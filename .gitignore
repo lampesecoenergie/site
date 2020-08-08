@@ -18,6 +18,7 @@
 !app/design/frontend/Smartwave/porto/**/*
 !app/etc/config.php
 !app/i18n/**/*
+!lib/web/fonts/Nostress_Koongo/**/*
 /update/
 dev
 vendor/codeception
