@@ -21,6 +21,8 @@
                     </xs:sequence>
 
                     <xs:attribute name="id" type="typeId" use="required" />
+<!-- 2020-08-08 Dmitry Fedyuk https://www.upwork.com/fl/mage2pro
+It was modified by someone before me. -->
                     <xs:attribute name="title" type="typeTitle" use="optional" />
                     <xs:attribute name="translate" type="xs:string" use="optional" />
                     <xs:attribute name="sortOrder" type="xs:int" use="optional" />
