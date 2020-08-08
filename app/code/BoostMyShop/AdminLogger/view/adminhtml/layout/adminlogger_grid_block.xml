@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="adminlogger.grid.container">
+            <block class="Magento\Backend\Block\Widget\Grid" name="adminlogger.grid" as="grid">
+                <arguments>
+                    <argument name="id" xsi:type="string">adminLoggerLogGrid</argument>
+                    <argument name="dataSource" xsi:type="object">BoostMyShop\AdminLogger\Model\ResourceModel\Log\Collection</argument>
+                    <argument name="use_ajax" xsi:type="string">1</argument>
+                    <argument name="default_sort" xsi:type="string">al_created_at</argument>
+                    <argument name="default_dir" xsi:type="string">desc</argument>
+                    <argument name="grid_url" xsi:type="url" path="*/*/grid"/>
+                </arguments>
+                <block class="Magento\Backend\Block\Widget\Grid\ColumnSet" as="grid.columnSet" name="permission.user.grid.columnSet">
+                    <arguments>
+                        <argument name="id" xsi:type="string">adminLoggerLogGrid</argument>
+                    </arguments>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" as="al_created_at">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Date</argument>
+                            <argument name="type" xsi:type="string">datetime</argument>
+                            <argument name="index" xsi:type="string">al_created_at</argument>
+                            <argument name="escape" xsi:type="string">1</argument>
+                            <argument name="column_css_class" xsi:type="string">col-name</argument>
+                            <argument name="header_css_class" xsi:type="string">col-name</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" as="al_user">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">User</argument>
+                            <argument name="index" xsi:type="string">al_user</argument>
+                            <argument name="escape" xsi:type="string">1</argument>
+                            <argument name="column_css_class" xsi:type="string">col-name</argument>
+                            <argument name="header_css_class" xsi:type="string">col-name</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" as="al_ip">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">IP</argument>
+                            <argument name="index" xsi:type="string">al_ip</argument>
+                            <argument name="escape" xsi:type="string">1</argument>
+                            <argument name="column_css_class" xsi:type="string">col-name</argument>
+                            <argument name="header_css_class" xsi:type="string">col-name</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" as="al_object_type">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Object type</argument>
+                            <argument name="index" xsi:type="string">al_object_type</argument>
+                            <argument name="escape" xsi:type="string">1</argument>
+                            <argument name="column_css_class" xsi:type="string">col-name</argument>
+                            <argument name="header_css_class" xsi:type="string">col-name</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" as="al_object_id">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Object ID</argument>
+                            <argument name="index" xsi:type="string">al_object_id</argument>
+                            <argument name="escape" xsi:type="string">1</argument>
+                            <argument name="column_css_class" xsi:type="string">col-name</argument>
+                            <argument name="header_css_class" xsi:type="string">col-name</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" as="al_action">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Action</argument>
+                            <argument name="index" xsi:type="string">al_action</argument>
+                            <argument name="escape" xsi:type="string">1</argument>
+                            <argument name="column_css_class" xsi:type="string">col-name</argument>
+                            <argument name="header_css_class" xsi:type="string">col-name</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" as="al_details">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Details</argument>
+                            <argument name="type" xsi:type="string">text</argument>
+                            <argument name="renderer" xsi:type="string">BoostMyShop\AdminLogger\Block\Log\Renderer\Details</argument>
+                            <argument name="index" xsi:type="string">al_details</argument>
+                            <argument name="escape" xsi:type="string">1</argument>
+                            <argument name="column_css_class" xsi:type="string">col-name</argument>
+                            <argument name="header_css_class" xsi:type="string">col-name</argument>
+                        </arguments>
+                    </block>
+                </block>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="NewDataSet" targetNamespace="clr-namespace:Cdiscount.Service.ProductIntegration.Pivot;assembly=Cdiscount.Service.ProductIntegration" xmlns:mstns="clr-namespace:Cdiscount.Service.ProductIntegration.Pivot;assembly=Cdiscount.Service.ProductIntegration" xmlns="clr-namespace:Cdiscount.Service.ProductIntegration.Pivot;assembly=Cdiscount.Service.ProductIntegration" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" attributeFormDefault="qualified" elementFormDefault="qualified" xmlns:app1="http://schemas.microsoft.com/winfx/2006/xaml">
+  <xs:import namespace="http://schemas.microsoft.com/winfx/2006/xaml" schemaLocation="Products_app1.xsd" />
+  <xs:element name="ProductPackage">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="ProductPackage.Products" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ProductCollection" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Product" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Product.EanList" minOccurs="1" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="ProductEan" minOccurs="1" maxOccurs="unbounded">
+                                  <xs:complexType>
+                                    <xs:attribute name="Ean" form="unqualified" type="xs:string" />
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="Product.ModelProperties" minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element ref="app1:String"  minOccurs="1" maxOccurs="unbounded"/>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="Product.Pictures" minOccurs="1" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="ProductImage" minOccurs="1" maxOccurs="unbounded">
+                                  <xs:complexType>
+                                    <xs:attribute name="Uri" form="unqualified" type="xs:string" />
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="BrandName" form="unqualified" type="xs:string" />
+                        <xs:attribute name="SellerProductFamily" form="unqualified" type="xs:string" />
+                        <xs:attribute name="SellerProductColorName" form="unqualified" type="xs:string" />
+                        <xs:attribute name="Size" form="unqualified" type="xs:string" />
+                        <xs:attribute name="Navigation" form="unqualified" type="xs:string" />
+                        <xs:attribute name="Description" form="unqualified" type="xs:string" />
+                        <xs:attribute name="EncodedMarketingDescription" form="unqualified" type="xs:string" />                        
+                        <xs:attribute name="LongLabel" form="unqualified" type="xs:string" />
+                        <xs:attribute name="Model" form="unqualified" type="xs:string" />
+                        <xs:attribute name="ProductKind" form="unqualified" type="xs:string" />
+                        <xs:attribute name="CategoryCode" form="unqualified" type="xs:string" />
+                        <xs:attribute name="SellerProductId" form="unqualified" type="xs:string" />
+                        <xs:attribute name="ShortLabel" form="unqualified" type="xs:string" />
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="Capacity" form="unqualified" type="xs:string" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="Name" form="unqualified" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="ProductPackage" />
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

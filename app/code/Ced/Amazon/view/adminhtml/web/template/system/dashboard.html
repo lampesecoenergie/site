@@ -1,0 +1,64 @@
+<style>
+    .cedcommerce.dashboard-actions {
+        border-bottom: 1px ghostwhite solid;
+        padding-bottom: 5px;
+        margin-bottom: 5px;
+        text-align: right;
+    }
+    .cedcommerce-vertical.admin__table-primary tbody tr:last-child td {
+        border-bottom: 1px solid #e3e3e3 !important;
+    }
+</style>
+<div class="amazon-dashboard">
+    <div class="cedcommerce dashboard-actions" id="actions">
+        <a class="cedcommerce actions sync" data-bind="click: function() {sync(true);}">Sync</a>
+    </div>
+    <!-- ko if: present('system') -->
+    <div class="dashboard-item">
+        <div class="dashboard-item-title">System</div>
+        <div class="dashboard-item-content">
+            <table class="cedcommerce-vertical admin__table-primary dashboard-data" data-bind="id: 'status-'+id">
+                <tbody>
+                <!-- ko foreach: {data: system(), as: 'item'} -->
+                    <tr>
+                        <th class="data-grid-th  no-link"
+                            data-bind="text: item.key"><span></span></th>
+                        <td class="system-value" data-bind="text: item.value"></td>
+                    </tr>
+                <!--/ko-->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--/ko-->
+
+    <!-- ko if: present('accounts') -->
+    <div data-bind="foreach: accounts()" id="amazon-accounts">
+        <div class="dashboard-item" data-bind="attr: {'account-id': id}">
+            <div class="dashboard-item-title" data-bind="text: name"></div>
+            <div class="dashboard-item-content">
+                <table class="admin__table-primary dashboard-data" data-bind="id: 'status-'+id" id="">
+                    <thead>
+                    <tr>
+                        <th class="data-grid-th  no-link"><span>Service</span></th>
+                        <th class="data-grid-th  no-link"><span>Status</span></th>
+                        <th class="data-grid-th  no-link"><span>Timestamp</span></th>
+                    </tr>
+                    </thead>
+                    <!-- ko : if Object.keys(api) -->
+                    <tbody data-bind="foreach: api">
+                    <tr class="even">
+                        <td class="service" data-bind="text: service"></td>
+                        <td class="status"
+                            data-bind="css: {'cedcommerce actions tick nochange':  status == 'GREEN'}, text: status"></td>
+                        <td class="timestamp" data-bind="text: timestamp"></td>
+                    </tr>
+                    </tbody>
+                    <!--/ko-->
+                </table>
+            </div>
+        </div>
+    </div>
+    <!--/ko-->
+
+</div>

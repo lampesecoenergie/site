@@ -1,0 +1,48 @@
+<div class="admin__data-grid-wrap admin__data-grid-wrap-static" id="<?php echo $block->escapeHtml($block->getId()) ?>_table">
+    <table class="data-grid">
+            <thead>
+                <tr>
+                    <?php foreach ($block->getColumns() as $_column): ?>
+                        <?php if ($_column->getHeaderHtml() == '&nbsp;'):?>
+                            <th class="data-grid-th" data-column="<?php /* @escapeNotVerified */ echo $_column->getId() ?>"
+                                <?php echo $_column->getHeaderHtmlProperty() ?>>&nbsp;</th>
+                        <?php else: ?>
+                            <?php echo $_column->getHeaderHtml()?>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </tr>
+            </thead>
+        <tbody>
+            <?php if (($block->getCollection()->getSize() > 0) && (!$block->getIsCollapsed())): ?>
+                <?php foreach ($block->getCollection() as $_index => $_item): ?>
+                    <tr title="<?php /* @escapeNotVerified */ echo $block->getRowUrl($_item) ?>"<?php if ($_class = $block->getRowClass($_item)): ?>
+                        class="<?php /* @escapeNotVerified */ echo $_class; ?>"<?php endif; ?> ><?php
+                        $i = 0;
+                        foreach ($block->getColumns() as $_column):
+                            if ($block->shouldRenderCell($_item, $_column)):
+                                $_rowspan = $block->getRowspan($_item, $_column);
+                                ?>
+                            <td <?php echo($_rowspan ? 'rowspan="' . $_rowspan . '" ' : '') ?>
+                                    class="<?php /* @escapeNotVerified */ echo $_column->getCssProperty() ?>
+                                            <?php /* @escapeNotVerified */ echo $_column->getId() == 'massaction' ? 'data-grid-checkbox-cell': ''?>">
+                                <?php echo(($_html = $_column->getRowField($_item)) != '' ? $_html : '&nbsp;') ?>
+                                </td><?php
+                                if ($block->shouldRenderEmptyCell($_item, $_column)):
+                                    ?>
+                                    <td colspan="<?php /* @escapeNotVerified */ echo $block->getEmptyCellColspan($_item) ?>"
+                                        class="last"><?php /* @escapeNotVerified */ echo $block->getEmptyCellLabel() ?></td><?php
+                                endif;
+                            endif;
+                        endforeach; ?>
+                    </tr>
+
+                <?php endforeach; ?>
+            <?php elseif ($block->getEmptyText()): ?>
+                <tr class="data-grid-tr-no-data">
+                    <td class="<?php /* @escapeNotVerified */ echo $block->getEmptyTextClass() ?>"
+                        colspan="<?php /* @escapeNotVerified */ echo $numColumns ?>"><?php /* @escapeNotVerified */ echo $block->getEmptyText() ?></td>
+                </tr>
+            <?php endif; ?>
+        </tbody>
+    </table>
+</div>

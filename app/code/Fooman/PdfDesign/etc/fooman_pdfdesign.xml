@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="fooman_pdfdesign.xsd">
+    <pdfDesign id="default"
+               name="Default Design"
+               classname="Fooman\PdfDesign\Model\DefaultDesign"
+               supported="1"/>
+    <pdfDesign id="alternative"
+               name="Alternative Design One"
+               classname="Fooman\PdfDesign\Model\AlternativeDesign"
+               supported="0"/>
+    <pdfDesign id="alternativetwo"
+               name="Alternative Design Two"
+               classname="Fooman\PdfDesign\Model\AlternativeDesignTwo"
+               supported="0"/>
+    <pdfDesign id="designone"
+               name="Design One"
+               classname="Fooman\PdfDesign\Model\DesignOne"
+               supported="0"/>
+</config>

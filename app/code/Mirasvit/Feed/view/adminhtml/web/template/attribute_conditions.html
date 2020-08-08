@@ -1,0 +1,117 @@
+<div class="feed__attribute-grid-container" data-bind=" afterRender: afterRender">
+    <div class="grid-header">
+        <div class="col-conditions">
+            Conditions
+        </div>
+        <div class="col-result">
+            Result
+        </div>
+    </div>
+    <ol class="feed__attribute-grid" data-role="sortable" data-bind="foreach: rows">
+        <li class="row">
+            <div class="col-sort">
+                <i class="fa fa-fw fa-arrows-v feed__btn-icon"></i>
+                <input data-role="order" type="hidden"
+                       data-bind="value: $index(), attr: {name: 'conditions[' + $index() + '][order]'}"/>
+            </div>
+
+            <div class="col-conditions">
+                <ol data-bind="foreach: statements">
+                    <li>
+                        <div class="col-attribute">
+                            <select
+                                    data-bind="
+                                foreach: jQuery.attributes,
+                                value: attribute,
+                                attr: {name: 'conditions[' + $parentContext.$index() + '][statement][' + $index() + '][attribute]'}">
+                                <!-- ko if: $index() == 0 -->
+                                <option value="">-- Please Select --</option>
+                                <!-- /ko -->
+                                <optgroup data-bind="attr: {label: label}, foreach: value">
+                                    <option data-bind="text: label, value: value"></option>
+                                </optgroup>
+                            </select>
+                        </div>
+
+                        <div class="col-operator">
+                            <select
+                                    data-bind="
+                        options: operators,
+                        optionsText: 'label',
+                        optionsValue: 'value',
+                        value: operator,
+                        attr: {name: 'conditions[' + $parentContext.$index() + '][statement][' + $index() + '][operator]'}">
+                            </select>
+                        </div>
+
+                        <div class="col-value">
+                            <!-- ko if: values().length > 0 -->
+                            <select
+                                    data-bind="options: values, optionsText: 'label', optionsValue: 'value', value: value,
+                                attr: {name: 'conditions[' + $parentContext.$index() + '][statement][' + $index() + '][value]'}">
+                            </select>
+                            <!-- /ko -->
+                            <!-- ko if: values().length == 0 -->
+                            <input type="text" data-bind="value: value,
+                                attr: {name: 'conditions[' + $parentContext.$index() + '][statement][' + $index() + '][value]'}"/>
+                            <!-- /ko -->
+                        </div>
+                        <div class="col-remove">
+                            <i class="fa fa-fw fa-times-circle feed__btn-icon"
+                               data-bind="click: $parent.removeCondition"></i>
+                        </div>
+                    </li>
+                </ol>
+
+                <button data-bind="click: $parent.addCondition">
+                    <i class="fa fa-fw fa-plus"></i> Add "AND" condition
+                </button>
+            </div>
+
+            <div class="col-result">
+                <div class="col-type">
+                    <select
+                            data-bind="
+                        options: jQuery.patternTypes,
+                        optionsText: 'label',
+                        optionsValue: 'value',
+                        value: resultType,
+                        attr: {name: 'conditions[' + $index() + '][result][type]'}">
+                    </select>
+                </div>
+
+                <div class="col-value">
+                    <!-- ko if: resultType() == 'pattern' -->
+                    <input type="text" class="input-text"
+                           data-bind="
+                        value: resultValue,
+                        attr: {name: 'conditions[' + $index() + '][result][value]'}"/>
+                    <!-- /ko -->
+
+                    <!-- ko if: resultType() != 'pattern' -->
+                    <select
+                            data-bind="
+                        visible: resultType() != 'pattern',
+                        foreach: jQuery.attributes,
+                        value: resultValue,
+                        attr: {name: 'conditions[' + $index() + '][result][value]'}">
+                        <!-- ko if: $index() == 0 -->
+                        <option value="">-- Please Select --</option>
+                        <!-- /ko -->
+                        <optgroup data-bind="attr: {label: label}, foreach: value">
+                            <option data-bind="text: label, value: value"></option>
+                        </optgroup>
+                    </select>
+                    <!-- /ko -->
+                </div>
+            </div>
+
+            <div class="col-remove">
+                <i class="fa fa-fw fa-times-circle feed__btn-icon" data-bind="click: $parent.removeRow"></i>
+            </div>
+        </li>
+    </ol>
+    <button data-bind="click: addRow">
+        <i class="fa fa-fw fa-plus"></i> Add "OR" condition
+    </button>
+</div>

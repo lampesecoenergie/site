@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!--
+ /**
+ * @category  Mageants BannerSlider
+ * @package   Mageants_BannerSlider
+ * @copyright Copyright (c) 2017 Mageants
+ * @author    Mageants Team <support@Mageants.com>
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+	<!-- Sliders Settigns XML-->
+    <virtualType name="MageantsBannerSliderGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>	
+    <virtualType name="MageantsBannerSliderSlidersGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Mageants\BannerSlider\Model\ResourceModel\Sliders\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">MageantsBannerSliderGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+	 <virtualType name="MageantsBannerSlidersGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+	<type name="Mageants\BannerSlider\Model\ResourceModel\Sliders\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mageants_bannerslider</argument>
+            <argument name="eventPrefix" xsi:type="string">mageants_bannerslider_sliders_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">sliders_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Mageants\BannerSlider\Model\ResourceModel\Sliders</argument>
+        </arguments>
+    </type>
+	
+	<!-- Slides Settigns XML-->
+    <virtualType name="MageantsBannerSliderSlidesGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Mageants\BannerSlider\Model\ResourceModel\Slides\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">MageantsBannerSlidesGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+	
+	<type name="Mageants\BannerSlider\Model\ResourceModel\Slides\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mageants_bannerslider_slides</argument>
+            <argument name="eventPrefix" xsi:type="string">mageants_bannerslider_slides_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">slides_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Mageants\BannerSlider\Model\ResourceModel\Slides</argument>
+        </arguments>
+    </type>
+	 <virtualType name="MageantsBannerSlidesGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="mageants_bannerslider_sliders_listing_data_source" xsi:type="string">Mageants\BannerSlider\Model\ResourceModel\Sliders\Grid\Collection</item>
+				<item name="mageants_bannerslider_slides_listing_data_source" xsi:type="string">Mageants\BannerSlider\Model\ResourceModel\Slides\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

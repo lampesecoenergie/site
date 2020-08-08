@@ -1,0 +1,415 @@
+<html>
+        <head>
+                <style>
+                    body {
+                        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                    }
+            
+                    section#main-content {
+                        min-width: 900px;
+                    }
+            
+                    aside#sidebar {
+                        max-width: 180px;
+                    }
+            
+                    .hasTooltip {
+                        color: #333;
+                        border-bottom: 1px dotted #666;
+                        cursor: help;
+                    }
+            
+                    #fullArticle img {
+                        border: none;
+                        padding: 0px;
+                        margin: 0px;
+                        display: inline;
+                    }
+            
+                    .btn-group {
+                        position: relative;
+                        display: inline-block;
+                        font-size: 0;
+                        vertical-align: middle;
+                        white-space: nowrap;
+                    }
+            
+                    a.btn-green-icon {
+                        display: none;
+                    }
+            
+                    .btn.btn-green {
+                        background-color: #a3bb1d;
+                        border: 1px solid #a3bb1d;
+                        color: white;
+                        background-image: none;
+                        text-shadow: none;
+                        -moz-transition: all 0.3s ease-in;
+                        -webkit-transition: all 0.3s ease-in;
+                        -o-transition: all 0.3s ease-in;
+                        transition: all 0.3s ease-in;
+                    }
+            
+                    h2,
+                    h2 a,
+                    #hikashop_checkout_login_left_part h2,
+                    #hikashop_checkout_login_right_part h2,
+                    #hikashop_checkout_login_right_part h3 {
+                        color: #aeae33 !important;
+                        font-weight: normal;
+                        font-size: 16px;
+                        margin: 0px 0px 20px 0px;
+                        padding-bottom: 10px;
+                        clear: both;
+                    }
+            
+                    h1,
+                    h2,
+                    h3,
+                    h4,
+                    h5,
+                    h6 {
+                        font-family: 'Poppins', sans-serif;
+                        ;
+                        font-weight: 400;
+                        margin-bottom: 30px !important;
+                        margin-top: 30px !important;
+                        border-bottom: 1px dotted #ddd;
+                        text-align: center;
+                    }
+            
+                    h2:hover,
+                    h2 a:hover {
+                        color: #aeae33 !important;
+                        text-decoration: none;
+                    }
+            
+                    h3,
+                    h3 a {
+                        color: #444;
+                        font-size: 18px;
+                        padding: 10px 0px;
+                        margin-bottom: 20px;
+                        border-bottom: 1px solid #ddd;
+                    }
+            
+                    h1,
+                    h1 a,
+                    h2.h1bis,
+                    #hikashop_checkout_page h1 {
+                        font-size: 26px;
+                        /**    text-transform: uppercase; **/
+                        color: #444;
+                        margin: 0px 0px 15px 0px;
+                        font-weight: normal;
+                        border: none;
+                        padding: 0px;
+                    }
+            
+                    a {
+                        color: #31dd93;
+                        text-decoration: none;
+                    }
+            
+                    ul li {
+                        list-style-image: url(https://www.acyba.com/templates/acyba/images/li.png);
+                        margin: 4px;
+                    }
+            
+                    li {
+                        line-height: 18px;
+                    }
+            
+                    ul,
+                    ol {
+                        padding: 0;
+                        margin: 0 0 9px 25px;
+                    }
+            
+                    #docsSearch {
+                        background-color: #303e47;
+                    }
+            
+                    #docsSearch h1 {
+                        color: #FFFFFF;
+                    }
+            
+                    h1.title {
+                        border-bottom: 1px dotted #ddd;
+                        text-transform: uppercase;
+                        color: #228c82;
+                        size: 20px;
+                    }
+            
+                    h2 {
+                        font-size: 24px;
+                    }
+                </style>
+            </head>
+<h2>1. Installation</h2>
+<h3>1.1 Installation manuelle</h3>
+<p>
+     Lors d'une installation manuelle, il faut décompresser le fichier zip dans le dossier app/code/Acyba/GLS.
+</p>
+<p>
+     Le module fonctionne avec des dépendances à d'autres modules, qu'il est nécessaire d'installer. On retrouve ces dernières dans le fichier composer.json du module. Pour les installer, vous devez utiliser la commande suivante :
+</p>
+<pre>
+composer require vendor_name/module_name:X.X.X
+</pre>
+<p>
+    <strong>Attention : pour installer les dépendances, vous devez utiliser la commande ci dessus avec les noms et numéros de version des modules comme déclaré dans le fichier composer.json du module GLS.</strong>
+</p>
+<p>
+     Une fois le module GLS et ses dépendances installées, effectuer les commandes Magento suivantes :&nbsp;
+</p>
+<pre>
+php magento setup:upgrade
+</pre>
+<pre>
+php magento setup:di:compile
+</pre>
+<h2>2. Configuration</h2>
+<h3>2.1 Modes de livraison</h3>
+<p>
+	 Le module a créé un nouveau mode de livraison GLS dans Magasins &gt; Configuration &gt; Ventes &gt; Modes de livraison.
+</p>
+<p>
+	 Pour activer les modes de livraison GLS sur le site, il faut passer le paramètre « Activer » à OUI et renseigner les champs « Login du Webservice GLS » et « Mot de passe du Webservice GLS » dont les valeurs vous sont fournies par GLS.
+</p>
+<p>
+	<strong>Attention</strong> : pour utiliser le module officiel GLS pour Magento 2 vous devez être client GLS. L’utilisation des différents modes de livraison GLS est soumis à l’acceptation des conditions générales de vente GLS. L’activation des modes de livraison GLS de ce module doit être en adéquation avec les grilles tarifaires signées avec GLS. Pour plus d’informations veuillez vous rapprocher de votre contact commercial GLS.
+</p>
+<p>
+	 Si vous n’êtes pas client GLS, connectez-vous sur le site internet 
+	<a href="http://www.gls-group.eu">www.gls-group.eu</a> pour découvrir toutes les prestations GLS et prendre contact avec GLS.
+</p>
+<p>
+	 Le module est fourni avec un paramétrage par défaut et ces paramètres sont modifiables dans le menu Magasins &gt; Configuration &gt; Ventes &gt; Méthodes de livraison &gt; GLS, votre partenaire transport :
+</p>
+<p>
+	<img src="https://lh6.googleusercontent.com/Yx-4JkyeaiTdi0jl3PK9kQ6NF-rS5sKl35o4vfCBODRWhZcC_QFIu0yMIuBUapdGhVa9u8Qcyw6OYk8e8Lhd0qHM6wqjAJ6lpFR8bNqAGGzCoK65QQ36eA9A_uVtJQMrI5ZImHhi" width="547" height="740" style="border-width: initial; border-style: none; border-color: initial; transform: rotate(0rad);">
+</p>
+<ul>
+	<li><b style="background-color: initial;">Titre</b> : Libellé du groupe de mode de livraison « GLS » proposé sur le site</li>
+	<li><strong>Activé</strong> : Par défaut désactivé lors de l’installation du module, à passer à Oui pour voir apparaître les modes de livraison GLS sur le site<br>
+	</li>
+	<li><strong>Login du webservice GLS</strong> : A renseigner, fourni par GLS<br>
+	</li>
+	<li><strong>Mot de passe du webservice GLS</strong> : A renseigner, fourni par GLS<br>
+	</li>
+	<li><strong>Poids maximum des articles</strong> : Poids maximum d’un colis que GLS peut prendre en charge<br>
+	</li>
+	<li><strong>GLS Chez Vous</strong> : Active ou désactive le mode de livraison à domicile<br>
+	</li>
+</ul>
+<p style="margin-left: 20px;">
+	 Cette prestation correspond à l’offre tarifaire GLS :
+</p>
+<p>
+	 &nbsp; &nbsp; &nbsp; -&nbsp; 
+	<em>Business Parcel</em>&nbsp;pour vos expéditions vers la France<br>
+	 &nbsp; &nbsp; &nbsp; -&nbsp; 
+	<em style="background-color: initial;">Euro Business Parcel</em>&nbsp;pour vos expéditions vers l'Europe<br>
+	 &nbsp; &nbsp; &nbsp; -&nbsp; 
+	<em style="background-color: initial;">Global Business Parcel</em>&nbsp;pour vos expéditions dans le monde entier
+</p>
+<ul>
+	<li><strong>Configuration GLS Chez Vous</strong> : Champ de paramétrage, voir explications détaillées et exemples ci-dessous</li>
+	<li><strong>Ordre de tri GLS Chez Vous</strong> : Définit l’ordre de tri de la livraison à domicile parmi les modes de livraison GLS&nbsp;</li>
+	<li><strong>GLS Chez Vous+</strong> : Active ou désactive le mode de livraison à domicile</li>
+</ul>
+<p style="margin-left: 20px;">
+	 Cette prestation correspond à l’offre tarifaire GLS : 
+	<em>Flex Delivery Service</em>
+</p>
+<ul>
+	<li><strong>Configuration GLS Chez Vous+</strong> : Champ de paramétrage, voir explications détaillées et exemples ci-dessous</li>
+	<li><strong>Ordre de tri GLS Chez Vous+</strong> : Définit l’ordre de tri de la livraison à domicile parmi les modes de livraison GLS</li>
+	<li><strong>GLS Point Relais</strong> : Active ou désactive le mode de livraison en Point Relais</li>
+</ul>
+<p style="margin-left: 20px;">
+	 Cette prestation correspond à l’offre tarifaire GLS : 
+	<em>Shop Delivery Service</em>
+</p>
+<ul>
+	<li><strong>Clé API Google Maps</strong> : Clé API pour utiliser le mode de livraison Point Relais afin de localiser les relais sur une carte Google Maps (pour la génération de cette clé, voir : <strong>5</strong><strong>.1 Génération de la clé API Google Maps</strong>)</li>
+	<li><strong>Configuration GLS Point Relais</strong> : Champ de paramétrage, voir explications détaillées et exemples ci-dessous</li>
+	<li><strong>Ordre de tri GLS Point Relais</strong> : Définit l’ordre de tri de la livraison en point relais parmi les modes de livraison GLS</li>
+	<li><strong>Uniquement les points relais XL</strong> : Active l’affichage des points relais XL uniquement (non par défaut)</li>
+	<li><strong>GLS avant 13h</strong> : Active ou désactive le mode de livraison express en mains propres avant 13h&nbsp;</li>
+</ul>
+<p style="margin-left: 20px;">
+</p>
+<p style="margin-left: 20px;">
+	 Cette prestation correspond à l’offre tarifaire GLS : 
+	<em>Express Parcel Guaranteed</em>
+</p>
+<ul>
+	<li><strong>Configuration GLS avant 13h</strong> : Champ de paramétrage, voir explications détaillées et exemples ci-dessous</li>
+	<li><strong>Ordre de tri GLS avant 13h</strong> : Définit l’ordre de tri de la livraison express parmi les modes de livraison GLS</li>
+	<li><strong>URL de suivi </strong>: Utilisé pour générer les liens de suivis de colis</li>
+	<li><strong>Débogage</strong> : Permet d’activer la fonction de débogage du module de calcul des frais de port (Fonction avancée pour les développeurs)</li>
+	<li><strong>Ordre de tri</strong> : Défini l’ordre de tri du groupe de modes de livraison GLS parmi les autres modes de livraison.</li>
+</ul>
+<p>
+	 Les champs de configuration utilisent une syntaxe au format PHP utilisée par le module OWEBIA pour Magento 2, dont voici&nbsp; 
+	<a href="http://htmlpreview.github.io/?https://github.com/owebia/magento2-module-advanced-shipping-setting/blob/master/view/doc_en_US.html#quick_start">la documentation</a>.
+</p>
+<p>
+	 Voici par exemple le paramétrage fourni pour la livraison à domicile :
+</p>
+<p>
+	<img src="https://s3.amazonaws.com/helpscout.net/docs/assets/57e400629033606c1955c4d7/images/5a54ad162c7d3a194367f9ba/file-8p2M8aZaz0.png">
+</p>
+<ol>
+	<li>title : libellé affiché sur le site pour ce mode de livraison</li>
+	<li>enabled : conditions d’activation de cette méthode. Dans cet exemple, cette méthode ne s’affiche que si le pays de destination est la France</li>
+	<li>price : frais de port pour cette méthode. Dans cet exemple, si le poids total du panier est inférieur ou égal à 150, les frais seront de 5, si le poids total du panier est compris entre 150 et&nbsp;160, les frais seront de 3 et dans les autres cas ils seront de 0</li>
+</ol>
+<p>
+	 Il est possible d’ajouter des filtres sur le groupe de client, la catégorie des produits dans le panier etc &hellip; (voir documentation pour plus d’informations)
+</p>
+<p>
+    Plusieurs méthodes peuvent être créées par champs de configuration. Pour cela, il faut dupliquer la fonction <strong>addMethod</strong>&nbsp;en définissant d'autres règles.
+</p>
+<p>
+    <strong>Attention : dans le nom de la méthode (ex : ci dessus tohome_fr), seulement la partie situé après le underscore peut être modifiée.</strong>
+</p>
+<h3>2.2 GLS Configuration avancée&nbsp;</h3>
+<h4>2.2.1 Configuration générale</h4>
+<p>
+	<strong></strong><strong>Code agence</strong> : Code de l’agence GLS à laquelle vous êtes lié. Information fournie par GLS.
+</p>
+<h4>2.2.2 Configuration des imports/exports</h4>
+<p>
+	 Cette section comporte la configuration pour gérer l’import et l’export des commandes GLS. Pour plus d’informations sur l’import et l’export GLS, voir 
+	<strong>4</strong><strong>. Import/Export</strong>.
+</p>
+<ul>
+	<li><strong>Actif</strong> : Activation de l’import/export automatique via une tâche cron. </li>
+	<li><strong>Fréquence</strong> : Fréquence d’activation de la tâche cron en minutes (toutes les X minutes).</li>
+	<li><strong>Expression cron</strong> : Expression cron générée à partir de la fréquence rentrée dans le champ au dessus (si vous ne voyez pas la modification après la sauvegarde, il faut rafraîchir le cache Magento de la configuration). </li>
+	<li><strong>Dossier d’import</strong> : Dossier dans lequel se trouvent les commandes à importer.</li>
+	<li><strong>Dossier d’export</strong> : Dossier dans lequel sont téléchargées les commandes exportées.</li>
+	<li><strong>Statut </strong><strong>des commandes à exporter</strong> : Statut des commandes à exporter pour l’export automatique via la tâche cron.</li>
+</ul>
+<h2>3. Affichage</h2>
+<p>
+	 Une fois les méthodes de livraisons paramétrées, voici un exemple d’affichage de ces méthodes sur le site :
+</p>
+<p>
+	<img src="https://s3.amazonaws.com/helpscout.net/docs/assets/57e400629033606c1955c4d7/images/5a58c1de2c7d3a1943682e35/file-cn3HNLhpoc.png" style="width: 683px;">
+</p>
+<p>
+	Si l’utilisateur choisit le mode de livraison “Point Relais”, une fenêtre de type pop-up apparaît pour qu’il puisse choisir le Point Relais dans lequel il désire être livré :
+</p>
+<p>
+	<img src="https://lh5.googleusercontent.com/X_36nbOZeLlnZB3Y65lD_0a8PPvv4H_jdqGHI3ZY04ni_yFzLklzC0BDB4G2UhqnqwaX0O4Ag0MIAP61MXRVcxO_SWAZOj7YVGo3CtblBePT28jtD5coChZZyigNTugo9MlRFcsP" width="624" height="484" style="border-width: initial; border-style: none; border-color: initial; transform: rotate(0rad);">
+</p>
+<p>
+	 Il peut ainsi choisir le point relais qu’il désire en cliquant sur le bouton “Choisir ce relais”.
+</p>
+<p>
+	 En cliquant sur le marqueur sur la carte, l’utilisateur pourra visualiser les heures d’ouvertures du relais :
+</p>
+<p>
+	<img src="https://lh6.googleusercontent.com/3hf3_tLPL2kVx5rXbT83DKi8DmGwTsmeWMO_wu9CgokUPzRbmfp1FSVOrBPI3Btibx99TP3x4pcnI0ADJSkhifTzxEcxgpRga1EBWl1rf8rQQyNU6Kx6WqdvBbAgCz0n7u4Tgci1" width="271" height="289" style="border-width: initial; border-style: none; border-color: initial; transform: rotate(0rad);">
+</p>
+<p>
+	 &nbsp;Une fenêtre de confirmation s’affiche pour que l’utilisateur confirme son choix de point relais :&nbsp;
+</p>
+<p>
+	<img src="https://lh4.googleusercontent.com/JrHTXOBzSgJzGFqp7esv5SHjWaUiknt7mD8drvTPBLSqe0c6SwOU6db4gts9pkv_1eQCRplt9ceLPr3hPvOxsQjFF_Hf9fm9plW4rZk4Lk5kldClx0tsGZR4701vWwCOSAu881u1" width="624" height="215" style="border-width: initial; border-style: none; border-color: initial; transform: rotate(0rad);">
+</p>
+<p>
+	 Une fois le point relais choisi, il s’affiche en rappel au dessous de la méthode de livraison en point relais :&nbsp;
+</p>
+<p>
+	<img src="https://lh4.googleusercontent.com/sVZpaJ0pns-M7WWewJi6ryOfX5rba5k8qCwMsF8MJDAgHnVShY4jJY9jRPpBZoOS8eo1JTpuN1JhgMKTgivDtFgqUUlddacO1SbXQ3nu_Vexuw1iO92qxBZpSb1IGloSaIDB_5Q6" width="624" height="144" style="border-width: initial; border-style: none; border-color: initial; transform: rotate(0rad);">
+</p>
+<h2>4. Import/Export</h2>
+<h3>4.1 Export vers WinExpé</h3>
+<p>
+	 Le module permet d’exporter des fichiers de commandes vers le logiciel GLS WinExpé.
+</p>
+<p>
+	 La configuration des exports se fait dans Magasins &gt; Configuration &gt; Ventes &gt; GLS Configuration Avancée (voir&nbsp;
+	<strong>2.2.2 Configuration des imports/exports</strong>).
+</p>
+<p>
+	 Cette fonctionnalité est accessible via une nouvelle entrée dans le menu principal : « GLS IMPORT/EXPORT &gt; Exporter les commandes ».
+</p>
+<p>
+	 Dans la configuration, le paramètre « Dossier d’export » doit être correctement renseigné.
+</p>
+<p>
+	 L’écran d’export liste toutes les commandes dont le mode de livraison est un mode de livraison GLS. Il est possible soit d’exporter, soit de télécharger une ou plusieurs commandes. Pour ce faire, il faut cocher les commandes que l’on désire exporter, puis choisir dans le menu “Actions” l'option voulue.
+</p>
+<p>
+	 L’option “Télécharger” va télécharger le fichier généré sur votre poste.
+</p>
+<p>
+	 L’option “Export” va placer le fichier généré dans le dossier défini dans la configuration (Magasins &gt; Configuration &gt; Ventes &gt; GLS Configuration Avancée &gt; Configuration des imports/exports &gt; Dossier d’export).
+</p>
+<p>
+	 Il vous faudra créer un accès FTP sur ce dossier et le paramétrer dans WinExpé pour que le logiciel puisse récupérer les fichiers automatiquement. Pour toutes questions relatives au paramétrage du logiciel GLS Winexpé, merci de vous rapprocher de votre contact informatique GLS.
+</p>
+<h3>4.2 Import depuis WinExpé</h3>
+<p>
+	 Le module permet d’importer des fichiers depuis le logiciel GLS WinExpé, pour enregistrer les numéros de suivi de colis dans Magento.&nbsp;
+</p>
+<p>
+	 La configuration des imports se fait dans Magasins &gt; Configuration &gt; Ventes &gt; GLS Configuration Avancée (voir&nbsp;
+	<strong>2.2.2 Configuration des imports/exports</strong>).
+</p>
+<p>
+	 Cette fonctionnalité est accessible via une nouvelle entrée dans le menu principal : « GLS IMPORT/EXPORT &gt; Importer les numéros de suivi ».
+</p>
+<p>
+	 Dans la configuration, le paramètre « Dossier d’import » doit être correctement renseigné.
+</p>
+<p>
+	 L’écran d’import se compose d’un bouton permettant d’importer les fichiers se trouvant dans le dossier défini dans la configuration (Magasins &gt; Configuration &gt; Ventes &gt; GLS Configuration Avancée &gt; Configuration des imports/exports &gt; Dossier d’import). Avec ces fichiers, les numéros de suivi vont être ajoutés aux commandes correspondantes puis les fichiers vont être supprimés.
+</p>
+<p>
+	 Il vous faudra créer un accès FTP sur ce dossier et le paramétrer dans WinExpé pour que le logiciel puisse télécharger les fichiers à importer automatiquement. Pour toutes questions relatives au paramétrage du logiciel GLS Winexpé, merci de vous rapprocher de votre contact informatique GLS.
+</p>
+<h3>4.3 Import/Export automatique</h3>
+<p>
+	 Il est possible d’automatiser l’import et l’export des commandes. La configuration de cette fonctionnalité se trouve dans Magasins &gt; Configuration &gt; Ventes &gt; GLS Configuration Avancée (voir&nbsp;
+	<strong>2.2.2 Configuration des imports/exports</strong>).
+</p>
+<p>
+	 Pour activer cette fonctionnalité, il faut mettre le paramètre “Actif” de la configuration sur “OUI” (Magasins &gt; Configuration &gt; Ventes &gt; GLS Configuration Avancée &gt; Configuration des imports/exports &gt; Actif) et renseigner la fréquence&nbsp;désirée&nbsp;en minutes (Magasins &gt; Configuration &gt; Ventes &gt; GLS Configuration Avancée &gt; Configuration des imports/exports &gt; Fréquence).
+</p>
+<p>
+	 Magento va ensuite exporter les commandes qui ont le statut défini (Magasins &gt; Configuration &gt; Ventes &gt; GLS Configuration Avancée &gt; Configuration des imports/exports &gt; Statut des commandes à exporter) et importer les commandes à la fréquence définie.
+</p>
+<h2>5. Divers</h2>
+<h3>5.1 Génération de la clé API Google Maps</h3>
+<p>
+	 Pour utiliser le mode de livraison GLS Point Relais, il est nécessaire de définir une clé API. En effet le module utilise une carte Google Maps pour localiser les différents point relais, et ce service nécessite une clé API.
+</p>
+<p>
+	 Cette clé API doit être générée et à renseignée dans la configuration (voir&nbsp; 
+	<strong>2.1 Modes de livraison</strong>).
+</p>
+<p>
+	 Voici les étapes à suivre pour générer cette clé API :
+</p>
+<ul>
+	<li>Se rendre sur le site <a href="https://console.developers.google.com">https://console.developers.google.com</a></li>
+	<li>Se connecter avec un compte Google</li>
+	<li>Se rendre dans la section “Identifiants”</li>
+	<li>Cliquer sur “Créer des identifiants” &gt; “Clé API” (Il est possible de définir des restriction pour cette clé)</li>
+	<li>Copier la clé</li>
+	<li>Se rendre dans “Bibliothèque”</li>
+	<li>Rechercher “Google Maps JavaScript API” et cliquer sur le résultat correspondant</li>
+	<li>Cliquer sur “Activer”</li>
+	<li>Retourner sur la configuration GLS pour coller la clé dans Magasins &gt; Configuration &gt; Ventes &gt; Méthodes de livraison &gt; GLS, votre partenaire transport &gt;&nbsp;Clé API Google Maps</li>
+</ul>
+<h3>5.2 Assistance</h3>
+<p>
+	 Pour une demande d'aide à la configuration ou à l'installation du module, merci de contacter votre conseiller GLS.
+</html>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mondial Relay Shipping Module
+ *
+ * @author    Magentix
+ * @copyright Copyright © 2018 Magentix. All rights reserved.
+ * @license   https://www.magentix.fr/en/licence.html Magentix Software Licence
+ * @link      https://mondialrelay.magentix.fr/
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="submit_before">
+            <block class="MondialRelay\Shipping\Block\Adminhtml\Order\Shipment\Create\Label" name="mondialrelay.shipping.order.shipment.create.label"/>
+        </referenceContainer>
+    </body>
+</page>

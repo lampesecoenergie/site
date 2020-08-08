@@ -1,0 +1,156 @@
+<?php
+$helper                = $this->helper("Ves\Blog\Helper\Data");
+$dateFormat            = $helper->getConfig("general_settings/dateformat");
+$comment_type          = $this->getConfig("post_page/comment_type");
+$auto_public           = $this->getConfig("post_page/auto_public");
+$comment_type          = $this->getConfig("post_page/comment_type");
+$numbercomment_perpage = (int)$this->getConfig("post_page/numbercomment_perpage");
+$facebookcomment_width = $this->getConfig("post_page/facebookcomment_width");
+$show_captcha          = $this->getConfig("post_page/show_captcha");
+$captcha_privatekey    = $this->getConfig("post_page/captcha_privatekey");
+$comment_type          = $this->getConfig("post_page/comment_type");
+$captcha_publickey     = $this->getConfig("post_page/captcha_publickey");
+$disqus_shortname      = $this->getConfig("post_page/disqus_shortname");
+$_post                 = $this->getPost();
+$_post->setData('categories', $_post->getPostCategories());
+$postUrl               = $helper->getPostUrl($_post);
+?>
+<div class="blog-comments">
+	<?php if( $comment_type == "disqus" ){ ?>
+	<div id="disqus_thread"></div>
+	<script>
+		var disqus_config = function () {
+			this.page.url = '<?php echo $postUrl ?>';
+			this.page.identifier = '<?php echo $_post->getIdenfitier() ?>';
+		};
+		
+    (function() {  // DON'T EDIT BELOW THIS LINE
+    	var d = document, s = d.createElement('script');
+    	
+    	s.src = '//<?php echo $disqus_shortname; ?>.disqus.com/embed.js';
+    	
+    	s.setAttribute('data-timestamp', +new Date());
+    	(d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+<?php }elseif(  $comment_type == "facebook" ){ ?>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+	var js, fjs = d.getElementsByTagName(s)[0];
+	if (d.getElementById(id)) return;
+	js = d.createElement(s); js.id = id;
+	js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+	fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-comments" data-href="<?php echo $postUrl ?>" data-width="<?php echo $facebookcomment_width ?>" data-numposts="<?php echo $numbercomment_perpage ?>"></div>
+<?php }else{ ?>
+
+<?php
+$comments = $this->getCollection();
+$customer = $this->getCustomer();
+$customerName = '';
+?>
+<h3 class="comment-counter">
+	<span><?php echo $comments->getSize(); ?></span>
+	<?php echo __( "Comments" ); ?>
+</h3>
+<?php echo $this->getChildHtml("rsslink"); ?>
+<?php if( $comments ) : ?>
+	<div class="comments-list">
+		<ul>
+			<?php $i=0; foreach( $comments as $comment ): ?>
+				<?php // Removing Spaces
+				$email = $comment->getData('user_email');
+				$email = trim($email);
+				  // Make all Lower Case
+				$email = strtolower($email);
+				  // Generating Hash
+				$email_hash = md5($email); ?>
+				<li class="<?php echo ( $i%2==0?"even":"odd") ; ?>" id="comment<?php echo $comment->getId(); ?>">
+					<div class="avatar"><img src="https://www.gravatar.com/avatar/<?php echo $email_hash?>?d=&s=60"></div>
+					<?php $createdTime = $helper->getFormatDate($comment->getCreationTime(), $dateFormat); ?>
+					<span class="comment-author"><?php echo $comment->getUserName(); ?></span><br/>
+					<span class="comment-date"><?php echo $createdTime ?></span>
+					<div class="comment-content"><?php echo $comment->getContent(); ?></div>
+				</li>
+				<?php $i++; endforeach; ?>
+			</ul>
+		</div>
+		<?php echo $this->getChildHtml('toolbar') ?>
+		<div class="comment-form">
+			<h2><?php echo __('Leave a Comment') ?></h2>
+			<div class="comment-notes"><?php echo __('Make sure you enter the (*) required information where indicated. HTML code is not allowed.');?></div>
+			<form method="post" action="<?php echo $this->getCommentFormUrl() ?>" id="form-comment">
+				<div class="above-inputs vesclear">
+					<ul class="form-list">
+						<li class="fields user-name">
+							<?php if($customer): ?>
+								<?php $customerName = $customer->getFirstName();
+								if($customer->getMiddlename()) $customerName .= ' ' .$customer->getMiddlename();
+								$customerName .= ' ' . $this->getLastname();
+								?>
+								<input type="hidden" name="user_name" value="<?php echo $customerName ?>" />
+							<?php else: ?>
+								<div class="field">
+									<label class="required" for="user_name"><em>*</em><?php echo __('Name') ?></label>
+								</div>
+								<div class="input-box">
+									<input id="user_name" name="user_name" title="<?php echo __('Name') ?>" class="input-text required-entry" />
+								</div>
+							<?php endif; ?>
+						</li>
+						<li class="fields user-email">
+							<?php if($customer): ?>
+								<input type="hidden" name="user_email" value="<?php echo $customer->getEmail() ?>" />
+							<?php else: ?>
+								<div class="field">
+									<label class="required" for="user_email"><em>*</em><?php echo __('Email') ?></label>
+								</div>
+								<div class="input-box">
+									<input id="user_email" name="user_email" title="<?php echo __('Email') ?>" class="input-text required-entry validate-email" />
+								</div>
+							<?php endif; ?>
+						</li>
+					</ul>
+					<input type="hidden" name="post_id" value="<?php echo $_post->getPostId(); ?>"/>
+				</div>
+				<div class="mid-inputs">
+					<label class="required" for="content"><em>*</em><?php echo __('Comment') ?></label>
+					<div class="input-box">
+						<textarea id="content" name="content" title="<?php echo __('Comment') ?>" class="input-text required-entry"></textarea>
+					</div>
+				</div>
+				<?php if( $show_captcha ): ?>
+					<script src='https://www.google.com/recaptcha/api.js'></script>
+					<div class="g-recaptcha" data-sitekey="<?php echo $captcha_publickey ?>"></div>
+				<?php endif; ?>
+				<div class="below-inputs">
+					<button class="button" type="submit" title="<?php echo __('Post Comment') ?>">
+						<span>
+							<span><?php echo __('Post Comment') ?></span>
+						</span>
+					</button>
+				</div>
+			</form>
+		</div>
+
+		<script>
+			require([
+				'jquery',
+				'mage/mage'
+				], function($){
+					var dataForm = $('#form-comment');
+					var ignore = null;
+					dataForm.mage('validation', {
+						ignore: ignore ? ':hidden:not(' + ignore + ')' : ':hidden'
+					}).find('input:text').attr('autocomplete', 'off');
+				});
+			</script>
+
+		<?php endif; ?>
+
+		<?php } ?>
+	</div>

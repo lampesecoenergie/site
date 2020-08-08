@@ -1,0 +1,390 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement(EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+ * @package   Ced_RueDuCommerce
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright Copyright CEDCOMMERCE(http://cedcommerce.com/)
+ * @license   http://cedcommerce.com/license-agreement.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Ced_RueDuCommerce:etc/system_file.xsd">
+    <system>
+        <tab id="cedcommerce" translate="label" sortOrder="1">
+            <label>Cedcommerce</label>
+        </tab>
+        <!-- section start for RueDuCommerce Configuration Tab in Cedcommerce section -->
+        <section id="rueducommerce_config" translate="label" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>RueDuCommerce Configuration</label>
+            <tab>cedcommerce</tab>
+            <resource>Ced_RueDuCommerce::system_config</resource>
+            <group id="rueducommerce_setting" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0"
+                   showInStore="0"
+                   showInProfile="1"
+            >
+                <label>RueDuCommerce Seller/Developer Settings</label>
+                <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0"
+                       showInStore="0"
+                       showInProfile="1"
+                >
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="mode" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="0"
+                       showInStore="0"
+                       showInProfile="1"
+                >
+                    <label>Mode</label>
+                    <options>
+                        <option label="Sandbox">sandbox</option>
+                        <option label="Live">live</option>
+                    </options>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+
+                <field id="live_endpoint" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="0"
+                       showInStore="0"
+                       showInProfile="1"
+                >
+                    <label>Default Service Url</label>
+                    <source_model>Ced\RueDuCommerce\Model\Source\Config\Endpoints</source_model>
+                    <depends>
+                        <field id="enable">1</field>
+                        <field id="mode">live</field>
+                    </depends>
+                </field>
+
+                <field id="sandbox_endpoint" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="0"
+                       showInStore="0"
+                       showInProfile="1"
+                >
+                    <label>Default Service Url</label>
+                    <source_model>Ced\RueDuCommerce\Model\Source\Config\SandboxEndpoints</source_model>
+                    <depends>
+                        <field id="enable">1</field>
+                        <field id="mode">sandbox</field>
+                    </depends>
+                </field>
+                <field id="version" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1"
+                       showInStore="1"
+                       showInProfile="1"
+                >
+                    <label>Version</label>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                    <frontend_model>Ced\RueDuCommerce\Block\System\Config\Form\Field\Disable</frontend_model>
+                </field>
+
+                <field id="api_key" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="0"
+                       showInStore="0"
+                       showInProfile="1"
+                >
+                    <label>Api Key</label>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="order_api_key" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="0"
+                       showInStore="0"
+                       showInProfile="1"
+                >
+                    <label>Order Api Key</label>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="storeid" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="0"
+                       showInStore="0"
+                       showInProfile="1"
+                >
+                    <label>Select Store</label>
+                    <source_model>Magento\Config\Model\Config\Source\Store</source_model>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                 <!--<field id="product_reference_type" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="0"
+                       showInStore="0"
+                       showInProfile="1"
+                >
+                    <label>Product Reference Type</label>
+                    <source_model>Ced\RueDuCommerce\Model\Source\ReferenceType</source_model>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="product_reference_value" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="0"
+                       showInStore="0"
+                       showInProfile="1"
+                >
+                    <label>Product Reference Value</label>
+                    <source_model>Ced\RueDuCommerce\Model\Source\Profile\Attributes</source_model>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>-->
+                <field id="debug_mode" translate="label" type="select" sortOrder="100" showInDefault="1" showInWebsite="0"
+                       showInStore="0"
+                       showInProfile="1"
+                >
+                    <label>Debug Mode</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="rueducommerce_product" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1"
+                   showInStore="0"
+                   showInProfile="1"
+            >
+                <label>RueDuCommerce Product Settings</label>
+                <group id="price_settings" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" showInProfile="1">
+                    <label>RueDuCommerce Price Settings</label>
+                    <field id="price" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0" showInProfile="1">
+                        <label>Product Price</label>
+                        <source_model>Ced\RueDuCommerce\Model\Source\Config\Price</source_model>
+                        <comment><![CDATA[Select to send a different product price to <b>RueDuCommerce</b>]]></comment>
+                    </field>
+                    <field id="fix_price" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="0" showInStore="0" showInProfile="1">
+                        <label>Modify by Fix Price</label>
+                        <validate>required-entry validate-number</validate>
+                        <depends>
+                            <field id="price" separator=",">plus_fixed,min_fixed</field>
+                        </depends>
+                    </field>
+                    <field id="percentage_price" translate="label" type="text" sortOrder="12" showInDefault="1" showInWebsite="0" showInStore="0" showInProfile="1">
+                        <label>Modify by Percenctage Price</label>
+                        <validate>required-entry validate-number</validate>
+                        <comment><![CDATA[Numeric value Required for <b>Add/subtract % on Magento price</b> 5 for Example: Magento price +/- 5% of Magento price.<b>]]></comment>
+                        <depends>
+                            <field id="price" separator=",">plus_per,min_per</field>
+                        </depends>
+                    </field>
+                    <field id="different_price" translate="label" type="text" sortOrder="13" showInDefault="1" showInWebsite="0" showInStore="0" showInProfile="1">
+                        <label>Map Price Attribute</label>
+                        <validate>required-entry</validate>
+                        <comment><![CDATA[<b>Attribute Code Required in case of <b>Custom Fixed Price</b>]]></comment>
+                        <depends>
+                            <field id="price">differ</field>
+                        </depends>
+                    </field>
+                </group>
+                <group id="inventory_settings" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" showInProfile="1">
+                    <label>RueDuCommerce Inventory Settings</label>
+                    <field id="advanced_threshold_status" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0" showInProfile="1">
+                        <label>Set Inventory on Basis of Threshold</label>
+                        <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                        <comment>Choose yes to send inventory on rueducommerce by condition </comment>
+                    </field>
+                    <field id="inventory_rule_threshold" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0" showInProfile="1">
+                        <label>Inventory Threshold Value</label>
+                        <comment>Set inventory quantity on which lesser and greater condition can control.</comment>
+                        <depends>
+                            <field id="advanced_threshold_status">1</field>
+                        </depends>
+                    </field>
+                    <field id="send_inventory_for_lesser_than_threshold" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0" showInProfile="1">
+                        <label>Send Inventory for Lesser Than Threshold Case</label>
+                        <comment>Send Quantity to RueDuCommerce for those products, whose inventory is LESSER than the inventory threshold.
+                        </comment>
+                        <depends>
+                            <field id="advanced_threshold_status">1</field>
+                        </depends>
+                    </field>
+                    <field id="send_inventory_for_greater_than_threshold" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0" showInProfile="1">
+                        <label>Send Inventory for Greater Than Threshold Case</label>
+                        <comment>Send Quantity to RueDuCommerce for those products, whose inventory is GREATER than the inventory threshold.
+                        </comment>
+                        <depends>
+                            <field id="advanced_threshold_status">1</field>
+                        </depends>
+                    </field>
+                </group>
+                <group id="rueducommerce_other_prod_setting" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" showInProfile="1">
+                    <label>Other Product Settings</label>
+                    <field id="rueducommerce_merge_parent_images" translate="label comment" type="select" sortOrder="30" showInDefault="1"
+                           showInWebsite="0" showInStore="0">
+                        <label>Merge Parent Product Images</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="rueducommerce_use_other_parent" translate="label" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0" showInProfile="1">
+                        <label>Use Parent Product Info</label>
+                        <can_be_empty>1</can_be_empty>
+                        <source_model>Ced\RueDuCommerce\Model\Source\Config\Attributes</source_model>
+                        <comment>Select all attribute which you want from configurable parent product.</comment>
+                    </field>
+                    <field id="rueducommerce_skip_from_validation" translate="label" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0" showInProfile="1">
+                        <label>Attributes to skip validation</label>
+                        <can_be_empty>1</can_be_empty>
+                        <source_model>Ced\RueDuCommerce\Model\Source\Config\MagentoAttributes</source_model>
+                        <comment>These attributes will skip from configurable product validation and upload.</comment>
+                    </field>
+                    <field id="rueducommerce_upload_config_as_simple" translate="label comment" type="select" sortOrder="30" showInDefault="1"
+                           showInWebsite="0" showInStore="0">
+                        <label>Upload Config As Simple</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                </group>
+            </group>
+            <group id="rueducommerce_order" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1"
+                   showInStore="0"
+            >
+                <label>RueDuCommerce Order Settings</label>
+                <field id="order_id_prefix" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>RueDuCommerce Order Id Prefix</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>Prefix for RueDuCommerce Increment ID</comment>
+                </field>
+                <field id="order_notify_email" translate="label comment" type="text" sortOrder="20" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Order Notification Email</label>
+                    <validate>required-entry</validate>
+                </field>
+                <field id="auto_accept_order" translate="label comment" type="select" sortOrder="30" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Auto Accept Order</label>
+                    <validate>required-entry</validate>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <!--<field id="auto_cancel_order" translate="label comment" type="select" sortOrder="30" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Auto Cancel Order</label>
+                    <validate>required-entry</validate>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>-->
+                <field id="enable_default_customer" translate="label comment" type="select" sortOrder="30" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Enable Default Customer</label>
+                    <validate>required-entry</validate>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <!--<field id="default_customer" translate="label comment" type="select" sortOrder="40" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Default Customer</label>
+                    <validate>required-entry</validate>
+                    <source_model>Ced\RueDuCommerce\Model\Source\Config\Customer</source_model>
+                    <depends>
+                        <field id="enable_default_customer">1</field>
+                    </depends>
+                </field>-->
+                <field id="default_customer_email" translate="label comment" type="text" sortOrder="40" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Default Customer Email</label>
+                    <depends>
+                        <field id="enable_default_customer">1</field>
+                    </depends>
+                    <validate>required-entry validate-email</validate>
+                </field>
+                <field id="rueducommerce_refund_from_core" translate="label comment" type="select" sortOrder="50" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Refund Order On RueDuCommerce</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Complete item will refund on rueducommerce.</comment>
+                    <tooltip>Magento shipping price doesn't matter. Let's take example if order has two item with shipping price 10 and 20 respectively. Then if you will refund first item on Magento then that item refund with their tax and shipping price.</tooltip>
+                </field>
+                <field id="rueducommerce_refund_reason" translate="label comment" type="select" sortOrder="60" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Refund Reason For RueDuCommerce</label>
+                    <depends>
+                        <field id="rueducommerce_refund_from_core">1</field>
+                    </depends>
+                    <validate>required-entry</validate>
+                    <source_model>Ced\RueDuCommerce\Model\Source\Config\RefundReason</source_model>
+                    <comment>This reason will applied for all refund items.</comment>
+                </field>
+                <!-- <field id="rueducommerce_creditmemo_on_magento" translate="label comment" type="select" sortOrder="70" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Order Refund/Cancel Syncing</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Credit Memo will generate for those items which was refunded on RueDuCommerce panel.</comment>
+                </field> -->
+            </group>
+            <group id="rueducommerce_cron" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>RueDuCommerce Cron Settings</label>
+                <field id="order_cron" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Order Cron</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>Order Fetch Cron </comment>
+                </field>
+                <field id="order_sync_cron" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Order Sync Cron</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>Order Sync Cron</comment>
+                </field>
+                <field id="inventory_price_cron" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Inventory|Price Cron</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>Inventory Sync Cron</comment>
+                </field>
+                <field id="feed_sync_cron" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Feed Cron</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>Feed Sync Cron</comment>
+                </field>
+                <field id="full_offer_sync_cron" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Full Offer Sync Cron</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>Full Offer Sync Cron</comment>
+                </field>
+                <field id="order_shipment_cron" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Order Shipment Cron</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>Completed magento order will automatically ship</comment>
+                </field>
+            </group>
+        </section>
+        <!-- section end for RueDuCommerce Cofiguration Tab in Cedcommerce Tab -->
+
+        <!-- section start for Shipping Methods Tab in Sales Tab -->
+        <section id="carriers">
+            <group id="shipbyrueducommerce" translate="label" type="text" sortOrder="21" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>RueDuCommerce Payment Method(Default)</label>
+                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="title" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Title</label>
+                </field>
+            </group>
+        </section>
+        <!-- section end for Shipping Methods Tab in Sales Tab -->
+
+        <!-- section start for Payment Methods Tab in Sales Tab -->
+        <section id="payment">
+            <group id="paybyrueducommerce" translate="label" type="text" sortOrder="22" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>RueDuCommerce</label>
+                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="title" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Title</label>
+                </field>
+                <field id="order_status" translate="label" type="select" sortOrder="3" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>New order status</label>
+                    <source_model>Magento\Sales\Model\Config\Source\Order\Status</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xsi:noNamespaceSchemaLocation="urn:magento:framework:Ui/etc/ui_configuration.xsd">
+    <listingToolbar name="listing_top">
+        <massaction name="listing_massaction">
+            <action name="fooman_invoice">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">fooman_invoice</item>
+                        <item name="label" xsi:type="string" translate="true">Invoice</item>
+                        <item name="url" xsi:type="url" path="ordermanager/order/invoice"/>
+                    </item>
+                </argument>
+                <argument name="actions" xsi:type="configurableObject">
+                    <argument name="class" xsi:type="string">Fooman\OrderManager\Model\Source\EmailingOptions</argument>
+                    <argument name="data" xsi:type="array">
+                        <item name="configPath" xsi:type="string">ordermanager/invoice/email</item>
+                        <item name="urlPath" xsi:type="string">ordermanager/order/invoice</item>
+                        <item name="paramName" xsi:type="string">email</item>
+                    </argument>
+                </argument>
+            </action>
+            <action name="fooman_ship">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">fooman_ship</item>
+                        <item name="label" xsi:type="string" translate="true">Ship</item>
+                        <item name="url" xsi:type="url" path="ordermanager/order/ship"/>
+                        <item name="callback" xsi:type="array">
+                            <item name="provider" xsi:type="string">
+                                <![CDATA[sales_order_grid.sales_order_grid.foomanOrderManagerMassAction]]>
+                            </item>
+                            <item name="target" xsi:type="string">collectGridData</item>
+                        </item>
+                    </item>
+                </argument>
+                <argument name="actions" xsi:type="configurableObject">
+                    <argument name="class" xsi:type="string">Fooman\OrderManager\Model\Source\EmailingOptions</argument>
+                    <argument name="data" xsi:type="array">
+                        <item name="configPath" xsi:type="string">ordermanager/ship/email</item>
+                        <item name="urlPath" xsi:type="string">ordermanager/order/ship</item>
+                        <item name="paramName" xsi:type="string">email</item>
+                        <item name="callback" xsi:type="array">
+                            <item name="provider" xsi:type="string">
+                                <![CDATA[sales_order_grid.sales_order_grid.foomanOrderManagerMassAction]]>
+                            </item>
+                            <item name="target" xsi:type="string">collectGridData</item>
+                        </item>
+                    </argument>
+                </argument>
+            </action>
+            <action name="fooman_invoice_ship">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">fooman_invoice_ship</item>
+                        <item name="label" xsi:type="string" translate="true">Invoice + Ship</item>
+                        <item name="url" xsi:type="url" path="ordermanager/order/invoiceAndShip"/>
+                        <item name="callback" xsi:type="array">
+                            <item name="provider" xsi:type="string">
+                                <![CDATA[sales_order_grid.sales_order_grid.foomanOrderManagerMassAction]]>
+                            </item>
+                            <item name="target" xsi:type="string">collectGridData</item>
+                        </item>
+                    </item>
+                </argument>
+            </action>
+            <action name="fooman_status">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">fooman_status</item>
+                        <item name="label" xsi:type="string" translate="true">Update Order Status</item>
+                        <item name="url" xsi:type="url" path="ordermanager/order/status"/>
+                    </item>
+                </argument>
+                <argument name="actions" xsi:type="configurableObject">
+                    <argument name="class" xsi:type="string">Fooman\OrderManager\Model\Source\UpdateStatusActionOptions</argument>
+                    <argument name="data" xsi:type="array">
+                        <item name="urlPath" xsi:type="string">ordermanager/order/status</item>
+                        <item name="paramName" xsi:type="string">new_status</item>
+                    </argument>
+                </argument>
+            </action>
+        </massaction>
+    </listingToolbar>
+    <container name="foomanOrderManagerMassAction">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="component" xsi:type="string">Fooman_OrderManager/js/grid/massactions</item>
+            </item>
+        </argument>
+    </container>
+    <columns name="sales_order_columns">
+        <column name="tracking_number">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Fooman_OrderManager/js/grid/columns/input</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="sortable" xsi:type="boolean">false</item>
+                    <item name="label" xsi:type="string" translate="true">Tracking Number</item>
+                    <item name="inputKey" xsi:type="string">tracking_number</item>
+                </item>
+            </argument>
+        </column>
+        <column name="tracking_carrier">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Fooman_OrderManager/js/grid/columns/select</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="sortable" xsi:type="boolean">false</item>
+                    <item name="label" xsi:type="string" translate="true">Tracking Carrier</item>
+                    <item name="inputKey" xsi:type="string">tracking_carrier</item>
+                </item>
+            </argument>
+        </column>
+    </columns>
+</listing>

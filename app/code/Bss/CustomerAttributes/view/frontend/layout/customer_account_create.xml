@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_CustomerAttributes
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2018-2019 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <referenceBlock name="customer_form_register">
+                <action method="setTemplate">
+                    <argument name="template" xsi:type="string">Bss_CustomerAttributes::form/register/register.phtml</argument>
+                </action>
+
+                <block ifconfig="bss_customer_attribute/general/enable"
+                       name="personal.information.section"
+                       as="personal_information_section"
+                       class="Bss\CustomerAttributes\Block\Frontend\Register\PersonalInformationSectionAttribute"
+                       template="Bss_CustomerAttributes::form/register/customer_attribute.phtml">
+                    <arguments>
+                        <argument name="view_model" xsi:type="object">Bss\CustomerAttributes\Model\RegisterData</argument>
+                    </arguments>
+                </block>
+
+                <block ifconfig="bss_customer_attribute/general/enable"
+                       name="signin.information.section"
+                       as="signin_information_section"
+                       class="Bss\CustomerAttributes\Block\Frontend\Register\SigninInformationSectionAttribute"
+                       template="Bss_CustomerAttributes::form/register/customer_attribute.phtml">
+                    <arguments>
+                        <argument name="view_model" xsi:type="object">Bss\CustomerAttributes\Model\RegisterData</argument>
+                    </arguments>
+                </block>
+
+                <block ifconfig="bss_customer_attribute/general/enable"
+                       name="customer.attribute.section"
+                       as="customer_attribute_section"
+                       class="Bss\CustomerAttributes\Block\Frontend\Register\CustomerSectionAttribute"
+                       template="Bss_CustomerAttributes::form/register/customer_attribute.phtml">
+                    <arguments>
+                        <argument name="view_model" xsi:type="object">Bss\CustomerAttributes\Model\RegisterData</argument>
+                    </arguments>
+                </block>
+            </referenceBlock>
+        </referenceContainer>
+    </body>
+</page>

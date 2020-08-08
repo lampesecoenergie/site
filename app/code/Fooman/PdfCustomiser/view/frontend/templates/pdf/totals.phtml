@@ -1,0 +1,84 @@
+<!-- TOTALS -->
+<?php
+/**
+ * @var $block \Fooman\PdfCustomiser\Block\Totals
+ *
+ * Note on the use of @noEscape throughout this template
+ * html output is allowed by design to allow users to customise their pdfs
+ * Before pdf rendering all output is run filtered by @see \Magento\Framework\Filter\Input\MaliciousCode
+ */
+?>
+<?php $totals = $block->getTotals() ?>
+<?php if ($totals) : ?>
+    <table nobr="true" width="100%" border="0" style="padding:2mm 0mm;" cellspacing="0">
+        <tr>
+            <td colspan="4">&nbsp;</td>
+        </tr>
+        <?php $nrTotals = count($totals) ?>
+        <?php $counterTotals = 1 ?>
+        <?php foreach ($totals as $total) : ?>
+            <?php $block->prepareTotal($total) ?>
+            <?php if ($total->canDisplay()) : ?>
+                <?php $totalDisplayLines = $block->getTotalLinesForDisplay($total); ?>
+                <?php if ($block->shouldDisplayBothCurrencies()) : ?>
+                    <?php foreach ($totalDisplayLines as $totalDisplayLine) : ?>
+                        <?php $totalDisplayLine['label'] = str_replace(' ()', '', $totalDisplayLine['label']); ?>
+                        <?php if ($total->getSourceField() == 'grand_total') : ?>
+                            <tr>
+                                <td width="36%">&nbsp;</td>
+                                <td style="border-top:1px solid black;"
+                                    align="right"
+                                    width="32%"
+                                ><strong><?= /* @noEscape */ $totalDisplayLine['label'] ?></strong></td>
+                                <td style="border-top:1px solid black;"
+                                    align="right"
+                                    width="16%"
+                                ><strong><?= /* @noEscape */ $totalDisplayLine['amount'] ?></strong></td>
+                                <td style="border-top:1px solid black;"
+                                    align="right"
+                                    width="16%"
+                                ><strong><?= /* @noEscape */ $totalDisplayLine['base_amount'] ?></strong></td>
+                            </tr>
+                        <?php else : ?>
+                            <tr>
+                                <td width="36%">&nbsp;</td>
+                                <td align="right"
+                                    width="32%"><?= /* @noEscape */ $totalDisplayLine['label'] ?></td>
+                                <td align="right"
+                                    width="16%"><?= /* @noEscape */ $totalDisplayLine['amount'] ?></td>
+                                <td align="right"
+                                    width="16%"><?= /* @noEscape */ $totalDisplayLine['base_amount'] ?></td>
+                            </tr>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                <?php else : ?>
+                    <?php foreach ($totalDisplayLines as $totalDisplayLine) : ?>
+                        <?php $totalDisplayLine['label'] = str_replace(' ()', '', $totalDisplayLine['label']); ?>
+                        <?php if ($total->getSourceField() == 'grand_total') : ?>
+                            <tr>
+                                <td width="25%">&nbsp;</td>
+                                <td width="25%">&nbsp;</td>
+                                <td style="border-top:1px solid black;"
+                                    align="right"
+                                    width="34%"><strong><?= /* @noEscape */ $totalDisplayLine['label'] ?></strong></td>
+                                <td style="border-top:1px solid black;"
+                                    align="right"
+                                    width="16%"><strong><?= /* @noEscape */ $totalDisplayLine['amount'] ?></strong></td>
+                            </tr>
+                        <?php else : ?>
+                            <tr>
+                                <td width="25%">&nbsp;</td>
+                                <td width="25%">&nbsp;</td>
+                                <td align="right"
+                                    width="34%"><?= /* @noEscape */ $totalDisplayLine['label'] ?></td>
+                                <td align="right"
+                                    width="16%"><?= /* @noEscape */ $totalDisplayLine['amount'] ?></td>
+                            </tr>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                <?php endif;?>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </table>
+<?php endif; ?>
+<!-- END TOTALS -->

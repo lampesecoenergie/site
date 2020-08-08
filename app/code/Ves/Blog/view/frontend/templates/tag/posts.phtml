@@ -1,0 +1,80 @@
+<?php
+$collection  = $this->getCollection();
+$helper      = $this->helper("Ves\Blog\Helper\Data");
+$imageHelper = $this->helper("Ves\Blog\Helper\Image");
+
+/** General Settings **/
+$dateFormat         = $this->getConfig("general_settings/dateformat");
+$twitterUsername    = $this->getConfig("general_settings/twitter_username");
+$enableNetworks     = $this->getConfig("general_settings/enable_networks");
+$networks           = array_flip(explode(",", $this->getConfig("general_settings/networks")));
+$layout             = $this->getConfig("blog_page/layout_type");
+$show_toolbartop    = $this->getConfig("blog_page/show_toolbartop");
+$show_toolbarbottom = $this->getConfig("blog_page/show_toolbarbottom");
+
+$itemsperpage       = (int)$this->getConfig('blog_page/item_per_page',20);
+$lg_column_item     = (int)$this->getConfig('blog_page/lg_column_item',6);
+$md_column_item     = (int)$this->getConfig('blog_page/md_column_item',6);
+$sm_column_item     = (int)$this->getConfig('blog_page/sm_column_item',6);
+$xs_column_item     = (int)$this->getConfig('blog_page/xs_column_item',6);
+$lg_column          = 12/$lg_column_item;
+$md_column          = 12/$md_column_item;
+$sm_column          = 12/$sm_column_item;
+$xs_column          = 12/$xs_column_item;
+
+/** POST Settings **/
+$show_image             = $this->getConfig("blog_page/show_image");
+$image_width            = (int)$this->getConfig("blog_page/image_width");
+$image_height           = (int)$this->getConfig("blog_page/image_height");
+$show_title             = $this->getConfig("blog_page/show_title");
+$show_shortdescription  = $this->getConfig("blog_page/show_shortdescription");
+$shortdescription_count = $this->getConfig("blog_page/shortdescription_count");
+$show_readmorelink		= $this->getConfig("blog_page/show_readmorelink");
+$show_categories        = $this->getConfig("blog_page/show_categories");
+$show_author            = $this->getConfig("blog_page/show_author");
+$show_commentcount      = $this->getConfig("blog_page/show_commentcount");
+$show_updatedtime       = $this->getConfig("blog_page/show_updatedtime");
+$show_createdtime       = $this->getConfig("blog_page/show_createdtime");
+$show_hits              = $this->getConfig("blog_page/show_hits");
+$show_image             = $this->getConfig("blog_page/show_image");
+$show_tags              = $this->getConfig("blog_page/show_tags"); 
+?>
+
+<?php if($collection->count()){ ?>
+<?php $total = count($collection->getItems()); ?>
+<div class="ves-blog">
+
+	<?php if($show_toolbartop){ ?>
+	<div class="blog-toolbar toolbar">
+		<?php echo $block->getChildHtml('toolbar'); ?>
+	</div>
+	<?php } ?>
+	<div class="blog-<?php echo $layout ?>">
+		<?php echo $this->getPostsBlock(); ?>
+	</div>
+	<?php if($show_toolbarbottom){ ?>
+	<div class="blog-toolbar toolbar">
+		<?php echo $block->getChildHtml('toolbar'); ?>
+	</div>
+	<?php } ?>
+</div>
+<?php if($layout=='masonry'){ ?>
+<script>
+require(['jquery'],function($){
+    $(document).ready(function(){
+		require([
+			'jquery',
+			'Ves_Blog/js/masonry.pkgd.min'
+			], function($, Masonry){
+				var masoW = 90/<?php echo $lg_column_item ?>;
+				$('.blog-masonry .post-item').css({"width":masoW+"%"});
+				new Masonry( '.blog-masonry', {
+					itemSelector: '.post-item'
+				});
+			});
+		});
+    });
+	</script>
+	<?php } ?>
+
+	<?php } ?>

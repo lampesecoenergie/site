@@ -1,0 +1,58 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement(EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_EbayMultiAccount
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CEDCOMMERCE(http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+
+/**
+ * @see Ced\EbayMultiAccount\Block\Adminhtml\OtherDetails
+ */
+
+?>
+<script>
+    require(['prototype'], function() {
+        function fetchCat() {
+            var validationMessage = $('validation_result1');
+            params = {
+                location: $('<?php  echo $block->escapeHtml($block->getLocation()); ?>').value,
+            };
+            new Ajax.Request('<?php  echo $block->escapeXssInUrl($block->getAjaxUrl()) ?>', {
+                parameters: params,
+                onSuccess: function(response) {
+                    try {
+                        if (response.responseText.evalJSON().msg == "success") {
+                            window.location = response.responseText.evalJSON().data;
+                        } else if (response.responseText.evalJSON().msg == "error") {
+                            var result = response.responseText.evalJSON().data;
+                            validationMessage.removeClassName('hidden').addClassName('error')
+                        }
+                    } catch(e) {
+                        validationMessage.removeClassName('hidden').addClassName('error');
+                    }
+                    validationMessage.update(result);
+                }
+            });
+        }
+        window.fetchCat = fetchCat;
+    });
+</script>
+<?php if ($this->token) { ?>
+<div class="actions actions-validate">
+    <div id="validation_result1" class="message-validation hidden"></div>
+    <button onclick="fetchCat(); return false;" class="action-validate" type="button" id="<?php echo $block->getHtmlId() ?>">
+        <span><?php echo $block->escapeHtml($block->getButtonLabel()) ?></span>
+    </button>
+</div>
+<?php } ?>

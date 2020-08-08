@@ -1,0 +1,26 @@
+<?php
+$helper     = $this->helper("Ves\Blog\Helper\Data");
+$collection = $this->getCollection();
+$posts      = $this->getData("posts");
+$dateFormat = $helper->getConfig("general_settings/dateformat");
+?>
+<?php if($collection->getSize()){ ?>
+<div class="ves-block blog-recentcomments block">
+	<div class="block-title">
+		<strong><?php echo __('Recent Comments'); ?></strong>
+	</div>
+	<div class="block-content">
+		<ul>
+			<?php foreach ($collection as $_comment) { ?>
+			<?php if(!isset($posts[$_comment->getPostId()])) continue; ?>
+			<?php $_post = $posts[$_comment->getPostId()]; ?>
+			<li>
+				<a href="<?php echo $helper->getPostUrl($_post) . '#comment' . $_comment->getCommentId()  ?>"><?php echo $_post->getTitle() ?></a>
+				<div class="comment-date"><?php echo $helper->getFormatDate($_comment->getCreationTime(), $dateFormat); ?></div>
+				<div class="post-shortcontent"><?php echo $helper->subString($_comment->getContent(), 50); ?></div>
+			</li>
+			<?php } ?>
+		</ul>
+	</div>
+</div>
+<?php } ?>

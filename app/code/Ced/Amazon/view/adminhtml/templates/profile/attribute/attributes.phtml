@@ -1,0 +1,179 @@
+<?php
+/** @var \Ced\Amazon\Block\Adminhtml\Profile\Ui\Form\AttributeMapping $block */
+
+$element = $block->getElement();
+$_htmlId = 'amazonAttributes' ?>
+<?php $_htmlClass = 'amazonAttributesClass' ?>
+<?php $_htmlName = 'amazon_attributes' ?>
+<?php $_readonly = false ?>
+<div class="field" id="attribute-<?php /* @escapeNotVerified */
+echo $_htmlId ?>-container" data-attribute-code="<?php /* @escapeNotVerified */
+echo $_htmlId ?>"
+>
+    <div class="control">
+        <table class="admin__control-table tiers_table" id="tiers_table">
+            <thead>
+            <div>Please map all Amazon attributes with Magento attributes.</div>
+            <tr>
+                <th class="col-customer-group"><?php /* @escapeNotVerified */
+                    echo __('Amazon Attribute') ?></th>
+                <th class="col-qty required"><?php /* @escapeNotVerified */
+                    echo __('Magento Catalog Attribute') ?></th>
+                <th class="col-delete"><?php /* @escapeNotVerified */
+                    echo __('Action') ?></th>
+            </tr>
+            </thead>
+            <tbody id="<?php /* @escapeNotVerified */
+            echo $_htmlId ?>_container"></tbody>
+            <tfoot>
+            <tr>
+                <td colspan="4" class="col-actions-add"><?php echo $block->getChildHtml('add_button') ?></td>
+            </tr>
+            </tfoot>
+        </table>
+
+        <script>
+            require([
+                'mage/template',
+                "prototype",
+                "mage/adminhtml/form"
+            ], function (mageTemplate) {
+//<![CDATA[
+                var requiredAttributeRowTemplate = '<tr>'
+                    + '<input type="hidden" value="0" name="<?php echo $_htmlName ?>[<%- data.index %>][minOccurs]" id="tier_price_row_<%- data.index %>_amazon_required"" />'
+                    + '<input type="hidden" name="<?php echo $_htmlName ?>[<%- data.index %>][name]" id="tier_price_row_<%- data.index %>_amazon_attribute_hidden"" />'
+                    + '<input type="hidden" name="<?php echo $_htmlName ?>[<%- data.index %>][dataType]" id="tier_price_row_<%- data.index %>_dataType"" />'
+                    + '<td><select style="margin-left: 10px;" onclick="return amazonAttributeControl.setAmazonAttributeType(this, <%- data.index %>);" class="<?php echo $_htmlClass ?> custgroup required-entry" name="<?php echo $_htmlName ?>[<%- data.index %>][name]" id="tier_price_row_<%- data.index %>_amazon_attribute">'
+
+                    <?php foreach ($block->getAmazonAttributes() as $optGroup) {
+                    $disable = '';
+                    if ($optGroup['label'] == 'Required Attributes') {
+                        $disable = 'disabled="disabled"';
+                    }
+                    ?>
+                    + '<optgroup <?php echo $disable ?> label="<?php echo $optGroup['label'] ?> ">'
+                    <?php
+                    foreach ($optGroup['value'] as $_groupId => $_groupName): ?>
+                    + '<option value="<?php echo $_groupId  ?>" attribute_type="<?php echo $_groupName['dataType'] ?>"><?php echo __($_groupName['name']) ?></option>'
+                    <?php endforeach
+                    ?>
+                    + '</optgroup>'
+                    <?php  }
+                    ?>
+                    + '</select></td>'
+                    + '<td> <select class="<?php echo $_htmlClass ?> required_magento_attr required-entry" name="<?php echo $_htmlName ?>[<%- data.index %>][magento_attribute_code]" id="tier_price_row_<%- data.index %>_magento_attr">'
+                    <?php foreach ($this->getMagentoAttributes() as $_groupId=>$_groupName): ?>
+                    + "<option value='<?php echo $_groupId ?>' ><?php echo __($_groupName) ?></option>"
+                    <?php endforeach ?>
+                    + '</select>'
+                    + ' </td>'
+                    + '<td class="col-delete"><input type="hidden" name="<?php /* @escapeNotVerified */ echo $_htmlName ?>[<%- data.index %>][delete]" class="delete" value="" id="tier_price_row_<%- data.index %>_delete" />'
+                    + '<button title="<?php /* @escapeNotVerified */ echo $block->escapeHtml(__('Delete Tier')); ?>" type="button" class="action- scalable delete icon-btn delete-product-option" id="tier_price_row_<%- data.index %>_delete_button" onclick="return amazonAttributeControl.deleteItem(event);">'
+                    + '<span><?php /* @escapeNotVerified */ echo __("Delete") ?></span></button></td>'
+                    + '</tr>';
+
+                var amazonAttributeControl = {
+                    template: mageTemplate(requiredAttributeRowTemplate),
+                    itemsCount: 0,
+                    addItem: function () {
+                        <?php if ($_readonly): ?>
+                        if (arguments.length < 4) {
+                            return;
+                        }
+                        <?php endif; ?>
+                        var data = {
+                            amazon_attribute: '',
+                            magento_attr: '',
+                            minOccurs: '',
+                            dataType: '',
+                            index: this.itemsCount++
+                        };
+
+                        if (arguments.length >= 4) {
+                            data.amazon_attribute = arguments[0];
+                            data.magento_attr = arguments[1];
+                            data.dataType = arguments[2];
+                            data.minOccurs = arguments[3];
+                        }
+                        Element.insert($('<?php /* @escapeNotVerified */ echo $_htmlId ?>_container'), {
+                            bottom: this.template({
+                                data: data
+                            })
+                        });
+                        $('tier_price_row_' + data.index + '_amazon_attribute').value = data.amazon_attribute;
+                        $('tier_price_row_' + data.index + '_magento_attr').value = data.magento_attr;
+                        $('tier_price_row_' + data.index + '_dataType').value = data.dataType;
+
+                        if (data.minOccurs == 1) {
+                            $('tier_price_row_' + data.index + '_delete_button').remove();
+                            $('tier_price_row_' + data.index + '_amazon_attribute').disabled = true;
+                            $('tier_price_row_' + data.index + '_amazon_attribute_hidden').value =
+                                data.amazon_attribute;
+                            $('tier_price_row_' + data.index + '_amazon_required').value = data.minOccurs;
+                        }
+
+                        if (data.readOnly == '1') {
+                            ['website', 'cust_group', 'qty', 'price', 'delete'].each(function (idx) {
+                                $('tier_price_row_' + data.index + '_' + idx).disabled = true;
+                            });
+                            $('tier_price_row_' + data.index + '_delete_button').hide();
+                        }
+
+                        <?php if ($_readonly): ?>
+                        $('<?php /* @escapeNotVerified */ echo $_htmlId ?>_container').select('input', 'select').each(this.disableElement);
+                        $('<?php /* @escapeNotVerified */ echo $_htmlId ?>_container').up('table').select('button').each(this.disableElement);
+                        <?php else: ?>
+                        $('<?php /* @escapeNotVerified */ echo $_htmlId ?>_container').select('input', 'select').each(function (el) {
+                            Event.observe(el, 'change', el.setHasChanges.bind(el));
+                        });
+                        <?php endif; ?>
+                    },
+                    disableElement: function (el) {
+                        el.disabled = true;
+                        el.addClassName('disabled');
+                    },
+                    deleteItem: function (event) {
+                        var tr = Event.findElement(event, 'tr');
+                        if (tr) {
+                            Element.select(tr, '.delete').each(function (elem) {
+                                elem.value = '1'
+                            });
+                            Element.select(tr, ['input', 'select']).each(function (elem) {
+                                elem.hide()
+                            });
+                            Element.hide(tr);
+                            Element.addClassName(tr, 'no-display template');
+                        }
+                        return false;
+                    },
+                    setAmazonAttributeType: function (e, index) {
+                        var attributeType = e.options[e.selectedIndex].getAttribute('attribute_type');
+                        $('tier_price_row_' + index + '_dataType').value = attributeType;
+                    }
+                };
+                <?php if(count($this->getMappedAttribute()) > 0 )
+                    foreach ($this->getMappedAttribute() as $id => $_item): ?>
+
+                amazonAttributeControl.addItem(
+                    '<?php echo $id ?>',
+                    '<?php echo isset($_item['magento_attribute_code']) ? $_item['magento_attribute_code'] : "" ?>',
+                    '<?php echo $_item['dataType'] ?>',
+                    '<?php echo $_item['minOccurs'] ?>'
+                );
+
+                <?php endforeach; ?>
+
+                <?php if ($_readonly): ?>
+
+                $('<?php /* @escapeNotVerified */ echo $_htmlId ?>_container').up('table').select('button')
+                    .each(amazonAttributeControl.disableElement);
+                <?php endif; ?>
+
+                window.amazonAttributeControl = amazonAttributeControl;
+//]]>
+            });
+
+
+        </script>
+    </div>
+</div>

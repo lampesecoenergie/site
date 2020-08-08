@@ -1,0 +1,91 @@
+Help,Help
+"GLS - Export","GLS - Export"
+"Orders have been downloaded","Orders have been downloaded"
+"Orders have been exported","Orders have been exported"
+"Orders have been imported","Orders have been imported"
+"No orders to import in the folder ","No orders to import in the folder "
+"Import orders","Import orders"
+"Invalid arguments count for addMethod FuncCall","Invalid arguments count for addMethod FuncCall"
+"Invalid first argument for addMethod FuncCall: the first argument must be a string and match the following pattern : ^[a-z][a-z0-9_]*$","Invalid first argument for addMethod FuncCall: the first argument must be a string and match the following pattern : ^[a-z][a-z0-9_]*$"
+"Invalid second argument for addMethod FuncCall: the second argument must be an array","Invalid second argument for addMethod FuncCall: the second argument must be an array"
+"The method %1 already exists","The method %1 already exists"
+Self,Self
+Parent,Parent
+Children,Children
+"Shipment creation error for Order %s : %s","Shipment creation error for Order %s : %s"
+"Unable to save the cron expression.","Unable to save the cron expression."
+"Opening hours","Opening hours"
+Monday,Monday
+Tuesday,Tuesday
+Wednesday,Wednesday
+Thursday,Thursday
+Friday,Friday
+Saturday,Saturday
+Sunday,Sunday
+"GLS, your transport partner","GLS, your transport partner"
+Informations,Informations
+Title,Title
+Enable,Enable
+"GLS webservice Login","GLS webservice Login"
+"GLS Webservice password","GLS Webservice password"
+"Maximum package weight (please consider about GLS maximum weight)","Maximum package weight (please consider about GLS maximum weight)"
+"GLS Chez Vous","GLS Chez Vous"
+"GLS Chez Vous setup","GLS Chez Vous setup"
+"GLS Chez Vous order","GLS Chez Vous order"
+"GLS Chez Vous +","GLS Chez Vous +"
+"GLS Chez Vous + setup","GLS Chez Vous + setup"
+"GLS Chez Vous + order","GLS Chez Vous + order"
+"GLS Point Relais","GLS Point Relais"
+"GLS Point Relais setup","GLS Point Relais setup"
+"GLS Point Relais order","GLS Point Relais order"
+"Only XL shop search","Only XL shop search"
+"GLS Avant 13H","GLS Avant 13H"
+"GLS Avant 13H setup","GLS Avant 13H setup"
+"GLS Avant 13H order","GLS Avant 13H order"
+"Tracking URL","Tracking URL"
+Debug,Debug
+"Display debug on cart on a delivery estimate","Display debug on cart on a delivery estimate"
+"GLS module order","GLS module order"
+"GLS Advanced Setup","GLS Advanced Setup"
+"General Configuration","General Configuration"
+"Weight unit","Weight unit"
+"Agency code","Agency code"
+"Google Maps API Key","Google Maps API Key"
+"Import / Export Configuration","Import / Export Configuration"
+Active,Active
+Frequency,Frequency
+"Cron expression","Cron expression"
+"Import folder","Import folder"
+"Import order status","Import order status"
+"Export folder","Export folder"
+"Status of orders to export","Status of orders to export"
+"Bundle Product Management","Bundle Product Management"
+"Item processing","Item processing"
+"If ""Self"" is selected, options bellow are ignored","If ""Self"" is selected, options bellow are ignored"
+"Item options on","Item options on"
+item.option.*,item.option.*
+"Item data on","Item data on"
+item.*,item.*
+"Product data on","Product data on"
+product.*,product.*
+"Configurable Product Management","Configurable Product Management"
+"Purchase Point","Purchase Point"
+Export,Export
+"Are you sure you want to export selected items?","Are you sure you want to export selected items?"
+Download,Download
+"Are you sure you want to download selected items?","Are you sure you want to download selected items?"
+ID,ID
+"Purchase Date","Purchase Date"
+"Bill-to Name","Bill-to Name"
+"Ship-to Name","Ship-to Name"
+"Grand Total (Purchased)","Grand Total (Purchased)"
+"Shipping Method","Shipping Method"
+Status,Status
+Yes,Yes
+No,No
+"Display","Display"
+"Your postcode","Your postcode"
+"Your address","Your address"
+"Your city","Your city"
+"Search","Search"
+"CHOOSE YOUR MONDIAL RELAY PARCELSHOP","CHOOSE YOUR MONDIAL RELAY PARCELSHOP"

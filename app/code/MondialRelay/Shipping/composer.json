@@ -1,0 +1,31 @@
+{
+  "name": "mondialrelay/module-shipping",
+  "description": "Module Mondial Relay for Magento 2",
+  "require": {
+    "magento/module-checkout":">=100.0.1",
+    "magento/module-quote":">=100.0.1",
+    "magento/module-sales":">=100.0.1",
+    "magento/module-shipping":">=100.0.1",
+    "magento/module-directory":">=100.0.1",
+    "magento/module-config":">=100.0.1",
+    "magento/module-backend": ">=100.0.1",
+    "magento/framework": ">=100.0.1"
+  },
+  "type": "magento2-module",
+  "version": "100.10.2",
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "MondialRelay\\Shipping\\": ""
+    }
+  },
+  "authors": [
+    {
+      "name": "Matthieu Vion",
+      "homepage": "https://mondialrelay.magentix.fr/",
+      "role": "Developer"
+    }
+  ]
+}

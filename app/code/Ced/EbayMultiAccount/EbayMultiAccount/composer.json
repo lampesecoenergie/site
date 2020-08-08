@@ -1,0 +1,19 @@
+{
+    "name": "ced/ebaymultiaccount-integration-m2",
+    "description": "EbayMultiAccount Magento2 integration",
+    "require": {
+        "php": ">=5.6",
+        "ced/integrator":"*"
+    },
+    "type": "magento2-module",
+    "version": "0.0.2",
+    "license": [
+        "EULA"
+    ],
+    "autoload": {
+    "files": [ "registration.php" ],
+        "psr-4": {
+            "Ced\\EbayMultiAccount\\": ""
+        }
+    }
+}

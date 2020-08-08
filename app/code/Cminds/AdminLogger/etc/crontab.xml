@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job name="auto_delete_old_page_view_logs" instance="Cminds\AdminLogger\Cron\AutoDeleteOldPageViewLogs" method="execute">
+            <schedule>* * * * *</schedule>
+        </job>
+        <job name="auto_delete_old_login_logs" instance="Cminds\AdminLogger\Cron\AutoDeleteOldLoginLogs" method="execute">
+            <schedule>* * * * *</schedule>
+        </job>
+        <job name="auto_delete_old_action_logs" instance="Cminds\AdminLogger\Cron\AutoDeleteOldActionLogs" method="execute">
+            <schedule>* * * * *</schedule>
+        </job>
+    </group>
+</config>

@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="sales_order_shipment_track_save_after">
+        <observer name="ced_amazon_shipment_track_save" instance="Ced\Amazon\Observer\Order\Track\Shipment"/>
+    </event>
+   <!-- <event name="sales_order_shipment_save_after">
+        <observer name="ced_amazon_shipment" instance="Ced\Amazon\Observer\Order\Shipment"/>
+    </event>-->
+
+    <event name="sales_order_item_cancel">
+        <observer name="ced_amazon_inventory" instance="Ced\Amazon\Observer\Order\Cancel"/>
+    </event>
+    <event name="sales_order_creditmemo_save_after">
+        <observer name="ced_amazon_creditmemo_after" instance="Ced\Amazon\Observer\Order\Creditmemo"/>
+    </event>
+    <event name="sales_model_service_quote_submit_success">
+        <observer name="ced_amazon_order_place_after" instance="Ced\Amazon\Observer\Order\Create"/>
+    </event>
+
+    <event name="cataloginventory_stock_item_save_after">
+        <observer name="ced_amazon_inventory" instance="Ced\Amazon\Observer\Product\Inventory\Change"/>
+    </event>
+    <event name="catalog_product_save_after">
+        <observer name="ced_amazon_product" instance="Ced\Amazon\Observer\Product\Save" />
+    </event>
+</config>

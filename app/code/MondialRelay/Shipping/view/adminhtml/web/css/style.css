@@ -1,0 +1,17 @@
+.mondialrelay-configuration{background:#fff9f8;border:1px solid #ccc;padding:0 10px 0 10px;margin-top:20px}
+.configuration-label,.configuration-return{background:#fffde2}
+.mondialrelay-configuration.active .entry-edit-head a{color:#B70B4A}
+.section-config .admin__collapsible-block tr:last-child>td>.mondialrelay-configuration{border-bottom:1px solid #ccc}
+.section-config .admin__collapsible-block tr:last-child > td > .section-config.mondialrelay-configuration > .config{padding-bottom:2.6rem}
+.mondialrelay-label-return-download{background:#f8f8f8;padding:10px}
+.mondialrelay-label-return-download ul{list-style-type:none;margin:0;padding:0}
+.mondialrelay-label-return-download .label{display:inline-block;width:200px;font-weight:bold}
+#carriers_mondialrelay_pickup,
+#carriers_mondialrelay_confort,
+#carriers_mondialrelay_premium,
+#carriers_mondialrelay_standard{padding-bottom:2.6rem}
+#carriers_mondialrelay-head{padding-left:35px;background:url(../images/icons/mondialrelay.png) no-repeat left center}
+.mondialrelay-pickup-selector{clear:both;margin-top:15px}
+.mondialrelay-pickup-selector .admin__page-section-title > span:after{color:#e22626;content:'*';font-weight:400;margin-left:3px}
+.mondialrelay-pickup-selector .admin__field-option label span{background:#B70B4A;color:#fff;padding:0 3px;font-size:12px}
+.mondialrelay-pickup-selector .admin__field-option label span.dri{background:#F7AE09}

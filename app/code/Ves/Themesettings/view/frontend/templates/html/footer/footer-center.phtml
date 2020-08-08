@@ -1,0 +1,23 @@
+<?php 
+$_vesData = $this->helper('Ves\Themesettings\Helper\Data');
+$_ves = $this->helper('Ves\Themesettings\Helper\Theme');
+if($_ves->getFooterCfg("footer_center_settings/enable_footer_center")): 
+?>
+<div class="ves-inner">
+<?php
+$staticblock = $_ves->getFooterCfg("footer_center_settings/staticblock");
+$custom_html = $_ves->getFooterCfg("footer_center_settings/custom_html");
+if($_ves->getGeneralCfg("general_settings/paneltool")){
+    $blockId_tmp = $this->getRequest()->getParam('footer_layout', $this->getRequest()->getParam('footer', false));
+    if($blockId_tmp) {
+        $staticblock = trim($blockId_tmp);
+    }
+}
+if($staticblock && is_numeric($staticblock)){
+	echo $this->getStaticBlock($staticblock);
+}elseif($custom_html!=''){
+	echo $_vesData->filter($custom_html);
+}
+?>
+</div>
+<?php endif; ?>

@@ -1,0 +1,18 @@
+<?php
+$helper = $this->helper("Ves\Blog\Helper\Data");
+$tags = $this->getData('tags');
+?>
+<?php if(count($tags)>0){ ?>
+<div class="ves-block block">
+	<div class="block-title">
+		<strong><?php echo __('Tags'); ?></strong>
+	</div>
+	<div class="block-content">
+		<ul class="tagcloud">
+			<?php foreach ($tags as $k => $v) { ?>
+			<li><a href="<?php echo $helper->getTagUrl($k) ?>" class="tag-count-<?php echo $v['count'] ?>" title="<?php echo $v['name'] ?>"><?php echo $v['name'] ?></a></li>	
+			<?php } ?>
+		</ul>
+	</div>
+</div>
+<?php } ?>

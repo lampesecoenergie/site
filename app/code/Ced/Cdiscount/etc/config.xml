@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement(EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+ * @package   Ced_Cdiscount
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright Copyright CEDCOMMERCE(http://cedcommerce.com/)
+ * @license   http://cedcommerce.com/license-agreement.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<default>
+		<cdiscount_config>
+			<cdiscount_order>
+				<order_id_prefix>CD</order_id_prefix>
+			</cdiscount_order>
+			<cdiscount_cron>
+				<order_cron>0</order_cron>
+				<order_cron_expression>*/20 * * * *</order_cron_expression>
+				<inventory_price_cron>0</inventory_price_cron>
+				<inventory_price_cron_expression>0 * * * *</inventory_price_cron_expression>
+				<all_inventory_price_cron>0</all_inventory_price_cron>
+				<all_inventory_price_cron_expression>0 0 * * *</all_inventory_price_cron_expression>
+			</cdiscount_cron>
+			<cdiscount_product>
+				<chunk_product>50</chunk_product>
+			</cdiscount_product>
+		</cdiscount_config>
+		<carriers>
+			<shipbycdiscount>
+				<active>1</active>
+				<sallowspecific>0</sallowspecific>
+				<name>Cdiscount Shipping Method(Default)</name>
+				<title>Cdiscount Shipping Method</title>
+				<model>Ced\Cdiscount\Model\Carrier\Cdiscount</model>
+			</shipbycdiscount>
+		</carriers> 
+		<payment>
+			<paybycdiscount>
+				<active>1</active>
+				<model>Ced\Cdiscount\Model\Payment\Cdiscount</model>
+				<order_status>Processing</order_status>
+				<title>Cdiscount Payment Method(Default)</title>
+				<payment_action>sale</payment_action>
+				<allowspecific>0</allowspecific>
+			</paybycdiscount>
+    </payment>
+  </default> 
+</config>

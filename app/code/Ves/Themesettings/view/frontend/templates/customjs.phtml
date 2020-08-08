@@ -1,0 +1,9 @@
+<?php
+$_ves = $this->helper('Ves\Themesettings\Helper\Theme');
+$customJs = trim($_ves->getCustomizationCfg('custom_code/custom_js'));
+?>
+<script type="text/javascript">
+	require(["jquery"],function(){
+		<?php echo $customJs; ?>
+	});	
+</script>

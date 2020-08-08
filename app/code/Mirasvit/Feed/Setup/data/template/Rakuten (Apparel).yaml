@@ -1,0 +1,519 @@
+---
+name: Rakuten (Apparel)
+type: txt
+format_serialized: 'a:5:{s:9:"delimiter";s:3:"tab";s:9:"enclosure";s:0:"";s:14:"include_header";s:1:"1";s:12:"extra_header";s:0:"";s:6:"schema";a:85:{i:0;a:5:{s:6:"header";s:9:"seller-id";s:5:"order";i:0;s:4:"type";s:7:"pattern";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:1;a:5:{s:6:"header";s:4:"gtin";s:5:"order";i:1;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:2;a:5:{s:6:"header";s:4:"isbn";s:5:"order";i:2;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:3;a:5:{s:6:"header";s:8:"mfg-name";s:5:"order";i:3;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:12:"manufacturer";}i:4;a:5:{s:6:"header";s:15:"mfg-part-number";s:5:"order";i:4;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:3:"sku";}i:5;a:5:{s:6:"header";s:4:"asin";s:5:"order";i:5;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:6;a:5:{s:6:"header";s:10:"seller-sku";s:5:"order";i:6;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:3:"sku";}i:7;a:5:{s:6:"header";s:5:"title";s:5:"order";i:7;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:4:"name";}i:8;a:5:{s:6:"header";s:11:"description";s:5:"order";i:8;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:11:"description";}i:9;a:5:{s:6:"header";s:10:"main-image";s:5:"order";i:9;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:5:"image";}i:10;a:5:{s:6:"header";s:17:"additional-images";s:5:"order";i:10;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:6:"image2";}i:11;a:5:{s:6:"header";s:6:"weight";s:5:"order";i:11;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:6:"weight";}i:12;a:5:{s:6:"header";s:8:"features";s:5:"order";i:12;s:4:"type";s:7:"pattern";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:13;a:5:{s:6:"header";s:13:"listing-price";s:5:"order";i:13;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:11:"final_price";}i:14;a:5:{s:6:"header";s:4:"msrp";s:5:"order";i:14;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:11:"final_price";}i:15;a:5:{s:6:"header";s:11:"category-id";s:5:"order";i:15;s:4:"type";s:7:"pattern";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:16;a:5:{s:6:"header";s:8:"keywords";s:5:"order";i:16;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:17;a:5:{s:6:"header";s:14:"product-set-id";s:5:"order";i:17;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:18;a:5:{s:6:"header";s:10:"Age Gender";s:5:"order";i:18;s:4:"type";s:7:"pattern";s:7:"pattern";s:14:"Unisex - Adult";s:9:"attribute";s:0:"";}i:19;a:5:{s:6:"header";s:16:"Apparel Material";s:5:"order";i:19;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:20;a:5:{s:6:"header";s:12:"Apparel Size";s:5:"order";i:20;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:21;a:5:{s:6:"header";s:10:"Baby Sizes";s:5:"order";i:21;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:22;a:5:{s:6:"header";s:20:"Bra Accessories Type";s:5:"order";i:22;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:23;a:5:{s:6:"header";s:13:"Bra Cup Sizes";s:5:"order";i:23;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:24;a:5:{s:6:"header";s:8:"Bra Type";s:5:"order";i:24;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:25;a:5:{s:6:"header";s:10:"Chest Size";s:5:"order";i:25;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:26;a:5:{s:6:"header";s:16:"Chest Size Range";s:5:"order";i:26;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:27;a:5:{s:6:"header";s:19:"Children Suit Sizes";s:5:"order";i:27;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:28;a:5:{s:6:"header";s:12:"Closure Type";s:5:"order";i:28;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:29;a:5:{s:6:"header";s:5:"Color";s:5:"order";i:29;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:5:"color";}i:30;a:5:{s:6:"header";s:11:"Color Class";s:5:"order";i:30;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:31;a:5:{s:6:"header";s:8:"Fit Type";s:5:"order";i:31;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:32;a:5:{s:6:"header";s:10:"Foot Style";s:5:"order";i:32;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:33;a:5:{s:6:"header";s:8:"Gift Set";s:5:"order";i:33;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:34;a:5:{s:6:"header";s:6:"Hooded";s:5:"order";i:34;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:35;a:5:{s:6:"header";s:11:"Inseam Size";s:5:"order";i:35;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:36;a:5:{s:6:"header";s:8:"Leg Type";s:5:"order";i:36;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:37;a:5:{s:6:"header";s:13:"Lingerie Type";s:5:"order";i:37;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:38;a:5:{s:6:"header";s:6:"Lining";s:5:"order";i:38;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:39;a:5:{s:6:"header";s:24:"Neck Circumference Range";s:5:"order";i:39;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:40;a:5:{s:6:"header";s:10:"Neck Style";s:5:"order";i:40;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:41;a:5:{s:6:"header";s:8:"Occasion";s:5:"order";i:41;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:42;a:5:{s:6:"header";s:15:"One Piece Style";s:5:"order";i:42;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:43;a:5:{s:6:"header";s:16:"Outerwear Styles";s:5:"order";i:43;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:44;a:5:{s:6:"header";s:7:"Padding";s:5:"order";i:44;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:45;a:5:{s:6:"header";s:12:"Pajama Style";s:5:"order";i:45;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:46;a:5:{s:6:"header";s:9:"Pant Size";s:5:"order";i:46;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:47;a:5:{s:6:"header";s:10:"Pant Style";s:5:"order";i:47;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:48;a:5:{s:6:"header";s:10:"Pants Type";s:5:"order";i:48;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:49;a:5:{s:6:"header";s:13:"Pattern Style";s:5:"order";i:49;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:50;a:5:{s:6:"header";s:10:"Profession";s:5:"order";i:50;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:51;a:5:{s:6:"header";s:28:"Regional Size Classification";s:5:"order";i:51;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:52;a:5:{s:6:"header";s:3:"Set";s:5:"order";i:52;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:53;a:5:{s:6:"header";s:22:"Shapewear & Slips Type";s:5:"order";i:53;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:54;a:5:{s:6:"header";s:18:"Shirts & Tops Size";s:5:"order";i:54;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:55;a:5:{s:6:"header";s:13:"Size Modifier";s:5:"order";i:55;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:56;a:5:{s:6:"header";s:18:"Skirt/Dress Length";s:5:"order";i:56;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:57;a:5:{s:6:"header";s:12:"Skirts Style";s:5:"order";i:57;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:58;a:5:{s:6:"header";s:13:"Sleeve Length";s:5:"order";i:58;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:59;a:5:{s:6:"header";s:12:"Sleeve Style";s:5:"order";i:59;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:60;a:5:{s:6:"header";s:11:"Sock Length";s:5:"order";i:60;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:61;a:5:{s:6:"header";s:9:"Sock Size";s:5:"order";i:61;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:62;a:5:{s:6:"header";s:10:"Sock Style";s:5:"order";i:62;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:63;a:5:{s:6:"header";s:9:"Sock Type";s:5:"order";i:63;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:64;a:5:{s:6:"header";s:12:"Suit Bottoms";s:5:"order";i:64;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:65;a:5:{s:6:"header";s:8:"Suit Fit";s:5:"order";i:65;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:66;a:5:{s:6:"header";s:11:"Suit Length";s:5:"order";i:66;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:67;a:5:{s:6:"header";s:9:"Suit Sets";s:5:"order";i:67;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:68;a:5:{s:6:"header";s:10:"Suit Sizes";s:5:"order";i:68;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:69;a:5:{s:6:"header";s:10:"Suit Style";s:5:"order";i:69;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:70;a:5:{s:6:"header";s:9:"Suit Tops";s:5:"order";i:70;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:71;a:5:{s:6:"header";s:18:"Swim Bottom Styles";s:5:"order";i:71;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:72;a:5:{s:6:"header";s:15:"Swim Top Styles";s:5:"order";i:72;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:73;a:5:{s:6:"header";s:17:"Swimwear Material";s:5:"order";i:73;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:74;a:5:{s:6:"header";s:13:"Swimwear Type";s:5:"order";i:74;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:75;a:5:{s:6:"header";s:5:"Theme";s:5:"order";i:75;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:76;a:5:{s:6:"header";s:9:"Top Style";s:5:"order";i:76;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:77;a:5:{s:6:"header";s:18:"Undergarment Style";s:5:"order";i:77;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:78;a:5:{s:6:"header";s:17:"Undergarment Type";s:5:"order";i:78;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:79;a:5:{s:6:"header";s:15:"Underpants Type";s:5:"order";i:79;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:80;a:5:{s:6:"header";s:15:"Undershirt Type";s:5:"order";i:80;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:81;a:5:{s:6:"header";s:14:"Underwear Type";s:5:"order";i:81;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:82;a:5:{s:6:"header";s:10:"Waist Size";s:5:"order";i:82;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:83;a:5:{s:6:"header";s:10:"Waistlines";s:5:"order";i:83;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}i:84;a:5:{s:6:"header";s:4:"Wire";s:5:"order";i:84;s:4:"type";s:0:"";s:7:"pattern";s:0:"";s:9:"attribute";s:0:"";}}}'
+csv_delimiter: tab
+csv_enclosure: ""
+csv_include_header: "1"
+csv_extra_header: ""
+csv_schema:
+          - 
+                    header: seller-id
+                    order: 0
+                    type: pattern
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: gtin
+                    order: 1
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: isbn
+                    order: 2
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: mfg-name
+                    order: 3
+                    type: ""
+                    pattern: ""
+                    attribute: manufacturer
+          - 
+                    header: mfg-part-number
+                    order: 4
+                    type: ""
+                    pattern: ""
+                    attribute: sku
+          - 
+                    header: asin
+                    order: 5
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: seller-sku
+                    order: 6
+                    type: ""
+                    pattern: ""
+                    attribute: sku
+          - 
+                    header: title
+                    order: 7
+                    type: ""
+                    pattern: ""
+                    attribute: name
+          - 
+                    header: description
+                    order: 8
+                    type: ""
+                    pattern: ""
+                    attribute: description
+          - 
+                    header: main-image
+                    order: 9
+                    type: ""
+                    pattern: ""
+                    attribute: image
+          - 
+                    header: additional-images
+                    order: 10
+                    type: ""
+                    pattern: ""
+                    attribute: image2
+          - 
+                    header: weight
+                    order: 11
+                    type: ""
+                    pattern: ""
+                    attribute: weight
+          - 
+                    header: features
+                    order: 12
+                    type: pattern
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: listing-price
+                    order: 13
+                    type: ""
+                    pattern: ""
+                    attribute: final_price
+          - 
+                    header: msrp
+                    order: 14
+                    type: ""
+                    pattern: ""
+                    attribute: final_price
+          - 
+                    header: category-id
+                    order: 15
+                    type: pattern
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: keywords
+                    order: 16
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: product-set-id
+                    order: 17
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Age Gender
+                    order: 18
+                    type: pattern
+                    pattern: 'Unisex - Adult'
+                    attribute: ""
+          - 
+                    header: Apparel Material
+                    order: 19
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Apparel Size
+                    order: 20
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Baby Sizes
+                    order: 21
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Bra Accessories Type
+                    order: 22
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Bra Cup Sizes
+                    order: 23
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Bra Type
+                    order: 24
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Chest Size
+                    order: 25
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Chest Size Range
+                    order: 26
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Children Suit Sizes
+                    order: 27
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Closure Type
+                    order: 28
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Color
+                    order: 29
+                    type: ""
+                    pattern: ""
+                    attribute: color
+          - 
+                    header: Color Class
+                    order: 30
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Fit Type
+                    order: 31
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Foot Style
+                    order: 32
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Gift Set
+                    order: 33
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Hooded
+                    order: 34
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Inseam Size
+                    order: 35
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Leg Type
+                    order: 36
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Lingerie Type
+                    order: 37
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Lining
+                    order: 38
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Neck Circumference Range
+                    order: 39
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Neck Style
+                    order: 40
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Occasion
+                    order: 41
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: One Piece Style
+                    order: 42
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Outerwear Styles
+                    order: 43
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Padding
+                    order: 44
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Pajama Style
+                    order: 45
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Pant Size
+                    order: 46
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Pant Style
+                    order: 47
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Pants Type
+                    order: 48
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Pattern Style
+                    order: 49
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Profession
+                    order: 50
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Regional Size Classification
+                    order: 51
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Set
+                    order: 52
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: 'Shapewear & Slips Type'
+                    order: 53
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: 'Shirts & Tops Size'
+                    order: 54
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Size Modifier
+                    order: 55
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Skirt/Dress Length
+                    order: 56
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Skirts Style
+                    order: 57
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Sleeve Length
+                    order: 58
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Sleeve Style
+                    order: 59
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Sock Length
+                    order: 60
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Sock Size
+                    order: 61
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Sock Style
+                    order: 62
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Sock Type
+                    order: 63
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Suit Bottoms
+                    order: 64
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Suit Fit
+                    order: 65
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Suit Length
+                    order: 66
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Suit Sets
+                    order: 67
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Suit Sizes
+                    order: 68
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Suit Style
+                    order: 69
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Suit Tops
+                    order: 70
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Swim Bottom Styles
+                    order: 71
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Swim Top Styles
+                    order: 72
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Swimwear Material
+                    order: 73
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Swimwear Type
+                    order: 74
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Theme
+                    order: 75
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Top Style
+                    order: 76
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Undergarment Style
+                    order: 77
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Undergarment Type
+                    order: 78
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Underpants Type
+                    order: 79
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Undershirt Type
+                    order: 80
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Underwear Type
+                    order: 81
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Waist Size
+                    order: 82
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Waistlines
+                    order: 83
+                    type: ""
+                    pattern: ""
+                    attribute: ""
+          - 
+                    header: Wire
+                    order: 84
+                    type: ""
+                    pattern: ""
+                    attribute: ""

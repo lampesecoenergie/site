@@ -1,0 +1,282 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Venustheme
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Venustheme.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.venustheme.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category   Venustheme
+ * @package    Ves_Themesettings
+ * @copyright  Copyright (c) 2014 Venustheme (http://www.venustheme.com/)
+ * @license    http://www.venustheme.com/LICENSE-1.0.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<default>
+		<ves_themesettings_general>
+			<general_settings>
+				<max_width></max_width>
+				<max_width_custom></max_width_custom>
+				<fluid_width></fluid_width>
+				<skin></skin>
+				<direction></direction>
+				<paneltool></paneltool>
+				<enable_ajaxcart>1</enable_ajaxcart>
+				<enable_ajax_img>0</enable_ajax_img>
+				<ajax_img_width>100</ajax_img_width>
+				<ajax_img_height>100</ajax_img_height>
+			</general_settings>
+			<font>
+				<body_font_size></body_font_size>
+				<body_font_family_group></body_font_family_group>
+				<body_font_family_custom></body_font_family_custom>
+				<body_font_family></body_font_family>
+				<body_char_subset></body_char_subset>
+				<body_font_weight></body_font_weight>
+			</font>
+			<promotion_settings>
+				<enable_popup>0</enable_popup>
+				<prefix_class></prefix_class>
+				<padding>0</padding>
+				<popup_width>700</popup_width>
+				<popup_height>324</popup_height>
+				<timeout>5000</timeout>
+				<cms_id></cms_id>
+				<show_newsletter>1</show_newsletter>
+				<show_dontshow>1</show_dontshow>
+			</promotion_settings>
+		</ves_themesettings_general>
+		<ves_themesettings_header>
+			<general_settings>
+				<custom_header_general>0</custom_header_general>
+				<custom_header_outer>0</custom_header_outer>
+				<custom_header_inner>0</custom_header_inner>
+			</general_settings>
+			<language_switcher_settings>
+				<language_switcher></language_switcher>
+				<language_switcher_template></language_switcher_template>
+			</language_switcher_settings>
+			<currency_switcher_settings>
+				<currency_switcher></currency_switcher>
+				<currency_template></currency_template>
+			</currency_switcher_settings>
+			<sticky_settings>
+				<custom_sticky>0</custom_sticky>
+				<custom_block>1</custom_block>
+			</sticky_settings>
+			<topbar>
+				<show_topbar>0</show_topbar>
+				<custom_topbar>0</custom_topbar>
+				<custom_topbar_outer>0</custom_topbar_outer>
+				<custom_topbar_inner>0</custom_topbar_inner>
+			</topbar>
+			<search_settings>
+				<custom_top_search>0</custom_top_search>
+			</search_settings>
+		</ves_themesettings_header>
+		<ves_themesettings_product_listing>
+			<general>
+				<ovveride_productlist>0</ovveride_productlist>
+			</general>
+			<design>
+				<custom_product_list>0</custom_product_list>
+				<custom_pl_name>0</custom_pl_name>
+				<custom_pl_image>0</custom_pl_image>
+				<custom_pl_price>0</custom_pl_price>
+				<custom_pl_quickview>0</custom_pl_quickview>
+				<custom_pl_addcart>0</custom_pl_addcart>
+				<custom_pl_compare>0</custom_pl_compare>
+				<custom_pl_wishlist>0</custom_pl_wishlist>
+				<custom_sale_label>0</custom_sale_label>
+				<custom_new_label>0</custom_new_label>
+				<quickview_format_type>Icon Class, Text</quickview_format_type>
+				<quickview_format_text>Quick view</quickview_format_text>
+				<quickview_format_class>fa fa-eye</quickview_format_class>
+				<addtocart_format_type>Icon Class, Text</addtocart_format_type>
+				<addtocart_format_text>Add To Cart</addtocart_format_text>
+				<addtocart_format_class>fa fa-shopping-cart</addtocart_format_class>
+				<compare_format_type>icon</compare_format_type>
+				<compare_format_text>Compare</compare_format_text>
+				<compare_format_class>fa fa-refresh</compare_format_class>
+				<wishlist_format_type>icon</wishlist_format_type>
+				<wishlist_format_text>Wishlist</wishlist_format_text>
+				<wishlist_format_class>fa fa-heart-o</wishlist_format_class>
+			</design>
+			<product_settings>
+				<show_name>1</show_name>
+				<show_name_single_line>1</show_name_single_line>
+				<show_short_description>1</show_short_description>
+				<short_max_char>100</short_max_char>
+				<show_learnmore>1</show_learnmore>
+				<show_price>1</show_price>
+				<show_review>1</show_review>
+				<show_countdowntimer>1</show_countdowntimer>
+				<show_quickview>1</show_quickview>
+				<show_addtocart>1</show_addtocart>
+				<show_wishlist>1</show_wishlist>
+				<show_compare>1</show_compare>
+				<show_new_label>1</show_new_label>
+				<show_sale_label>1</show_sale_label>
+				<show_image>1</show_image>
+				<image_width>300</image_width>
+				<alt_image>1</alt_image>
+				<alt_image_column>position</alt_image_column>
+				<alt_image_column_value>2</alt_image_column_value>
+			</product_settings>
+		</ves_themesettings_product_listing>
+		<ves_themesettings_category_page>
+			<general_settings>
+				<show_name>1</show_name>
+				<show_description>1</show_description>
+				<show_image>1</show_image>
+				<show_toptoolbar>1</show_toptoolbar>
+				<show_bottomtoolbar>1</show_bottomtoolbar>
+				<products_columns_large>3</products_columns_large>
+				<products_columns_medium>3</products_columns_medium>
+				<products_columns_small>2</products_columns_small>
+				<products_columns_mini>1</products_columns_mini>
+			</general_settings>
+			<product_settings>
+				<show_name>1</show_name>
+				<show_name_single_line>1</show_name_single_line>
+				<show_short_description>1</show_short_description>
+				<short_max_char>1</short_max_char>
+				<show_learnmore>1</show_learnmore>
+				<show_price>1</show_price>
+				<show_review>1</show_review>
+				<show_countdowntimer>1</show_countdowntimer>
+				<show_quickview>1</show_quickview>
+				<quickview_format_type>icon-text</quickview_format_type>
+				<quickview_format_text>Quick View</quickview_format_text>
+				<quickview_format_class>fa fa-eye</quickview_format_class>
+				<show_addtocart>1</show_addtocart>
+				<addtocart_format_type>icon-text</addtocart_format_type>
+				<addtocart_format_text>Add to Cart</addtocart_format_text>
+				<addtocart_format_class>fa fa-shopping-cart</addtocart_format_class>
+				<show_wishlist>1</show_wishlist>
+				<wishlist_format_type>icon-text</wishlist_format_type>
+				<wishlist_format_text>Add to Wishlist</wishlist_format_text>
+				<wishlist_format_class>fa fa-files-o</wishlist_format_class>
+				<show_compare>1</show_compare>
+				<compare_format_type>icon-text</compare_format_type>
+				<compare_format_text>Add to Compare</compare_format_text>
+				<compare_format_class>fa fa-heart-o</compare_format_class>
+				<show_new_label>1</show_new_label>
+				<show_sale_label>1</show_sale_label>
+				<show_image>1</show_image>
+				<image_width>300</image_width>
+				<alt_image>1</alt_image>
+				<alt_image_column>position</alt_image_column>
+				<alt_image_column_value>2</alt_image_column_value>
+			</product_settings>
+		</ves_themesettings_category_page>
+		<ves_themesettings_product_page>
+			<tab_settings>
+				<mode>tabs</mode>
+				<enable_description>1</enable_description>
+				<enable_addtioninfo>1</enable_addtioninfo>
+				<enable_reviews>1</enable_reviews>
+				<enable_related>0</enable_related>
+				<enable_upsell>0</enable_upsell>
+				<customtab>0</customtab>
+				<relatedproducts_loop>1</relatedproducts_loop>
+				<relatedproducts_rtl>0</relatedproducts_rtl>
+				<relatedproducts_autoplay>1</relatedproducts_autoplay>
+				<relatedproducts_timeout>5000</relatedproducts_timeout>
+				<relatedproducts_number_item>12</relatedproducts_number_item>
+				<relatedproducts_large_max_items>4</relatedproducts_large_max_items>
+				<relatedproducts_large_items>3</relatedproducts_large_items>
+				<relatedproducts_portrait_items>3</relatedproducts_portrait_items>
+				<relatedproducts_tablet_items>3</relatedproducts_tablet_items>
+				<relatedproducts_tablet_small_items>2</relatedproducts_tablet_small_items>
+				<relatedproducts_mobile_items>1</relatedproducts_mobile_items>
+				<upsellproducts_loop>1</upsellproducts_loop>
+				<upsellproducts_rtl>0</upsellproducts_rtl>
+				<upsellproducts_autoplay>1</upsellproducts_autoplay>
+				<upsellproducts_timeout>5000</upsellproducts_timeout>
+				<upsellproducts_number_item>12</upsellproducts_number_item>
+				<upsellproducts_large_max_items>4</upsellproducts_large_max_items>
+				<upsellproducts_large_items>3</upsellproducts_large_items>
+				<upsellproducts_portrait_items>3</upsellproducts_portrait_items>
+				<upsellproducts_tablet_items>3</upsellproducts_tablet_items>
+				<upsellproducts_tablet_small_items>2</upsellproducts_tablet_small_items>
+				<upsellproducts_mobile_items>1</upsellproducts_mobile_items>
+			</tab_settings>
+			<element_settings>
+				<show_name>1</show_name>
+				<enable_customfont>0</enable_customfont>
+				<show_sku>1</show_sku>
+				<show_sharelinks>1</show_sharelinks>
+				<show_short_description>1</show_short_description>
+				<show_price>1</show_price>
+				<show_rating>1</show_rating>
+				<show_countdowntimer>1</show_countdowntimer>
+				<show_addtocart>1</show_addtocart>
+				<show_review>1</show_review>
+				<show_wishlist>1</show_wishlist>
+				<show_email>1</show_email>
+				<show_compare>1</show_compare>
+				<show_newlabel>1</show_newlabel>
+				<show_salelabel></show_salelabel>
+				<thumb_layout>horizontal</thumb_layout>
+				<thumb_location>bottom</thumb_location>
+				<show_zoom>1</show_zoom>
+				<zoom_magnify>1</zoom_magnify>
+			</element_settings>
+		</ves_themesettings_product_page>
+		<ves_themesettings_cart_page>
+			<crossel_products>
+				<crossellproducts_loop>1</crossellproducts_loop>
+				<crossellproducts_rtl>0</crossellproducts_rtl>
+				<crossellproducts_autoplay>1</crossellproducts_autoplay>
+				<crossellproducts_timeout>5000</crossellproducts_timeout>
+				<crossellproducts_number_item>12</crossellproducts_number_item>
+				<crossellproducts_large_max_items>4</crossellproducts_large_max_items>
+				<crossellproducts_large_items>3</crossellproducts_large_items>
+				<crossellproducts_portrait_items>3</crossellproducts_portrait_items>
+				<crossellproducts_tablet_items>3</crossellproducts_tablet_items>
+				<crossellproducts_tablet_small_items>2</crossellproducts_tablet_small_items>
+				<crossellproducts_mobile_items>1</crossellproducts_mobile_items>
+			</crossel_products>
+		</ves_themesettings_cart_page>
+		<ves_themesettings_contact_page>
+			<googlemap>
+				<map_api>AIzaSyALraGXlzRqFlAOb-tYLhUi6o6Cq9qN4KA</map_api>
+			</googlemap>
+		</ves_themesettings_contact_page>
+		<ves_themesettings_footer>
+			<general_settings>
+				<custom_footer_general>0</custom_footer_general>
+				<custom_footer_outer>0</custom_footer_outer>
+				<custom_scrolltop>0</custom_scrolltop>
+			</general_settings>
+			<footer_top_settings>
+				<enable_footer_top>1</enable_footer_top>
+				<custom_footertop>0</custom_footertop>
+				<custom_footertop_outer>0</custom_footertop_outer>
+				<custom_footertop_inner>0</custom_footertop_inner>
+			</footer_top_settings>
+			<footer_center_settings>
+				<enable_footer_center>0</enable_footer_center>
+				<custom_footercenter>0</custom_footercenter>
+				<custom_fcenter_outer>0</custom_fcenter_outer>
+				<custom_fcenter_inner>0</custom_fcenter_inner>
+			</footer_center_settings>
+			<footer_bottom_settings>
+				<enable_footer_bottom>0</enable_footer_bottom>
+				<custom_ffooter>0</custom_ffooter>
+				<custom_ffooter_outer>0</custom_ffooter_outer>
+				<custom_ffooter_inner>0</custom_ffooter_inner>
+			</footer_bottom_settings>
+		</ves_themesettings_footer>
+	</default>
+</config>

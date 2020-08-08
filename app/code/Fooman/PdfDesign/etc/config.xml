@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <sales_pdf>
+            <all>
+                <pdfdesign>default</pdfdesign>
+            </all>
+            <altdesign>
+                <primarycolour>#ededed</primarycolour>
+                <secondarycolour>#808080</secondarycolour>
+            </altdesign>
+            <designone>
+                <primarycolour>#f0f0f0</primarycolour>
+                <secondarycolour>#575757</secondarycolour>
+            </designone>
+        </sales_pdf>
+    </default>
+</config>

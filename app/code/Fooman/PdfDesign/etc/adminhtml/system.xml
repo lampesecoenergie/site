@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author     Kristof Ringleff, Fooman
+ * @package    Fooman_PdfDesign
+ * @copyright  Copyright (c) 2015 Fooman Limited (http://www.fooman.co.nz)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="sales_pdf">
+            <group id="all">
+                <group id="design" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Design</label>
+                    <field id="pdfdesign" translate="label" type="select" sortOrder="50" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Pdf Design</label>
+                        <source_model>Fooman\PdfDesign\Model\System\DesignOptions</source_model>
+                        <config_path>sales_pdf/all/pdfdesign</config_path>
+                    </field>
+                </group>
+                <group id="altdesign" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Alternative Designs - Settings</label>
+                    <field id="primarycolour" translate="label" type="\Fooman\PdfCore\Block\System\Config\Colourpicker" sortOrder="100" showInDefault="1"
+                           showInWebsite="1" showInStore="1" canRestore="0">
+                        <label>Primary Colour</label>
+                        <config_path>sales_pdf/altdesign/primarycolour</config_path>
+                    </field>
+                    <field id="secondarycolour" translate="label" type="\Fooman\PdfCore\Block\System\Config\Colourpicker" sortOrder="110" showInDefault="1"
+                           showInWebsite="1" showInStore="1" canRestore="0">
+                        <label>Secondary Colour</label>
+                        <config_path>sales_pdf/altdesign/secondarycolour</config_path>
+                    </field>
+                </group>
+                <group id="designone" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Design One - Settings</label>
+                    <field id="primarycolour" translate="label" type="\Fooman\PdfCore\Block\System\Config\Colourpicker" sortOrder="100" showInDefault="1"
+                           showInWebsite="1" showInStore="1" canRestore="0">
+                        <label>Primary Colour</label>
+                        <config_path>sales_pdf/designone/primarycolour</config_path>
+                    </field>
+                    <field id="secondarycolour" translate="label" type="\Fooman\PdfCore\Block\System\Config\Colourpicker" sortOrder="110" showInDefault="1"
+                           showInWebsite="1" showInStore="1" canRestore="0">
+                        <label>Secondary Colour</label>
+                        <config_path>sales_pdf/designone/secondarycolour</config_path>
+                    </field>
+                </group>
+            </group>
+        </section>
+    </system>
+</config>

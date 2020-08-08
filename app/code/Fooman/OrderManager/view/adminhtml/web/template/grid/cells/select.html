@@ -1,0 +1,13 @@
+<div class="data-grid-cell-content col-tracking-carrier">
+    <!-- ko if: $row().tracking_carrier -->
+    <span data-bind="text: $col.formatCarrierName($row().tracking_carrier)"></span>
+    <!-- /ko -->
+    <!-- ko if: $col.canShip($row()) -->
+    <select data-bind="attr: { name: inputKey + '[' + $row().entity_id + ']' },
+        options: carriers,
+        optionsValue: 'value',
+        optionsText: 'text',
+        value: preselectedCarrier" class="admin__control-select" style="width: 125px">
+    </select>
+    <!-- /ko -->
+</div>

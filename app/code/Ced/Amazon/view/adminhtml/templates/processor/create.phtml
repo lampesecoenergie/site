@@ -1,0 +1,125 @@
+<?php
+
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement(EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+ * @package   Ced_Cdon
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright Copyright CEDCOMMERCE(http://cedcommerce.com/)
+ * @license   http://cedcommerce.com/license-agreement.txt
+ */
+
+/** @var $block \Ced\Amazon\Block\Adminhtml\Processor\Create */
+$total = $block->getChunksCount();
+$baseUrl = $block->getUrl('amazon/processor/process');
+$successImg = $block->getViewFileUrl('Ced_Amazon::images/fam_bullet_success.svg');
+$errorImg = $block->getViewFileUrl('Ced_Amazon::images/fam_bullet_error.svg');
+$loaderImg = $block->getViewFileUrl('Ced_Amazon::images/rule-ajax-loader.gif');
+$actionType = $block->getActionType();
+$finalMessage = $block->finalMessage();
+?>
+<div class="row">
+    <div class="col-md-12" style="margin-top: 10px;">
+        <div class="panel panel-default">
+            <div class="block-content panel-body ">
+                <div id="amazon-progress-bar"></div>
+                <br>
+                <div id="batches">
+                    <div class="batches-tab" data-role="collapsible">
+                        <div data-role="trigger">
+                            <span>Responses</span>
+                        </div>
+                    </div>
+                    <div class="batches-content" data-role="content">
+                        <ul id="profileRows" style="list-style: none;">
+                            <li style="list-style: none;">
+                                <?php echo 'Total ' . $total . ' Batch(s) Found.'; ?>
+                            </li>
+                            <li style="list-style: none;" id="updateRow">
+                                <img id="statusImage" src="<?php echo $loaderImg ?>">
+                                <span id="updateStatus" class="text"><?php echo __("Updating..."); ?></span>
+                            </li>
+                            <li id="liFinished" style="display:none; list-style: none;">
+                                <?php echo $finalMessage; ?>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    #batches {
+        border: 1px solid #ddd;
+        border-radius: 0;
+    }
+
+    .batches-tab {
+        background: #eee;
+        padding: 1rem;
+        cursor: pointer;
+        font-weight: bold;
+
+    &
+    :first-child {
+        border-bottom: 1px solid #ddd;
+    }
+
+    &
+    :nth-last-child(2) {
+        border-top: 1px solid #ddd;
+    }
+
+    }
+    .batches-content {
+        padding: 0.5rem 0.5rem;
+    }
+
+    /*li*/
+    #batches ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    #batches ul li {
+        vertical-align: middle;
+        padding: 2px 2px 2px 2px;
+        font: normal 12px sans-serif;
+        font-size: small;
+    }
+
+    #batches li img {
+        vertical-align: middle;
+        margin-right: 5px;
+        max-width: 12px;
+    }
+
+    #batches span {
+        vertical-align: middle;
+    }
+
+</style>
+<script type="text/x-magento-init">
+    {
+        "*" :{
+        "Ced_Amazon/js/processor/create":{
+            "Total" : "<?php  echo (int)$total; ?>",
+                "AjaxUrl" : "<?php echo $block->getAjaxUrl();?>",
+                "SuccessImg" : "<?php  echo $successImg; ?>",
+                "ErrorImg" : "<?php  echo $errorImg; ?>",
+                "ActionType" : "<?php echo $actionType; ?>"
+                  }
+             }
+    }
+
+</script>

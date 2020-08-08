@@ -1,0 +1,164 @@
+<?php if($menu = $this->getMenu()){ ?>
+<?php
+$data = $this->helper("\Ves\Megamenu\Helper\Data");
+$layout = $this->getData('layout');
+if(!$layout) $layout = 'horizontal';
+$menuItems = $menu->getData('menuItems');
+$structure = json_decode($menu->getStructure(), true);
+$items = [];
+$html = '';
+if(is_array($structure)){
+	foreach ($structure as $k => $v) {
+		$itemData = $data->renderMenuItemData($v, [], $menuItems);
+		$html .= $data->drawItem($itemData);
+	}
+}
+$html = $data->filter($html);
+$alias = $menu->getAlias().time().rand();
+$disableBellow = (int)$menu->getData('disable_bellow');
+$bodyClass = $class = '';
+if($menu->getData("mobile_template") == 0){
+	//$class = 'offcanvas-menu-left';
+	$bodyClass = 'ves-offcanvas-menu-left';
+}
+if($menu->getData("mobile_template") == 2){
+	$class = 'accordion-menu';
+	$bodyClass = 'ves-accordion-menu';
+}
+$mobileTemplate = $menu->getData("mobile_template");
+if(!$mobileTemplate) $mobileTemplate = 'horizontal';
+$id = time().rand();
+$desktopTemplate = $menu->getData("desktop_template");
+$event = $menu->getData("event");
+if(!$event) $event = 'hover';
+$class = $menu->getData("classes");
+?>
+
+<div id="<?php echo $alias ?>-menu" class="nav-menu <?php echo $class ?>" role="navigation" data-action="navigation">
+	<ul id="<?php echo $alias ?>" class="ves-megamenu <?php echo 'menu-' . $event ?> ves-<?php echo $mobileTemplate ?> <?php echo $class ?>" <?php if($disableBellow>0){ ?>data-disable-bellow="<?php echo $disableBellow ?>"<?php } ?> data-mage-init='{"menu":{"responsive":false, "expanded":false, "position":{"my":"left top","at":"left bottom"}}}' data-toggle-mobile-nav="false">
+		<?php echo $html; ?>
+	</ul>
+	<?= /* @escapeNotVerified */ $block->getChildHtml() ?>
+</div>
+<script type="text/javascript">
+	require(['jquery'],function($){
+		$('.price-box.price-final_price', $("#<?php echo $alias ?>")).each(function(){
+			$(this).removeClass('price-box').addClass('price-box1');
+			$(this).attr('data-role','priceBox1');
+		})
+		jQuery(document).ready(function($) {
+			$("#<?php echo $alias ?> .dynamic-items li:first").addClass("dynamic-active");
+			var id = $("#<?php echo $alias ?> .dynamic-items li:first").data("dynamic-id");
+			$("#<?php echo $alias ?> ."+id).addClass("dynamic-active");
+			$("#<?php echo $alias ?> .level0 .submenu").find(".active").addClass("");
+
+			$("#<?php echo $alias ?>").find(".level0 .submenu").each(function(index, elemetn){
+				var eSelected = $(this).find(".active");
+				if(eSelected.length){
+					$(this).addClass("active");
+				}
+			});
+		});
+
+		$("#<?php echo $alias ?> .dynamic-items li").hover(function(){
+			$(this).parents(".dynamic-items").find("li").removeClass("dynamic-active");
+			$(this).addClass("dynamic-active");
+			var id = $(this).data("dynamic-id");
+			$("#<?php echo $alias ?> ."+id).parent().find(".dynamic-item").removeClass("dynamic-active");
+			$("#<?php echo $alias ?> ."+id).addClass("dynamic-active");
+		});
+
+		$("#<?php echo $alias ?> li a").hover(function(){
+			$(this).css({
+				"background-color": $(this).data("hover-bgcolor"),
+				"color": $(this).data("hover-color")
+			});
+		}, function(){
+			$(this).css({
+				"background-color": $(this).data("bgcolor"),
+				"color": $(this).data("color")
+			});
+		});
+		$(window).on("resize", function(){
+			if($("#<?php echo $alias ?>").data("disable-bellow")){
+				if ($(window).width() <= $("#<?php echo $alias ?>").data("disable-bellow")){
+					$("#<?php echo $alias ?>-menu").hide();
+				}else{
+					$("#<?php echo $alias ?>-menu").show();
+				}
+			}
+
+			if ($(window).width() >= 768 && $(window).width() <= 1024){
+				$("#<?php echo $alias ?> .nav-anchor").off().click(function(){
+					var iParent = $(this).parent('.nav-item');
+					iParent.addClass("clicked");
+					console.log($(iParent).children('.submenu').length);
+					if ($(iParent).children('.submenu').length>0) {
+						iParent.trigger('hover');
+						if (iParent.hasClass('submenu-alignleft') || iParent.hasClass('submenu-alignright')){
+							if ((iParent.offset().left + iParent.find('.submenu').eq(0).width()) > $(window).width()){
+								iParent.find('.submenu').eq(0).css('max-width','100%');
+								iParent.css('position','static');
+							}
+						}
+						return false;
+					}
+					return true;
+				});
+			}else{
+				$("#<?php echo $alias ?>").find('.submenu').css('max-width','');
+				$("#<?php echo $alias ?>").find('.submenu-alignleft').css('position','relative');
+			}
+
+			$("#<?php echo $alias ?>").find("li").each(function(index, element){
+				if($(this).data("disable-bellow") && $(window).width() <= $(this).data("disable-bellow")){
+					$(this).addClass("hidden");
+				}else if($(this).hasClass("hidden")){
+					$(this).removeClass("hidden");
+				}
+			});
+			if ($(window).width() <= 991){
+				$("#<?php echo $alias ?>").addClass("nav-mobile");
+			}else{
+				$("#<?php echo $alias ?>").find("div").removeClass("mbactive");
+				$("#<?php echo $alias ?>").removeClass("nav-mobile");
+			}
+		}).resize();
+		//Toggle mobile menu
+		$('#<?php echo $alias ?> .opener').on('click', function(e) {
+			e.preventDefault();
+			$("#<?php echo $alias ?> .nav-item").removeClass("item-active");
+			var parent = $(this).parents(".nav-item").eq(0);
+			$(this).toggleClass('item-active');
+			$(parent).find(".submenu").eq(0).slideToggle();
+			return false;
+		});
+
+		var menuToogle = function () {
+			if ($('html').hasClass('nav-open')) {
+				$('html').removeClass('nav-open');
+				setTimeout(function () {
+					$('html').removeClass('nav-before-open');
+				}, 300);
+			} else {
+				$('body').append('<div class="ves-overlay ves-overlay<?php echo $alias ?>"></div>');
+				$('html').addClass('nav-before-open');
+				setTimeout(function () {
+					$('html').addClass('nav-open');
+				}, 42);
+			}
+		}
+		$(document).on("click", ".action.nav-toggle", menuToogle);
+		$(document).on("click", ".ves-overlay<?php echo $alias ?>", function(){
+		    $('#<?php echo $alias ?>').css("left","");
+		    $('html').removeClass('nav-open');
+		    setTimeout(function () {
+		     	$('html').removeClass('nav-before-open');
+		    }, 300);
+		    $('.ves-overlay').remove();
+		    return false;
+		});
+
+	});
+</script>
+<?php } ?>

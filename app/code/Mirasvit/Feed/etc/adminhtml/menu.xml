@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Mirasvit_Feed::feed" module="Mirasvit_Feed" resource="Mirasvit_Feed::feed"
+             sortOrder="50" title="Advanced Product Feeds" parent="Magento_Catalog::catalog"/>
+
+        <add id="Mirasvit_Feed::feed_feed" title="Feeds" module="Mirasvit_Feed"
+             sortOrder="10" action="feed/feed/index" resource="Mirasvit_Feed::feed_feed"
+             parent="Mirasvit_Feed::feed"/>
+
+        <add id="Mirasvit_Feed::feed_template" title="Templates"
+             module="Mirasvit_Feed" sortOrder="20" action="feed/template/index"
+             resource="Mirasvit_Feed::feed_template" parent="Mirasvit_Feed::feed"/>
+
+        <add id="Mirasvit_Feed::feed_rule" title="Manage Filters" module="Mirasvit_Feed"
+             sortOrder="25" action="feed/rule/index" resource="Mirasvit_Feed::feed_rule"
+             parent="Mirasvit_Feed::feed"/>
+
+        <add id="Mirasvit_feed::feed_dynamic_attribute" title="Dynamic Attributes"
+             module="Mirasvit_Feed" sortOrder="28" action="feed/dynamic_attribute/index"
+             resource="Mirasvit_Feed::feed_dynamic_attribute"
+             parent="Mirasvit_Feed::feed"/>
+
+        <add id="Mirasvit_feed::feed_dynamic_category" title="Category Mapping"
+             module="Mirasvit_Feed" sortOrder="30" action="feed/dynamic_category/index"
+             resource="Mirasvit_Feed::feed_dynamic_category"
+             parent="Mirasvit_Feed::feed"/>
+
+        <add id="Mirasvit_feed::feed_dynamic_variable" title="Dynamic Variables"
+             module="Mirasvit_Feed" sortOrder="32" action="feed/dynamic_variable/index"
+             resource="Mirasvit_Feed::feed_dynamic_variable"
+             parent="Mirasvit_Feed::feed"/>
+
+        <add id="Mirasvit_feed::feed_report" title="Reports" module="Mirasvit_Feed"
+             sortOrder="40" action="feed/report/view" resource="Mirasvit_Feed::feed_report"
+             parent="Mirasvit_Feed::feed"/>
+             
+        <add id="Mirasvit_feed::feed_import" title="Import/Export Data" module="Mirasvit_Feed"
+             sortOrder="50" action="feed/import/index" resource="Mirasvit_Feed::feed_import"
+             parent="Mirasvit_Feed::feed"/>
+    </menu>
+</config>

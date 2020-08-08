@@ -1,0 +1,23 @@
+<?php /** @var $block \MondialRelay\Shipping\Block\Adminhtml\Order\Shipment\Create\Label */ ?>
+<?php if ($block->canCreateShippingLabel()): ?>
+    <?php if ($block->canShowAutoCreate()): ?>
+        <div class="field choice admin__field admin__field-option field-auto-create">
+            <input id="auto_create_shipping_label"
+                   class="admin__control-checkbox"
+                   name="shipment[auto_create_shipping_label]"
+                   value="1"
+                   type="checkbox"/>
+
+            <label class="admin__field-label" for="auto_create_shipping_label">
+                <span><?php echo __('Auto Create Shipping Label') ?></span>
+            </label>
+        </div>
+    <?php endif; ?>
+    <script>
+        require([
+            "jquery"
+        ], function($) {
+            $('.options-units-weight option[value="<?php echo $block->getStoreWeightUnit() ?>"]').attr("selected", "selected");
+        });
+    </script>
+<?php endif; ?>

@@ -1,0 +1,24 @@
+<?php /** @var $block \MondialRelay\Shipping\Block\Adminhtml\Order\View\Shipping */ ?>
+<section class="admin__page-section">
+    <div class="admin__page-section-title">
+        <span class="title"><?php echo __('Mondial Relay Information') ?></span>
+    </div>
+    <div class="admin__page-section-content">
+        <div class="admin__page-section-item">
+            <div class="admin__page-section-item-title">
+                <span class="title"><?php echo __('Shipping Data') ?></span>
+            </div>
+            <div class="admin__page-section-item-content">
+                <?php if ($block->getCode()): ?>
+                    <p><?php echo __('Mondial Relay code: %1', $block->getCode()) ?></p>
+                <?php endif; ?>
+                <?php if ($block->getPickupId()): ?>
+                    <p><?php echo __('Pickup identifier: %1', $block->getPickupId()) ?></p>
+                <?php endif; ?>
+                <?php if ($block->getCountryId()): ?>
+                    <p><?php echo __('Shipping Country: %1', $block->getCountryId()) ?></p>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</section>

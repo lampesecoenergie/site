@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category  Mageants BannerSlider
+ * @package   Mageants_BannerSlider
+ * @copyright Copyright (c) 2017 Mageants
+ * @author    Mageants Team <support@Mageants.com>
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+	<update handle="editor"/>
+    <body>
+        <referenceContainer name="content">
+            <block class="Mageants\BannerSlider\Block\Adminhtml\Sliders\Edit" name="mageants_bannerslider_sliders_edit"/> 
+        </referenceContainer>
+        <referenceContainer name="left">
+            <block class="Mageants\BannerSlider\Block\Adminhtml\Sliders\Edit\Tabs" name="mageants_bannerslider_sliders_tabs">
+                <block class="Mageants\BannerSlider\Block\Adminhtml\Sliders\Edit\Tab\Slider" name="mageants_bannerslider_sliders_edit_tab_slider"/>
+                <block class="Mageants\BannerSlider\Block\Adminhtml\Sliders\Edit\Tab\Advsetting" name="mageants_bannerslider_sliders_edit_tab_advsetting"/>
+                <block class="Mageants\BannerSlider\Block\Adminhtml\Sliders\Edit\Tab\Setting" name="mageants_bannerslider_sliders_edit_tab_setting"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">slider</argument>
+                    <argument name="block" xsi:type="string">mageants_bannerslider_sliders_edit_tab_slider</argument>
+                </action>
+				<action method="addTab">
+                    <argument name="name" xsi:type="string">setting</argument>
+                    <argument name="block" xsi:type="string">mageants_bannerslider_sliders_edit_tab_setting</argument>
+                </action>
+				<action method="addTab">
+                    <argument name="name" xsi:type="string">advsetting</argument>
+                    <argument name="block" xsi:type="string">mageants_bannerslider_sliders_edit_tab_advsetting</argument>
+                </action>
+				<action method="addTab">
+                    <argument name="name" xsi:type="string">associated_slides</argument>
+                    <argument name="block" xsi:type="array">
+                        <item name="label" xsi:type="string">Slides</item>
+                        <item name="title" xsi:type="string">Slides</item>
+                        <item name="url" xsi:type="helper" helper="Mageants\BannerSlider\Helper\Data::getSlidesGridUrl"></item>
+                        <item name="class" xsi:type="string">ajax</item>
+                    </argument>
+                </action>
+            </block>
+        </referenceContainer> 
+    </body>
+</page>

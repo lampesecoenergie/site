@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author     Kristof Ringleff, Fooman
+ * @package    Fooman_PdfCustomiser
+ * @copyright  Copyright (c) 2015 Fooman Limited (http://www.fooman.co.nz)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Fooman_PdfCustomiser" setup_version="5.0.5">
+        <sequence>
+            <module name="Magento_Backend"/>
+            <module name="Magento_Sales"/>
+            <module name="Fooman_PdfCore"/>
+            <module name="Fooman_PdfDesign"/>
+            <module name="Fooman_PrintOrderPdf"/>
+            <module name="Fooman_EmailAttachments"/>
+            <module name="Magento_Weee"/>
+            <module name="Magento_Tax"/>
+        </sequence>
+    </module>
+</config>

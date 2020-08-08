@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mondial Relay Shipping Module
+ *
+ * @author    Magentix
+ * @copyright Copyright © 2018 Magentix. All rights reserved.
+ * @license   https://www.magentix.fr/en/licence.html Magentix Software Licence
+ * @link      https://mondialrelay.magentix.fr/
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="carriers" translate="label" type="text" sortOrder="320" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="mondialrelay" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Mondial Relay</label>
+                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="title" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Title</label>
+                </field>
+                <field id="api_company" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>API Company</label>
+                </field>
+                <field id="api_reference" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>API Reference</label>
+                </field>
+                <field id="api_key" translate="label" type="password" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>API Key</label>
+                </field>
+                <field id="api_test" translate="label" type="button" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <frontend_model>MondialRelay\Shipping\Block\Adminhtml\System\Config\Api\Test</frontend_model>
+                    <label>Test API credentials</label>
+                </field>
+                <field id="sort_order" translate="label" type="text" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Sort Order</label>
+                </field>
+                <field id="showmethod" translate="label" type="select" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Method if Not Applicable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="specificerrmsg" translate="label" type="textarea" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Displayed Error Message</label>
+                </field>
+                <include path="MondialRelay_Shipping::system/pickup.xml"/>
+                <include path="MondialRelay_Shipping::system/standard.xml"/>
+                <include path="MondialRelay_Shipping::system/confort.xml"/>
+                <include path="MondialRelay_Shipping::system/premium.xml"/>
+                <include path="MondialRelay_Shipping::system/label.xml"/>
+                <include path="MondialRelay_Shipping::system/return.xml"/>
+                <include path="MondialRelay_Shipping::system/limitation.xml"/>
+            </group>
+        </section>
+    </system>
+</config>

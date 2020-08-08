@@ -1,0 +1,9 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="\Fooman\PdfCore\Model\PdfRenderer" shared="false">
+        <arguments>
+            <argument name="pdf" xsi:type="object" shared="false">\Fooman\PdfCore\Model\Tcpdf\Pdf</argument>
+            <argument name="filenameHelper" xsi:type="object" shared="false">\Fooman\PdfCore\Helper\Filename</argument>
+        </arguments>
+    </type>
+</config>

@@ -1,0 +1,28 @@
+<?php
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+/**
+ * Store switcher template
+ *
+ * @see \Magento\Store\Block\Store\Switcher
+ */
+?>
+<?php if (count($block->getGroups())>1): ?>
+    <div class="switcher store switcher-store" id="switcher-store">
+        <label for="select-store"><?php echo __('Select Store') ?></label>
+        <select id="select-store" title="<?php echo __('Select Store') ?>" name="store">
+            <?php foreach ($this->getGroups() as $_group): ?>
+                <?php $_selected = ($_group->getId()==$this->getCurrentGroupId()) ? ' selected="selected"' : '' ?>
+                <?php $defaultStore = $_group->getDefaultStore(); ?>
+                <option value="<?php echo $this->getUrl('stores/store/switch',["___store"=>$defaultStore->getCode(),]); ?>" <?php echo $_selected ?>><?php echo $block->escapeHtml($_group->getName()) ?></option>
+            <?php endforeach; ?>
+        </select>
+    </div>
+<?php endif; ?>

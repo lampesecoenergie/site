@@ -1,0 +1,18 @@
+<?php
+$collection = $block->getCollection();
+$helper = $this->helper("Ves\Blog\Helper\Data");
+?>
+<?php if($collection->getSize()){ ?>
+<div class="ves-block block">
+	<div class="block-title">
+		<strong><?php echo __('Categories'); ?></strong>
+	</div>
+	<div class="block-content">
+		<ul class="blog-cats">
+			<?php foreach ($collection as $_cat) { ?>
+			<li><a href="<?php echo $helper->getCategoryUrl($_cat->getIdentifier()) ?>" title="<?php echo $_cat->getName(); ?>"><?php echo $_cat->getName(); ?></a></li>
+			<?php } ?>
+		</ul>
+	</div>
+</div>
+<?php } ?>

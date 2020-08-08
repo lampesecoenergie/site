@@ -1,0 +1,535 @@
+<html>
+
+<head>
+    <style>
+        body {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        section#main-content {
+            min-width: 900px;
+        }
+
+        aside#sidebar {
+            max-width: 180px;
+        }
+
+        .hasTooltip {
+            color: #333;
+            border-bottom: 1px dotted #666;
+            cursor: help;
+        }
+
+        #fullArticle img {
+            border: none;
+            padding: 0px;
+            margin: 0px;
+            display: inline;
+        }
+
+        .btn-group {
+            position: relative;
+            display: inline-block;
+            font-size: 0;
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+
+        a.btn-green-icon {
+            display: none;
+        }
+
+        .btn.btn-green {
+            background-color: #a3bb1d;
+            border: 1px solid #a3bb1d;
+            color: white;
+            background-image: none;
+            text-shadow: none;
+            -moz-transition: all 0.3s ease-in;
+            -webkit-transition: all 0.3s ease-in;
+            -o-transition: all 0.3s ease-in;
+            transition: all 0.3s ease-in;
+        }
+
+        h2,
+        h2 a,
+        #hikashop_checkout_login_left_part h2,
+        #hikashop_checkout_login_right_part h2,
+        #hikashop_checkout_login_right_part h3 {
+            color: #aeae33 !important;
+            font-weight: normal;
+            font-size: 16px;
+            margin: 0px 0px 20px 0px;
+            padding-bottom: 10px;
+            clear: both;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Poppins', sans-serif;
+            ;
+            font-weight: 400;
+            margin-bottom: 30px !important;
+            margin-top: 30px !important;
+            border-bottom: 1px dotted #ddd;
+            text-align: center;
+        }
+
+        h2:hover,
+        h2 a:hover {
+            color: #aeae33 !important;
+            text-decoration: none;
+        }
+
+        h3,
+        h3 a {
+            color: #444;
+            font-size: 18px;
+            padding: 10px 0px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        h1,
+        h1 a,
+        h2.h1bis,
+        #hikashop_checkout_page h1 {
+            font-size: 26px;
+            /**    text-transform: uppercase; **/
+            color: #444;
+            margin: 0px 0px 15px 0px;
+            font-weight: normal;
+            border: none;
+            padding: 0px;
+        }
+
+        a {
+            color: #31dd93;
+            text-decoration: none;
+        }
+
+        ul li {
+            list-style-image: url(https://www.acyba.com/templates/acyba/images/li.png);
+            margin: 4px;
+        }
+
+        li {
+            line-height: 18px;
+        }
+
+        ul,
+        ol {
+            padding: 0;
+            margin: 0 0 9px 25px;
+        }
+
+        #docsSearch {
+            background-color: #303e47;
+        }
+
+        #docsSearch h1 {
+            color: #FFFFFF;
+        }
+
+        h1.title {
+            border-bottom: 1px dotted #ddd;
+            text-transform: uppercase;
+            color: #228c82;
+            size: 20px;
+        }
+
+        h2 {
+            font-size: 24px;
+        }
+    </style>
+</head>
+<h2>1.Installation</h2>
+<h3>1.1 Manual installation (via zip file)</h3>
+<p>
+    To manually install the module, you have to extract the zip file under app/code/Acyba/GLS directory.
+</p>
+<p>
+    The module run with dependencies to others modules, that you need to install. You can find them in the composer.json file
+    of the module. To install them, you have to use the following command :&nbsp;
+</p>
+<pre>
+composer require vendor_name/module_name:X.X.X
+</pre>
+<p>
+    <strong>Warning : to install the dependencies, you have to use the above command with module names and version numbers as declared
+        in the composer.json file of GLS module.</strong>
+</p>
+<p>
+    Once the GLS module and its dependencies are installed, please run the followings Magento commands :&nbsp;
+</p>
+<pre>
+php magento setup:upgrade
+</pre>
+<pre>
+php magento setup:di:compile
+</pre>
+<h2>2. Configuration</h2>
+<h3>2.1 Shipping methods</h3>
+<p>
+    The module created a new GLS shipping method in Stores &gt; Configuration &gt; Sales &gt; Shipping Methods.
+</p>
+<p>
+    To activate the GLS shipping method on the website, it’s necessary to switch the “Enable” parameter on and fill up the fields
+    “GLS webservice login” and “GLS &nbsp;webservice password” whose values are provided by GLS. &nbsp;
+</p>
+<p>
+    <strong>Warning</strong> : to use the official GLS module for Magento 2, you have to be a GLS customer. The use of the different
+    GLS shipping methods is subject to the acceptance of GLS general terms and conditions. The activation of the GLS shipping
+    methods of this module have to match with the prices lists signed with GLS. For more information, please get in touch
+    with your GLS commercial contact.
+</p>
+<p>
+    If you’re not a GLS customer, please connect to
+    <a href="http://www.gls-group.eu/">www.gls-group.eu</a> to discover all the GLS services and contact GLS.
+</p>
+<p>
+    The module is provided with a default configuration and all these parameters are editable in the menu Stores &gt; Configuration
+    &gt; Sales &gt; Shipping Methods &gt; GLS, your transport partner :
+</p>
+<p>
+    <img src="https://lh5.googleusercontent.com/EKLxlYPFJLZYTKNAfTbfH2pT3zqVx-9LhU9ox08LT4sP6JjomGSAL-klK11Ajt2_oNu_4fC7ymMJuBvZ17gccNfG3clbVEAOzLZzV4UqrzSaUera_ih9BfYrREzxI238wvCnN0aH"
+        width="447" height="845" style="border-width: initial; border-style: none; border-color: initial; transform: rotate(0rad);">
+</p>
+<ul>
+    <li>
+        <strong>Title</strong>: Label of the GLS shipping method group displayed on the website</li>
+    <li>
+        <strong>Enable</strong>: By default disabled when installing the module. Switch on to see GLS shipping methods on the website</li>
+    <li>
+        <strong>GLS webservice login</strong>: Provided by GLS</li>
+    <li>
+        <b style="background-color: initial;">GLS webservice password</b>: Provided by GLS</li>
+    <li>
+        <strong>Maximum package weight</strong> : Maximum package weight that GLS can carry</li>
+    <li>
+        <strong>GLS Chez vous</strong> : Enable or disable the “at home” shipping method</li>
+</ul>
+<p style="margin-left: 20px;">
+    This service match the following GLS offers:
+</p>
+<p style="margin-left: 20px;">
+    -&nbsp;&nbsp;
+    <em>Business Parcel</em> for your national shipments
+    <br> -&nbsp;
+    <em style="background-color: initial;">Euro Business Parcel</em> for your European&nbsp;shipments
+    <br> -&nbsp;
+    <em style="background-color: initial;">Global Business Parcel</em> for your international shipments
+</p>
+<ul>
+    <li>
+        <p>
+            <strong>GLS Chez Vous setup</strong>: Configuration field, please see more explanations and examples below
+        </p>
+    </li>
+    <li>
+        <p>
+            <strong>GLS Chez Vous order</strong>: Set the order of appearance of the “at home” shipping method among GLS shipping
+            methods
+        </p>
+    </li>
+    <li>
+        <p>
+            <strong>GLS</strong>
+            <strong> Chez Vous +</strong>: &nbsp;Enable or disable the “at home” shipping method
+        </p>
+    </li>
+</ul>
+<p style="margin-left: 20px;">
+    This service match the GLS offer :
+    <em>Flex Delivery Service</em>
+</p>
+<ul>
+    <li>
+        <p style="">
+            <strong>GLS Chez Vous + setup</strong>: Configuration field, please see more explanations and examples below
+        </p>
+    </li>
+    <li>
+        <p style="">
+            <strong>GLS Chez Vous + order</strong>: Set the order of appearance of the “at home” shipping method among GLS shipping
+            methods
+        </p>
+    </li>
+    <li>
+        <p style="">
+            <strong>GLS Point Relais</strong>: Enable or disable the relay shipping method
+        </p>
+    </li>
+</ul>
+<p style="margin-left: 20px;">
+    This service match the GLS offer:
+    <em>Shop Delivery Service</em>
+</p>
+<ul>
+    <li>
+        <p style="">
+            <strong>Google Maps API Key</strong>: API key to use the relay shipping method to locate the relays on a Google Maps
+            (See:
+            <strong>5.1 Generation of the Google Maps API Key </strong>to learn how to generate this key)
+        </p>
+    </li>
+    <li>
+        <p style="">
+            <strong>GLS Point Relais setup</strong>: Configuration field, please see more explanations and examples below
+        </p>
+    </li>
+    <li>
+        <p style="">
+            <strong>GLS Point Relais order</strong>: Set the order of appearance of the relay shipping method among GLS shipping
+            methods
+        </p>
+    </li>
+    <li>
+        <p style="">
+            <strong>Only XL shop search</strong>: Enable the display of XL relays only (disabled by default)
+        </p>
+    </li>
+    <li>
+        <p style="">
+            <strong>GLS Avant 13H</strong>: Enable or disable the express shipment before 1pm
+        </p>
+    </li>
+</ul>
+<p style="margin-left: 20px;">
+    This service match the GLS offer:
+    <em>Express Parcel Guaranteed</em>
+</p>
+<ul>
+    <li>
+        <p style="">
+            <strong>GLS Avant 13H setup</strong>: Configuration field, please see more explanations and examples below
+        </p>
+    </li>
+    <li>
+        <p style="">
+            <strong>GLS Avant 13H order</strong>: Set the order of appearance of the express shipping method among GLS shipping methods
+        </p>
+    </li>
+    <li>
+        <p style="">
+            <strong>Tracking URL</strong>: Used to generate shipment tracking URL
+        </p>
+    </li>
+    <li>
+        <p style="">
+            <strong>Debug</strong>: Allow to enable the module debugging function for the shipping costs calculation (Advanced function
+            for developer)
+        </p>
+    </li>
+    <li>
+        <p style="">
+            <strong>GLS</strong>
+            <strong> module order:</strong>&nbsp;set the order of appearance of the GLS shipping methods group among other shipping
+            methods
+        </p>
+    </li>
+</ul>
+<p>
+    The configuration fields use a PHP format syntax used by the OWEBIA module for Magento 2, whose&nbsp;
+    <a href="http://htmlpreview.github.io/?https://github.com/owebia/magento2-module-advanced-shipping-setting/blob/master/view/doc_en_US.html#quick_start">documentation is here</a>.
+</p>
+<p>
+    For example, here is the provided configuration for at home shipment:
+</p>
+<p>
+    <img src="https://lh5.googleusercontent.com/xbpPpS_y7czn5jv065CAXu7-R3Lk0KeWy4rLwPQC771Fs6J5hNYI0FRKFHVxOkUg62OTUxgymQf5txFbjSV2ycaFdS6kUjK_mPEWeHutSOjCCc4fasDJ7ZUB-AmXpHncKrPWGsMB"
+        width="606" height="228" style="border-width: initial; border-style: none; border-color: initial; transform: rotate(0rad);">
+</p>
+<ol>
+    <li>title : label displayed on the website for this shipping method</li>
+    <li>enabled : activation conditions for this method. In this example, the method will be displayed only if the destination
+        country is France</li>
+    <li>price : shipping fees for this method. In this example, if the cart total weight is less than or equal to 150, the fees
+        will be 5, if the cart total weight is less than or equal to 160, the fees will be 3 and in other cases, it will
+        be 0</li>
+</ol>
+<p>
+    It’s possible to add filters on customer group, product categories etc &hellip; (for more informations, please check documentation)
+</p>
+<p>
+    Many methods can be created for one configuration field. To do that, you have to duplicate the
+    <strong>addMethod</strong>&nbsp;function by defining others rules.
+</p>
+<p>
+    <strong>Warning: in the method name (ex: tohome_fr above), only the part before the underscore can be edit</strong>
+</p>
+<h3>2.2 GLS Advanced Setup</h3>
+<h4>2.2.1 General Configuration</h4>
+<p>
+    <strong>Agency code</strong>: GLS agency code you are linked to. Information provided by GLS
+</p>
+<h4>2.2.2 Import/export configuration</h4>
+<p>
+    This section contains the configuration to manage the import and export of GLS orders. For more information about import
+    and export, please check
+    <strong>4. Import/Export</strong>
+    <strong>.</strong>
+</p>
+<ul>
+    <li>
+        <strong>Active</strong>: Activation of automatic import/export through a cron task</li>
+    <li>
+        <strong>Frequency</strong>: Cron task frequency in minutes (every X minutes)</li>
+    <li>
+        <strong>Cron expression</strong>: Cron expression generated from frequency field (if the you can't see the modification after
+        saving, please refresh Magento configuration cache)</li>
+    <li>
+        <strong>Import folder</strong>: Folder in which there are the orders to import</li>
+    <li>
+        <strong>Export folder</strong>: Folder in which the exported orders are downloaded</li>
+    <li>
+        <strong>Status of orders to export</strong>: Status of orders to export for automatic export through the cron task</li>
+</ul>
+
+<h2>3. Display</h2>
+<p>
+    After the shipping methods configuration, here is an example of the display of these methods on the website:
+</p>
+<p>
+    <img src="https://lh5.googleusercontent.com/w__Mujlbk5NmZEcYtlR1ia9fx8OFB2_tfo51xox_P-EQuVyWbsSoEE7-H2U0xQreFbmJIp-tb9tR3dyXM_REAjn2TVxkvM8s_EV4ju3hXwd5RT2cyEsFmvbX7CfSHoepdmc_8I-g"
+        width="624" height="332" style="border-width: initial; border-style: none; border-color: initial; transform: rotate(0rad);">
+</p>
+<p>
+    If the user choose the shipping method “Point Relais”, a popup to choose the relay to deliver to will be displayed:&nbsp;
+</p>
+<p>
+    <img src="https://lh5.googleusercontent.com/DS8ttSWxbvKv1eGvyn0WZ09-8l0rf_8xUZAgO4s4tCM_60G05vteRfvsPgnXmR0Xy65cjmz92PtoGOxR1a_QDTk9YH6oH7ixPHMK2o9hVIjz9LQgkZ96C0qrsqYaXOPz6Ff-Sq_u"
+        width="624" height="481" style="border-width: initial; border-style: none; border-color: initial; transform: rotate(0rad);">
+</p>
+<p>
+    This way he can choose the relay by clicking the button “Choose this relay”.
+</p>
+<p>
+    By clicking on markers on the map, the user can see relay opening hours:
+</p>
+<p>
+    <img src="https://lh6.googleusercontent.com/e-De3rVA17kLDDxyGn60Le95lwPHQixUazmhzXbvfZKpvLpdTGj2lLrNjwSOcXkqjGcUnvc1bHg6qyKh_G8fNzTtbz5C1SrzgU_nHIx-CSsjlDEL7D84hoznrDXhrEQQn4Q2QCtv"
+        width="277" height="256" style="border-width: initial; border-style: none; border-color: initial; transform: rotate(0rad);">
+</p>
+<p>
+    A confirmation popup will ask the user to confirm his choice:&nbsp;
+</p>
+<p>
+    <img src="https://lh6.googleusercontent.com/ZLjoMjvec0mOuuVXEMu96PEr5oP6NYgTUO1gE_czbg3BaFXZNwAS3SkuCwZ8kRyWcgE6m5pOm5yjCrhpHrIN75hTQQS79d4YpZuXKgiFjW0CrBxv4EQ_G9lGsyxrrLi-rIfrT0iu"
+        width="624" height="228" style="border-width: initial; border-style: none; border-color: initial; transform: rotate(0rad);">
+</p>
+<p>
+    After confirmation, the relay details will be displayed below the shipping method:
+</p>
+<p>
+    <img src="https://lh3.googleusercontent.com/7ZLAbuj1YcZjN1o9NJwlTH6mQwlMnEnFhYDNSOpprGYRqC-E2uHe_JgK3YL-QXaBABmsN5-7p8KrTG3TyRYTiqj39JTtlTvumETO3SXJsU7TD9xl34uFNsMP0iqyDto-2s7aZk39"
+        width="624" height="152" style="border-width: initial; border-style: none; border-color: initial; transform: rotate(0rad);">
+</p>
+
+<h2>4. Import/Export</h2>
+<h3>4.1 Export to WinExpé</h3>
+<p>
+    The module allows to export orders files to the GLS WinExpé software.
+</p>
+<p>
+    The exports configuration is done in Stores &gt; Configuration &gt; Sales &gt; GLS Advanced Setup (check
+    <strong>2.2.2 Import/export Configuration</strong>).
+</p>
+<p>
+    This feature is reachable through a new menu entry “GLS IMPORT/EXPORT &gt; Export orders”.
+</p>
+<p>
+    In the configuration, the &nbsp;“Export Folder” parameter have to be well set.
+</p>
+<p>
+    The export screen lists all orders whose shipping method is a GLS one. It’s possible to either download or export one or
+    several orders. To do this, you have to check orders that you want to export, then choose in the “Actions” menu what
+    you want to do.
+</p>
+<p>
+    The “Download” option will download the generated file on your computer.
+</p>
+<p>
+    The “Export” option will put the generated file in the directory set in configuration (Stores &gt; Configuration &gt; Sales
+    &gt; GLS Advanced Setup &gt; Import / Export Configuration).
+</p>
+<p>
+    You have to create a FTP access on this directory and configure it in WinExpé so the software can automatically recovers
+    the files. For any question about the WinExpé software configuration, please get in touch with your GLS IT contact.
+</p>
+<h3>4.2 Import from WinExpé</h3>
+<p>
+    The module allows to import files from the GLS WinExpé software, to save tracking numbers in Magento.
+</p>
+<p>
+    The imports configuration is done in Stores &gt; Configuration &gt; Sales &gt; GLS Advanced Setup (check
+    <strong>2.2.2 Import/export Configuration</strong>).
+</p>
+<p>
+    This feature is reachable through a new menu entry “GLS IMPORT/EXPORT &gt; Import tracking numbers”.
+</p>
+<p>
+    In the configuration, the “Import folder” parameter have to be well set.
+</p>
+<p>
+    In the import screen you will find a button to import files that are in the folder set in the configuration (Stores &gt;
+    Configuration &gt; Sales &gt; GLS Advanced Setup &gt; Import / Export Configuration). With these files, the tracking
+    numbers will be added to the matching orders, then files will be deleted.
+</p>
+<p>
+    You have to create a FTP access on this directory and configure it in WinExpé for the software can automatically upload the
+    files to import.
+</p>
+<h3>4.3 Automatic Import/Export</h3>
+<p>
+    It’s possible to automate orders import and export. It can be configured in Stores &gt; Configuration &gt; Sales &gt; GLS
+    Advanced Setup (check
+    <strong> 2.2.2 Import/export Configuration</strong>).
+</p>
+<p>
+    To enable this, you have to switch on the “Active” parameter in configuration (Stores &gt; Configuration &gt; Sales &gt;
+    GLS Advanced Setup &gt; Import / Export Configuration &gt; Active) and fill &nbsp;up the wanted frequency in minutes
+    (Stores &gt; Configuration &gt; Sales &gt; GLS Advanced Setup &gt; Import / Export Configuration &gt; Frequency).
+</p>
+<p>
+    Then, Magento will export orders that have the defined status (Stores &gt; Configuration &gt; Sales &gt; GLS Advanced Setup
+    &gt; Import / Export Configuration &gt; Status of orders to export) and import orders at the defined frequency.
+</p>
+
+<h2>5. Miscellaneous</h2>
+<h3>5.1 Generation of the Google Maps API Key&nbsp;</h3>
+<p>
+    To use the GLS Point Relais shipping method, it’s necessary to define an API key. Indeed, the module uses a Google Map to
+    locate the relays, and this service require an API key.
+</p>
+<p>
+    You have to generate this API Key and set it in the configuration (check
+    <strong>2.1 Shipping Methods</strong>).
+</p>
+<p>
+    Here are the different steps to generate this API key:
+</p>
+<ul>
+    <li>Go to
+        <a href="https://console.developers.google.com">https://console.developers.google.com</a>
+    </li>
+    <li>Connect with a Google account</li>
+    <li>Go to “Credentials” section</li>
+    <li>Click on “Create credentials” &gt; “API Key” (It’s possible to configure restriction for this key)</li>
+    <li>Copy the key</li>
+    <li>Go to “Library” section</li>
+    <li>Search “Google Maps JavaScript API” and click on the corresponding result</li>
+    <li>Click on “Enable”</li>
+    <li>Back in the GLS configuration, paste the key in Stores &gt; Configuration &gt; Sales &gt; Shipping Methods &gt; GLS,
+        your transport partner &gt; Google Maps API Key</li>
+</ul>
+<h3>5.2 Support</h3>
+<p>
+    If you need some help with the configuration or installation of our module, please contact yout GLS advisor
+</p>
+
+</html>

@@ -1,0 +1,59 @@
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/highlight.min.js"></script>
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/default.min.css">
+
+<input type="text" id="id" placeholder="<?= __('Product IDs separated by comma') ?>">
+
+<pre><code class="xml"><?php echo htmlentities($block->getContent()) ?></code></pre>
+
+<script>
+    $(document).ready(function () {
+        $('pre code').each(function (i, block) {
+            hljs.highlightBlock(block);
+        });
+    });
+    if ($.cookie("feed_preview_ids")) {
+        $('#id').val($.cookie("feed_preview_ids"));
+    }
+    $('#id').on('change', function () {
+        $.cookie("feed_preview_ids", $('#id').val(), {path: '/'});
+    });
+</script>
+
+<style>
+    body {
+        padding: 0;
+        margin: 0;
+    }
+
+    input[type="text"] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        min-width: 300px;
+        background-color: #fff;
+        border-radius: 1px;
+        border: 1px solid #adadad;
+        color: #303030;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.36;
+        height: auto;
+        width: auto;
+        padding: 6px 10px 6px;
+        transition: border-color .1s linear;
+        vertical-align: baseline;
+    }
+
+    input[type="text"]:focus {
+        border-color: #007bdb;
+        box-shadow: none;
+        outline: 0;
+    }
+
+    pre {
+        margin-top: 2.5rem;
+    }
+</style>

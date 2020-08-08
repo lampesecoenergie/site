@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Cminds_AdminLogger::security"
+             title="Security"
+             module="Cminds_AdminLogger"
+             sortOrder="51"
+             resource="Cminds_AdminLogger::security"/>
+        <add id="Cminds_AdminLogger::history"
+             title="Admin Actions History"
+             module="Cminds_AdminLogger"
+             sortOrder="10"
+             parent="Cminds_AdminLogger::security"
+             action="adminlogger/actionhistory/index"
+             resource="Cminds_AdminLogger::history"/>
+    </menu>
+</config>

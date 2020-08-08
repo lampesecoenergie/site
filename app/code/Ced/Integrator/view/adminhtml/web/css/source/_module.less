@@ -1,0 +1,183 @@
+@integrator-icons-admin__font-name-path: '@{baseDir}Ced_Integrator/fonts/integrator';
+@integrator-icons-admin__font-name : 'CedIntegrator';
+.lib-font-face(
+  @family-name:@integrator-icons-admin__font-name,
+  @font-path: @integrator-icons-admin__font-name-path,
+  @font-weight: normal,
+  @font-style: normal
+);
+
+.admin__menu .item-integrator.parent.level-0 > a:before {
+  font-family: @integrator-icons-admin__font-name;
+  content: "\ea2f";
+  display: block;
+  font-size: 3rem;
+  height: 3rem;
+}
+
+.cedcommerce.actions-li {
+  list-style: none;
+  display: inline;
+}
+
+.cedcommerce.actions {
+  font-size: 0;
+  cursor: pointer;
+}
+
+.cedcommerce.actions.view:before {
+  display: inline-block;
+  content: url('@{baseDir}Ced_Integrator/images/actions/view.svg');
+  height:16px;
+}
+
+.cedcommerce.actions.delete:before {
+  display: inline-block;
+  content: url('@{baseDir}Ced_Integrator/images/actions/delete.svg');
+  height:16px;
+}
+
+.cedcommerce.actions.download:before {
+  display: inline-block;
+  content: url('@{baseDir}Ced_Integrator/images/actions/download.svg');
+  height:16px;
+}
+
+.cedcommerce.actions.edit:before {
+  display: inline-block;
+  content: url('@{baseDir}Ced_Integrator/images/actions/edit.svg');
+  height:16px;
+}
+
+.cedcommerce.actions.sync:before {
+  display: inline-block;
+  content: url('@{baseDir}Ced_Integrator/images/actions/sync.svg');
+  height:16px;
+}
+
+.cedcommerce.actions.upload:before {
+  display: inline-block;
+  content: url('@{baseDir}Ced_Integrator/images/actions/upload.svg');
+  height:16px;
+}
+
+.cedcommerce.actions.validate:before {
+  display: inline-block;
+  content: url('@{baseDir}Ced_Integrator/images/actions/validate-circle.svg');
+  height:16px;
+}
+
+.cedcommerce.actions.error:before {
+  display: inline-block;
+  content: url('@{baseDir}Ced_Integrator/images/actions/error.svg');
+  height:16px;
+}
+
+.cedcommerce.actions.authorize:before {
+  display: inline-block;
+  content: url('@{baseDir}Ced_Integrator/images/actions/authorize.svg');
+  height:16px;
+}
+
+.cedcommerce.actions.unlock:before {
+  display: inline-block;
+  content: url('@{baseDir}Ced_Integrator/images/actions/unlock.svg');
+  height:16px;
+}
+
+.cedcommerce.actions.tick:before {
+  display: inline-block;
+  content: url('@{baseDir}Ced_Integrator/images/actions/tick.svg');
+  height:16px;
+}
+
+.cedcommerce.actions.preview:before {
+  display: inline-block;
+  content: url('@{baseDir}Ced_Integrator/images/actions/preview.svg');
+  height:16px;
+}
+
+.cedcommerce.actions.tick-grey:before {
+  display: inline-block;
+  content: url('@{baseDir}Ced_Integrator/images/actions/tick-grey.svg');
+  height:16px;
+}
+
+.cedcommerce.actions.view.disable,
+.cedcommerce.actions.preview.disable,
+.cedcommerce.actions.error.disable,
+.cedcommerce.actions.delete.disable,
+.cedcommerce.actions.edit.disable,
+.cedcommerce.actions.sync.disable,
+.cedcommerce.actions.upload.disable,
+.cedcommerce.actions.tick.disable,
+.cedcommerce.actions.validate.disable{
+  cursor: not-allowed;
+}
+
+.cedcommerce.actions.tick-grey.nochange,
+.cedcommerce.actions.tick.nochange{
+  cursor: default;
+}
+
+
+.cedcommerce.errors {
+  border: none !important; margin: 0; padding: 0 0 2px 0; cursor: pointer;
+}
+
+.cedcommerce.errors div {
+  min-width: 100px !important;
+}
+
+.cedcommerce.errors.feed {
+  background: #d6d2d2 none repeat scroll 0 0;
+  border: 1px solid #000000 !important;
+  color: #000000;
+  display: block;
+  font-weight: bold;
+  line-height: 17px;
+  padding: 0 3px;
+  text-align: center;
+  text-transform: uppercase;
+  content: "F";
+  visibility: visible;
+}
+
+.cedcommerce.errors.validation {
+  background: #d6d2d2 none repeat scroll 0 0;
+  border: 1px solid #000000 !important;
+  display: block;
+  font-weight: bold;
+  line-height: 17px;
+  padding: 0 3px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #000000;
+  content: "V";
+  visibility: visible;
+}
+
+.admin__menu .item-integrator .submenu .level-2 a[href="#"] {
+  cursor: default !important;
+  font-weight:bold !important;
+  font-size: 1.7rem !important;
+  color: #bdb4b4 !important;
+}
+
+.admin__menu .item-integrator .submenu .level-2 a[href="#"]:hover {
+  background-color: transparent !important;
+}
+
+.admin__menu .item-integrator .submenu .level-1 .submenu-group-title {
+  font-weight:bold !important;
+  text-transform: uppercase !important;
+}
+
+.admin__menu .item-integrator .submenu li {
+  min-width: 18.5rem !important;
+  max-width: 20.5rem !important;
+}
+
+.admin__menu .item-integrator .submenu .parent {
+  margin-bottom: 2.5rem !important;
+}

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Amazon
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">amazon_report_request_form.amazon_report_request_form_data_source</item>
+            <item name="deps" xsi:type="string">amazon_report_request_form.amazon_report_request_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Request</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="array">
+                <item name="name" xsi:type="string">back</item>
+                <item name="label" xsi:type="string" translate="true">Back</item>
+                <item name="class" xsi:type="string">back</item>
+                <item name="url" xsi:type="string">amazon/report/index</item>
+            </item>
+            <item name="save" xsi:type="array">
+                <item name="name" xsi:type="string">add</item>
+                <item name="label" xsi:type="string" translate="true">Request</item>
+                <item name="class" xsi:type="string">primary</item>
+            </item>
+        </item>
+		<item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">amazon_report_request_form</item>
+            <item name="type" xsi:type="string">tabs</item>
+        </item>
+    </argument>
+    <dataSource name="amazon_report_request_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Ced\Amazon\Ui\DataProvider\Report\Search</argument>
+            <argument name="name" xsi:type="string">amazon_report_request_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="amazon/report/request"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+
+    <fieldset name="report_parameters">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Parameters</item>
+                <item name="collapsible" xsi:type="boolean">false</item>
+            </item>
+        </argument>
+        <field name="account_id">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Ced\Amazon\Model\Source\Account</item>
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/element/select</item>
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">amazon_report_request_form_data_source</item>
+                    <item name="label" xsi:type="string" translate="true">Account</item>
+                    <item name="additionalInfo" xsi:type="string">
+                        Select account to request report from Amazon.
+                    </item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="type">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Ced\Amazon\Model\Source\Report\Type</item>
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/element/select</item>
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">amazon_report_request_form_data_source</item>
+                    <item name="label" xsi:type="string" translate="true">Type</item>
+                    <item name="additionalInfo" xsi:type="string">
+                        <![CDATA[
+                        Select a report type to import report from Amazon. <br/>
+                        Example: <b>"All Listing Data"</b>. <br/>
+                    ]]>
+                    </item>
+                    <item name="default" xsi:type="string">_GET_MERCHANT_LISTINGS_ALL_DATA_</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+    </fieldset>
+    <fieldset name="report_optional_parameters">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Optional</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+            </item>
+        </argument>
+        <field name="marketplace_id">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Ced\Amazon\Model\Source\Marketplace\Name</item>
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/element/multiselect</item>
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">amazon_report_request_form_data_source</item>
+                    <item name="label" xsi:type="string" translate="true">Marketplace Id</item>
+                    <item name="additionalInfo" xsi:type="string">
+                        <![CDATA[
+                        <b>Optional</b> :
+                        Provide select a marketplace id to generate report (NA, EU only). <br/>
+                        Default: All
+                        ]]>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="start_date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/element/date</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">amazon_report_request_form_data_source</item>
+                    <item name="label" xsi:type="string" translate="true">Start Date</item>
+                    <item name="options" xsi:type="array">
+                        <item name="dateFormat" xsi:type="string">y-MM-dd</item>
+                        <item name="showsTime" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="end_date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/element/date</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">amazon_report_request_form_data_source</item>
+                    <item name="label" xsi:type="string" translate="true">End Date</item>
+                    <item name="options" xsi:type="array">
+                        <item name="dateFormat" xsi:type="string">y-MM-dd</item>
+                        <item name="showsTime" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+</form>

@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="catalog_product_save_after">
+        <observer name="ProductAfterSaveObserver" instance="Cminds\AdminLogger\Observer\Product\ProductAfterSaveObserver"/>
+    </event>
+    <event name="catalog_product_save_before">
+        <observer name="ProductBeforeSaveObserver" instance="Cminds\AdminLogger\Observer\Product\ProductBeforeSaveObserver"/>
+    </event>
+    <event name="catalog_product_delete_after_done">
+        <observer name="ProductAfterDeleteObserver" instance="Cminds\AdminLogger\Observer\Product\ProductAfterDeleteObserver"/>
+    </event>
+    <event name="catalog_controller_category_delete">
+        <observer name="CategoryAfterDeleteObserver" instance="Cminds\AdminLogger\Observer\Category\CategoryAfterDeleteObserver"/>
+    </event>
+    <event name="catalog_category_save_after">
+        <observer name="CategoryAfterSaveObserver" instance="Cminds\AdminLogger\Observer\Category\CategoryAfterSaveObserver"/>
+    </event>
+    <event name="customer_save_after">
+        <observer name="CustomerAfterSaveObserver" instance="Cminds\AdminLogger\Observer\Customer\CustomerAfterSaveObserver"/>
+    </event>
+    <event name="customer_save_before">
+        <observer name="CustomerBeforeSaveObserver" instance="Cminds\AdminLogger\Observer\Customer\CustomerBeforeSaveObserver"/>
+    </event>
+    <event name="customer_delete_after">
+        <observer name="CustomerAfterDeleteObserver" instance="Cminds\AdminLogger\Observer\Customer\CustomerAfterDeleteObserver"/>
+    </event>
+    <event name="cms_page_save_before">
+        <observer name="ContentPageBeforeSaveObserver" instance="Cminds\AdminLogger\Observer\Content\Page\ContentPageBeforeSaveObserver"/>
+    </event>
+    <event name="cms_page_save_after">
+        <observer name="ContentPageAfterSaveObserver" instance="Cminds\AdminLogger\Observer\Content\Page\ContentPageAfterSaveObserver"/>
+    </event>
+    <event name="cms_page_delete_after">
+        <observer name="ContentPageAfterDeleteObserver" instance="Cminds\AdminLogger\Observer\Content\Page\ContentPageAfterDeleteObserver"/>
+    </event>
+    <event name="cms_block_save_before">
+        <observer name="ContentBlockBeforeSaveObserver" instance="Cminds\AdminLogger\Observer\Content\Block\ContentBlockBeforeSaveObserver"/>
+    </event>
+    <event name="cms_block_save_after">
+        <observer name="ContentBlockAfterSaveObserver" instance="Cminds\AdminLogger\Observer\Content\Block\ContentBlockAfterSaveObserver"/>
+    </event>
+    <event name="cms_block_delete_after">
+        <observer name="ContentBlockAfterDeleteObserver" instance="Cminds\AdminLogger\Observer\Content\Block\ContentBlockAfterDeleteObserver"/>
+    </event>
+    <event name="widget_widget_instance_save_before">
+        <observer name="ContentWidgetBeforeSaveObserver" instance="Cminds\AdminLogger\Observer\Content\Widget\ContentWidgetBeforeSaveObserver"/>
+    </event>
+    <event name="widget_widget_instance_save_after">
+        <observer name="ContentWidgetAfterSaveObserver" instance="Cminds\AdminLogger\Observer\Content\Widget\ContentWidgetAfterSaveObserver"/>
+    </event>
+    <event name="widget_widget_instance_delete_after">
+        <observer name="ContentWidgetAfterDeleteObserver" instance="Cminds\AdminLogger\Observer\Content\Widget\ContentWidgetAfterDeleteObserver"/>
+    </event>
+    <event name="backend_auth_user_login_failed">
+        <observer name="AdminLoginFailedObserver" instance="Cminds\AdminLogger\Observer\Admin\Login\AdminLoginFailedObserver"/>
+    </event>
+    <event name="backend_auth_user_login_success">
+        <observer name="AdminLoginSuccessObserver" instance="Cminds\AdminLogger\Observer\Admin\Login\AdminLoginSuccessObserver"/>
+    </event>
+    <event name="layout_load_before">
+        <observer name="PageViewObserver" instance="Cminds\AdminLogger\Observer\Page\PageViewObserver"/>
+    </event>
+    <event name="sales_invoice_item_save_before">
+        <observer name="SalesInvoiceBeforeSaveObserver" instance="Cminds\AdminLogger\Observer\Order\Invoice\SalesInvoiceBeforeSaveObserver"/>
+    </event>
+    <event name="sales_invoice_item_save_after">
+        <observer name="SalesInvoiceAfterSaveObserver" instance="Cminds\AdminLogger\Observer\Order\Invoice\SalesInvoiceAfterSaveObserver"/>
+    </event>
+    <event name="sales_creditmemo_item_save_before">
+        <observer name="SalesCreditmemoBeforeSaveObserver" instance="Cminds\AdminLogger\Observer\Order\Creditmemo\SalesCreditmemoBeforeSaveObserver"/>
+    </event>
+    <event name="sales_creditmemo_item_save_after">
+        <observer name="SalesCreditmemoAfterSaveObserver" instance="Cminds\AdminLogger\Observer\Order\Creditmemo\SalesCreditmemoAfterSaveObserver"/>
+    </event>
+    <event name="sales_shipment_item_save_before">
+        <observer name="SalesShipmentBeforeSaveObserver" instance="Cminds\AdminLogger\Observer\Order\Shipment\SalesShipmentBeforeSaveObserver"/>
+    </event>
+    <event name="sales_shipment_item_save_after">
+        <observer name="SalesShipmentAfterSaveObserver" instance="Cminds\AdminLogger\Observer\Order\Shipment\SalesShipmentAfterSaveObserver"/>
+    </event>
+    <event name="sales_order_address_save_after">
+        <observer name="SalesAddressAfterSaveObserver" instance="Cminds\AdminLogger\Observer\Order\Address\SalesAddressAfterSaveObserver"/>
+    </event>
+    <event name="sales_order_save_after">
+        <observer name="OrderItemAfterSaveObserver" instance="Cminds\AdminLogger\Observer\Order\Status\OrderItemAfterSaveObserver"/>
+    </event>
+    <event name="cminds_adminlogger_config_update">
+        <observer name="ConfigUpdateObserver" instance="Cminds\AdminLogger\Observer\Config\ConfigUpdateObserver"/>
+    </event>
+    <event name="cminds_adminlogger_new_action">
+        <observer name="AdminLoggerNewActionObserver" instance="Cminds\AdminLogger\Observer\AdminLoggerNewActionObserver"/>
+    </event>
+</config>

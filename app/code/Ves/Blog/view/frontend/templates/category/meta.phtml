@@ -1,0 +1,13 @@
+<?php
+$helper = $this->helper('\Ves\Blog\Helper\Data');
+$category = $helper->getCoreRegistry()->registry('current_post_category');
+$image = $category->getImage();
+$description = $category->getDescription();
+?>
+<?php if($image!='' && $category->getIsActive()){ ?>
+<?php $imgUrl = $helper->getMediaUrl($image); ?>
+<img src="<?php echo $imgUrl ?>" alt="<?php echo $category->getName() ?>"/>
+<?php } ?>
+<?php if($description && $category->getIsActive()){ ?>
+<div class="blogcat-description"><?php echo $description ?></div>
+<?php } ?>

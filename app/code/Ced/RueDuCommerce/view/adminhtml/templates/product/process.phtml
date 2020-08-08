@@ -1,0 +1,289 @@
+<?php
+
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement(EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+ * @package   Ced_RueDuCommerce
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright Copyright CEDCOMMERCE(http://cedcommerce.com/)
+ * @license   http://cedcommerce.com/license-agreement.txt
+ */
+
+$total = $block->ids;
+$baseUrl = $block->getUrl('rueducommerce/product/index');
+$successImg = $block->getViewFileUrl('Ced_RueDuCommerce::images/fam_bullet_success.svg');
+$errorImg = $block->getViewFileUrl('Ced_RueDuCommerce::images/fam_bullet_error.svg');
+$loaderImg = $block->getViewFileUrl('Ced_RueDuCommerce::images/rule-ajax-loader.gif');
+?>
+<div class="row">
+    <div class="col-md-12" style="margin-top: 10px;">
+        <div class="panel panel-default">
+            <div class="block-content panel-body ">
+                <div id="rueducommerce-progress-bar"></div>
+                <br>
+                <div id="batches">
+                    <div class="batches-tab" data-role="collapsible">
+                        <div data-role="trigger">
+                            <span>Responses</span>
+                        </div>
+                    </div>
+                    <div class="batches-content" data-role="content">
+                        <ul id="profileRows" style="list-style: none;">
+                            <li style="list-style: none;">
+                                <?php echo 'Total ' . $total . ' Batch(s) Found.'; ?>
+                            </li>
+                            <li style="list-style: none;" id="updateRow">
+                                <img id="statusImage" src="<?php echo $loaderImg ?>">
+                                <span id="updateStatus" class="text"><?php echo __("Updating..."); ?></span>
+                            </li>
+                            <li id="liFinished" style="display:none; list-style: none;">
+                                <?php echo __("Finished product mass validation."); ?>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    #batches {
+        border: 1px solid #ddd;
+        border-radius: 0;
+    }
+
+    .batches-tab {
+        background: #eee;
+        padding: 1rem;
+        cursor: pointer;
+        font-weight: bold;
+
+    &
+    :first-child {
+        border-bottom: 1px solid #ddd;
+    }
+
+    &
+    :nth-last-child(2) {
+        border-top: 1px solid #ddd;
+    }
+
+    }
+    .batches-content {
+        padding: 0.5rem 0.5rem;
+    }
+
+    /*li*/
+    #batches ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    #batches ul li {
+        vertical-align: middle;
+        padding: 2px 2px 2px 2px;
+        font: normal 12px sans-serif;
+        font-size: small;
+    }
+
+    #batches li img {
+        vertical-align: middle;
+        margin-right: 5px;
+        max-width: 12px;
+    }
+
+    #batches span {
+        vertical-align: middle;
+    }
+
+</style>
+<script>
+    require([
+            'jquery',
+            'jquery/ui',
+            'accordion',
+            'lineProgressbar'
+        ],
+        function ($) {
+
+            $("#rueducommerce-progress-bar").LineProgressbar({
+                percentage: 0,
+                fillBackgroundColor: '#77a21b',
+                height: '25px'
+            });
+
+            $( ".batch-container" ).accordion({ collapsible: true, active: false});
+
+            var totalRecords = parseInt("<?php  echo (int)$total; ?>");
+            var countOfSuccess = 0;
+            var id = 0;
+            var liFinished = document.getElementById('liFinished');
+            var updateStatus = document.getElementById('updateStatus');
+            var updateRow = document.getElementById('updateRow');
+            var statusImage = document.getElementById('statusImage');
+
+            //call on load
+            sendRequest();
+
+
+            function sendRequest() {
+                //console.log( parseInt(((id + 0.5) / totalRecords) * 100));
+                //update progress
+                $("#rueducommerce-progress-bar").LineProgressbar({
+                    percentage: parseInt(((id + 0.5) / totalRecords) * 100),
+                    fillBackgroundColor: '#77a21b',
+                    height: '35px',
+                    duration: 0
+                });
+
+                updateStatus.innerHTML = (id + 1) + ' Of ' + totalRecords + ' Processing';
+
+                var request = $.ajax({
+                    type: "GET",
+                    url: "<?php echo $block->getAjaxUrl();?>",
+                    data: {batchid: id},
+                    success: function (data) {
+                        var json = data;
+                        id++;
+                        var span = document.createElement('li');
+                        if (json.hasOwnProperty('success')) {
+                            countOfSuccess++;
+                            span.innerHTML =
+                                '<img src="<?php  echo $successImg ?>"><span>' +
+                                json.success + '</span>';
+                            span.id = 'id-' + id;
+                            updateRow.parentNode.insertBefore(span, updateRow);
+                        }
+                        else {
+                            var errorMessage = {
+                                'status': true,
+                                'errors': ''
+                            };
+                            if (json.hasOwnProperty('error')) {
+                                //errorMessage = json.error;
+                                //console.log(parseErrors(json.messages));
+                                errorMessage = parseErrors(json.messages);
+                                //console.log(json.hasOwnProperty('count'));
+                                var heading = '<span>' +
+                                    '<img src="<?php  echo $errorImg ?>"> Errors in product validation.</span>';
+                                if (errorMessage.status === false && json.hasOwnProperty('count')) {
+                                    heading = '<img src="<?php  echo $successImg ?>"><span>' +
+                                        json.count + ' Product(s) Validated successfully</span>';
+                                }
+
+                                var errorTemplate = '<div class="batch-container">' +
+                                    '<div data-role="collapsible" style="cursor: pointer;">' +
+                                    '<div data-role="trigger">' + heading + '</div></div>' +
+                                    '<div data-role="content">'+errorMessage.errors+'</div></div>';
+                            }
+                            //span.innerHTML = '<img src="<?php  //echo $errorImg ?>"><span>' + errorMessage + '</span>';
+                            span.innerHTML = errorTemplate;
+                            span.id = 'id-' + id;
+                            updateRow.parentNode.insertBefore(span, updateRow);
+                            $( ".batch-container" ).accordion({ collapsible: true, active: false});
+                        }
+
+
+                    },
+
+                    error: function () {
+                        id++;
+                        var span = document.createElement('li');
+                        span.innerHTML = '<img src="<?php  echo $errorImg ?>"><span>Something went wrong </span>';
+                        span.id = 'id-'+id;
+                        //span.style = 'background-color:#FDD';
+                        updateRow.parentNode.insertBefore(span, updateRow);
+
+                    },
+
+                    complete: function () {
+                        //console.log( parseInt(((id) / totalRecords) * 100));
+                        //update progress
+                        $("#rueducommerce-progress-bar").LineProgressbar({
+                            percentage: parseInt(((id) / totalRecords) * 100),
+                            fillBackgroundColor: '#77a21b',
+                            height: '35px',
+                            duration: 0
+                        });
+
+                        if (id < totalRecords) {
+                            sendRequest();
+                        } else {
+                            statusImage.src = '<?php  echo $successImg ?>';
+                            var span = document.createElement('li');
+                            span.innerHTML =
+                                '<img src="<?php  echo $successImg ?>">' +
+                                '<span id="updateStatus">' +
+                                totalRecords + ' product batch(s) successfully validated.' + '</span>';
+                            liFinished.parentNode.insertBefore(span, liFinished);
+                            document.getElementById("liFinished").style.display = "block";
+                            updateStatus.innerHTML = (id) + ' of ' + totalRecords + ' Processed.';
+                        }
+
+                    },
+                    dataType: "json"
+                });
+
+            }
+
+            function parseErrors(errors) {
+                var data = (errors);
+                var result = {
+                    'status': true,
+                    'errors': ''
+                };
+                if (data) {
+                    result.errors = '<table class="data-grid" style="margin-bottom:10px; margin-top:10px"><tr>' +
+                        '<th style="padding:15px">Sl. No.</th>' +
+                        '<th style="padding:15px">Sku</th>' +
+                        '<th style="padding:15px">Errors</th></tr>';
+                    var products = Object.keys(data).length;
+                    var counter = 0;
+                    $.each(data, function (index, value) {
+                        var messages = '';
+                        $.each(value.errors, function (i, v) {
+                            if (typeof v === 'object' && v !== null && Object.keys(v).length > 0) {
+                                messages += '<ul style="list-style: none;">';
+                                $.each(v, function (attribute, err) {
+                                    messages += '<li><b>'+attribute+'</b> : '+err+'</li>';
+                                });
+                                messages += '</ul>';
+                            }
+                        });
+
+                        //console.log(messages);
+                        if (messages === '') {
+                            counter++;
+                            messages = '<b style="color:forestgreen;">No errors.</b>';
+                        }
+                        if (!value['Field']) {
+                            value['Field'] = value['SellerSku'];
+                        }
+                        //var sku = "<a href='" + value.url + "' target='_blank'>" + value.sku + "</a>";
+                        result.errors += '<tr><td>' + (value['Field']) + '</td><td>'  + (value['SellerSku']) + '</td><td>' + (value['Message']) +
+                            '</td></tr>';
+                    });
+                    result.errors += '</table>';
+                    if (products === counter) {
+                        result.status = false;
+                    }
+                }
+                return result;
+            }
+
+            function getPercent() {
+                return Math.ceil(((id + 1) / totalRecords) * 1000) / 10;
+            }
+        }
+    );
+
+</script>

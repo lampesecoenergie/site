@@ -1,0 +1,296 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement(EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+ * @package   Ced_RueDuCommerce
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright Copyright CEDCOMMERCE(http://cedcommerce.com/)
+ * @license   http://cedcommerce.com/license-agreement.txt
+ */
+
+/*Ced\RueDuCommerce\Block\Adminhtml\Order\Ship $block*/
+$orderHelper = $block->getHelper('\Order');
+$magentoOrder = $block->getOrder();
+$magentoOrderId = $magentoOrder->getId();
+
+$rueducommerceOrder = $block->getModel();
+$rueducommerceOrderItemsData = $orderHelper->processOrderItems($rueducommerceOrder);
+
+
+$shipments = json_decode($rueducommerceOrder->getShipments(), true);
+$shipments = (isset($shipments) and is_array($shipments)) ? $shipments : [];
+
+$cancellations = json_decode($rueducommerceOrder->getCancellations(), true);
+$cancellations = (isset($cancellations) and is_array($cancellations)) ? $cancellations : [];
+
+$rueducommerceOrderData = json_decode($rueducommerceOrder->getOrderData(), true);
+
+$id = $rueducommerceOrder->getId();
+
+?>
+    <p>
+        <input type="hidden" id="formKey" value="<?php echo $block->getFormKey(); ?>">
+        <input type="hidden" id="RueDuCommerceOrderID" value="<?php echo $rueducommerceOrder->getRueducommerceOrderId() ?>" readonly>
+        <input type="hidden" id="IncrementId" value="<?php echo $magentoOrder->getIncrementId() ?>">
+        <input type="hidden" id="OrderId" value="<?php echo $magentoOrder->getId() ?>">
+    </p>
+<?php if (!empty($rueducommerceOrderItemsData)) {?>
+    <div class="admin__page-section-content">
+        <div class="admin__page-section-item">
+            <div class="admin__page-section-item-title">
+                <span class="title">RueDuCommerce Order Information</span>
+            </div>
+            <div class="admin__page-section-item-content">
+                <table class="admin__table-secondary">
+                    <tbody>
+                    <tr>
+                        <th>RueDuCommerce Order Id</th>
+                        <td><?php echo $rueducommerceOrder->getRueducommerceOrderId(); ?></td>
+                    </tr>
+                    <tr>
+                        <th>Order Placed on RueDuCommerce</th>
+                        <td><?php echo date('l, F jS Y', strtotime($rueducommerceOrder->getOrderPlaceDate())); ?></td>
+                    </tr>
+                    <tr>
+                        <th>Shipping Provider</th>
+                        <td>
+                            <select class="admin__control-select" id="CarrierCode">
+                                <option value="">Select a carrier</option>
+                                <?php
+                                foreach ($orderHelper->getShipmentProviders() as $code) {
+                                    echo "<option value='{$code['code']}'>{$code['label']}</option>";
+                                }
+                                ?>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Tracking Number</th>
+                        <td><input class="admin__control-text" type="text" id="TrackingNumber" value=""></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="admin__page-section-title">
+        <span class="title">Shipment Order Items</span>
+    </div>
+    <div class="admin__table-wrapper">
+        <table class="data-table admin__table-primary edit-order-table" id="_prod_table">
+            <thead>
+            <tr class="headings">
+                <th>Product sku</th>
+                <th>Quantity ordered</th>
+                <!-- <th>Cancel Item</th> -->
+            </tr>
+            </thead>
+            <tbody>
+            <?php 
+            foreach ($rueducommerceOrderItemsData as $k => $item) { 
+                $cancelQty = 0;
+                $availQty = $item['quantity'];
+                if ($availQty > 0) { ?>
+                    <tr>
+                    <td>
+                        <input type="hidden" id="sku_<?php echo $k; ?>" value="<?php echo $item['offer_sku'] ?>">
+                        <input type="hidden" id="order_item_id_<?php echo $k; ?>"
+                               value="<?php echo $item['order_line_id'] ?>">
+                        <strong><?php echo $item['offer_sku'] ?></strong>
+                    </td>
+                    <td><input type="hidden" id="qty_<?php echo $k; ?>" value="<?php echo $availQty ?>">
+                        <strong><?php echo $availQty ?></strong>
+                    </td>
+                   <!--  <td>
+                        <select style="width: 65% !important;"
+                                class="admin__control-select" type="text" id="cancel_reason_<?php echo $k; ?>">
+                            <option value="">Select a reason</option>
+                            <?php
+                            foreach ($orderHelper->getCancelReasons() as $reason) {
+                                echo "<option value='{$reason['code']}'>{$reason['label']}</option>";
+                            }
+                            ?>
+                        </select>
+                    </td> -->
+                    </tr><?php }
+                $k++;
+            } ?>
+            </tbody>
+        </table>
+        <div style="float: right; margin-right:30px">
+            <button class="primary" id="submitShipment">Submit Shipment</button>
+        </div>
+    </div>
+
+<?php } ?>
+
+    <div data-mage-init='{"accordion":{"openedState": "active", "collapsible": true, "active": false, "multipleCollapsible": false}}'>
+
+        <div class="admin__page-section-title" data-role="collapsible">
+            <span class="title" data-role="trigger" style="cursor: pointer">Shipments (<?php echo $rueducommerceOrder->getStatus(); ?>)</span>
+        </div>
+        <div data-role="content">
+            <?php foreach ($shipments as $key => $shipment):?>
+                <div class="admin__table-wrapper fulfillments">
+                    <table class="data-table admin__table-primary edit-order-table">
+                        <tr>
+                            <th>#<?php echo $key+1 ?></th>
+                            <td class="border-gray-td first-td"></td>
+                        </tr>
+                        <tr>
+                            <th>OrderId</th>
+                            <td class="border-gray-td"><?php echo isset($shipment['OrderId']) ? $shipment['OrderId'] : ''; ?></td>
+                        </tr>
+                        <tr>
+                            <th>Status</th>
+                            <td class="border-gray-td"><?php echo isset($shipment['Status']) ? $shipment['Status'] : ''; ?></td>
+                        </tr>
+                        <tr>
+                            <th>Carrier</th>
+                            <td class="border-gray-td"><?php echo isset($shipment['ShippingProvider']) ? $shipment['ShippingProvider'] : ''; ?></td>
+                        </tr>
+                        <tr>
+                            <th>TrackingNumber</th>
+                            <td class="border-gray-td"><?php echo isset($shipment['TrackingNumber']) ? $shipment['TrackingNumber'] : ''; ?></td>
+                        </tr>
+                    </table>
+                </div>
+            <?php endforeach;?>
+        </div>
+    </div>
+
+<script>
+    require([
+        "jquery",
+        'Magento_Ui/js/modal/confirm',
+    ], function ($, alert) {
+        $('#submitShipment').on('click', function () {
+            ship();
+        });
+
+        function ship() {
+            var key = document.getElementById('formKey').value;
+            var incrementId = document.getElementById('IncrementId').value;
+            var magentoOrderId = document.getElementById('OrderId').value;
+            var rueducommerceOrderId = document.getElementById('RueDuCommerceOrderID').value;
+            var carrierCode = document.getElementById('CarrierCode').value;
+            var trackingNumber = document.getElementById('TrackingNumber').value;
+
+            var itemsCount = <?php echo count($rueducommerceOrderItemsData); ?>;
+                if (carrierCode === "" ) {
+                    alert({
+                        title: 'Invalid shipment data',
+                        content: "Please enter shipping provider."
+                    });
+                    return false;
+                }
+                if (trackingNumber === "") {
+                    alert({
+                        title: 'Invalid shipment data',
+                        content: "Please enter tracking number."
+                    });
+                    return false;
+                }
+
+            var data = {};
+            data['shipments'] = [
+                    {
+                        "order_id": magentoOrderId,
+                        "IncrementId": incrementId,
+                        "RueDuCommerceOrderID": rueducommerceOrderId,
+                        "ShippingProvider": carrierCode,
+                        "TrackingNumber": trackingNumber,
+                    }
+            ];
+
+            $.ajax({
+                url: "<?php echo $this->getUrl('rueducommerce/order/ship', ['form_key' => $block->getFormKey()]) ?>",
+                type: 'POST',
+                data: data,
+
+                showLoader: true, // enable loader
+
+
+                success: function (response) {
+                    if (response.success === true) {
+                        try {
+                            window.location.href = "";
+                        }
+                        catch (err) {
+                            alert({
+                                title: 'Order shipment failed.',
+                                content: response.message
+                            });
+                        }
+                    } else {
+                        var message = parseMessage(response.message); console.log(message);
+                        alert({
+                            title: 'Order shipment failed.',
+                            content: message
+                        });
+                    }
+                },
+                error: function () {
+                    alert({
+                        title: 'Order shipment failed.',
+                        content: 'Api is down.'
+                    });
+                }
+            });
+        }
+
+    });
+
+    function parseMessage(m) {
+        var message = "";
+        if (m !== "") {
+            if (typeof m === 'object') {
+                message += "<ul>";
+
+                jQuery.each(m, function (index, value) {
+                    message += "<li>"+parseMessage(value)+"</li>";
+                });
+                message += "</ul>";
+            } else {
+                message = m;
+            }
+        }
+
+        return message;
+    }
+</script>
+
+<style>
+    input.admin__control-text, .admin__control-select {
+        width: 100% !important;
+    }
+    .border-gray-td {
+        border-left: 1px solid #80808059;
+        border-top: 1px solid #80808059;
+    }
+
+    .border-gray-td.last-td {
+        border-bottom: 1px solid #80808059 !important;
+    }
+
+    .border-gray-td.first-td {
+        border-left: none;
+        border-top: none;
+        border-bottom: none;
+    }
+
+    .fulfillments {
+        background-color: #80808014;
+        padding-left: 10px;
+        border: 1px solid #80808059;
+        margin-bottom: 20px;
+    }
+</style>

@@ -1,0 +1,123 @@
+Help,Aide
+"GLS - Export","GLS - Export"
+"Orders have been downloaded","Commandes téléchargées"
+"Orders have been exported","Commandes exportées"
+"Orders have been imported","Commandes importées"
+"No orders to import in the folder ","Aucune commande à importer dans le dossier "
+"Import orders","Importer les commandes"
+"Error during request GLS WebService. Check logs for more information.","Erreur pendant la requête au webservice GLS. Vérifier le fichier de log pour plus d'informations"
+"PostCode and/or Country not defined","Code postal et/ou pays non défini(s)"
+"Error GLS : Can't set relay information in the session for the order because at least one relay information is empty in request.","Erreur GLS : Impossible de définir les informations du point relay en session pour la commande car au moins une des informations du relai est absente"
+"GLS file corrupted. Can't update agency code list.","Fichier GLS corrompu. Impossible de mettre à jour la liste des codes agences"
+"No corresponding file in GLS FTP to get ZIPCODE for express delivery mode. Can't update agency code list.","Pas de fichiers correspondant sur le serveur de GLS pour le mode de livraison Express. Impossible de mettre à jour la liste des codes agence"
+"Can't connect to GLS FTP to get ZIPCODE for express delivery mode. Can't update agency code list.","Impossible de se connecter au serveur GLS pour récupérer les agences pour le mode de livraison Express. Impossible de mettre à jour la liste des codes agence"
+"Invalid arguments count for addMethod FuncCall","Nombre d'arguments invalide pour addMethod FuncCall"
+"Invalid first argument for addMethod FuncCall: the first argument must be a string and match the following pattern : ^[a-z][a-z0-9_]*$","Premier argument invalide pour addMethod FuncCall : le premier argument doit être une chaine de caractères et suivre le modèle suivant : ^[a-z][a-z0-9_]*$"
+"Invalid second argument for addMethod FuncCall: the second argument must be an array","Second argument invalide pour addMethod FuncCall: le deuxième argument doit être un tableau"
+"The method %1 already exists","La méthode %1 existe déjà"
+"GLS : Invalid config","GLS : Configuration invalide"
+"Invalid price: null","Prix invalide: null"
+"Invalid price: false","Prix invalide: false"
+"Owebia_AdavancedShippingSetting : Invalid config","Owebia_AdavancedShippingSetting : Configuration invalide"
+Self,Lui-même
+Parent,Parent
+Children,Enfants
+"Import : the order doesn't exist : ","Import : la commande n'existe pas : "
+"Shipment creation error for Order %s : %s","Erreur de création d'expédition pour la commande %s : %s"
+"Import : unable to delete file : ","Import : impossible de supprimer le fichier : "
+" orders doesn't exists. Check logs for more details"," commandes n'existent pas. Vérifier le fichier de log pour plus d'informations"
+"Order %s can not be shipped or has already been shipped","La commande %s ne peut pas être expédiée ou a déjà été expédiée"
+"Error GLS : Can't set relay information in order because at least one information is missing in session","Erreur GLS : Impossible de définir les informations du point relais pour la commande car au moins une information est absente en session"
+"Error GLS : Can't set relay information in order because can't access to order","Erreur GLS : Impossible de définir les informations du point relais pour la commande car pas d'accès à la commande"
+"Unable to save the cron expression.","Impossible de sauvegarder l'expression cron"
+"Opening hours","Heures d'ouverture"
+Monday,Lundi
+Tuesday,Mardi
+Wednesday,Mercredi
+Thursday,Jeudi
+Friday,Vendredi
+Saturday,Samedi
+Sunday,Dimanche
+"Choose this relay","Choisir ce relais"
+"CHOOSE YOUR MONDIAL RELAY PARCELSHOP","CHOISISSEZ VOTRE POINT RELAIS MONDIAL RELAY"
+"Error: more than 1 info windows are open","Erreur : Plus d'une fenêtre d'information est ouverte"
+"Error : can't select relay","Erreur : impossible de sélectionner un point relais"
+"Confirm relay","Confirmer relais"
+"Do you confirm the shipment to this relay:","Confirmez-vous la livraison dans ce point relais : "
+"Modify my relay","Modifier mon point relais"
+"No relays found","Pas de relais trouvés"
+"Please choose a relay for this shipping method","Vous devez choisir un point relais pour ce mode de livraison"
+"You have to set a phone number for the GLS shipping methods","Vous devez définir un numéro de téléphone pour les modes de livraison GLS"
+"GLS Import - Export","GLS Import - Export"
+"Export orders","Exporter les commandes"
+"Import tracking numbers","Importer les numéros de suivi"
+"GLS, your transport partner","GLS, votre partenaire transport"
+Informations,Informations
+Title,Titre
+Enable,Activé
+"GLS webservice login","Login du webservice GLS"
+"GLS webservice password","Mot de passe du webservice GLS"
+"Maximum package weight (please consider about GLS maximum weight)","Poids maximum des articles (faire attention au poids maximum de GLS)"
+"GLS Chez Vous","GLS Chez Vous"
+"GLS Chez Vous setup","Configuration GLS Chez Vous"
+"GLS Chez Vous order","Ordre GLS Chez Vous"
+"GLS Chez Vous +","GLS Chez Vous +"
+"GLS Chez Vous + setup","Configuration GLS Chez Vous +"
+"GLS Chez Vous + order","Ordre GLS Chez Vous +"
+"GLS Point Relais","GLS Point Relais"
+"GLS Point Relais setup","Configuration GLS Point Relais"
+"GLS Point Relais order","Ordre GLS Point Relais"
+"Only XL shop search","Uniquement les Points Relais XL"
+"GLS Avant 13H","GLS Avant 13H"
+"GLS Avant 13H setup","Configuration GLS Avant 13H"
+"GLS Avant 13H order","Ordre GLS Avant 13H"
+"Tracking URL","URL de suivi"
+Debug,Débogage
+"Display debug on cart on a delivery estimate","Affichage du debug sur le panier lors d'une estimation de livraison"
+"GLS module order","Ordre de tri"
+"GLS Advanced Setup","GLS configuration avancée"
+"General Configuration","Configuration générale"
+"Weight unit","Unité de poids"
+"Agency code","Code agence"
+"Google Maps API Key","Clé API Google Maps"
+"Import / Export Configuration","Configuration des imports/exports"
+Active,Actif
+Frequency,Fréquence
+"Cron expression","Expression cron"
+"Import folder","Dossier d'import"
+"Import order status","Statut des commandes importées"
+"Export folder","Dossier d'export"
+"Status of orders to export","Statut des commandes à exporter"
+"Bundle Product Management","Gestion des produits packagés (Bundle Product)"
+"Item processing","Traitement d'un article"
+"If ""Self"" is selected, options bellow are ignored","Si ""Lui-même"" est sélectionné, les options ci-dessous sont ignorées"
+"Item options on","Options de l'article sur"
+item.option.*,item.option.*
+"Item data on","Données de l'article sur"
+item.*,item.*
+"Product data on","Données du produit sur"
+product.*,product.*
+"Configurable Product Management","Gestion des produits configurables (Configurable Product)"
+"All Store Views","All Store Views"
+"Purchase Point","Lieu d'achat"
+Export,Export
+"Are you sure you want to export selected items?","Êtes-vous sûr de vouloir exporter les éléments sélectionnés ?"
+Download,Télécharger
+"Are you sure you want to download selected items?","Êtes-vous sûr de vouloir télécharger les éléments sélectionnés ?"
+ID,ID
+"Purchase Date","Date d'achat"
+"Bill-to Name","Nom de facturation"
+"Ship-to Name","Nom de livraison"
+"Grand Total (Purchased)","Total (achat)"
+"Shipping Method","Méthode de livraison"
+Status,Statut
+Yes,Oui
+No,Non
+"GLS POINT RELAY SHIPPING METHOD NEEDS A GOOGLE MAPS API KEY", "LE MODE DE LIVRAISON GLS POINT RELAIS A BESOIN D'UNE CLE API GOOGLE MAPS"
+WARNING,ATTENTION
+"Stores > Configuration > Sales > GLS Advanced Setup > General Configuration > Google Maps API KEY", "Magasins > Configuration > Ventes > GLS Configuration Avancée > Clé API Google Maps"
+"Display","Afficher"
+"Your postcode","Votre code postal"
+"Your address","Votre adresse"
+"Your city","Votre ville"
+"Search","Rechercher"

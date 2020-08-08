@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Fooman_PdfDesign:etc/fooman_pdfdesign_file.xsd">
+    <pdfDesign id="alternative" supported="1"/>
+    <pdfDesign id="alternativetwo" supported="1"/>
+    <pdfDesign id="designone" supported="1"/>
+</config>

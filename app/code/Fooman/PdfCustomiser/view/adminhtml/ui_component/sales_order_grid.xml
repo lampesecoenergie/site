@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:framework:Ui/etc/ui_configuration.xsd">
+    <listingToolbar name="listing_top">
+        <massaction name="listing_massaction">
+            <action name="pdfinvoices_order">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">fooman_order_pdfinvoices</item>
+                        <item name="url" xsi:type="url" path="fooman_pdfcustomiser/order/pdfinvoices"/>
+                    </item>
+                </argument>
+            </action>
+            <action name="pdfshipments_order">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">fooman_order_pdfshipments</item>
+                        <item name="url" xsi:type="url" path="fooman_pdfcustomiser/order/pdfshipments"/>
+                    </item>
+                </argument>
+            </action>
+            <action name="pdfcreditmemos_order">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">fooman_order_pdfcreditmemos</item>
+                        <item name="url" xsi:type="url" path="fooman_pdfcustomiser/order/pdfcreditmemos"/>
+                    </item>
+                </argument>
+            </action>
+            <action name="pdfdocs_order">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">fooman_order_pdfdocs</item>
+                        <item name="url" xsi:type="url" path="fooman_pdfcustomiser/order/pdfdocs"/>
+                    </item>
+                </argument>
+            </action>
+            <action name="fooman_pdforders">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="url" xsi:type="url" path="fooman_pdfcustomiser/order/pdforders"/>
+                    </item>
+                </argument>
+            </action>
+        </massaction>
+    </listingToolbar>
+</listing>
+

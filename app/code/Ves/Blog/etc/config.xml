@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Venustheme
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Venustheme.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.venustheme.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category   Venustheme
+ * @package    Ves_Blog
+ * @copyright  Copyright (c) 2014 Venustheme (http://www.venustheme.com/)
+ * @license    http://www.venustheme.com/LICENSE-1.0.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<default>
+		<vesblog>
+			<general_settings>
+				<enable>1</enable>
+				<url_prefix>blog</url_prefix>
+				<url_suffix>.html</url_suffix>
+				<categories_urls>1</categories_urls>
+				<dateformat>medium</dateformat>
+				<twitter_username></twitter_username>
+				<enable_networks>1</enable_networks>
+				<networks>twitter,facebook,googleplus,linkedin,pinterest</networks>
+				<rssposts_show>12</rssposts_show>
+				<latestpagerss>1</latestpagerss>
+				<categoryrss>1</categoryrss>
+				<tagrss>1</tagrss>
+				<authorrss>1</authorrss>
+				<commentrss>1</commentrss>
+			</general_settings>
+			<blog_latest_page>
+				<route>latest</route>
+				<page_title>Latest Posts Page</page_title>
+				<meta_description>Latest Posts Page</meta_description>
+				<meta_keywords>Latest Posts Page</meta_keywords>
+			</blog_latest_page>
+			<category_page>
+				<show_breadcrumbs>1</show_breadcrumbs>
+				<show_toolbartop>1</show_toolbartop>
+				<show_toolbarbottom>1</show_toolbarbottom>
+				<show_image>1</show_image>
+				<image_width>800</image_width>
+				<image_height>500</image_height>
+				<show_title>1</show_title>
+				<show_shortdescription>1</show_shortdescription>
+				<shortdescription_count>100</shortdescription_count>
+				<show_readmorelink>1</show_readmorelink>
+				<show_categories>1</show_categories>
+				<show_author>1</show_author>
+				<show_commentcount>1</show_commentcount>
+				<show_updatedtime>1</show_updatedtime>
+				<show_createdtime>1</show_createdtime>
+				<show_hits>1</show_hits>
+				<show_tags>1</show_tags>
+			</category_page>
+			<post_page>
+				<show_breadcrumbs>1</show_breadcrumbs>
+				<show_image>1</show_image>
+				<image_width>800</image_width>
+				<image_height>500</image_height>
+				<show_title>1</show_title>
+				<show_description>1</show_description>
+				<show_categories>1</show_categories>
+				<show_author>1</show_author>
+				<show_commentcount>1</show_commentcount>
+				<show_updatedtime>1</show_updatedtime>
+				<show_createdtime>1</show_createdtime>
+				<show_socialblock>1</show_socialblock>
+				<show_hits>1</show_hits>
+				<show_tags>1</show_tags>
+				<enable_commentblock>1</enable_commentblock>
+				<comment_type>default</comment_type>
+				<auto_public>0</auto_public>
+				<numbercomment_perpage>5</numbercomment_perpage>
+				<show_captcha>0</show_captcha>
+				<captcha_publickey>6LegxuISAAAAALhQG7fwq9nhbx497-IvCjqcwiMF</captcha_publickey>
+				<captcha_privatekey>6LegxuISAAAAAPgzed0RLVBCqPEP9tLqznn435pS</captcha_privatekey>
+				<related_carousel_layout>owl_carousel</related_carousel_layout>
+				<mobile_items>1</mobile_items>
+				<tablet_small_items>3</tablet_small_items>
+				<tablet_items>4</tablet_items>
+				<portrait_items>4</portrait_items>
+				<default_items>5</default_items>
+				<large_items>6</large_items>
+				<autoplay>1</autoplay>
+				<autoplay_timeout>3000</autoplay_timeout>
+				<dots>1</dots>
+				<nav>1</nav>
+			</post_page>
+			<blog_page>
+				<layout_type>list</layout_type>
+				<page_layout>2columns-left</page_layout>
+				<orderby>ASC</orderby>
+				<show_breadcrumbs>1</show_breadcrumbs>
+				<item_per_page>16</item_per_page>
+				<show_toolbartop>1</show_toolbartop>
+				<show_toolbarbottom>1</show_toolbarbottom>
+				<lg_column_item>4</lg_column_item>
+				<md_column_item>4</md_column_item>
+				<sm_column_item>2</sm_column_item>
+				<xs_column_item>1</xs_column_item>
+				<show_image>1</show_image>
+				<image_width>800</image_width>
+				<image_height>500</image_height>
+				<show_title>1</show_title>
+				<show_shortdescription>1</show_shortdescription>
+				<shortdescription_count>100</shortdescription_count>
+				<show_readmorelink>1</show_readmorelink>
+				<show_categories>1</show_categories>
+				<show_author>1</show_author>
+				<show_commentcount>1</show_commentcount>
+				<show_updatedtime>1</show_updatedtime>
+				<show_createdtime>1</show_createdtime>
+				<show_hits>1</show_hits>
+				<show_tags>1</show_tags>
+			</blog_page>
+		</vesblog>
+	</default>
+</config>

@@ -1,0 +1,95 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="\Fooman\EmailAttachments\Observer\AbstractSendShipmentObserver">
+        <arguments>
+            <argument name="pdfRenderer" xsi:type="object">\Fooman\PdfCustomiser\Model\PdfRenderer\ShipmentAdapter</argument>
+        </arguments>
+    </type>
+    <type name="\Fooman\PdfCustomiser\Model\PdfRenderer\ShipmentAdapter" shared="false">
+        <arguments>
+            <argument name="pdfRenderer" xsi:type="object" shared="false">\Fooman\PdfCore\Model\PdfRenderer</argument>
+        </arguments>
+    </type>
+    <type name="\Fooman\EmailAttachments\Observer\AbstractSendOrderObserver" shared="false">
+        <arguments>
+            <argument name="pdfRenderer" xsi:type="object" shared="false">\Fooman\PdfCustomiser\Model\PdfRenderer\OrderAdapter</argument>
+        </arguments>
+    </type>
+    <type name="\Fooman\PdfCustomiser\Model\PdfRenderer\OrderAdapter" shared="false">
+        <arguments>
+            <argument name="pdfRenderer" xsi:type="object" shared="false">\Fooman\PdfCore\Model\PdfRenderer</argument>
+        </arguments>
+    </type>
+    <type name="\Fooman\EmailAttachments\Observer\AbstractSendInvoiceObserver" shared="false">
+        <arguments>
+            <argument name="pdfRenderer" xsi:type="object" shared="false">\Fooman\PdfCustomiser\Model\PdfRenderer\InvoiceAdapter</argument>
+        </arguments>
+    </type>
+    <type name="\Fooman\PdfCustomiser\Model\PdfRenderer\InvoiceAdapter" shared="false">
+        <arguments>
+            <argument name="pdfRenderer" xsi:type="object" shared="false">\Fooman\PdfCore\Model\PdfRenderer</argument>
+        </arguments>
+    </type>
+    <type name="\Fooman\EmailAttachments\Observer\AbstractSendCreditmemoObserver" shared="false">
+        <arguments>
+            <argument name="pdfRenderer" xsi:type="object" shared="false">\Fooman\PdfCustomiser\Model\PdfRenderer\CreditmemoAdapter</argument>
+        </arguments>
+    </type>
+    <type name="\Fooman\PdfCustomiser\Model\PdfRenderer\CreditmemoAdapter" shared="false">
+        <arguments>
+            <argument name="pdfRenderer" xsi:type="object" shared="false">\Fooman\PdfCore\Model\PdfRenderer</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Payment\Block\Info">
+        <plugin name="fooman_pdfcustomiser_paymentinfoblock"
+                type="\Fooman\PdfCustomiser\Plugin\PaymentInfoBlockPlugin"/>
+    </type>
+
+    <type name="Fooman\EmailAttachments\Model\TermsAndConditionsAttacher">
+        <plugin name="fooman_pdfcustomiser_termsandconditionsaspdf"
+                type="\Fooman\PdfCustomiser\Plugin\TermsAndConditionsAsPdf"/>
+    </type>
+
+    <type name="Fooman\PdfDesign\Model\DefaultDesign">
+        <arguments>
+            <argument name="templateFiles" xsi:type="array">
+                <item name="shipping" xsi:type="string">Fooman_PdfCustomiser::pdf/shipping.phtml</item>
+                <item name="comments" xsi:type="string">Fooman_PdfCustomiser::pdf/comments.phtml</item>
+                <item name="giftmessage" xsi:type="string">Fooman_PdfCustomiser::pdf/giftmessage.phtml</item>
+                <item name="taxTable" xsi:type="string">Fooman_PdfCustomiser::pdf/taxtable.phtml</item>
+                <item name="totals" xsi:type="string">Fooman_PdfCustomiser::pdf/totals.phtml</item>
+                <item name="bundleExtras" xsi:type="string">Fooman_PdfCustomiser::pdf/table/bundle-extras.phtml</item>
+                <item name="extras" xsi:type="string">Fooman_PdfCustomiser::pdf/table/extras.phtml</item>
+                <item name="paymentDefault" xsi:type="string">Fooman_PdfCustomiser::pdf/payment-default.phtml</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Fooman\PdfDesign\Model\AlternativeDesign">
+        <arguments>
+            <argument name="templateFiles" xsi:type="array">
+                <item name="table" xsi:type="string">Fooman_PdfCustomiser::pdf-alt/table.phtml</item>
+                <item name="totals" xsi:type="string">Fooman_PdfCustomiser::pdf-alt/totals.phtml</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Fooman\PdfDesign\Model\AlternativeDesignTwo">
+        <arguments>
+            <argument name="templateFiles" xsi:type="array">
+                <item name="table" xsi:type="string">Fooman_PdfCustomiser::pdf-alt/table.phtml</item>
+                <item name="totals" xsi:type="string">Fooman_PdfCustomiser::pdf-alt/totals.phtml</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Fooman\PdfDesign\Model\DesignOne">
+        <arguments>
+            <argument name="templateFiles" xsi:type="array">
+                <item name="table" xsi:type="string">Fooman_PdfCustomiser::pdf-design-1/table.phtml</item>
+                <item name="icons" xsi:type="string">Fooman_PdfCustomiser::pdf-design-1/icons.phtml</item>
+            </argument>
+            <argument name="footerHandle" xsi:type="string">fooman_pdfcustomiser_design_1_footer</argument>
+        </arguments>
+    </type>
+</config>

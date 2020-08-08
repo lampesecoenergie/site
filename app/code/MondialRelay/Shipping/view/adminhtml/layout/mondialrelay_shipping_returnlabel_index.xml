@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mondial Relay Shipping Module
+ *
+ * @author    Magentix
+ * @copyright Copyright © 2018 Magentix. All rights reserved.
+ * @license   https://www.magentix.fr/en/licence.html Magentix Software Licence
+ * @link      https://mondialrelay.magentix.fr/
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="MondialRelay_Shipping::css/style.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <uiComponent name="mondialrelay_shipping_returnlabel_form"/>
+        </referenceContainer>
+    </body>
+</page>

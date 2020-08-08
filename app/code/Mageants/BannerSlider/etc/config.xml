@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+ /**
+ * @category  Mageants BannerSlider
+ * @package   Mageants_BannerSlider
+ * @copyright Copyright (c) 2017 Mageants
+ * @author    Mageants Team <support@Mageants.com>
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Magento/Store/etc/config.xsd">
+    <default>
+        <mageants_bannerslider>
+            <general>
+                <enable>1</enable>
+            </general>
+			<defslidersetting>
+				<show_navigation_arrows>1</show_navigation_arrows>
+				<show_navigation_bullets>1</show_navigation_bullets>
+				<speed>800</speed>
+				<autoplay>230</autoplay>
+				<keyboard>1</keyboard>
+				<interval>4000</interval>
+			</defslidersetting>			
+			<advslidersetting>
+				<optopacity>0</optopacity>
+				<translatefactor>230</translatefactor>
+				<maxangle>25</maxangle>
+				<maxscale>2</maxscale>
+			</advslidersetting>			
+        </mageants_bannerslider>
+    </default>
+</config>

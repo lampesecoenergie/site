@@ -1,0 +1,128 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!--DATA-->
+    <preference for="Mirasvit\Feed\Api\Data\ValidationInterface" type="Mirasvit\Feed\Model\Validation" />
+
+    <!--REPOSITORY-->
+    <preference for="Mirasvit\Feed\Api\Repository\ValidationRepositoryInterface" type="Mirasvit\Feed\Repository\ValidationRepository" />
+
+    <!--SERVICE-->
+    <preference for="Mirasvit\Feed\Api\Service\ImportServiceInterface" type="Mirasvit\Feed\Service\ImportService"/>
+    <preference for="Mirasvit\Feed\Api\Service\ExportServiceInterface" type="Mirasvit\Feed\Service\ExportService"/>
+    <preference for="Mirasvit\Feed\Api\Service\ValidationServiceInterface" type="Mirasvit\Feed\Service\ValidationService"/>
+    <preference for="Mirasvit\Feed\Api\Factory\EntityFactoryInterface" type="Mirasvit\Feed\Factory\EntityFactory"/>
+
+    <type name="Mirasvit\Feed\Export\Filter\Pool">
+        <arguments>
+            <argument name="scopes" xsi:type="array">
+                <item name="string" xsi:type="object">Mirasvit\Feed\Export\Filter\StringFilter</item>
+                <item name="currency" xsi:type="object">Mirasvit\Feed\Export\Filter\CurrencyFilter</item>
+                <item name="array" xsi:type="object">Mirasvit\Feed\Export\Filter\ArrayFilter</item>
+                <item name="number" xsi:type="object">Mirasvit\Feed\Export\Filter\NumberFilter</item>
+                <item name="url" xsi:type="object">Mirasvit\Feed\Export\Filter\UrlFilter</item>
+                <item name="image" xsi:type="object">Mirasvit\Feed\Export\Filter\ImageFilter</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Mirasvit\Feed\Export\Resolver\Pool">
+        <arguments>
+            <argument name="resolvers" xsi:type="array">
+                <item name="product_configurable" xsi:type="array">
+                    <item name="resolver" xsi:type="object">Mirasvit\Feed\Export\Resolver\Product\Type\ConfigurableResolver</item>
+                    <item name="for" xsi:type="string">Magento\Catalog\Model\Product</item>
+                    <item name="type_id" xsi:type="string">configurable</item>
+                </item>
+                <item name="product_grouped" xsi:type="array">
+                    <item name="resolver" xsi:type="object">Mirasvit\Feed\Export\Resolver\Product\Type\GroupedResolver</item>
+                    <item name="for" xsi:type="string">Magento\Catalog\Model\Product</item>
+                    <item name="type_id" xsi:type="string">grouped</item>
+                </item>
+                <item name="product_bundle" xsi:type="array">
+                    <item name="resolver" xsi:type="object">Mirasvit\Feed\Export\Resolver\Product\Type\BundleResolver</item>
+                    <item name="for" xsi:type="string">Magento\Catalog\Model\Product</item>
+                    <item name="type_id" xsi:type="string">bundle</item>
+                </item>
+
+                <item name="product" xsi:type="array">
+                    <item name="resolver" xsi:type="object">Mirasvit\Feed\Export\Resolver\ProductResolver</item>
+                    <item name="for" xsi:type="string">Magento\Catalog\Model\Product</item>
+                </item>
+                <item name="category" xsi:type="array">
+                    <item name="resolver" xsi:type="object">Mirasvit\Feed\Export\Resolver\CategoryResolver</item>
+                    <item name="for" xsi:type="string">Magento\Catalog\Model\Category</item>
+                </item>
+                <item name="store" xsi:type="array">
+                    <item name="resolver" xsi:type="object">Mirasvit\Feed\Export\Resolver\StoreResolver</item>
+                    <item name="for" xsi:type="string">Magento\Store\Model\Store</item>
+                </item>
+                <item name="review" xsi:type="array">
+                    <item name="resolver" xsi:type="object">Mirasvit\Feed\Export\Resolver\ReviewResolver</item>
+                    <item name="for" xsi:type="string">Magento\Review\Model\Review</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    
+    <type name="Mirasvit\Feed\Export\Resolver\ProductResolver">
+        <arguments>
+            <argument name="resolvers" xsi:type="array">
+                <item name="price" xsi:type="object">Mirasvit\Feed\Export\Resolver\Product\PriceResolver</item>
+                <item name="image" xsi:type="object">Mirasvit\Feed\Export\Resolver\Product\ImageResolver</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="FeedExportCommand" xsi:type="object">Mirasvit\Feed\Console\Command\ExportCommand</item>
+                <item name="FeedDeliveryCommand" xsi:type="object">Mirasvit\Feed\Console\Command\DeliveryCommand</item>
+                <item name="FeedCronCommand" xsi:type="object">Mirasvit\Feed\Console\Command\CronCommand</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Mirasvit\Report\Api\Repository\ReportRepositoryInterface">
+        <arguments>
+            <argument name="reports" xsi:type="array">
+                <item name="feed_overview" xsi:type="string">Mirasvit\Feed\Reports\Feed</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Configure Entity Manager -->
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="Mirasvit\Feed\Api\Data\ValidationInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="const">Mirasvit\Feed\Api\Data\ValidationInterface::TABLE_NAME</item>
+                    <item name="identifierField" xsi:type="const">Mirasvit\Feed\Api\Data\ValidationInterface::ID</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\EntityManager\HydratorPool">
+        <arguments>
+            <argument name="hydrators" xsi:type="array">
+                <item name="Mirasvit\Feed\Api\Data\ValidationInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Set available validators -->
+    <type name="Mirasvit\Feed\Api\Repository\ValidationRepositoryInterface">
+        <arguments>
+            <argument name="validators" xsi:type="array">
+                <item name="required" xsi:type="object">Mirasvit\Feed\Validator\RequiredValueValidator</item>
+                <item name="recommended" xsi:type="object">Mirasvit\Feed\Validator\RecommendedValueValidator</item>
+            </argument>
+        </arguments>
+    </type>
+  
+    <type name="Magento\Store\Api\StoreResolverInterface">
+        <plugin name="feedStoreResolver" type="Mirasvit\Feed\Plugin\StoreResolverPlugin"/>
+    </type>
+</config>

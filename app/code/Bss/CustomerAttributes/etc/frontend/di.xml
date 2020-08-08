@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_CustomerAttributes
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2018-2019 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Bss\CustomerAttributes\Model\Metadata\Form\Radio">
+        <plugin name="bss_customer_attributes_plugin_validate_form_radio" type="Bss\CustomerAttributes\Plugin\Model\Metadata\Form\ValidateValue" sortOrder="10"/>
+    </type>
+    <type name="Bss\CustomerAttributes\Model\Metadata\Form\CheckBoxs">
+        <plugin name="bss_customer_attributes_plugin_validate_form_checkboxs" type="Bss\CustomerAttributes\Plugin\Model\Metadata\Form\ValidateValue" sortOrder="10"/>
+    </type>
+    <type name="Magento\Customer\Model\Metadata\Form\Date">
+        <plugin name="bss_customer_attributes_plugin_validate_form_date" type="Bss\CustomerAttributes\Plugin\Model\Metadata\Form\ValidateValue" sortOrder="10"/>
+    </type>
+    <type name="Magento\Customer\Model\Metadata\Form\Text">
+        <plugin name="bss_customer_attributes_plugin_validate_form_text" type="Bss\CustomerAttributes\Plugin\Model\Metadata\Form\ValidateValue" sortOrder="10"/>
+    </type>
+    <type name="Magento\Customer\Model\Metadata\Form\Textarea">
+        <plugin name="bss_customer_attributes_plugin_validate_form_textarea" type="Bss\CustomerAttributes\Plugin\Model\Metadata\Form\ValidateValue" sortOrder="10"/>
+    </type>
+    <type name="Magento\Customer\Model\Metadata\Form\Boolean">
+        <plugin name="bss_customer_attributes_plugin_validate_form_boolean" type="Bss\CustomerAttributes\Plugin\Model\Metadata\Form\ValidateValue" sortOrder="10"/>
+    </type>
+    <type name="Magento\Customer\Model\Metadata\Form\Multiselect">
+        <plugin name="bss_customer_attributes_plugin_validate_form_multi" type="Bss\CustomerAttributes\Plugin\Model\Metadata\Form\ValidateValue" sortOrder="10"/>
+    </type>
+    <type name="Magento\Customer\Model\Metadata\Form\Select">
+        <plugin name="bss_customer_attributes_plugin_validate_form_select" type="Bss\CustomerAttributes\Plugin\Model\Metadata\Form\ValidateValue" sortOrder="10"/>
+    </type>
+    <type name="Magento\Eav\Model\Attribute\Data\Text">
+        <plugin name="bss_customer_attributes_plugin_eav_validate_form_text" type="Bss\CustomerAttributes\Plugin\Model\Metadata\Form\ValidateValue" sortOrder="10"/>
+    </type>
+    <type name="Magento\Eav\Model\Entity\Attribute\Backend\ArrayBackend">
+        <plugin name="bss_customer_attributes_plugin_eav_validate_backend_model_multi" type="Bss\CustomerAttributes\Plugin\Model\Attribute\Backend\ValidateValue" sortOrder="10"/>
+    </type>
+    <type name="Magento\Eav\Model\Entity\Attribute\Backend\DefaultBackend">
+        <plugin name="bss_customer_attributes_plugin_eav_validate_backend_model" type="Bss\CustomerAttributes\Plugin\Model\Attribute\Backend\ValidateValue" sortOrder="10"/>
+    </type>
+    <type name="Magento\Eav\Model\Entity\Attribute\Backend\Datetime">
+        <plugin name="bss_customer_attributes_plugin_eav_validatedate_backend_model" type="Bss\CustomerAttributes\Plugin\Model\Attribute\Backend\ValidateValue" sortOrder="10"/>
+    </type>
+    <type name="Magento\Eav\Model\Entity\Attribute\Frontend\Datetime">
+        <plugin name="bss_customer_attributes_plugin_eav_validatedate_frontend_model" type="Bss\CustomerAttributes\Plugin\Model\Attribute\Backend\ValidateValue" sortOrder="10"/>
+    </type>
+    <type name="Magento\Customer\Model\Metadata\Form">
+        <plugin name="bss_customer_attributes_plugin_save_form_edit" type="Bss\CustomerAttributes\Plugin\Model\Metadata\Form" sortOrder="10"/>
+    </type>
+    <type name="Magento\Checkout\Block\Checkout\LayoutProcessor">
+        <plugin name="bss_customer_attributes_checkout_layout_processor" type="Bss\CustomerAttributes\Plugin\Block\LayoutProcessor" />
+    </type>
+    <type name="Magento\Customer\Controller\Account\EditPost">
+        <plugin name="bss_customer_attributes_plugin_edit_post" type="Bss\CustomerAttributes\Plugin\Controller\Account\EditPost" sortOrder="10"/>
+    </type>
+    <type name="Magento\Checkout\Model\CompositeConfigProvider">
+        <arguments>
+            <argument name="configProviders" xsi:type="array">
+                <item name="bss_customer_attributes_composite_config" xsi:type="object">Bss\CustomerAttributes\Model\CompositeConfigProvider</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

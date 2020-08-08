@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mondial Relay Shipping Module
+ *
+ * @author    Magentix
+ * @copyright Copyright © 2018 Magentix. All rights reserved.
+ * @license   https://www.magentix.fr/en/licence.html Magentix Software Licence
+ * @link      https://mondialrelay.magentix.fr/
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <carriers>
+            <mondialrelay>
+                <active>0</active>
+                <model>MondialRelay\Shipping\Model\Carrier\MondialRelay</model>
+                <title>Mondial Relay</title>
+                <specificerrmsg>This shipping method is not available. To use this shipping method, please contact us.</specificerrmsg>
+                <api_company>BDTEST13</api_company>
+                <api_reference>11</api_reference>
+                <api_key>PrivateK</api_key>
+                <active_rma>1</active_rma>
+                <is_online>1</is_online>
+                <standard>
+                    <active>0</active>
+                    <name>Standard</name>
+                    <specificcountry>BE</specificcountry>
+                    <insurance>0</insurance>
+                    <max_weight>30</max_weight>
+                    <max_size>150</max_size>
+                </standard>
+                <confort>
+                    <active>0</active>
+                    <name>Confort</name>
+                    <specificcountry>FR</specificcountry>
+                    <insurance>0</insurance>
+                    <max_weight>70</max_weight>
+                    <max_size>650</max_size>
+                </confort>
+                <premium>
+                    <active>0</active>
+                    <name>Premium</name>
+                    <specificcountry>FR</specificcountry>
+                    <insurance>0</insurance>
+                    <max_weight>130</max_weight>
+                    <max_size>650</max_size>
+                </premium>
+                <pickup>
+                    <active>0</active>
+                    <name>Point Relais</name>
+                    <specificcountry>FR</specificcountry>
+                    <insurance>0</insurance>
+                    <open>1</open>
+                    <apply_default>0</apply_default>
+                    <default_postcode>75001</default_postcode>
+                    <default_country>FR</default_country>
+                    <map_type>osm</map_type>
+                    <number>10</number>
+                    <max_weight>30</max_weight>
+                    <max_size>150</max_size>
+                    <codes>24R,24L,DRI</codes>
+                </pickup>
+                <label>
+                    <size>URL_PDF_10x15</size>
+                    <delete_after>10</delete_after>
+                    <shipping_status>103</shipping_status>
+                </label>
+                <return>
+                    <recipient_return_type>2</recipient_return_type>
+                    <recipient_postcode>75001</recipient_postcode>
+                    <recipient_country>FR</recipient_country>
+                </return>
+                <limitation>
+                    <weight_limitation>1</weight_limitation>
+                    <weight_calculation>per_cart</weight_calculation>
+                    <size_limitation>0</size_limitation>
+                    <size_calculation>per_cart</size_calculation>
+                    <debug>0</debug>
+                </limitation>
+            </mondialrelay>
+        </carriers>
+    </default>
+</config>

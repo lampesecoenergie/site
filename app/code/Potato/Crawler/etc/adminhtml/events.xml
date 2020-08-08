@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="potato_crawler_add_to_queue">
+        <observer name="po_crawler_queue" instance="Potato\Crawler\Observer\Queue\AddStoreToQueue" />
+    </event>
+</config>

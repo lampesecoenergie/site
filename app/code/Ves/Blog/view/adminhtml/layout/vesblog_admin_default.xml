@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+	<head>
+		<css src="Ves_Blog::css/styles.css" />
+	</head>
+    <body>
+        <referenceContainer name="page.main.actions">
+            <block class="Ves\Blog\Block\Adminhtml\Menu" name="ves_blog_menu" />
+        </referenceContainer>
+    </body>
+</page>

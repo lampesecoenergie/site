@@ -1,0 +1,187 @@
+<?php
+$collection  = $this->getCollection();
+$helper      = $this->helper("Ves\Blog\Helper\Data");
+$imageHelper = $this->helper("Ves\Blog\Helper\Image");
+
+/** General Settings **/
+$dateFormat         = $helper->getConfig("general_settings/dateformat");
+$twitterUsername    = $helper->getConfig("general_settings/twitter_username");
+$enableNetworks     = $helper->getConfig("general_settings/enable_networks");
+$layout             = $helper->getConfig("post_page/related_carousel_layout");
+$networks           = array_flip(explode(",", $helper->getConfig("general_settings/networks")));
+$default_items      = (int)$helper->getConfig('post_page/default_items');
+$mobile_items       = (int)$helper->getConfig('post_page/mobile_items');
+$tablet_small_items = (int)$helper->getConfig('post_page/tablet_small_items');
+$tablet_items       = (int)$helper->getConfig('post_page/tablet_items');
+$portrait_items     = (int)$helper->getConfig('post_page/portrait_items');
+$large_items        = (int)$helper->getConfig('post_page/large_items');
+$autoplay           = $helper->getConfig('post_page/autoplay');
+$autoplay_timeout   = $helper->getConfig('post_page/autoplay_timeout');
+$dots               = $helper->getConfig('post_page/dots');
+$nav                = $helper->getConfig('post_page/nav');
+
+
+
+/** POST Settings **/
+$show_image                    = $this->getConfig("show_image");
+$image_width                   = (int)$this->getConfig("image_width");
+if(!$image_width) $image_width = 800;
+$image_height                  = (int)$this->getConfig("image_height");
+$show_title                    = $this->getConfig("show_title");
+$show_shortdescription         = $this->getConfig("show_shortdescription");
+$shortdescription_count        = $this->getConfig("shortdescription_count");
+$show_readmorelink             = $this->getConfig("show_readmorelink");
+$show_categories               = $this->getConfig("show_categories");
+$show_author                   = $this->getConfig("show_author");
+$show_commentcount             = $this->getConfig("show_commentcount");
+$show_updatedtime              = $this->getConfig("show_updatedtime");
+$show_createdtime              = $this->getConfig("show_createdtime");
+$show_hits                     = $this->getConfig("show_hits");
+$show_tags                     = $this->getConfig("show_tags");
+
+$i = 1;
+$x = 0;
+$total = $collection->getSize();
+?>
+<?php if($total>0){ ?>
+<div class="ves-block posts-related">
+	<div class="block-title">
+		<h3><?php echo __('Related Posts') ?></h3>
+	</div>
+	<div class="block-content">
+		<ul <?php if($layout == 'owl_carousel'){ ?>class="post-owl owl-carousel"<?php } ?>>
+			<?php foreach ($collection as $_post) {  ?>
+			<?php  $postUrl = $helper->getPostUrl($_post);  ?>
+
+			<li class="ves-post post-item">
+				<?php if($show_image){ ?>
+				<div class="post-image">
+					<a href="<?php echo $postUrl ?>" title="<?php echo $_post->getTitle(); ?>">
+						<?php if( $_post->getThumbnailType() == 1 && $_post->getThumbnail()!=''){ ?>
+						<img src="<?php echo $imageHelper->resizeImage($_post->getThumbnail(), $image_width, $image_height) ?>" alt="<?php echo $_post->getTitle(); ?>"/>
+						<?php }else if($_post->getThumbnailType() == 2){ ?>
+						<?php if($_post->getThumbnailVideoType()==1 && $_post->getThumbnailVideoId()!=''){ ?>
+						<iframe width="<?php echo $image_width ?>" height="<?php echo $image_height ?>" src="https://www.youtube.com/embed/<?php echo $_post->getThumbnailVideoId() ?>" frameborder="0" allowfullscreen></iframe>
+						<?php }else if($_post->getThumbnailVideoType()==2 && $_post->getThumbnailVideoId()!=''){ ?>
+						<iframe src="https://player.vimeo.com/video/<?php echo $_post->getThumbnailVideoId() ?>?color=3498DB&title=0&byline=0&portrait=0" width="<?php echo $image_width ?>" height="<?php echo $image_height ?>" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+						<?php } ?>
+						<?php } ?>
+					</a>
+				</div>
+				<?php } ?>
+				<div class="post-meta">
+					<?php if($show_title){ ?>
+					<div class="post-title">
+						<?php if($layout == 'list'){ ?>
+						<a href="<?php echo $postUrl ?>" title="<?php echo $_post->getTitle(); ?>"><?php echo $i .') ' . $_post->getTitle(); ?></a>
+						<?php }else{ ?>
+						<a href="<?php echo $postUrl ?>" title="<?php echo $_post->getTitle(); ?>"><?php echo $_post->getTitle(); ?></a>
+						<?php } ?>
+					</div>
+					<?php } ?>
+					<?php if($show_author){ ?>
+					<div class="post-author">
+						<?php $author = $helper->getPostAuthor($_post) ?>
+						<?php echo __('Posted by: ') ?>
+						<a href="<?php echo $helper->getAuthorUrl($author); ?>" title=""><?php echo $author->getFirstName() . ' ' . $author->getLastName() ?></a>
+					</div>
+					<?php } ?>
+					<?php if($show_createdtime || $show_updatedtime){ ?>
+					<div class="post-date">
+						<?php if($show_createdtime){ ?>
+						<?php $createdTime = $helper->getFormatDate($_post->getCreationTime(), $dateFormat); ?>
+						<span><?php echo __('Created on %1', $createdTime); ?></span>
+						<?php } ?>
+						<?php if($show_updatedtime){ ?>
+						<?php $updateTime = $helper->getFormatDate($_post->getUpdateTime(), $dateFormat); ?>
+						<span><?php echo __('Updated on %1', $createdTime); ?></span>
+						<?php } ?>
+					</div>
+					<?php } ?>
+					<?php if($show_commentcount){ ?>
+					<div class="post-comment">
+						<?php echo __('%1 comments', $_post->getCommentCount()); ?>
+					</div>
+					<?php } ?>
+					<?php if($show_categories){ ?>
+					<div class="post-categories">
+						<?php echo __('Pubslished In: ') ?>
+						<?php
+						$categories = $_post->getData('categories');
+						$count = count($categories);
+						?>
+						<?php foreach ($categories as $k => $v) { ?>
+						<a href="<?php echo $helper->getCategoryUrl($v['identifier'])  ?>" title="<?php echo $v['name'] ?>"><?php echo $v['name'] ?></a>
+						<?php if(isset($categories[$k+1])) echo __(', '); ?>
+						<?php } ?>
+					</div>
+					<?php } ?>
+					<?php if($show_hits){ ?>
+					<div class="post-hits"><span><?php echo __("Read");?></span> <strong><?php echo (int)$_post->getHits(); ?></strong> <?php echo __("Times"); ?></div>
+					<?php } ?>
+					<?php if($show_tags){ ?>
+					<?php $tags = $_post->getTags(); ?>
+					<?php if(!empty($tags)){ ?>
+					<div class="post-tag">
+						<span><?php echo __('Tags:'); ?></span>
+						<?php foreach ($tags as $k => $v) { ?>
+						<a href="<?php echo $helper->getTagUrl($v['alias']) ?>"><?php echo $v['name'] ?></a>
+						<?php if(isset($tags[$k+1])) echo __(', '); ?>
+						<?php } ?>
+					</div>
+					<?php } ?>
+					<?php } ?>
+					<?php if($show_shortdescription){ ?>
+					<div class="post-summary">
+						<?php $shortContent = $_post->getShortContent(); ?>
+						<?php echo $helper->subString($shortContent, (int)$shortdescription_count); ?>
+						<?php if($show_readmorelink){ ?>
+						<a href="<?php echo $postUrl ?>" title="<?php echo $_post->getTitle(); ?>"><?php echo __('Read more') ?></a>
+						<?php } ?>	
+					</div>
+					<?php } ?>
+				</div>
+			</li>
+			<?php $i++; ?>
+			<?php } ?>
+		</ul>
+	</div>
+	<?php if($layout=='owl_carousel'){ ?>
+	<script>
+	require(['jquery'],function($){
+	    $(document).ready(function(){	
+			require([
+				'jquery',
+				<?php if($this->helper("Ves\All\Helper\Data")->getConfig("enable_owlcarousel")): ?>
+					"Ves_All/lib/owl.carousel/owl.carousel.min",
+				<?php endif; ?>
+				], function(){
+					jQuery(document).ready(function() {
+						var owl = jQuery('.post-owl');
+						owl.owlCarousel({
+							rtl: false,
+							loop:true,
+							nav:<?php echo $nav?"true":"false" ?>,
+							dots:<?php echo $dots?"true":"false" ?>,
+							responsiveRefreshRate: false,
+							<?php if($autoplay){ ?>
+							autoplay:true,
+							autoplayTimeout: <?php echo $autoplay_timeout ?>,
+							autoplayHoverPause:true,
+							<?php } ?>
+							responsive:{
+								0 : { items: <?php echo $mobile_items ?>},
+								480 : {items: <?php echo $tablet_small_items ?>},
+								768 : {items: <?php echo $tablet_items ?>},
+								980 : {items: <?php echo $portrait_items ?>},
+								1200 : {items: <?php echo $large_items ?>}
+							}
+						});
+					});
+				});
+			});
+	    });
+		</script>
+		<?php } ?>
+	</div>
+	<?php } ?>

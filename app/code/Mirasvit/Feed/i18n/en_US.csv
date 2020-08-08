@@ -1,0 +1,235 @@
+"Manage Dynamic Attributes","Manage Dynamic Attributes"
+"Add Attribute","Add Attribute"
+Save,Save
+"Save & Close","Save & Close"
+"General Information","General Information"
+Name,Name
+"Attribute Code","Attribute Code"
+ID,ID
+Code,Code
+Action,Action
+Edit,Edit
+Delete,Delete
+"Category Mapping","Category Mapping"
+"Add Category Mapping","Add Category Mapping"
+"Manage Dynamic Variables","Manage Dynamic Variables"
+"Add Variable","Add Variable"
+"Variable Code","Variable Code"
+"Manage Feeds","Manage Feeds"
+"Add Feed","Add Feed"
+"Delivery Feed","Delivery Feed"
+"Preview Feed","Preview Feed"
+Generate,Generate
+"Email Notifications","Email Notifications"
+Email,Email
+"Separate emails by commas","Separate emails by commas"
+"Notification Events","Notification Events"
+"Reports Configuration","Reports Configuration"
+"Enable Reports","Enable Reports"
+No,No
+Yes,Yes
+"If enabled, extension append two special arguments
+                (ff=, fp=) to product url for track clicks and orders","If enabled, extension append two special arguments
+                (ff=, fp=) to product url for track clicks and orders"
+"Scheduled Task","Scheduled Task"
+Enabled,Enabled
+"If enabled, extension will generate feed by schedule.
+                 To generate feed by schedule, magento cron must be configured.","If enabled, extension will generate feed by schedule.
+                 To generate feed by schedule, magento cron must be configured."
+"Days of the week","Days of the week"
+"Time of the day","Time of the day"
+"Cronjob status","Cronjob status"
+"FTP Settings","FTP Settings"
+Protocol,Protocol
+"Host Name","Host Name"
+"User Name","User Name"
+Password,Password
+Path,Path
+"Passive mode","Passive mode"
+"Test Connection","Test Connection"
+"Google Analytics","Google Analytics"
+"Campaign Source","Campaign Source"
+"Required. Referrer: google, newsletter4","Required. Referrer: google, newsletter4"
+"Campaign Medium","Campaign Medium"
+"Required. Marketing Medium: cpc, banner, email","Required. Marketing Medium: cpc, banner, email"
+"Campaign Name","Campaign Name"
+"Required. Product, promo code, or slogan","Required. Product, promo code, or slogan"
+"Campaign Term","Campaign Term"
+"Identify the paid keywords","Identify the paid keywords"
+"Campaign Content","Campaign Content"
+"Use to differentiate ads","Use to differentiate ads"
+Filename,Filename
+"File Type","File Type"
+"Store View","Store View"
+"Is Active","Is Active"
+"Created At","Created At"
+Type,Type
+Title,Title
+Message,Message
+Continue,Continue
+Settings,Settings
+Template,Template
+"Product Filters","Product Filters"
+"Feed Information","Feed Information"
+"Content Settings","Content Settings"
+Filters,Filters
+Additional,Additional
+History,History
+CSV,CSV
+TXT,TXT
+XML,XML
+File,File
+"Last Generated At","Last Generated At"
+Status,Status
+Duplicate,Duplicate
+Remove,Remove
+"Are you sure?","Are you sure?"
+"Select Data to Export","Select Data to Export"
+Templates,Templates
+"Dynamic Attributes","Dynamic Attributes"
+"Dynamic Categories","Dynamic Categories"
+"Dynamic Variable","Dynamic Variable"
+"Select Data to Import","Select Data to Import"
+"Dynamic Variables","Dynamic Variables"
+"Import/Export Information","Import/Export Information"
+"Import Data","Import Data"
+"Export Data","Export Data"
+Feeds,Feeds
+Reports,Reports
+"Import/Export Data","Import/Export Data"
+"Manage Filters","Manage Filters"
+"Add Filter","Add Filter"
+"Close Window","Close Window"
+"Save Filter","Save Filter"
+"Filters (leave blank for select all products)","Filters (leave blank for select all products)"
+"Filter Information","Filter Information"
+Rules,Rules
+Conditions,Conditions
+Disabled,Disabled
+Export,Export
+"Manage Feed Templates","Manage Feed Templates"
+"Add Template","Add Template"
+"Import Templates","Import Templates"
+"Fields Delimiter","Fields Delimiter"
+"Fields enclosure","Fields enclosure"
+"Include Columns Header","Include Columns Header"
+"Extra Header","Extra Header"
+"Template Information","Template Information"
+"Export Template","Export Template"
+"Feed was successfully delivered to ""%1""","Feed was successfully delivered to ""%1"""
+"Unable to delivery feed. %1","Unable to delivery feed. %1"
+"Advanced Product Feeds","Advanced Product Feeds"
+"Item was successfully deleted","Item was successfully deleted"
+"This item not exists.","This item not exists."
+"New Attribute","New Attribute"
+"Item was successfully saved","Item was successfully saved"
+"Unable to find item to save","Unable to find item to save"
+"New Mapping","New Mapping"
+"New Variable","New Variable"
+"The feed has been deleted.","The feed has been deleted."
+"This feed no longer exists.","This feed no longer exists."
+"Feed was successfully duplicated.","Feed was successfully duplicated."
+"New Feed","New Feed"
+"You saved the feed.","You saved the feed."
+"A connection was successfully established with ""%1""","A connection was successfully established with ""%1"""
+"%1 has been exported to %2","%1 has been exported to %2"
+"%1 has not been selected","%1 has not been selected"
+"%1 ""%2"" has been imported.","%1 ""%2"" has been imported."
+"Rule was successfully duplicated","Rule was successfully duplicated"
+"New Filter","New Filter"
+"Filter rule exported to %1","Filter rule exported to %1"
+"Filter was successfully saved","Filter was successfully saved"
+"The template has been deleted.","The template has been deleted."
+"This template no longer exists.","This template no longer exists."
+"New Template","New Template"
+"Template ""%1"" has been exported to ""%2""","Template ""%1"" has been exported to ""%2"""
+"Template ""%1"" has been imported.","Template ""%1"" has been imported."
+"Import Feed Templates","Import Feed Templates"
+"A total of %1 record(s) have been deleted.","A total of %1 record(s) have been deleted."
+"You saved the template.","You saved the template."
+"No data to save.","No data to save."
+"Dynamic Attribute","Dynamic Attribute"
+Initialization,Initialization
+Filtration,Filtration
+Exporting,Exporting
+Finalization,Finalization
+"%1 out of %2","%1 out of %2"
+"ETA %1","ETA %1"
+"Can't remove folder %1","Can't remove folder %1"
+"1. Primary Attributes","1. Primary Attributes"
+"5. Stock Attributes","5. Stock Attributes"
+"2. Prices & Taxes","2. Prices & Taxes"
+"4. Images","4. Images"
+"3. Category","3. Category"
+"6. Dynamic Attributes","6. Dynamic Attributes"
+"7. Dynamic Variables","7. Dynamic Variables"
+"8. Others Attributes","8. Others Attributes"
+"not set","not set"
+"ZIP (*.zip)","ZIP (*.zip)"
+Sunday,Sunday
+Monday,Monday
+Tuesday,Tuesday
+Wednesday,Wednesday
+Thursday,Thursday
+Friday,Friday
+Saturday,Saturday
+Comma,Comma
+Tab,Tab
+Colon,Colon
+Space,Space
+"Vertical pipe","Vertical pipe"
+Semi-colon,Semi-colon
+"Successful Export","Successful Export"
+"Unsuccessful Export","Unsuccessful Export"
+"Successful Delivery","Successful Delivery"
+"Unsuccessful Delivery","Unsuccessful Delivery"
+none,none
+"""",""""
+','
+"FTP / FTPS","FTP / FTPS"
+SFTP,SFTP
+"Start export process","Start export process"
+"Feed was successfully exported","Feed was successfully exported"
+Error,Error
+"Conditions Combination","Conditions Combination"
+"Attribute Set","Attribute Set"
+Category,Category
+Quantity,Quantity
+"Product Type","Product Type"
+"Base Image","Base Image"
+Thumbnail,Thumbnail
+"Small Image","Small Image"
+"Base Image Size (bytes)","Base Image Size (bytes)"
+"Thumbnail Size (bytes)","Thumbnail Size (bytes)"
+"Small Image Size (bytes)","Small Image Size (bytes)"
+"PHP Condition","PHP Condition"
+"Stock Availability","Stock Availability"
+"Manage Stock","Manage Stock"
+"Status(Parent Product)","Status(Parent Product)"
+"Is Salable","Is Salable"
+"Open Chooser","Open Chooser"
+Feed,Feed
+Condition,Condition
+"Output Type","Output Type"
+"Output Value","Output Value"
+"Add Row","Add Row"
+"Sort Option","Sort Option"
+"Add Condition","Add Condition"
+"Product IDs separated by comma","Product IDs separated by comma"
+Reload,Reload
+"Feed Access Url","Feed Access Url"
+"Last Generated","Last Generated"
+"Generation Time","Generation Time"
+Attribute,Attribute
+Pattern,Pattern
+Product,Product
+Value,Value
+Filter,Filter
+Criteria,Criteria
+Expression,Expression
+✖,✖
+"Add Criteria","Add Criteria"
+"Library of patterns","Library of patterns"
+"Feed Preview <sup>10 products</sup>","Feed Preview <sup>10 products</sup>"
+"Open in new window","Open in new window"
+Dictionary successfully processed.

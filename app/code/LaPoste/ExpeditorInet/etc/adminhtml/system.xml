@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="expeditorinet" translate="label" sortOrder="500" showInDefault="1" showInWebsite="0" showInStore="0">
+            <class>separator-top</class>
+            <label>La Poste Expeditor INet</label>
+            <tab>sales</tab>
+            <resource>LaPoste_ExpeditorInet::config</resource>
+
+            <group id="export" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Order Export</label>
+
+                <field id="file_extension" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>File Extension</label>
+                    <source_model>LaPoste\ExpeditorInet\Model\Config\Source\FileExtension</source_model>
+                    <comment>Extension of the generated export file.</comment>
+                </field>
+
+                <field id="file_charset" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>File Charset</label>
+                    <source_model>LaPoste\ExpeditorInet\Model\Config\Source\FileCharset</source_model>
+                    <comment>Charset used in the generated export file.</comment>
+                </field>
+
+                <field id="field_delimiter" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Field Delimiter</label>
+                    <source_model>LaPoste\ExpeditorInet\Model\Config\Source\FieldDelimiter</source_model>
+                    <comment>Delimiter character used in the generated export file.</comment>
+                </field>
+
+                <field id="field_enclosure" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Field Enclosure</label>
+                    <source_model>LaPoste\ExpeditorInet\Model\Config\Source\FieldEnclosure</source_model>
+                    <comment>Enclosure character used in the generated export file.</comment>
+                </field>
+
+                <field id="endofline_character" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>End of Line Character</label>
+                    <source_model>LaPoste\ExpeditorInet\Model\Config\Source\EndOfLineCharacter</source_model>
+                    <comment>End of line character used in the generated export file.</comment>
+                </field>
+
+                <field id="signature_required" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Signature on Delivery</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Whether a signature is required for home delivery.</comment>
+                </field>
+
+                <field id="company_name" translate="label comment" type="text" sortOrder="70" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Company Commercial Name</label>
+                    <comment>This value is used the commercial name of the company in Expeditor Inet.</comment>
+                </field>
+            </group>
+
+            <group id="import" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Shipment Import</label>
+
+                <field id="field_delimiter" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Field Delimiter</label>
+                    <source_model>LaPoste\ExpeditorInet\Model\Config\Source\FieldDelimiter</source_model>
+                    <comment>Delimiter character used in the import file.</comment>
+                </field>
+
+                <field id="field_enclosure" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Field Enclosure</label>
+                    <source_model>LaPoste\ExpeditorInet\Model\Config\Source\FieldEnclosure</source_model>
+                    <comment>Enclosure character used in the import file.</comment>
+                </field>
+
+                <field id="default_tracking_title" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Default Tracking Title</label>
+                    <comment>This value can be changed in the import form.</comment>
+                </field>
+
+                <field id="send_email" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Send an Email</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Send shipment confirmation to the customer.</comment>
+                </field>
+
+                <field id="shipment_comment" translate="label comment" type="textarea" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Shipment Comment</label>
+                    <comment>Internal comment, can be left empty.</comment>
+                </field>
+
+                <field id="include_comment_in_email" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Include Comment in Email</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Only applies if the shipment comment is set.</comment>
+                </field>
+
+                <field id="carrier_code" translate="label comment" type="select" sortOrder="70" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Carrier</label>
+                    <source_model>LaPoste\ExpeditorInet\Model\Config\Source\Carriers</source_model>
+                    <comment>Carrier associated to the tracking number.</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

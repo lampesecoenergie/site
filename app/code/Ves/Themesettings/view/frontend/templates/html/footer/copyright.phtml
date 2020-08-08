@@ -1,0 +1,17 @@
+<?php
+$ves = $this->helper("Ves\Themesettings\Helper\Theme");
+$data = $this->helper("Ves\Themesettings\Helper\Data");
+$enable_coppyright = $ves->getFooterCfg("general_settings/enable_coppyright");
+$enable_custom_coppyright = $ves->getFooterCfg("general_settings/enable_custom_coppyright");
+$custom_coppyright = $data->filter($ves->getFooterCfg("general_settings/custom_coppyright"));
+
+?>
+<?php if($enable_coppyright){ ?>
+<div class="copyright">
+ <?php if($enable_custom_coppyright){ ?>
+ <?php echo $custom_coppyright; ?>
+ <?php }else{ ?> 
+ <span><?php /* @escapeNotVerified */ echo $block->getCopyright() ?></span>
+ <?php } ?>    
+</div>
+<?php } ?>

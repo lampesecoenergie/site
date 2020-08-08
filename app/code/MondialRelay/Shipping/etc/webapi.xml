@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mondial Relay Shipping Module
+ *
+ * @author    Magentix
+ * @copyright Copyright © 2018 Magentix. All rights reserved.
+ * @license   https://www.magentix.fr/en/licence.html Magentix Software Licence
+ * @link      https://mondialrelay.magentix.fr/
+ */
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <!-- Cart for guests -->
+    <route url="/V1/guest-carts/:cartId/mondialrelay-pickup" method="GET">
+        <service class="MondialRelay\Shipping\Api\GuestPickupRepositoryInterface" method="current"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/guest-carts/:cartId/mondialrelay-pickup/:pickupId/:countryId/:code" method="PUT">
+        <service class="MondialRelay\Shipping\Api\GuestPickupRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/guest-carts/:cartId/mondialrelay-pickup" method="DELETE">
+        <service class="MondialRelay\Shipping\Api\GuestPickupRepositoryInterface" method="reset"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- Cart for current customer -->
+    <route url="/V1/carts/mine/mondialrelay-pickup" method="GET">
+        <service class="MondialRelay\Shipping\Api\PickupRepositoryInterface" method="current"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="cartId" force="true">%cart_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/carts/mine/mondialrelay-pickup/:pickupId/:countryId/:code" method="PUT">
+        <service class="MondialRelay\Shipping\Api\PickupRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="cartId" force="true">%cart_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/carts/mine/mondialrelay-pickup" method="DELETE">
+        <service class="MondialRelay\Shipping\Api\PickupRepositoryInterface" method="reset"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="cartId" force="true">%cart_id%</parameter>
+        </data>
+    </route>
+    
+    <!-- Pickup -->
+    <route url="/V1/mondialrelayPickup/:pickupId/:countryId" method="GET">
+        <service class="MondialRelay\Shipping\Api\PickupRepositoryInterface" method="get"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/mondialrelayPickup/:orderId" method="GET">
+        <service class="MondialRelay\Shipping\Api\PickupRepositoryInterface" method="shippingData"/>
+        <resources>
+            <resource ref="Magento_Sales::sales" />
+        </resources>
+    </route>
+    <route url="/V1/mondialrelayPickup" method="GET">
+        <service class="MondialRelay\Shipping\Api\PickupRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+</routes>

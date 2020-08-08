@@ -1,0 +1,154 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement(EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+ * @package   Ced_EbayMultiAccount
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright Copyright CEDCOMMERCE(http://cedcommerce.com/)
+ * @license   http://cedcommerce.com/license-agreement.txt
+ */
+?>
+
+<?php
+
+$base_url = $block->getUrl('ebaymultiaccount/jobscheduler/index');
+$total = $block->totalcount();
+$succes_img = $block->getViewFileUrl('Ced_EbayMultiAccount::images/fam_bullet_success.gif');
+$error_img = $block->getViewFileUrl('Ced_EbayMultiAccount::images/error_msg_icon.gif');
+$loader_img = $block->getViewFileUrl('Ced_EbayMultiAccount::images/rule-ajax-loader.gif');
+?>
+<main class="page-content">
+    <div class="page-main-actions"> 
+        <div class="page-actions" data-ui-id="page-actions-toolbar-content-header">
+            <div class="page-actions-inner" data-title="Back">
+                <div class="page-actions-buttons">
+                    <button onclick="setLocation('<?php  echo $base_url; ?>')" title="Back" type="button" class="action-default scalable save primary" role="button" aria-disabled="false">
+                        <span class="ui-button-text"><span>Back</span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="page:main-container" class="page-columns">
+        <div class="admin__old">
+            <div id="container" class="main-col">
+                <div class="entry-edit form-inline">
+                    <fieldset id="main_fieldset" class="fieldset admin__fieldset ">
+                        <legend class="admin__legend legend">
+                            <span>Creating Status</span>
+                        </legend>
+                        <ul>
+							<li>
+								<img src="<?php  echo $block->escapeXssInUrl($block->getViewFileUrl
+                                ('Ced_EbayMultiAccount::images/note_msg_icon.gif')); ?>"/>Starting File Create execution, please wait...
+							</li>
+							<li>
+								<img src="<?php  echo $block->escapeXssInUrl($block->getViewFileUrl
+                                ('Ced_EbayMultiAccount::images/fam_bullet_error.gif')); ?>" />Warning: Please do not close the window during creation
+							</li>
+						</ul>
+						<ul id="profileRows">
+							<li>
+								<img src="<?php  echo $block->escapeXssInUrl($succes_img) ?>">
+                                <?php  echo $block->escapeHtml('Total '.$total.' Batch(s) Found.'); ?>
+							</li>
+							<li id="update_row">
+								<img id="status_image" src="<?php  echo $block->escapeXssInUrl($loader_img); ?>">
+								<span id="update_status">Updating...</span>
+							</li>
+							<li id="liFinished">
+								<img src="<?php echo $block->escapeXssInUrl($block->getViewFileUrl
+                                ('Ced_EbayMultiAccount::images/note_msg_icon.gif')); ?>"/>Finished File Creation execution.
+							</li>
+						</ul>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script>
+	require([
+		'prototype',
+	], function() {
+		var totalRecords = parseInt("<?php echo $total; ?>");
+		var countOfSuccess = 0;
+		var id = 0;
+		var my_id = document.getElementById('liFinished');
+		var update_status = document.getElementById('update_status');
+		var update_row = document.getElementById('update_row');
+		var status_image = document.getElementById('status_image');
+		uploaddata();
+
+		function uploaddata() {
+
+			percent = getPercent();
+			update_status.innerHTML = percent+'% '+(id+1)+' Of '+totalRecords+' Processing';
+			new Ajax.Request("<?php echo $this->getUrl('ebaymultiaccount/jobScheduler/ajaxCreateFile');?>"+'index/'+id, {
+				method: "post",
+				onSuccess: function(transport) {
+					var json = transport.responseText.evalJSON();
+					id++;
+					if (json.success) {
+						countOfSuccess++;
+						var span = document.createElement('li');
+						span.innerHTML = '<img class="v-middle" src="<?php echo $succes_img ?>"><span class="text">'+json.success+'</span>';
+						span.id = 'id-'+id;
+						span.style = 'background-color:#DDF';
+						update_row.parentNode.insertBefore(span, update_row);
+					}
+					if (json.error) {
+						var span = document.createElement('li');
+						span.innerHTML = '<img class="v-middle" src="<?php echo $error_img ?>"><span class="text">'+json.error+'</span>';
+						span.id = 'id-'+id;
+						span.style = 'background-color:#FDD';
+						update_row.parentNode.insertBefore(span, update_row);
+					}
+
+					if (id < totalRecords) {
+						uploaddata();
+					} else {
+						status_image.src = '<?php echo $succes_img ?>';
+						var span = document.createElement('li');
+						span.innerHTML = '<img class="v-middle" src="<?php echo $succes_img ?>"><span id="update_status" class="text">'+countOfSuccess+' Batch(s) Successfully Created.'+'</span>';
+						span.style = 'background-color:#DDF';
+						my_id.parentNode.insertBefore(span, my_id);
+						document.getElementById("liFinished").style.display="block";
+						update_status.innerHTML = percent+'% '+(id)+' Of '+totalRecords+' Processed.';
+					}
+
+				},
+				onFailure: function() {
+					id++;
+					var span = document.createElement('li');
+					span.innerHTML = '<img class="v-middle" src="<?php echo $error_img ?>"><span class="text">Something Went Wrong </span>';
+					span.id = 'id-'+id;
+					span.style = 'background-color:#FDD';
+					update_row.parentNode.insertBefore(span, update_row);
+
+					if (id < totalRecords) {
+						uploaddata();
+					} else {
+						status_image.src = '<?php echo $succes_img ?>';
+						var span = document.createElement('li');
+						span.innerHTML = '<img class="v-middle" src="<?php echo $succes_img ?>"><span id="update_status" class="text">'+countOfSuccess+' Batch(s) Successfully Created.'+'</span>';
+						span.style = 'background-color:#DDF';
+						my_id.parentNode.insertBefore(span, my_id);
+						document.getElementById("liFinished").style.display="block";
+					}
+				}
+			});
+		}
+		function getPercent() {
+			return Math.ceil(((id+1)/totalRecords)*1000)/10;
+		}
+	});
+</script>

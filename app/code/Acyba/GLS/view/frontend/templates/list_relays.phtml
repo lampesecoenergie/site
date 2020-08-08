@@ -1,0 +1,70 @@
+<?php
+if ($listRelays = $block->getListRelays()) {
+    $i = 0;
+    if (array_key_exists('errorCode', $listRelays)) {
+        echo '<div id="gls_error_webservice">';
+        echo 'Error '.$listRelays['errorCode'].' : '.$listRelays['errorDscr'];
+        echo '</div>';
+    }else {
+        foreach ($listRelays as $relay) {
+            ?>
+            <div class="gls_relay" id="gls_relay_<?php echo $i ?>">
+                <span class="gls_relay_index"><?php echo $i; ?></span>
+                <span class="gls_relay_id"><?php echo $relay['relayId']; ?></span>
+                <span class="gls_relay_name"><?php echo $relay['relayName']; ?></span>
+                <span class="gls_relay_address"><?php echo $relay['relayAddress']; ?></span>
+                <span class="gls_relay_zipcode"><?php echo $relay['relayZipCode']; ?></span>
+                <span class="gls_relay_city"><?php echo $relay['relayCity']; ?></span>
+                <span class="gls_relay_latitude"><?php echo $relay['relayLatitude']; ?></span>
+                <span class="gls_relay_longitude"><?php echo $relay['relayLongitude']; ?></span>
+                <div>
+                    <span class="gls_list_show_relay_schedule"><?php echo __("Display") ?></span>
+                </div>
+                <span class="gls_relay_schedule">
+                <table cellpadding="0" cellspacing="0">
+                    <?php
+                    $allDays = [
+                        '0' => __("Monday"),
+                        '1' => __("Tuesday"),
+                        '2' => __("Wednesday"),
+                        '3' => __("Thursday"),
+                        '4' => __("Friday"),
+                        '5' => __("Saturday"),
+                        '6' => __("Sunday")
+                    ];
+                    if (array_key_exists('relayWorkingDays', $relay)) {
+                        foreach ($relay['relayWorkingDays'] as $workingDay) {
+                            echo '<tr>';
+                            echo '<td class="day">'.$allDays[$workingDay->Day].'</td>';
+
+                            if ($workingDay->Breaks->Hours->From) {
+                                echo '<td class="opening_hours">'.
+                                     $block->formatRelaysOpeningHours($workingDay->OpeningHours->Hours->From).
+                                     ' : '.$block->formatRelaysOpeningHours($workingDay->Breaks->Hours->From).
+                                     ' / '.$block->formatRelaysOpeningHours($workingDay->Breaks->Hours->To).
+                                     ' : '.$block->formatRelaysOpeningHours($workingDay->OpeningHours->Hours->To).
+                                     '</td>';
+                            }else {
+                                echo '<td class="opening_hours">'.
+                                     $block->formatRelaysOpeningHours($workingDay->OpeningHours->Hours->From).
+                                     ' : '.$block->formatRelaysOpeningHours($workingDay->OpeningHours->Hours->To).
+                                     '</td>';
+                            }
+                            echo '</tr>';
+                        }
+                    }
+                    ?>
+                </table>
+                </span>
+                <span
+                    class="gls_path_marker"><?php echo $this->getViewFileUrl('Acyba_GLS::images/gls_marker.png') ?></span>
+                <button class="gls_relay_choose gls_relay_button_list"
+                        data-relayindex="<?php echo $i; ?>"><?php echo __('Choose this relay'); ?></button>
+            </div>
+
+
+            <?php
+            $i++;
+        }
+    }
+}

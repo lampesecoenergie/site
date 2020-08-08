@@ -1,0 +1,666 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement(EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+ * @package   Ced_Amazon
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright Copyright CEDCOMMERCE(http://cedcommerce.com/)
+ * @license   http://cedcommerce.com/license-agreement.txt
+ */
+
+/** @var \Ced\Amazon\Block\Adminhtml\Order\Shipment $block */
+$helper = $block->getHelper();
+
+/** @var \Magento\Sales\Model\Order $magentoOrder */
+$magentoOrder = $block->getOrder();
+
+/** @var int $magentoOrderId */
+$magentoOrderId = $magentoOrder->getId();
+
+/** @var \Ced\Amazon\Api\Data\OrderInterface $mpOrder */
+$mpOrder = $block->getModel();
+
+/** @var array $fulfillments */
+$fulfillments = $block->getFulfillments();
+
+/** @var array $adjustments */
+$adjustments = $block->getAdjustments();
+
+/** @var array $mpOrderData */
+$mpOrderData = $block->getOrderData();
+
+/** @var array $orderItems */
+$orderItems = $block->getOrderItems();
+
+$mpOrderItemsData = $helper->processOrderItems($orderItems, $fulfillments, $adjustments);
+
+$id = $mpOrder->getId();
+?>
+<script>
+    var marketplace = {
+        amazon: {
+            'mp_order_id': "<?= $mpOrder->getId() ?>"
+        }
+    };
+</script>
+
+<section class="admin__page-section order-view-account-information">
+    <div class="admin__page-section-title">
+        <span class="title"><?= $block->escapeHtml(__('Marketplace Order Information #%1', $mpOrder->getAmazonOrderId())) ?></span>
+    </div>
+    <div class="admin__page-section-content">
+        <div class="admin__page-section-item">
+            <?php /* Order Information */ ?>
+            <div class="admin__page-section-item-content">
+                <table class="admin__table-secondary order-information-table">
+                    <tr>
+                        <th><?= $block->escapeHtml(__('Row Id')) ?></th>
+                        <td><?= $block->escapeHtml($mpOrder->getId()) ?></td>
+                    </tr>
+                    <tr>
+                        <th><?= $block->escapeHtml(__('Amazon Order Id')) ?></th>
+                        <td><?= $block->escapeHtml($mpOrder->getAmazonOrderId()) ?></td>
+                    </tr>
+                    <tr>
+                        <th><?= $block->escapeHtml(__('Order Status')) ?></th>
+                        <td><span id="order_status"><?= $block->escapeHtml($mpOrder->getStatus()) ?></span></td>
+                    </tr>
+                    <tr>
+                        <th><?= $block->escapeHtml(__('Purchase Date')) ?></th>
+                        <td><?= $block->escapeHtml(date('l, F jS Y', strtotime($mpOrder->getOrderPlaceDate()))); ?></td>
+                    </tr>
+                    <?php if (isset($mpOrderData['FulfillmentChannel'])) { ?>
+                        <tr>
+                            <th><?= $block->escapeHtml(__('Fulfillment Channel')) ?></th>
+                            <td><?= $block->escapeHtml($mpOrderData['FulfillmentChannel']) ?></td>
+                        </tr>
+                    <?php } ?>
+                    <?php if (isset($mpOrderData['SalesChannel'])) { ?>
+                        <tr>
+                            <th><?= $block->escapeHtml(__('Sales Channel')) ?></th>
+                            <td><?= $block->escapeHtml($mpOrderData['SalesChannel']) ?></td>
+                        </tr>
+                    <?php } ?>
+                    <?php if (isset($mpOrderData['ShipServiceLevel'])) { ?>
+                        <tr>
+                            <th><?= $block->escapeHtml(__('Ship Service Level')) ?></th>
+                            <td><?= $block->escapeHtml($mpOrderData['ShipServiceLevel']) ?></td>
+                        </tr>
+                    <?php } ?>
+                    <?php if (isset($mpOrderData['IsPrime'])) { ?>
+                        <tr>
+                            <th><?= $block->escapeHtml(__('Is Prime Order')) ?></th>
+                            <td><?= $block->escapeHtml($mpOrderData['IsPrime']) ?></td>
+                        </tr>
+                    <?php } ?>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="admin__page-section order-view-account-information">
+<div data-mage-init='{"accordion":{"openedState": "active", "collapsible": true, "active": false, "multipleCollapsible": true}}'>
+    <div data-role="collapsible">
+        <div data-role="trigger" class="admin__page-section-title">
+            <span class="title" style="cursor: pointer"><?= $block->escapeHtml(__('Marketplace Order Item Information')) ?></span>
+        </div>
+    </div>
+    <div data-role="content">
+        <table class="data-table admin__table-primary edit-order-table">
+            <thead>
+            <tr class="headings">
+                <th class="col-status"><span>ASIN</span></th>
+                <th class="col-status"><span>SKU</span></th>
+                <th class="col-status"><span>Amazon Order Id</span></th>
+                <th class="col-status"><span>Order Item Id</span></th>
+                <th class="col-status"><span>Qty Ordered</span></th>
+                <th class="col-status"><span>Quantity shipped</span></th>
+                <th class="col-status"><span>Buyer Customized Info</span></th>
+            </tr>
+            </thead>
+
+            <tbody class="even">
+            <?php foreach ($block->getAmazonOrderItems() as $item) { ?>
+            <tr>
+                <td class="col-status"><?= $item->getAsin() ?></td>
+                <td class="col-status"><?= $item->getSku() ?></td>
+                <td class="col-status"><?= $item->getOrderId() ?></td>
+                <td class="col-status"><?= $item->getOrderItemId() ?></td>
+                <td class="col-status"><?= $item->getQtyOrdered() ?></td>
+                <td class="col-status"><?= $item->getQtyShipped() ?></td>
+                <td class="col-status" style="text-align: center;">
+                <?php if (!empty($item->getCustomizedUrl())) { ?>
+                <a class="cedcommerce actions download" href="<?= $item->getCustomizedUrl() ?>" target="_blank">Download</a>
+                <?php } else { ?>
+                    NA
+                <?php }?>
+                </td>
+            </tr>
+            <?php } ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+</section>
+
+<div data-mage-init='{"accordion":{"openedState": "active", "collapsible": true, "active": false, "multipleCollapsible": false}}'>
+    <div class="admin__page-section-title" data-role="collapsible">
+        <span class="title" data-role="trigger" style="cursor: pointer">Fulfillments</span>
+    </div>
+    <div data-role="content">
+        <?php foreach ($fulfillments as $key => $fulfillment) :
+            $feedId = isset($shipment['feed_id']) ? $shipment['feed_id'] : '';
+            ?>
+            <div class="admin__table-wrapper fulfillments" id="amazon-shipment-<?= $key ?>">
+                <table class="data-table admin__table-primary edit-order-table">
+                    <tr>
+                        <th class="cedcommerce shipment">#<?= $key ?></th>
+                        <td class="border-gray-td first-td">
+                            <a title="Delete Shipment" href="javascript:void(0);"
+                               style="float: right; margin-right: 5%;"
+                               class="cedcommerce actions delete amazon-shipment-delete"
+                               data-shipment-id="<?= $key ?>"
+                            >
+                            </a>
+                            <a title="Sync Shipment Status" href="javascript:void(0);"
+                               style="float: right; margin-right: 5%;"
+                               class="cedcommerce actions sync amazon-shipment-sync"
+                               data-shipment-id="<?= $key ?>"
+                            ></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Status</th>
+                        <td class="border-gray-td" id="shipment-status-<?= $key ?>"><?php
+                            $status = isset($fulfillment['Status']) ? $fulfillment['Status'] : '';
+                            echo $block->getStatusText($status);
+                            ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>FulfillmentDate</th>
+                        <td class="border-gray-td"><?php
+                            $fulfillmentDate = isset($fulfillment['FulfillmentDate']) ? $fulfillment['FulfillmentDate'] : '';
+                            echo $block->escapeHtml($fulfillmentDate);
+                            ?>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>CarrierCode</th>
+                        <td class="border-gray-td"><?php
+                            $carrierCode = isset($fulfillment['FulfillmentData']['CarrierCode']) ? $fulfillment['FulfillmentData']['CarrierCode'] : '';
+                            echo $block->escapeHtml($carrierCode);
+                            ?>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>CarrierName</th>
+                        <td class="border-gray-td"><?php
+                            $carrierName = isset($fulfillment['FulfillmentData']['CarrierName']) ? $fulfillment['FulfillmentData']['CarrierName'] : '';
+                            echo $block->escapeHtml($carrierName);
+                            ?></td>
+                    </tr>
+
+                    <tr>
+                        <th>ShippingMethod</th>
+                        <td class="border-gray-td"><?php
+                            $shippingMethod = isset($fulfillment['FulfillmentData']['ShippingMethod']) ? $fulfillment['FulfillmentData']['ShippingMethod'] : '';
+                            echo $block->escapeHtml($shippingMethod);
+                            ?>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>ShipperTrackingNumber</th>
+                        <td class="border-gray-td"><?php
+                            $shipperTrackingNumber = isset($fulfillment['FulfillmentData']['ShipperTrackingNumber']) ? $fulfillment['FulfillmentData']['ShipperTrackingNumber'] : '';
+                            echo $block->escapeHtml($shipperTrackingNumber);
+                            ?>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>Items</th>
+                        <td class="border-gray-td last-td">
+                            <table class="data-table admin__table-primary edit-order-table">
+                                <thead>
+                                <tr class="headings">
+                                    <th>Product Sku</th>
+                                    <th>Quantity</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                if (isset($fulfillment['Items']) and is_array($fulfillment['Items'])) {
+                                    foreach ($fulfillment['Items'] as $item) { ?>
+                                        <tr>
+                                            <td>
+                                                <strong><?= $block->escapeHtml(isset($item['SKU']) ? $item['SKU'] : ''); ?></strong>
+                                            </td>
+                                            <td>
+                                                <strong><?= $block->escapeHtml(isset($item['Quantity']) ? $item['Quantity'] : ''); ?></strong>
+                                            </td>
+                                        </tr>
+                                    <?php }
+                                } ?>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Errors</th>
+                        <td class="border-gray-td">
+                            <span style="color: #FA0000">
+                                <?= $block->escapeHtml(isset($fulfillment['errors']) ? json_encode($fulfillment['errors']) : ''); ?>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Feed</th>
+                        <td class="border-gray-td last-td">
+                            <table class="data-table admin__table-primary edit-order-table">
+                                <thead>
+                                <tr class="headings">
+                                    <th>QueueId</th>
+                                    <th>FeedSubmissionId</th>
+                                    <th>SubmittedDate</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <?= $block->escapeHtml(isset($fulfillment['queue_ids']) ? $fulfillment['queue_ids'] : ''); ?>
+                                    </td>
+                                    <td>
+                                        <strong>
+                                            <a id="submission-id-<?= $key ?>"
+                                                <?php
+                                                $feedId = isset($fulfillment['Feed']['FeedSubmissionId']) ? $fulfillment['Feed']['FeedSubmissionId'] : '';
+                                                ?>
+                                               href="<?= $block->getUrl('amazon/feed/view', ['feed_id' => $feedId]) ?>"
+                                               target="_blank">
+                                                <?= $block->escapeHtml($feedId); ?>
+                                            </a>
+                                        </strong>
+                                    </td>
+                                    <td id="submitted-date-<?= $key ?>"><?= $block->escapeHtml(isset($fulfillment['Feed']['SubmittedDate']) ? $fulfillment['Feed']['SubmittedDate'] : ''); ?></strong></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+
+
+                </table>
+            </div>
+        <?php endforeach; ?>
+    </div>
+    <div class="admin__page-section-title" data-role="collapsible">
+        <span class="title" data-role="trigger" style="cursor: pointer">Adjustments</span>
+    </div>
+    <div data-role="content">
+        <?php foreach ($adjustments as $key => $adjustment): ?>
+            <div class="admin__table-wrapper fulfillments">
+                <table class="data-table admin__table-primary edit-order-table">
+                    <tr>
+                        <th>#<?= $key + 1 ?></th>
+                        <td class="border-gray-td first-td"></td>
+                    </tr>
+                    <tr>
+                        <th>Status</th>
+                        <td class="border-gray-td"><?= $adjustment['Status']; ?></td>
+                    </tr>
+
+                    <tr>
+                        <th>AdjustedItems</th>
+                        <td class="border-gray-td last-td">
+                            <table class="data-table admin__table-primary edit-order-table">
+                                <thead>
+                                <tr class="headings">
+                                    <th>Product Sku</th>
+                                    <th>Quantity Cancelled</th>
+                                    <th>Adjustment Reason</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php foreach ($adjustment['AdjustedItems'] as $item) { ?>
+                                    <tr>
+                                    <td><strong><?= $item['SKU'] ?></strong></td>
+                                    <td><strong><?= $item['QuantityCancelled'] ?></strong></td>
+                                    <td><strong><?= $item['AdjustmentReason'] ?></strong></td>
+                                    </tr><?php } ?>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</div>
+
+<div class="admin__page-section-title" data-role="collapsible">
+    <span class="title" data-role="trigger" style="cursor: pointer">Actions</span>
+</div>
+<div id="marketplace-actions" style="min-height: 46px; padding: 5px;">
+    <div style="float: right;">
+        <button class="primary" id="marketplace-create-shipment">Create Shipment</button>
+    </div>
+</div>
+
+<?php echo $block->getChildHtml('ced_amazon_order_shipment_form') ?>
+
+<script>
+    require([
+        'jquery',
+        'Ced_Integrator/js/modal/popup',
+        "mage/calendar"
+    ], function ($, popup) {
+        // Open create shipment popup
+        $('#marketplace-create-shipment').on('click', function () {
+            var callback = false;
+            var content = $('#marketplace-create-shipment-form');
+            content.show();
+            // var time = new Date();
+            // var defaultValue = time.getUTCFullYear() + '-'+ time.getUTCMonth() + '-' + time.getUTCDay() + ' ' + time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds();
+            // TODO: fix datetime picker
+            $('#FulfillmentDate').calendar({
+                showsTime: true,
+                hideIfNoPrevNext: true,
+                buttonText: "<?= __('Select Date') ?>",
+                dateFormat: "yyyy-MM-dd",
+                timeFormat: "HH:mm:ss Z", //yyyy-MM-dd HH:mm:ss // 2009-02-10T09:22:33+00:00
+                minDate: "<?= $block->escapeHtml(date('Y-m-d', strtotime($mpOrder->getOrderPlaceDate()))); ?>",
+                maxDate: "<?= $block->escapeHtml(date('Y-m-d')); ?>"
+            });
+            popup(
+                {
+                    title: 'Create Marketplace Shipment',
+                    content: content,
+                    actions: {
+                        confirm: callback
+                    }
+                }
+            );
+        });
+    });
+
+    require([
+        "jquery",
+        'Magento_Ui/js/modal/confirm',
+    ], function ($, alert) {
+        // Submit shipment form
+        $('#submit-shipment').on('click', function () {
+            var incrementId = document.getElementById('IncrementId').value;
+            var magentoOrderId = document.getElementById('OrderId').value;
+            var amazonOrderId = document.getElementById('AmazonOrderID').value;
+            var carrierCode = document.getElementById('CarrierCode').value;
+            var carrierName = document.getElementById('CarrierName').value;
+            var shippingMethod = document.getElementById('ShippingMethod').value;
+            var trackingNumber = document.getElementById('ShipperTrackingNumber').value;
+            var fulfillmentDate = document.getElementById('FulfillmentDate').value;
+
+            var shippedItems = [];
+            var adjustedItems = [];
+            var itemsCount = <?= count($mpOrderItemsData); ?>;
+
+            for (var i = 0; i < itemsCount; i++) {
+                if (document.getElementById('sku_' + i)) {
+                    var amazonOrderItemCode = document.getElementById('order_item_id_' + i).value;
+                    var sku = document.getElementById('sku_' + i).value;
+                    var quantity = document.getElementById('qty_' + i).value;
+                    var quantityCancelled = document.getElementById('can_' + i).value;
+                    var quantityShipped = document.getElementById('ship_' + i).value;
+                    var reason = document.getElementById('cancel_reason_' + i).value;
+
+                    if ((quantityCancelled !== quantity) && (quantityShipped !== quantity) ||
+                        (quantityShipped == quantityCancelled)) {
+                        alert({
+                            title: 'Invalid shipment data',
+                            content: "Please either ship complete ship or cancel this order."
+                        });
+                        return;
+                    }
+
+
+                    var check = true;
+                    if (quantityShipped < 1) {
+                        check = false;
+                    }
+
+                    var shippedItem = {
+                        'SKU': sku,
+                        'AmazonOrderItemCode': amazonOrderItemCode,
+                        'Quantity': quantityShipped
+                    };
+
+                    var adjustedItem = {
+                        'SKU': sku,
+                        'AmazonOrderItemCode': amazonOrderItemCode,
+                        'QuantityCancelled': quantityCancelled,
+                        'AdjustmentReason': reason
+                    };
+
+                    if (quantityShipped > 0) {
+                        shippedItems.push(shippedItem);
+                    }
+
+                    if (quantityCancelled > 0) {
+                        adjustedItems.push(adjustedItem);
+                    }
+                }
+            }
+            if (check) {
+                if (carrierCode === "" && carrierName === "") {
+                    alert({
+                        title: 'Invalid shipment data',
+                        content: "Please enter shipping carrier."
+                    });
+                    return false;
+                }
+                if (trackingNumber === "") {
+                    alert({
+                        title: 'Invalid shipment data',
+                        content: "Please enter tracking number."
+                    });
+                    return false;
+                }
+                if (fulfillmentDate === "") {
+                    alert({
+                        title: 'Invalid shipment data',
+                        content: "Please enter fulfillment date."
+                    });
+                    return false;
+                }
+            }
+
+            var data = {};
+            if (shippedItems.length > 0) {
+                data['fulfillments'] = [
+                    {
+                        "OrderId": magentoOrderId,
+                        "IncrementId": incrementId,
+                        "AmazonOrderID": amazonOrderId,
+                        "FulfillmentDate": fulfillmentDate,
+                        "FulfillmentData": {
+                            "CarrierCode": carrierCode,
+                            "CarrierName": carrierName,
+                            "ShippingMethod": shippingMethod,
+                            "ShipperTrackingNumber": trackingNumber
+                        },
+                        "Items": shippedItems
+                    }
+                ];
+            }
+
+            if (adjustedItems.length > 0) {
+                data['adjustments'] = [
+                    {
+                        "OrderId": magentoOrderId,
+                        "IncrementId": incrementId,
+                        "AmazonOrderID": amazonOrderId,
+                        "AdjustedItems": adjustedItems
+                    }
+                ];
+            }
+
+            if (Object.keys(data).length > 0) {
+                $.ajax({
+                    url: "<?= $this->getUrl('amazon/order/ship', ['form_key' => $block->getFormKey(), 'order_id' => $mpOrder->getId()]) ?>",
+                    type: 'POST',
+                    data: data,
+
+                    showLoader: true, // enable loader
+
+
+                    success: function (response) {
+                        if (response.success === true) {
+                            try {
+                                window.location.href = "";
+                            } catch (err) {
+                                alert({
+                                    title: 'Order shipment failed.',
+                                    content: response.message
+                                });
+                            }
+                        } else {
+                            var message = parseMessage(response.message);
+                            alert({
+                                title: 'Order shipment failed.',
+                                content: message
+                            });
+                        }
+                    },
+                    error: function () {
+                        alert({
+                            title: 'Order shipment failed.',
+                            content: 'Api is down.'
+                        });
+                    }
+                });
+            } else {
+                alert({
+                    title: 'Order shipment data invalid.',
+                    content: ''
+                });
+            }
+        });
+
+
+        // Sync shipment feed
+        $(".amazon-shipment-sync").on('click', function () {
+            var shipmentId = $(this).data('shipment-id');
+            var orderId = marketplace.amazon.mp_order_id;
+            var status = $('#shipment-status-' + shipmentId);
+            var url = "<?= $block->getUrl('amazon/order/shipment_sync') ?>";
+            var data = {
+                'shipment_id': shipmentId,
+                'order_id': orderId
+            };
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                data: data,
+                showLoader: true, // enable loader
+                success: function (response) {
+                    if (response.hasOwnProperty('Status')) {
+                        var statusHtml = status.html();
+                        if (response['Status'] === 'Done') {
+                            statusHtml = "<span class='grid-severity-notice'>" + response['Status'] + "</span>";
+                        } else {
+                            statusHtml = "<span class='grid-severity-critical'>" + response['Status'] + "</span>";
+                        }
+                        status.html(statusHtml);
+                    }
+                }
+
+            })
+
+        });
+
+        // Delete shipment
+        $(".amazon-shipment-delete").on('click', function () {
+            var url = "<?= $block->getUrl('amazon/order/shipment_delete') ?>";
+            var id = $(this).data('shipment-id');
+            var orderId = marketplace.amazon.mp_order_id;
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                data: {
+                    'order_id': orderId,
+                    'shipment_id': id
+                },
+                showLoader: true, // enable loader
+                success: function (response) {
+                    if (response.hasOwnProperty('status')) {
+                        if (response['status'] == true) {
+                            $('#amazon-shipment-' + id).remove();
+                        }
+                    }
+                }
+            });
+        });
+
+    });
+
+    function parseMessage(m) {
+        var message = "";
+        if (typeof m === 'object') {
+            message += "<ul>";
+
+            jQuery.each(m, function (index, value) {
+                message += "<li>" + parseMessage(value) + "</li>";
+            });
+            message += "</ul>";
+        } else {
+            message = m;
+        }
+
+        return message;
+    }
+</script>
+
+<style>
+    input.admin__control-text, .admin__control-select {
+        width: 100% !important;
+    }
+
+    .border-gray-td {
+        border-left: 1px solid #80808059;
+        border-top: 1px solid #80808059;
+    }
+
+    .border-gray-td.last-td {
+        border-bottom: 1px solid #80808059 !important;
+    }
+
+    .border-gray-td.first-td {
+        border-left: none;
+        border-top: none;
+        border-bottom: none;
+    }
+
+    .fulfillments {
+        background-color: #80808014;
+        padding-left: 10px;
+        border: 1px solid #80808059;
+        margin-bottom: 20px;
+    }
+
+    ._has-datepicker + .ui-datepicker-trigger {
+        position: relative !important;
+    }
+</style>

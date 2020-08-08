@@ -1,0 +1,17 @@
+<?php
+$helper = $this->helper("Ves\Blog\Helper\Data");
+?>
+<div class="blog-searchform block">
+	<div class="block-title">
+		<strong><?php echo __('Blog Search'); ?></strong>
+	</div>
+	<div class="block-content">
+		<form role="search" method="get" class="search-form" action="<?php echo $helper->getSearchFormUrl(); ?>" data-mage-init='{"validation":{}}'>
+			<label>
+			<span class="screen-reader-text"><?php echo __('Search for:'); ?></span>
+				<input type="search" class="search-field required-entry" placeholder="<?php echo __('Search …'); ?>" value="<?php echo $helper->getSearchKey() ?>" name="s" title="<?php echo __('Search for:'); ?>">
+			</label>
+			<button type="submit" class="search-submit"><span class="screen-reader-text"><?php echo __('Search'); ?></span></button>
+		</form>
+	</div>
+</div>

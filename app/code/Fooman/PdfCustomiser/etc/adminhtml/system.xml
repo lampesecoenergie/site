@@ -1,0 +1,369 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author     Kristof Ringleff, Fooman
+ * @package    Fooman_PdfCustomiser
+ * @copyright  Copyright (c) 2015 Fooman Limited (http://www.fooman.co.nz)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="sales_pdf">
+            <group id="all">
+                <group id="font">
+                    <field id="allprinttrackingbarcode" translate="label" type="select" sortOrder="400" showInDefault="1"
+                           showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Display Tracking Number as Barcode</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>sales_pdf/all/allprinttrackingbarcode</config_path>
+                        <tooltip>When set to "Yes", the shipping tracking number will be displayed as a barcode.</tooltip>
+                    </field>
+                </group>
+                <group id="page">
+                    <field id="allowneraddress" translate="label" type="textarea" sortOrder="400" showInDefault="1"
+                           showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Store Address</label>
+                        <config_path>sales_pdf/all/allowneraddress</config_path>
+                        <tooltip>Enter your store's address as you would like it to appear in the pdfs.
+                            This field can also be used for free text.
+                        </tooltip>
+                    </field>
+                    <field id="allprintcomments" translate="label" type="select" sortOrder="500" showInDefault="1"
+                       showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Order Comments</label>
+                        <source_model>Fooman\PdfCustomiser\Model\System\PrintComments</source_model>
+                        <tooltip><![CDATA[When set to All, comments inputted under <b>Sales > Orders > Comment History</b>
+                                    will be added to the pdf (the comments you see in the back-end order view history).]]></tooltip>
+                    </field>
+                    <field id="alldisplayweight" translate="label" type="select" sortOrder="600" showInDefault="1"
+                           showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Display Total Weight</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>sales_pdf/all/alldisplayweight</config_path>
+                        <tooltip>When set to Yes, the total weight will be displayed. This setting may be useful for shipping purposes.</tooltip>
+                    </field>
+                </group>
+                <group id="other">
+                    <field id="displayboth" translate="label" type="select" sortOrder="600" showInDefault="1"
+                           showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Display Base and Order Currency</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>sales_pdf/all/displayboth</config_path>
+                        <tooltip><![CDATA[When set to No, pdfs will always display the order currency. When set to Yes,
+                        pdfs will display the base currency in addition to order currency.]]></tooltip>
+                    </field>
+                    <field id="alltaxsummary" translate="label" type="select" sortOrder="700" showInDefault="1"
+                           showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Display detailed Tax Summary</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>sales_pdf/all/alltaxsummary</config_path>
+                        <tooltip><![CDATA[When set to Yes, the pdf document will include details of tax is applied to items.]]></tooltip>
+                    </field>
+                    <field id="default_bundle_item_display" translate="label" type="select" sortOrder="800" showInDefault="1"
+                           showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Default Bundle Display</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>sales_pdf/all/default_bundle_item_display</config_path>
+                        <tooltip><![CDATA[When set to No, bundle items of a fixed price bundle will include more details]]></tooltip>
+                    </field>
+                </group>
+            </group>
+            <group id="order" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Order</label>
+                <field id="ordertitle" translate="label" type="text" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Title</label>
+                    <tooltip>Enter a title for the order pdf.</tooltip>
+                </field>
+                <field id="orderaddresses" translate="label" type="select" sortOrder="200" showInDefault="1"
+                       showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Customer Addresses</label>
+                    <source_model>Fooman\PdfCustomiser\Model\System\AddressOptions</source_model>
+                    <tooltip><![CDATA[Which addresses should appear on the pdf? Choose from shipping address,
+                                billing address or both. Note that downloadable product orders won't have a shipping address.<br/><br/>
+                                If the customer VAT number is entered during checkout, this will be shown as part of the
+                                billing address by default.<br/><br/>
+                                Swapping around the order of the billing and shipping addresses is
+                                possible – see the Developer Bonuses section for more information.<br/><br/>
+                                You can customise the customer address format by accessing
+                                <b>System > Configuration > Customer Configuration > Address Templates > Pdf</b>.
+                                The | character will be converted into a line break.]]></tooltip>
+                </field>
+                <field id="columns" translate="label" sortOrder="300" showInDefault="1" showInWebsite="1"
+                       showInStore="1" canRestore="1">
+                    <label>Columns</label>
+                    <frontend_model>Fooman\PdfCustomiser\Block\System\Config\OrderColumnConfig</frontend_model>
+                    <backend_model>Fooman\PdfCore\Model\Config\Backend\Columns</backend_model>
+                    <tooltip><![CDATA[Use the add button to add additional columns you want to display in the pdf. Choose from:<br/>
+
+                                <ul>
+                                 <li>Position (orders the products automatically by adding a number)</li>
+                                 <li>Product name</li>
+                                 <li>SKU</li>
+                                 <li>SKU barcode (displays the SKU as a barcode)</li>
+                                 <li>Product image</li>
+                                 <li>Price</li>
+                                 <li>Discount</li>
+                                 <li>Qty</li>
+                                 <li>Tax</li>
+                                 <li>Subtotal</li>
+                                 <li>Supported Product Attributes</li>
+                                </ul>
+                                <strong>There is no maximum number</strong>, but the more columns you select, the smaller they will become in order to fit on the same page.<br/><br/>
+                                Use the Custom Title column to change the title for the column<br/><br/>
+                                Use the Custom Width column to change the relative width of a column (empty =  use default width for the column type). Default values range between 12 and 28.
+                                ]]></tooltip>
+                    <can_be_empty>1</can_be_empty>
+                </field>
+                <field id="sortby" translate="label" type="select" sortOrder="310" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Sort By Column</label>
+                    <source_model>Fooman\PdfCustomiser\Block\System\Config\SortByColumn</source_model>
+                </field>
+                <field id="ordercustom" translate="label" type="textarea" sortOrder="320" showInDefault="1"
+                       showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Custom Text</label>
+                    <tooltip>Add custom text to appear at the bottom of the pdf. Use free text or simple html.</tooltip>
+                </field>
+                <field id="orderintegratedlabels" translate="label" type="select" sortOrder="400" showInDefault="1"
+                       showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Use Integrated Labels</label>
+                    <source_model>Fooman\PdfCustomiser\Model\System\IntegratedLabelsOptions</source_model>
+                    <tooltip><![CDATA[Select “Yes” to use integrated labels. Each label measures 85mm x 54mm.
+                                Labels measure positioned 20mm from the side and 23mm from bottom.<br/><br/>
+                                Choose from the following standard labels:<br/>
+                                • Single – Shipping Address Label<br/>
+                                • Single – Billing Address Label<br/>
+                                • Double – Shipping and Billing Addresses<br/>
+                                <br/><br/>]]></tooltip>
+                </field>
+            </group>
+            <group id="invoice" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Invoice</label>
+                <field id="invoicetitle" translate="label" type="text" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Title</label>
+                    <tooltip>Enter a title for the invoice pdf.</tooltip>
+                </field>
+                <field id="invoiceaddresses" translate="label" type="select" sortOrder="200" showInDefault="1"
+                       showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Customer Addresses</label>
+                    <source_model>Fooman\PdfCustomiser\Model\System\AddressOptions</source_model>
+                    <tooltip><![CDATA[Which addresses should appear on the pdf? Choose from shipping address,
+                                billing address or both. Note that downloadable product orders won't have a shipping address.<br/><br/>
+                                If the customer VAT number is entered during checkout, this will be shown as part of the
+                                billing address by default.<br/><br/>
+                                Swapping around the order of the billing and shipping addresses is
+                                possible – see the Developer Bonuses section for more information.<br/><br/>
+                                You can customise the customer address format by accessing
+                                <b>System > Configuration > Customer Configuration > Address Templates > Pdf</b>.
+                                The | character will be converted into a line break.]]></tooltip>
+                </field>
+                <field id="columns" translate="label" sortOrder="300" showInDefault="1" showInWebsite="1"
+                       showInStore="1" canRestore="1">
+                    <label>Columns</label>
+                    <frontend_model>Fooman\PdfCustomiser\Block\System\Config\ColumnConfig</frontend_model>
+                    <backend_model>Fooman\PdfCore\Model\Config\Backend\Columns</backend_model>
+                    <tooltip><![CDATA[Use the add button to add additional columns you want to display in the pdf. Choose from:<br/>
+
+                                <ul>
+                                 <li>Position (orders the products automatically by adding a number)</li>
+                                 <li>Product name</li>
+                                 <li>SKU</li>
+                                 <li>SKU barcode (displays the SKU as a barcode)</li>
+                                 <li>Product image</li>
+                                 <li>Price</li>
+                                 <li>Discount</li>
+                                 <li>Qty</li>
+                                 <li>Tax</li>
+                                 <li>Subtotal</li>
+                                 <li>Supported Product Attributes</li>
+                                </ul>
+                                <strong>There is no maximum number</strong>, but the more columns you select, the smaller they will become in order to fit on the same page.<br/><br/>
+                                Use the Custom Title column to change the title for the column<br/><br/>
+                                Use the Custom Width column to change the relative width of a column (empty =  use default width for the column type). Default values range between 12 and 28.
+                                ]]></tooltip>
+                    <can_be_empty>1</can_be_empty>
+                </field>
+                <field id="sortby" translate="label" type="select" sortOrder="310" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Sort By Column</label>
+                    <source_model>Fooman\PdfCustomiser\Block\System\Config\SortByColumn</source_model>
+                </field>
+                <field id="invoicecustom" translate="label" type="textarea" sortOrder="320" showInDefault="1"
+                       showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Custom Text</label>
+                    <tooltip>Add custom text to appear at the bottom of the pdf. Use free text or simple html.</tooltip>
+                </field>
+                <field id="invoiceintegratedlabels" translate="label" type="select" sortOrder="400" showInDefault="1"
+                       showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Use Integrated Labels</label>
+                    <source_model>Fooman\PdfCustomiser\Model\System\IntegratedLabelsOptions</source_model>
+                    <tooltip><![CDATA[Select “Yes” to use integrated labels. Each label measures 85mm x 54mm.
+                                Labels measure positioned 20mm from the side and 23mm from bottom.<br/><br/>
+                                Choose from the following standard labels:<br/>
+                                • Single – Shipping Address Label<br/>
+                                • Single – Billing Address Label<br/>
+                                • Double – Shipping and Billing Addresses<br/>
+                                <br/><br/>]]></tooltip>
+                </field>
+            </group>
+            <group id="shipment" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="1"
+                   showInStore="1" canRestore="1">
+                <label>Shipment</label>
+                <field id="shipmenttitle" translate="label" type="text" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Title</label>
+                    <tooltip>Enter a title for the shipment pdf.</tooltip>
+                </field>
+                <field id="shipmentuseorder" translate="label" type="select" sortOrder="100" showInDefault="1"
+                       showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Print Order as Packing Slip</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <tooltip><![CDATA[When set to Yes, you can bypass the standard workflow requirement by printing packing slips
+                                without first having to create a Magento shipment. You can do this regardless of order status.
+                                However, you will lose the ability to print the packing slips with the shipment number
+                                (the order number is used instead).<br/><br/>
+                                Use this setting if you are getting the following error message: "There are no printable documents related to selected orders"]]>
+                    </tooltip>
+                </field>
+                <field id="shipmentaddresses" translate="label" type="select" sortOrder="200" showInDefault="1"
+                       showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Customer Addresses</label>
+                    <source_model>Fooman\PdfCustomiser\Model\System\AddressOptions</source_model>
+                    <tooltip><![CDATA[Which addresses should appear on the pdf? Choose from shipping address,
+                                billing address or both. Note that downloadable product orders won't have a shipping address.<br/><br/>
+                                If the customer VAT number is entered during checkout, this will be shown as part of the
+                                billing address by default.<br/><br/>
+                                Swapping around the order of the billing and shipping addresses is
+                                possible – see the Developer Bonuses section for more information.<br/><br/>
+                                You can customise the customer address format by accessing
+                                <b>System > Configuration > Customer Configuration > Address Templates > Pdf</b>.
+                                The | character will be converted into a line break.]]></tooltip>
+                </field>
+                <field id="columns" translate="label" sortOrder="300" showInDefault="1" showInWebsite="1"
+                       showInStore="1" canRestore="1">
+                    <label>Columns</label>
+                    <frontend_model>Fooman\PdfCustomiser\Block\System\Config\ShipmentColumnConfig</frontend_model>
+                    <backend_model>Fooman\PdfCore\Model\Config\Backend\Columns</backend_model>
+                    <tooltip><![CDATA[Use the add button to add additional columns you want to display in the pdf. Choose from:<br/>
+
+                                <ul>
+                                 <li>Position (orders the products automatically by adding a number)</li>
+                                 <li>Product name</li>
+                                 <li>SKU</li>
+                                 <li>SKU barcode (displays the SKU as a barcode)</li>
+                                 <li>Product image</li>
+                                 <li>Price</li>
+                                 <li>Discount</li>
+                                 <li>Qty</li>
+                                 <li>Tax</li>
+                                 <li>Subtotal</li>
+                                 <li>Supported Product Attributes</li>
+                                </ul>
+                                <strong>There is no maximum number</strong>, but the more columns you select, the smaller they will become in order to fit on the same page.<br/><br/>
+                                Use the Custom Title column to change the title for the column<br/><br/>
+                                Use the Custom Width column to change the relative width of a column (empty =  use default width for the column type). Default values range between 12 and 28.
+                                ]]></tooltip>
+                    <can_be_empty>1</can_be_empty>
+                </field>
+                <field id="sortby" translate="label" type="select" sortOrder="310" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Sort By Column</label>
+                    <source_model>Fooman\PdfCustomiser\Block\System\Config\SortByColumn</source_model>
+                </field>
+                <field id="shipmentcustom" translate="label" type="textarea" sortOrder="320" showInDefault="1"
+                       showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Custom Text</label>
+                    <tooltip>Add custom text to appear at the bottom of the pdf. Use free text or simple html.</tooltip>
+                </field>
+                <field id="shipmentintegratedlabels" translate="label" type="select" sortOrder="400" showInDefault="1"
+                       showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Use Integrated Labels</label>
+                    <source_model>Fooman\PdfCustomiser\Model\System\IntegratedLabelsOptions</source_model>
+                    <tooltip><![CDATA[Select “Yes” to use integrated labels. Each label measures 85mm x 54mm.
+                                Labels measure positioned 20mm from the side and 23mm from bottom.<br/><br/>
+                                Choose from the following standard labels:<br/>
+                                • Single – Shipping Address Label<br/>
+                                • Single – Billing Address Label<br/>
+                                • Double – Shipping and Billing Addresses<br/>
+                                <br/><br/>]]></tooltip>
+                </field>
+            </group>
+            <group id="creditmemo" translate="label" type="text" sortOrder="400" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Credit Memo</label>
+                <field id="creditmemotitle" translate="label" type="text" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Title</label>
+                    <tooltip>Enter a title for the credit memo pdf.</tooltip>
+                </field>
+                <field id="creditmemoaddresses" translate="label" type="select" sortOrder="200" showInDefault="1"
+                       showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Customer Addresses</label>
+                    <source_model>Fooman\PdfCustomiser\Model\System\AddressOptions</source_model>
+                    <tooltip><![CDATA[Which addresses should appear on the pdf? Choose from shipping address,
+                                billing address or both. Note that downloadable product orders won't have a shipping address.<br/><br/>
+                                If the customer VAT number is entered during checkout, this will be shown as part of the
+                                billing address by default.<br/><br/>
+                                Swapping around the order of the billing and shipping addresses is
+                                possible – see the Developer Bonuses section for more information.<br/><br/>
+                                You can customise the customer address format by accessing
+                                <b>System > Configuration > Customer Configuration > Address Templates > Pdf</b>.
+                                The | character will be converted into a line break.]]></tooltip>
+                </field>
+                <field id="columns" translate="label" sortOrder="300" showInDefault="1" showInWebsite="1"
+                       showInStore="1" canRestore="1">
+                    <label>Columns</label>
+                    <frontend_model>Fooman\PdfCustomiser\Block\System\Config\ColumnConfig</frontend_model>
+                    <backend_model>Fooman\PdfCore\Model\Config\Backend\Columns</backend_model>
+                    <tooltip><![CDATA[Use the add button to add additional columns you want to display in the pdf. Choose from:<br/>
+
+                                <ul>
+                                 <li>Position (orders the products automatically by adding a number)</li>
+                                 <li>Product name</li>
+                                 <li>SKU</li>
+                                 <li>SKU barcode (displays the SKU as a barcode)</li>
+                                 <li>Product image</li>
+                                 <li>Price</li>
+                                 <li>Discount</li>
+                                 <li>Qty</li>
+                                 <li>Tax</li>
+                                 <li>Subtotal</li>
+                                 <li>Supported Product Attributes</li>
+                                </ul>
+                                <strong>There is no maximum number</strong>, but the more columns you select, the smaller they will become in order to fit on the same page.<br/><br/>
+                                Use the Custom Title column to change the title for the column<br/><br/>
+                                Use the Custom Width column to change the relative width of a column (empty =  use default width for the column type). Default values range between 12 and 28.
+                                ]]></tooltip>
+                    <can_be_empty>1</can_be_empty>
+                </field>
+                <field id="sortby" translate="label" type="select" sortOrder="310" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Sort By Column</label>
+                    <source_model>Fooman\PdfCustomiser\Block\System\Config\SortByColumn</source_model>
+                </field>
+                <field id="creditmemocustom" translate="label" type="textarea" sortOrder="320" showInDefault="1"
+                       showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Custom Text</label>
+                    <tooltip>Add custom text to appear at the bottom of the pdf. Use free text or simple html.</tooltip>
+                </field>
+                <field id="creditmemointegratedlabels" translate="label" type="select" sortOrder="400" showInDefault="1"
+                       showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Use Integrated Labels</label>
+                    <source_model>Fooman\PdfCustomiser\Model\System\IntegratedLabelsOptions</source_model>
+                    <tooltip><![CDATA[Select “Yes” to use integrated labels. Each label measures 85mm x 54mm.
+                                Labels measure positioned 20mm from the side and 23mm from bottom.<br/><br/>
+                                Choose from the following standard labels:<br/>
+                                • Single – Shipping Address Label<br/>
+                                • Single – Billing Address Label<br/>
+                                • Double – Shipping and Billing Addresses<br/>
+                                <br/><br/>]]></tooltip>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

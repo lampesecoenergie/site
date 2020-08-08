@@ -1,0 +1,541 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement(EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+ * @package   Ced_EbayMultiAccount
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright Copyright CEDCOMMERCE(http://cedcommerce.com/)
+ * @license   http://cedcommerce.com/license-agreement.txt
+ */
+
+$element = $this->getElement();
+$_htmlId = 'alldetails';
+$_htmlName = 'domesticService';
+$_htmlName1 = 'internationalService';
+$location = $this->getLocationId();
+$payMethods = $block->getPaymentMethods();
+$returnAccepted = $block->getReturnAccepted();
+$refundType = $block->getRefundType();
+$returnDays = $block->getReturnWithIn();
+$shipCostPaidby = $block->getShipCostPaidBy();
+$serviceType = $block->getServiceType();
+$excludedArea = $block->getExcludedLocation();
+$shipToLocation = $block->getShipToLocation();
+$saleTaxStates = $block->getSalesTaxRegion();
+$yesNo = $block->getYesNo();
+?>
+
+<div class="field" id="<?php /* @escapeNotVerified */ echo $_htmlId?>" data-attribute-code="<?php /* @escapeNotVerified */ echo $_htmlId?>"
+     >
+     <?php if ($location != null) { ?>
+     <p><span><h2>Payment Details</h2></span></p>
+    <div class="field admin__field required _required">
+        <label class="label admin__field-label" for="payment_method" >
+            <span>Payment Method</span>
+        </label>
+        <div class="admin__field-control control">
+            <select id="payment_method" name="payment_method[]" title="Payment Method" class="required-entry select multiselect admin__control-multiselect" size="6" multiple="multiple">
+                <?php foreach ($payMethods as $payMethod) {
+                        if (!empty($this->getSavedPaymentMethod()) && in_array($payMethod['value'], $this->getSavedPaymentMethod())) {  ?>
+                        <option value="<?php echo $payMethod['value'] ?>" selected ="selected"> <?php echo __($payMethod['label']) ?> 
+                        </option>
+                        <?php  } else { ?>
+                        <option value="<?php echo $payMethod['value'] ?>"> <?php echo __($payMethod['label']) ?> 
+                        </option>
+                     <?php }
+                    }
+                ?>
+            </select>
+        </div>
+    </div>
+    <div class="field admin__field">
+        <label class="label admin__field-label" for="paypal_email" >
+            <span>PayPal Email</span>
+        </label>
+        <input id="paypal_email" name="paypal_email" value="<?php echo $this->getSavedPaymentEmail() ?>" class="required-entry input-text admin__control-text" type="text">
+    </div>
+
+    <hr>
+    <p><span><h2>Return Policy</h2></span></p>
+    <div class="field admin__field required _required">
+        <label class="label admin__field-label" for="return_accepted" >
+            <span>Return Accepted</span>
+        </label>
+        <div class="admin__field-control control">
+            <select id="return_accepted" name="return_accepted" title="Return Accepted" class="required-entry select select admin__control-select">
+                <?php foreach ($returnAccepted as $returnAccept) {
+                        if (!empty($this->getSavedReturnAccepted()) && $returnAccept['value'] == $this->getSavedReturnAccepted()) {  ?>
+                        <option value="<?php echo $returnAccept['value'] ?>" selected ="selected"> <?php echo __($returnAccept['label']) ?> 
+                        </option>
+                        <?php  } else { ?>
+                        <option value="<?php echo $returnAccept['value'] ?>"> <?php echo __($returnAccept['label']) ?> 
+                        </option>
+                     <?php }
+                    }
+                ?>
+            </select>
+        </div>
+    </div>
+    <?php if($location == 0) { ?>
+    <div class="field admin__field" style="display:none" id="div_refund_type">
+        <label class="label admin__field-label" for="refund_type" >
+            <span>Return Option</span>
+        </label>
+        <div class="admin__field-control control">
+            <select id="refund_type" name="refund_type" title="Return Accepted" class="required-entry select select admin__control-select">
+                <?php foreach ($refundType as $refundTypes) {
+                        if (!empty($this->getSavedRefundType()) && $refundTypes['value'] == $this->getSavedRefundType()) {  ?>
+                        <option value="<?php echo $refundTypes['value'] ?>" selected ="selected"> <?php echo __($refundTypes['label']) ?> 
+                        </option>
+                        <?php  } else { ?>
+                        <option value="<?php echo $refundTypes['value'] ?>"> <?php echo __($refundTypes['label']) ?> 
+                        </option>
+                     <?php }
+                    }
+                ?>
+            </select>
+        </div>
+    </div>
+    <?php } ?>
+    <div class="field admin__field " style="display:none" id="div_retrun_days">
+        <label class="label admin__field-label" for="return_days" >
+            <span>Return Days</span>
+        </label>
+        <div class="admin__field-control control">
+            <select id="return_days" name="return_days" title="Return Accepted" class="select select admin__control-select">
+                <?php foreach ($returnDays as $returnDay) {
+                        if (!empty($this->getSavedReturnWithIn()) && $returnDay['value'] == $this->getSavedReturnWithIn()) {  ?>
+                        <option value="<?php echo $returnDay['value'] ?>" selected ="selected"> <?php echo __($returnDay['label']) ?> 
+                        </option>
+                        <?php  } else { ?>
+                        <option value="<?php echo $returnDay['value'] ?>"> <?php echo __($returnDay['label']) ?> 
+                        </option>
+                     <?php }
+                    }
+                ?>
+            </select>
+        </div>
+    </div>
+    <div class="field admin__field" style="display:none" id="div_ship_cost_paidby">
+        <label class="label admin__field-label" for="ship_cost_paidby" >
+            <span>Ship Cost Paid By</span>
+        </label>
+        <div class="admin__field-control control">
+            <select id="ship_cost_paidby" name="ship_cost_paidby" title="Return Accepted" class="select select admin__control-select">
+                <?php foreach ($shipCostPaidby as $shipCostPaid) {
+                        if (!empty($this->getSavedShipCostPaidBy()) && $shipCostPaid['value'] == $this->getSavedCatFeatures()) {  ?>
+                        <option value="<?php echo $shipCostPaid['value'] ?>" selected ="selected"> <?php echo __($shipCostPaid['label']) ?> 
+                        </option>
+                        <?php  } else { ?>
+                        <option value="<?php echo $shipCostPaid['value'] ?>"> <?php echo __($shipCostPaid['label']) ?> 
+                        </option>
+                     <?php }
+                    }
+                ?>
+            </select>
+        </div>
+    </div>
+    <?php if(in_array($location, [71,77,101,186])) { ?>
+    <div class="field admin__field" style="display:none" id="div_retrun_description">
+        <label class="label admin__field-label" for="return_description" >
+            <span>Return Description</span>
+        </label>
+        <textarea id="return_description" name="return_description" class="textarea admin__control-textarea" rows="2" cols="25"><?php echo $this->getSavedReturnDescription(); ?></textarea>
+    </div>
+    <?php } ?>
+
+    <hr>
+    <p><span><h2>Shipping Policy</h2></span></p>
+    <div class="field admin__field required _required">
+        <label class="label admin__field-label" for="service_type" >
+            <span>Service Type</span>
+        </label>
+        <div class="admin__field-control control">
+            <select id="service_type" name="service_type" title="Return Accepted" class="required-entry select select admin__control-select">
+                <?php foreach ($serviceType as $serviceTypes) {
+                        if (!empty($this->getSavedServiceType()) && $serviceTypes['value'] == $this->getSavedServiceType()) {  ?>
+                        <option value="<?php echo $serviceTypes['value'] ?>" selected ="selected"> <?php echo __($serviceTypes['label']) ?> 
+                        </option>
+                        <?php  } else { ?>
+                        <option value="<?php echo $serviceTypes['value'] ?>"> <?php echo __($serviceTypes['label']) ?> 
+                        </option>
+                     <?php }
+                    }
+                ?>
+            </select>
+        </div>
+    </div>
+    <div class="field admin__field">
+        <label class="label admin__field-label" for="free_shipping" >
+            <span>Free Shipping</span>
+        </label>
+        <div class="admin__field-control control">
+            <select id="free_shipping" name="free_shipping" title="Return Accepted" class="select select admin__control-select">
+                <?php foreach ($yesNo as $yesNoOption) {
+                        if (!empty($this->getSavedFreeShipping()) && $yesNoOption['value'] == $this->getSavedFreeShipping()) {  ?>
+                        <option value="<?php echo $yesNoOption['value'] ?>" selected ="selected"> <?php echo __($yesNoOption['label']) ?> 
+                        </option>
+                        <?php  } else { ?>
+                        <option value="<?php echo $yesNoOption['value'] ?>"> <?php echo __($yesNoOption['label']) ?> 
+                        </option>
+                     <?php }
+                    }
+                ?>
+            </select>
+        </div>
+    </div>
+    <table class="admin__control-table tiers_table">
+        <thead>
+        <tr>
+            <th>Shipping Service</th>
+            <th>Charges</th>
+            <th>Additional Charges</th>
+            <th class="col-delete">Action</th>
+        </tr>
+        </thead>
+        <tbody id="<?php /* @escapeNotVerified */ echo $_htmlId ?>_domestic"></tbody>
+        <tfoot>
+        <tr>
+            <td colspan="4" class="col-actions-add"><?php echo $block->getChildHtml('add_button') ?></td>
+        </tr>
+        </tfoot>
+    </table>
+    <script>
+            require([
+                'mage/template',
+                "prototype",
+                "mage/adminhtml/form"
+            ], function (mageTemplate) {
+                var domesticServiceRowTemplate = '<tr>'
+                    + '<td><select name="<?php echo $_htmlName ?>[<%- data.index %>][service]" id="dom_ship_service_<%- data.index %>_service">'
+
+                    <?php foreach ($this->getDomShippingService() as $domShipService) {
+                            $domShipService['label'] = str_replace("'", "", $domShipService['label']);
+                     ?>
+                    + '<option value="<?php echo $domShipService['value'] ?>"><?php echo $domShipService['label'] ?></option>'
+                    <?php  } ?>
+                    + '</select></td>'
+                    + '<td> <input type="text" name="<?php /* @escapeNotVerified */ echo $_htmlName ?>[<%- data.index %>][charge]" value="" id="dom_ship_service_<%- data.index %>_charge" /></td>'
+                    + '<td><input type="text" name="<?php /* @escapeNotVerified */ echo $_htmlName ?>[<%- data.index %>][add_charge]" value="" id="dom_ship_service_<%- data.index %>_add_charge" /></td>'
+                    + '<td class="col-delete"><input type="hidden" name="<?php /* @escapeNotVerified */ echo $_htmlName ?>[<%- data.index %>][delete]" class="delete" value="" id="dom_ship_service_<%- data.index %>_delete" />'
+                    + '<button title="<?php /* @escapeNotVerified */ echo $block->escapeHtml(__('Delete Tier')); ?>" type="button" class="action- scalable delete icon-btn delete-product-option" id="dom_ship_service_<%- data.index %>_delete_button" onclick="return domesticService.deleteItem(event);">'
+                    + '<span><?php /* @escapeNotVerified */ echo __("Delete") ?></span></button></td>'
+                    + '</tr>';
+
+                var domesticService = {
+                    template: mageTemplate(domesticServiceRowTemplate),
+                    itemsCount: 0,
+                    addItem : function () {
+                        var data = {
+                            service: '',
+                            charge: '',
+                            add_charge: '',
+                            index: this.itemsCount++
+                        };
+
+                        data.service = arguments[0];
+                        data.charge = arguments[1];
+                        data.add_charge = arguments[2];
+                        if (data.service === undefined) {
+                            data.service = '';
+                        }
+                        if (data.charge === undefined) {
+                            data.charge = '';
+                        }
+                        if (data.add_charge === undefined) {
+                            data.add_charge = '';
+                        }
+                        Element.insert($('<?php /* @escapeNotVerified */ echo $_htmlId ?>_domestic'), {
+                            bottom : this.template({
+                                data: data
+                            })
+                        });
+                        $('dom_ship_service_' + data.index + '_service').value = data.service;
+                        $('dom_ship_service_' + data.index + '_charge').value    = data.charge;
+                        $('dom_ship_service_' + data.index + '_add_charge').value    = data.add_charge;
+                    },
+                    deleteItem: function(event) {
+                        var tr = Event.findElement(event, 'tr');
+                        if (tr) {
+                            Element.select(tr, '.delete').each(function(elem){elem.value='1'});
+                            Element.select(tr, ['input', 'select']).each(function(elem){elem.hide()});
+                            Element.hide(tr);
+                            Element.addClassName(tr, 'no-display template');
+                        }
+                        return false;
+                    },
+                };
+                <?php if(count($this->getMappedService()) > 0 ) {
+                    $allService = $this->getMappedService();
+                    foreach ($allService as $services) { 
+                        $service = isset($services['service']) ? $services['service'] : '';
+                        $charge = isset($services['charge']) ? $services['charge'] : '';
+                        $add_charge = isset($services['add_charge']) ? $services['add_charge'] : '';
+                     ?>
+                domesticService.addItem('<?php echo $service ?>', '<?php echo $charge ?>', '<?php echo $add_charge ?>');
+                <?php } } ?>
+                window.domesticService = domesticService;
+            });
+    </script>
+    <div class="field admin__field">
+        <label class="label admin__field-label" for="excluded_area" >
+            <span>Excluded Areas</span>
+        </label>
+        <div class="admin__field-control control">
+            <select id="excluded_area" name="excluded_area[]" title="Service Type" class="multiselect admin__control-multiselect" size="5" multiple="multiple">
+                <?php foreach ($excludedArea as $excludedAreas) {
+                        if (!empty($this->getSavedExcludedLocation()) && $excludedAreas['value'] == $this->getSavedExcludedLocation()) {  ?>
+                        <option value="<?php echo $excludedAreas['value'] ?>" selected ="selected"> <?php echo __($excludedAreas['label']) ?> 
+                        </option>
+                        <?php  } else { ?>
+                        <option value="<?php echo $excludedAreas['value'] ?>"> <?php echo __($excludedAreas['label']) ?> 
+                        </option>
+                     <?php }
+                    }
+                ?>
+            </select>
+        </div>
+    </div>
+    <div class="field admin__field">
+        <label class="label admin__field-label" for="global_shipping" >
+            <span>Global Shipping</span>
+        </label>
+        <div class="admin__field-control control">
+            <select id="global_shipping" name="global_shipping" title="Return Accepted" class="select select admin__control-select">
+                <?php foreach ($yesNo as $yesNoOption) {
+                        if (!empty($this->getSavedGlobalShipping()) && $yesNoOption['value'] == $this->getSavedGlobalShipping()) {  ?>
+                        <option value="<?php echo $yesNoOption['value'] ?>" selected ="selected"> <?php echo __($yesNoOption['label']) ?> 
+                        </option>
+                        <?php  } else { ?>
+                        <option value="<?php echo $yesNoOption['value'] ?>"> <?php echo __($yesNoOption['label']) ?> 
+                        </option>
+                     <?php }
+                    }
+                ?>
+            </select>
+        </div>
+    </div>
+    <table class="admin__control-table tiers_table" id='internationalServices'>
+        <thead>
+        <tr>
+            <th>International Shipping Service</th>
+            <th>Charges</th>
+            <th>Additional Charges</th>
+            <th class="col-delete">Action</th>
+        </tr>
+        </thead>
+        <tbody id="<?php /* @escapeNotVerified */ echo $_htmlId ?>_international"></tbody>
+        <tfoot>
+        <tr>
+            <td colspan="4" class="col-actions-add"><?php echo $block->getChildHtml('add_button_new') ?></td>
+        </tr>
+        </tfoot>
+    </table>
+    <script>
+            require([
+                'mage/template',
+                "prototype",
+                "mage/adminhtml/form"
+            ], function (mageTemplate) {
+                var internationalServiceRowTemplate = '<tr>'
+                    + '<td><select name="<?php echo $_htmlName1 ?>[<%- data.index %>][service]" id="in_ship_service_<%- data.index %>_service">'
+
+                    <?php foreach ($this->getInShippingService() as $inShipService) {
+                            $inShipService['label'] = str_replace("'", "", $inShipService['label']);
+                     ?>
+                    + '<option value="<?php echo $inShipService['value'] ?>"><?php echo $inShipService['label'] ?></option>'
+                    <?php  } ?>
+                    + '</select></td>'
+                    + '<td> <input type="text" name="<?php /* @escapeNotVerified */ echo $_htmlName1 ?>[<%- data.index %>][charge]" value="" id="in_ship_service_<%- data.index %>_charge" /></td>'
+                    + '<td><input type="text" name="<?php /* @escapeNotVerified */ echo $_htmlName1 ?>[<%- data.index %>][add_charge]" value="" id="in_ship_service_<%- data.index %>_add_charge" /></td>'
+                    + '<td class="col-delete"><input type="hidden" name="<?php /* @escapeNotVerified */ echo $_htmlName1 ?>[<%- data.index %>][delete]" class="delete" value="" id="in_ship_service_<%- data.index %>_delete" />'
+                    + '<button title="<?php /* @escapeNotVerified */ echo $block->escapeHtml(__('Delete Tier')); ?>" type="button" class="action- scalable delete icon-btn delete-product-option" id="in_ship_service_<%- data.index %>_delete_button" onclick="return internationalService.deleteItem(event);">'
+                    + '<span><?php /* @escapeNotVerified */ echo __("Delete") ?></span></button></td>'
+                    + '</tr>';
+
+                var internationalService = {
+                    template: mageTemplate(internationalServiceRowTemplate),
+                    itemsCount: 0,
+                    addItem : function () {
+                        var data = {
+                            service: '',
+                            charge: '',
+                            add_charge: '',
+                            index: this.itemsCount++
+                        };
+
+                        data.service = arguments[0];
+                        data.charge      = arguments[1];
+                        data.add_charge = arguments[2];
+                        if (data.service === undefined) {
+                            data.service = '';
+                        }
+                        if (data.charge === undefined) {
+                            data.charge = '';
+                        }
+                        if (data.add_charge === undefined) {
+                            data.add_charge = '';
+                        }
+
+                        Element.insert($('<?php /* @escapeNotVerified */ echo $_htmlId ?>_international'), {
+                            bottom : this.template({
+                                data: data
+                            })
+                        });
+                        $('in_ship_service_' + data.index + '_service').value = data.service;
+                        $('in_ship_service_' + data.index + '_charge').value    = data.charge;
+                        $('in_ship_service_' + data.index + '_add_charge').value    = data.add_charge;
+                    },
+                    deleteItem: function(event) {
+                        var tr = Event.findElement(event, 'tr');
+                        if (tr) {
+                            Element.select(tr, '.delete').each(function(elem){elem.value='1'});
+                            Element.select(tr, ['input', 'select']).each(function(elem){elem.hide()});
+                            Element.hide(tr);
+                            Element.addClassName(tr, 'no-display template');
+                        }
+                        return false;
+                    },
+                };
+                <?php if(count($this->getInMappedService()) > 0 ) {
+                    $allInService = $this->getInMappedService();
+                    foreach ($allInService as $services) {
+                        $service = isset($services['service']) ? $services['service'] : '';
+                        $charge = isset($services['charge']) ? $services['charge'] : '';
+                        $add_charge = isset($services['add_charge']) ? $services['add_charge'] : '';
+                         ?>
+                internationalService.addItem('<?php echo $service ?>', '<?php echo $charge ?>', '<?php echo $add_charge ?>');
+                <?php } } ?>
+                window.internationalService = internationalService;
+            });
+    </script>
+    <div class="field admin__field" style="display:none" id="div_ship_to_location">
+        <label class="label admin__field-label" for="ship_to_location">
+            <span>Ship To Location</span>
+        </label>
+        <div class="admin__field-control control">
+            <select id="ship_to_location" name="ship_to_location[]" title="Service Type" class="select multiselect admin__control-multiselect" size="5" multiple="multiple">
+                <?php foreach ($shipToLocation as $shipToLocations) {
+                        if (!empty($this->getSavedShipToLocation()) && in_array($shipToLocations['value'], $this->getSavedShipToLocation())) {  ?>
+                        <option value="<?php echo $shipToLocations['value'] ?>" selected ="selected"> <?php echo __($shipToLocations['label']) ?> 
+                        </option>
+                        <?php  } else { ?>
+                        <option value="<?php echo $shipToLocations['value'] ?>"> <?php echo __($shipToLocations['label']) ?> 
+                        </option>
+                     <?php }
+                    }
+                ?>
+            </select>
+        </div>
+    </div>
+    <?php if($location == 0) { ?>
+    <hr>
+    <p><span><h2>Sales Tax Details</h2></span></p>
+
+    <div class="field admin__field">
+        <label class="label admin__field-label" for="sale_tax_rate" >
+            <span>Sales Tax %</span>
+        </label>
+        <input id="sale_tax_rate" name="sale_tax_rate" value="<?php echo $this->getSavedSaleTaxRate() ?>" class="input-text admin__control-text" type="text" />
+    </div>
+    <div class="field admin__field">
+        <label class="label admin__field-label" for="sale_tax_state" >
+            <span>Sale Tax State</span>
+        </label>
+        <div class="admin__field-control control">
+            <select id="sale_tax_state" name="sale_tax_state" title="Return Accepted" class="select select admin__control-select">
+                <?php foreach ($saleTaxStates as $saleTaxState) {
+                        if (!empty($this->getSavedSalesTaxRegion()) && $saleTaxState['value'] == $this->getSavedSalesTaxRegion()) {  ?>
+                        <option value="<?php echo $saleTaxState['value'] ?>" selected ="selected"> <?php echo __($saleTaxState['label']) ?> 
+                        </option>
+                        <?php  } else { ?>
+                        <option value="<?php echo $saleTaxState['value'] ?>"> <?php echo __($saleTaxState['label']) ?> 
+                        </option>
+                     <?php }
+                    }
+                ?>
+            </select>
+        </div>
+    </div>
+    <div class="field admin__field">
+        <label class="label admin__field-label" for="shipping_includes" >
+            <span>Shipping Includes</span>
+        </label>
+        <div class="admin__field-control control">
+            <select id="shipping_includes" name="shipping_includes" title="Return Accepted" class="select select admin__control-select">
+                <?php foreach ($yesNo as $yesNoOption) {
+                        if (!empty($this->getSavedShippingIncludes()) && $yesNoOption['value'] == $this->getSavedShippingIncludes()) {  ?>
+                        <option value="<?php echo $yesNoOption['value'] ?>" selected ="selected"> <?php echo __($yesNoOption['label']) ?> 
+                        </option>
+                        <?php  } else { ?>
+                        <option value="<?php echo $yesNoOption['value'] ?>"> <?php echo __($yesNoOption['label']) ?> 
+                        </option>
+                     <?php }
+                    }
+                ?>
+            </select>
+        </div>
+    </div>
+    <?php } } ?>
+</div>
+<script>
+    require([
+        "jquery",
+    ], function($) {
+        var globalShipping = $('#global_shipping').val();
+        if (globalShipping == 1) {
+            $('#div_ship_to_location').css("display", "block");
+            $('#internationalServices').css("display", "block");
+        } else {
+            $('#internationalServices').css("display", "none");
+        }
+        $('#global_shipping').change(function(){ 
+            var globalShipping = $('#global_shipping').val();
+            if (globalShipping == 1) {
+                $('#div_ship_to_location').css("display", "block");
+                $('#internationalServices').css("display", "block");
+            } else {
+                $('#div_ship_to_location').css("display", "none");
+                $('#internationalServices').css("display", "none");
+            }
+        });
+        var returnAccepted = $('#return_accepted').val();
+        if (returnAccepted == "ReturnsAccepted") {
+            $('#div_retrun_days').css("display", "block");
+            $('#div_refund_type').css("display", "block");
+            $('#div_ship_cost_paidby').css("display", "block");
+            $('#div_retrun_description').css("display", "block");
+        } else {
+            $('#div_retrun_days').val('');
+            $('#div_refund_type').val('');
+            $('#div_ship_cost_paidby').val('');
+            $('#div_retrun_description').val('');
+        }
+        $('#return_accepted').change(function(){ 
+            var returnAccepted = $('#return_accepted').val();
+            if (returnAccepted == "ReturnsAccepted") {
+                $('#div_retrun_days').css("display", "block");
+                $('#div_refund_type').css("display", "block");
+                $('#div_ship_cost_paidby').css("display", "block");
+                $('#div_retrun_description').css("display", "block");
+            } else {
+                $('#div_retrun_days').css("display", "none");
+                $('#div_refund_type').css("display", "none");
+                $('#div_ship_cost_paidby').css("display", "none");
+                $('#div_retrun_description').css("display", "none");
+                $('#div_retrun_days').val('');
+                $('#div_refund_type').val('');
+                $('#div_ship_cost_paidby').val('');
+                $('#div_retrun_description').val('');
+            }
+        });
+    });
+</script>

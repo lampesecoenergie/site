@@ -1,0 +1,199 @@
+<?php 
+/**
+ * @category  Mageants BannerSlider
+ * @package   Mageants_BannerSlider
+ * @copyright Copyright (c) 2017 Mageants
+ * @author    Mageants Team <support@Mageants.com>
+ */
+$helper = $this->getBannerHelper();
+?>
+<?php if($helper->isExtentionEnable()): ?>
+
+	<?php 
+	$slider = $this->getSlider();
+
+	$imageHelper = $this->getBannerImageHelper();
+	?>
+
+	<?php if($slider && $slider ->getId() ): ?>
+	<?php 
+	$slides = $this->getSlides() ;
+
+	$unser_setting = $helper->unserializeSetting($slider->getSetting());
+
+	$setting = $unser_setting['setting'];
+	?>
+	<div class="bannerwrapper" 
+		style="<?php echo $setting['width'] == ""? '' : "width:{$setting['width']}px;"?>;
+					  <?php echo $setting['height'] == ""? '' : "height:{$setting['height']}px;"?>
+		">
+		<div id="slider-<?php echo $slider->getId();?>" class="sl-slider-wrapper" 
+			style="<?php echo $setting['width'] == ""? '' : "width:{$setting['width']}px;"?>;
+					  <?php echo $setting['height'] == ""? '' : "height:{$setting['height']}px;"?>
+			">
+
+			<div class="sl-slider">
+				
+				<?php foreach($slides as $slide): ?>
+				
+					<?php	$slidesetting = $slide['setting'];?>		
+					
+					<div class="sl-slide <?php echo $slide['class']?>" data-orientation="<?php echo $slidesetting['orientation']?>" data-slice1-rotation="<?php echo $slidesetting['slice1-rotation']?>" data-slice2-rotation="<?php echo $slidesetting['slice2-rotation']?>" data-slice1-scale="<?php echo $slidesetting['slice1-scale']?>" data-slice2-scale="<?php echo $slidesetting['slice2-scale']?>">
+						<div class="sl-slide-inner">
+							<div class="bg-img bg-img-1"   
+								<?php if($slide['image']):?> style="background-image: url(<?php echo $slide['image']?>)"<?php endif?>>
+							</div>
+							<h2><?php echo $slide['title']?></h2>
+							<blockquote><?php echo $slide['content']?></blockquote>
+						</div>
+					</div>
+				
+				<?php endforeach?>		
+				
+			</div><!-- /sl-slider -->
+			
+			<?php if($setting['show_navigation_arrows']):?>
+			
+			<nav id="nav-arrows" class="nav-arrow">
+					<span class="next"><?php echo __("Next")?></span>
+					<span class="prev"><?php echo __("Prev")?></span>			
+			</nav>
+			
+			<?php endif?>
+			
+			<?php if($setting['show_navigation_bullets']):?>
+			
+			<nav id="nav-dots" class="nav-dots">
+			
+				<?php $i = 0;?>
+				
+				<?php foreach($slides as $key=>$slide): ?>
+				
+					<?php if($i  == 0):?>
+					
+						<span class="nav-dot-current"></span>
+						
+					<?php else:?>
+					
+						<span></span>				
+						
+					<?php endif?>
+				
+				<?php $i++?>
+			
+				<?php endforeach?>
+				
+			</nav>
+			
+			<?php endif?>
+
+		</div><!-- /slider-wrapper -->
+		
+		
+		<script type="text/javascript">
+		setTimeout(function(){
+			require(['jquery','mageants/bannerslidermodernizr','mageants/bannersliderbacond','mageants/bannersliderslitslider'],function($){
+				$(function() {
+					var Page = (function() {
+						
+						var $navarrow = $( '#slider-<?php echo $slider->getId();?> #nav-arrows ' ),
+							$navbultes = $( '#slider-<?php echo $slider->getId();?> #nav-dots > span' ),
+							
+							slitslider = $( '#slider-<?php echo $slider->getId();?>' ).slitslider( {
+								// transitions speed
+								speed : <?php echo $setting['speed']?>,
+								
+								// if true the item's slices will also animate the opacity value
+								optOpacity : <?php echo $setting['optopacity']==1?'true':'false'?>,
+								
+								// amount (%) to translate both slices - adjust as necessary
+								translateFactor : <?php echo $setting['translatefactor']?>,
+								
+								// maximum possible angle
+								maxAngle : <?php echo $setting['maxangle']?>,
+								
+								// maximum possible scale
+								maxScale : <?php echo $setting['maxscale']?> ,
+								
+								// slideshow on / off
+								autoplay : <?php echo $setting['autoplay']==1?'true':'false'?>,
+								
+								// keyboard navigation
+								keyboard : <?php echo $setting['keyboard']==1?'true':'false'?>,
+								
+								// time between transitions
+								interval : <?php echo $setting['interval']?>,
+								
+								// callbacks
+								onBeforeChange : function( slide, pos ) 
+								{
+									<?php echo $setting['onbeforechange']?>
+								
+									$navbultes.removeClass( 'nav-dot-current' );
+		
+									$navbultes.eq( pos ).addClass( 'nav-dot-current' );
+
+								},
+								onAfterChange : function( slide, idx ) 
+								{ 
+									<?php echo $setting['onafterchange']?>
+									
+									return false; 
+								}
+							} ),
+
+							init = function() 
+							{
+								initEvents();
+							},
+							initEvents = function() 
+							{
+								<?php if($setting['show_navigation_arrows']):?>
+								
+								$navarrow.find('.next').on( 'click', function( event ) {
+										slitslider.next();								
+								} );
+								
+								$navarrow.find('.prev').on( 'click', function( event ) {
+										slitslider.previous();
+								} );
+								
+								<?php endif?>
+								
+								<?php if($setting['show_navigation_bullets']):?>
+								
+								$navbultes.each( function( i ) {
+								
+									$( this ).on( 'click', function( event ) {
+										
+										var $dot = $( this );
+										
+										if( !slitslider.isActive() ) {
+
+											$navbultes.removeClass( 'nav-dot-current' );
+											$dot.addClass( 'nav-dot-current' );
+										
+										}
+										
+										slitslider.jump( i + 1 );
+										return false;
+									
+									} );
+									
+								} );
+								
+								<?php endif?>
+							};
+
+							return { init : init };
+
+					})();
+
+					Page.init();
+				});
+			});
+			},2000)
+		</script>
+	</div>
+	<?php endif?>
+<?php endif?>

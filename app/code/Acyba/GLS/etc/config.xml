@@ -1,0 +1,111 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<default>
+		<carriers>
+			<gls>
+				<sallowspecific>0</sallowspecific>
+				<model>Acyba\GLS\Model\Carrier\GLS</model>
+				<title>GLS</title>
+				<max_package_weight>100</max_package_weight>
+				<gls_livraisontohome>1</gls_livraisontohome>
+				<gls_configtohome><![CDATA[
+addMethod('tohome_fr', [
+    'title' => "Livraison à domicile en 24/48H",
+    'enabled' => $request->dest_country_id == 'FR',
+    'price' =>  array_reduce([ [150.00, 5.00], [160.00, 3.00], ['*', 0.00] ], function ($carry, $item) {
+        global $quote;
+        global $request;
+        if(isset($carry)) return $carry;
+        if($request->free_shipping) return 00.00;
+        if(isset($item[0]) && ($quote->grand_total <= $item[0] || $item[0] == '*')) {
+            $carry = $item[1];
+        }
+        return $carry;
+    }),
+]);
+]]></gls_configtohome>
+				<gls_ordertohome>1</gls_ordertohome>
+				<gls_livraisonfds>0</gls_livraisonfds>
+				<gls_configfds><![CDATA[
+addMethod('fds_fr', [
+    'title' => "En cas d’absence, choisissez où et quand vous souhaitez être livré",
+    'enabled' => $request->dest_country_id == 'FR',
+    'price' =>  array_reduce([ [150.00, 5.00], [160.00, 3.00], ['*', 0.00] ], function ($carry, $item) {
+        global $quote;
+        global $request;
+        if(isset($carry)) return $carry;
+        if($request->free_shipping) return 00.00;
+        if(isset($item[0]) && ($quote->grand_total <= $item[0] || $item[0] == '*')) {
+            $carry = $item[1];
+        }
+        return $carry;
+    }),
+]);
+addMethod('fds_int', [
+    'title' => "En cas d’absence, choisissez où et quand vous souhaitez être livré (international)",
+    'enabled' => in_array($request->dest_country_id, ['DE', 'BE', 'LU', 'AT', 'PL', 'ES', 'NL', 'DK']),
+    'price' =>  array_reduce([ [150.00, 5.00], [160.00, 3.00], ['*', 0.00] ], function ($carry, $item) {
+        global $quote;
+        global $request;
+        if(isset($carry)) return $carry;
+        if($request->free_shipping) return 00.00;
+        if(isset($item[0]) && ($quote->grand_total <= $item[0] || $item[0] == '*')) {
+            $carry = $item[1];
+        }
+        return $carry;
+    }),
+]);
+]]></gls_configfds>
+				<gls_orderfds>2</gls_orderfds>
+				<gls_livraisonrelay>1</gls_livraisonrelay>
+				<gls_google_maps_api_key>0</gls_google_maps_api_key>
+				<gls_configrelay><![CDATA[
+addMethod('relay_fr', [
+    'title' => "Retrait en Point Relais de votre choix",
+    'enabled' => $request->dest_country_id == 'FR',
+     'price' =>  array_reduce([ [150.00, 5.00], [160.00, 3.00], ['*', 0.00] ], function ($carry, $item) {
+        global $quote;
+        global $request;
+        if(isset($carry)) return $carry;
+        if($request->free_shipping) return 00.00;
+        if(isset($item[0]) && ($quote->grand_total <= $item[0] || $item[0] == '*')) {
+            $carry = $item[1];
+        }
+        return $carry;
+    }),
+]);
+]]></gls_configrelay>
+				<gls_orderrelay>3</gls_orderrelay>
+				<gls_onlyxlrelay>0</gls_onlyxlrelay>
+				<gls_livraisonexpress>1</gls_livraisonexpress>
+				<gls_configexpress><![CDATA[
+addMethod('express_fr', [
+    'title' => "Retrait express",
+    'enabled' => $request->dest_country_id == 'FR',
+   'price' =>  array_reduce([ [150.00, 5.00], [160.00, 3.00], ['*', 0.00] ], function ($carry, $item) {
+        global $quote;
+        global $request;
+        if(isset($carry)) return $carry;
+        if($request->free_shipping) return 00.00;
+        if(isset($item[0]) && ($quote->grand_total <= $item[0] || $item[0] == '*')) {
+            $carry = $item[1];
+        }
+        return $carry;
+    }),
+]);
+]]></gls_configexpress>
+				<gls_orderexpress>4</gls_orderexpress>
+				<gls_tracking_view_url>https://gls-group.eu/EU/en/parcel-tracking?match={tracking_number}</gls_tracking_view_url>
+				<gls_debug>0</gls_debug>
+				<gls_sort_order>1</gls_sort_order>
+			</gls>
+		</carriers>
+		<gls_section>
+			<gls_import_export>
+				<gls_active>0</gls_active>
+				<gls_import_folder>var/import/gls/</gls_import_folder>
+				<gls_export_folder>var/export/gls/</gls_export_folder>
+			</gls_import_export>
+		</gls_section>
+	</default>
+</config>

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement(EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_EbayMultiAccount
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CEDCOMMERCE(http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="cataloginventory_stock_item_save_after">
+        <observer name="ced_ebaymultiaccount_inventory_save" instance="Ced\EbayMultiAccount\Observer\InventoryChange"/>
+    </event>
+    <event name="sales_order_shipment_save_after">
+        <observer name="ced_ebaymultiaccount_shipment" instance="Ced\EbayMultiAccount\Observer\Shipment"/>
+    </event>
+    <event name="sales_order_shipment_resource_save_after">
+        <observer name="ced_ebaymultiaccount_shipment_resource" instance="Ced\EbayMultiAccount\Observer\Shipment"/>
+    </event>
+    <event name="controller_action_predispatch">
+        <observer name="ced_ebaymultiaccount_controller_action_predispatch" instance="Ced\EbayMultiAccount\Observer\Predispatch" />
+    </event>
+    <!--<event name="layout_load_before">
+        <observer name="layout_load_before_cedcommerce" instance="Ced\EbayMultiAccount\Observer\BeforeLoadLayout" />
+    </event>-->
+</config>

@@ -1,0 +1,2353 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Venustheme
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Venustheme.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.venustheme.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category   Venustheme
+ * @package    Ves_Themesettings
+ * @copyright  Copyright (c) 2014 Venustheme (http://www.venustheme.com/)
+ * @license    http://www.venustheme.com/LICENSE-1.0.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Config/etc/system_file.xsd">
+	<system>
+		<tab id="vesthemesettings" translate="label" sortOrder="300">
+			<label>VES Themesettings</label>
+		</tab>
+		<section id="ves_themesettings_general" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+			<class>separator-top</class>
+			<label>General Settings</label>
+			<tab>vesthemesettings</tab>
+			<resource>Ves_Themesettings::configuration</resource>
+			<group id="general_settings" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>General Settings</label>
+				<field id="skin" translate="label comment" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Skins</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\General\Skins</source_model>
+				</field>
+				<field id="layout" translate="label comment" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Layout</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\General\Layout</source_model>
+				</field>
+				<field id="direction" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Direction</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\General\Direction</source_model>
+				</field>
+				<!-- Page Width Settings-->
+				<field id="page_width_heading" translate="label comment" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Width Settings</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="max_width" translate="label comment" type="select" sortOrder="18" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Maximum Page Width</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\WideCustom</source_model>
+				</field>
+				<field id="max_width_custom" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Input Maximum Page Width</label>
+					<depends><field id="max_width">custom</field></depends>
+				</field>
+				<field id="custom_selector_width" translate="label comment" type="select" sortOrder="22" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enable Custom Width For Selector</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment><![CDATA[<br/>]]></comment>
+				</field>
+				<field id="container_attrs" translate="label" sortOrder="28" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Element Selector Width</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\CustomSelectorWidth</frontend_model>
+					<backend_model>Ves\Themesettings\Model\System\Config\Backend\Serialized</backend_model>
+					<comment><![CDATA[Add custom width for each screen size.<br/> Input Media Rules,Css Selector, width (px or %), gutter (px or %). Empty for hide<br/>
+					<strong>Ex:</strong><br/>
+					Media Rule = <strong>(min-width: 992px) and (max-width: 1199px)</strong>
+					<br/>Selector = <strong>.container</strong>
+					<br/>Width = <strong>968px</strong>
+					<br/>Gutter = <strong>30px</strong> - Use to add number fo real width and padding of selector
+					<br/>
+					<br/>
+					Result on frontend:
+					<br/>
+					<strong>
+					<i>
+						<br/>@media (min-width: 992px) and (max-width: 1199px) {
+   							<br/>.container { width: 998px; padding-left: 15px; padding-right: 15px }
+						<br/>}
+					</i>
+					</strong>
+					<br/>
+					width = width + gutter = 998px
+					<br/>
+					padding horizontal = gutter / 2 = 15px
+					<br/>
+					<a href="http://www.w3schools.com/cssref/css3_pr_mediaquery.asp">See more about Media Rules</a>
+					]]></comment>
+					<depends><field id="custom_selector_width">1</field></depends>
+				</field>
+				<!-- End Page Width Settings-->
+
+				<!-- Ajax Cart Settings-->
+				<field id="ajaxcart_heading" translate="label comment" type="text" sortOrder="42" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Ajax Cart Settings</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="enable_ajaxcart" translate="label comment" type="select" sortOrder="43" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enable Ajax Cart</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment><![CDATA[Enable/Disable Ajax Cart<br/>]]></comment>
+				</field>
+				<field id="enable_ajax_img" translate="label comment" type="select" sortOrder="45" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enable Product Image</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment><![CDATA[<br/>]]></comment>
+				</field>
+				<field id="ajax_img_width" translate="label comment" type="text" sortOrder="46" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Product Image Width</label>
+					<depends>
+	                    <field id="enable_ajax_img">1</field>
+	                </depends>
+				</field>
+				<field id="ajax_img_height" translate="label comment" type="text" sortOrder="48" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Product Image Height</label>
+					<depends>
+	                    <field id="enable_ajax_img">1</field>
+	                </depends>
+				</field>
+
+				<field id="body_heading" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Body Settings</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="body_classes" translate="label comment" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Body Classes</label>
+				</field>
+				<field id="bg_color" translate="label comment" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Background Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<comment><![CDATA[Background color of the web browser viewport (applied for HTML body element). Set the same color as for footer background to avoid blank space below the footer on large screens.]]></comment>
+				</field>
+				<field id="bg_image" translate="label" type="image" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Background Image</label>
+					<backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+					<upload_dir config="system/filesystem/media" scope_info="1">ves/themesettings/background</upload_dir>
+					<base_url type="media" scope_info="1">ves/themesettings/background</base_url>
+					<comment><![CDATA[Allowed file types: jpeg, gif, png.]]></comment>
+				</field>
+				<field id="bg_repeat" translate="label comment" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Background Repeat</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Css\Background\Repeat</source_model>
+				</field>
+				<field id="bg_attachment" translate="label comment" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Background Attachment</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Css\Background\Attachment</source_model>
+				</field>
+				<field id="bg_positionx" translate="label comment" type="select" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Background Position (x-axis)</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Css\Background\Positionx</source_model>
+				</field>
+				<field id="bg_positiony" translate="label comment" type="select" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Background Position (y-axis)</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Css\Background\Positiony</source_model>
+				</field>
+				<field id="pattern" translate="label comment" type="select" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Pattern</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Pattern</frontend_model>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Css\Background\Pattern</source_model>
+				</field>
+				<field id="padding_top" translate="label comment" type="text" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Top Padding</label>
+				</field>
+				<field id="padding_bottom" translate="label comment" type="text" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Bottom Padding</label>
+				</field>
+				<field id="paneltool_heading" translate="label comment" type="text" sortOrder="160" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Panel Tool</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="paneltool" translate="label comment" type="select" sortOrder="170" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enable</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+			</group>
+			<group id="font" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Font Settings</label>
+
+				<field id="body_font_heading" translate="label comment" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Body Font</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="body_font_size" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Basic Font Size</label>
+				</field>
+				<field id="body_font_family_group" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Font Family</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Css\Font\Groupcustomgoogle</source_model>
+				</field>
+				<field id="body_font_family_custom" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom</label>
+					<comment><![CDATA[Type in your custom font stack, e.g.:<br/><em>Arial, "Helvetica Neue", Helvetica, sans-serif</em>.<br/><strong>Important</strong>: Do not add trailing semicolon.]]></comment>
+					<depends><field id="body_font_family_group">custom</field></depends>
+				</field>
+				<field id="body_font_family" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Google Fonts</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Css\Font\GoogleFonts</source_model>
+					<comment><![CDATA[Font preview is available on <a href="http://www.google.com/webfonts">Google Web Fonts</a><br/><strong style="color:red;">Important</strong>: most of the fonts from Google are not available in all weights. Make sure that you specified correct weight (field <strong>Font Weight</strong> below) for selected font. Otherwise font will not be displayed. Refer to <a href="http://www.google.com/webfonts">Google Web Fonts</a> to check if the selected weight is available for your font.]]></comment>
+					<depends><field id="body_font_family_group">google</field></depends>
+				</field>
+				<field id="body_char_subset" translate="label comment" type="multiselect" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Character Sets</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Css\Font\Subset</source_model>
+					<comment><![CDATA[Some of the fonts support multiple scripts (like Latin and Cyrillic for example). You need to select at least one character set.<br/><strong style="color:red;">Important</strong>: not all fonts support extended character sets. For a complete list of available fonts and font subsets refer to <a href="http://www.google.com/webfonts">Google Web Fonts</a>.<br/><strong style="color:red;">Important</strong>: using multiple character sets affects performance, so only select the character sets that you actually need.]]></comment>
+					<depends><field id="body_font_family_group">google</field></depends>
+				</field>
+				<field id="body_font_weight" translate="label comment" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Font Weight</label>
+					<comment><![CDATA[<div style="float:left;padding-bottom:30px">Specify the weight of the font. You can only use <strong>numeric font weights</strong> which are available for the CSS property <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight"><em>font-weight</em></a>. E.g. normal weight is <em>400</em>, bold is <em>700</em>. Leave empty to use default weight.<br/><strong style="color:red;">Important</strong>: if you selected a font from Google Fonts, note that some fonts are not available in all weights. Refer to <a href="http://www.google.com/webfonts">Google Web Fonts</a> to check if the selected weight is available for your font.</div>]]></comment>
+				</field>
+				<field id="custom_fonts_heading" translate="label comment" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom Fonts</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+					<comment><![CDATA[<br/>]]></comment>
+				</field>
+				<field id="custom_fonts" translate="label" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Element Fonts</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Font</frontend_model>
+					<backend_model>Ves\Themesettings\Model\System\Config\Backend\Serialized</backend_model>
+				</field>
+			</group>
+			<group id="colors" translate="label" type="text" sortOrder="600" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Colors</label>
+				<field id="basic_color_heading" translate="label comment" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Basic Colors</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="color" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Text Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+				</field>
+				<field id="link_color" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Link Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+				</field>
+				<field id="link_hover_color" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Link Hover Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+				</field>
+				<field id="buttons_heading" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Buttons</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="button_bg_color" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Button Background Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+				</field>
+				<field id="button_color" translate="label comment" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Button Text Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+				</field>
+				<field id="button_hover_bg_color" translate="label comment" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Button Hover Background Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+				</field>
+				<field id="button_hover_color" translate="label comment" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Button Hover Text Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+				</field>
+				<field id="button_border_color" translate="label comment" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Button Border Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+				</field>
+				<field id="button_border_width" translate="label comment" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Button Border Width</label>
+					<depends>
+	                    <field id="button_border_wid">1</field>
+	                </depends>
+				</field>
+				<field id="button_border_radius" translate="label comment" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Button Border Radius</label>
+					<depends>
+	                    <field id="button_border_rad">1</field>
+	                </depends>
+				</field>
+			</group>
+			<group id="promotion_settings" translate="label" type="text" sortOrder="1000" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Popup Promotion Settings</label>
+				<field id="enable_popup" translate="label comment" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enable Popup</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="prefix_class" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Prefix Class</label>
+				</field>
+				<field id="padding" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Popup Padding</label>
+				</field>
+				<field id="bg_image" translate="label comment" type="text" sortOrder="32" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Background Image</label>
+					<comment><![CDATA[Input image path in pub/media/<strong>[Background Image]</strong> folder which will show as background of popup. Empty to hide]]></comment>
+				</field>
+				<field id="bg_color" translate="label comment" type="text" sortOrder="34" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Background Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<comment><![CDATA[Choose Background color for promotion popup.]]></comment>
+				</field>
+				<field id="bg_repeat" translate="label comment" type="select" sortOrder="36" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Background Repeat</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Css\Background\Repeat</source_model>
+				</field>
+				<field id="text_color" translate="label comment" type="text" sortOrder="38" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Text Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<comment><![CDATA[Choose Text color in promotion popup.]]></comment>
+				</field>
+				<field id="popup_width" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Popup Width</label>
+				</field>
+				<field id="popup_height" translate="label comment" type="text" sortOrder="55" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Popup Height</label>
+				</field>
+				<field id="timeout" translate="label comment" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Delay Time To Show Popup</label>
+				</field>
+				<field id="cms_id" translate="label comment" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Choose CMS Static Block</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\StaticBlocks</source_model>
+					<comment><![CDATA[Choose a static block to show content in content of popup. Empty for hide.]]></comment>
+				</field>
+				<field id="show_newsletter" translate="label comment" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Newsletter Form</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_dontshow" translate="label comment" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enable Dont Show Popup Again Button</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+			</group>
+		</section>
+		<section id="ves_themesettings_header" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+			<class>separator-top</class>
+			<label>Header</label>
+			<tab>vesthemesettings</tab>
+			<resource>Ves_Themesettings::configuration</resource>
+			<group id="general_settings" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>General Settings</label>
+				<field id="header_layout" translate="label comment" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Header Layout</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Header\Layouts</source_model>
+				</field>
+
+				<field id="static_block" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Static Block ID</label>
+                    <source_model>Ves\Themesettings\Model\System\Config\Source\Footer\StaticBlocks</source_model>
+                    <comment><![CDATA[Choose a static block to show on header]]></comment>
+                </field>
+
+                <field id="custom_header_general" translate="label comment" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom Style</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+
+				<field id="text_color" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Text Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends>
+	                    <field id="custom_header_general">1</field>
+	                </depends>
+				</field>
+				<field id="link_color" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Link Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends>
+	                    <field id="custom_header_general">1</field>
+	                </depends>
+				</field>
+				<field id="link_hover_color" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Link Hover Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends>
+	                    <field id="custom_header_general">1</field>
+	                </depends>
+				</field>
+				<field id="general_settings_outcontainer_heading" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Outer Container</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="custom_header_outer" translate="label comment" type="select" sortOrder="55" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom Style</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="outer_bg_color" translate="label comment" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Background Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends>
+	                    <field id="custom_header_outer">1</field>
+	                </depends>
+				</field>
+				<field id="outer_bg_image" translate="label" type="image" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Background Image</label>
+					<backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+					<upload_dir config="system/filesystem/media" scope_info="1">ves/themesettings/images</upload_dir>
+					<base_url type="media" scope_info="1">ves/themesettings/images</base_url>
+					<comment><![CDATA[Allowed file types: jpeg, gif, png.]]></comment>
+					<depends>
+	                    <field id="custom_header_outer">1</field>
+	                </depends>
+				</field>
+				<field id="outer_bg_repeat" translate="label comment" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Background Repeat</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Css\Background\Repeat</source_model>
+					<depends>
+	                    <field id="custom_header_outer">1</field>
+	                </depends>
+				</field>
+				<field id="outer_bg_attachment" translate="label comment" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Background Attachment</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Css\Background\Attachment</source_model>
+					<depends>
+	                    <field id="custom_header_outer">1</field>
+	                </depends>
+				</field>
+				<field id="outer_bg_positionx" translate="label comment" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Background Position (x-axis)</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Css\Background\Positionx</source_model>
+					<depends>
+	                    <field id="custom_header_outer">1</field>
+	                </depends>
+				</field>
+				<field id="outer_bg_positiony" translate="label comment" type="select" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Background Position (y-axis)</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Css\Background\Positiony</source_model>
+					<depends>
+	                    <field id="custom_header_outer">1</field>
+	                </depends>
+				</field>
+				<field id="outer_pattern" translate="label comment" type="select" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Pattern</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Pattern</frontend_model>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Css\Background\Pattern</source_model>
+					<depends>
+	                    <field id="custom_header_outer">1</field>
+	                </depends>
+				</field>
+				<field id="outer_padding_top" translate="label comment" type="text" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Top Padding</label>
+					<depends>
+	                    <field id="custom_header_outer">1</field>
+	                </depends>
+				</field>
+				<field id="outer_padding_bottom" translate="label comment" type="text" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Bottom Padding</label>
+					<depends>
+	                    <field id="custom_header_outer">1</field>
+	                </depends>
+				</field>
+				<field id="general_settings_incontainer_heading" translate="label comment" type="text" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Inner Container</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+
+				<field id="custom_header_inner" translate="label comment" type="select" sortOrder="155" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom Style</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="inner_bg_color" translate="label comment" type="text" sortOrder="160" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Inner Background Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends>
+	                    <field id="custom_header_inner">1</field>
+	                </depends>
+				</field>
+				<field id="inner_padding_top" translate="label comment" type="text" sortOrder="170" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Top Padding</label>
+					<depends>
+	                    <field id="custom_header_inner">1</field>
+	                </depends>
+				</field>
+				<field id="inner_padding_right" translate="label comment" type="text" sortOrder="180" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Right Padding</label>
+					<depends>
+	                    <field id="custom_header_inner">1</field>
+	                </depends>
+				</field>
+				<field id="inner_padding_bottom" translate="label comment" type="text" sortOrder="190" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Bottom Padding</label>
+					<depends>
+	                    <field id="custom_header_inner">1</field>
+	                </depends>
+				</field>
+				<field id="inner_padding_left" translate="label comment" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Left Padding</label>
+					<depends>
+	                    <field id="custom_header_inner">1</field>
+	                </depends>
+				</field>
+			</group>
+			<group id="toplinks_settings" translate="label" type="text" sortOrder="230" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Top links</label>
+				<field id="enable" translate="label comment" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enable</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment><![CDATA[<br/>]]></comment>
+				</field>
+				<field id="custom_links" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Add Custom Links</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\TopLinks</frontend_model>
+					<backend_model>Ves\Themesettings\Model\System\Config\Backend\Serialized</backend_model>
+					<comment><![CDATA[<p><b>_blank</b> Load in a new window</p><p><b>_self</b> Load in the same frame as it was clicked</p><p><b>_parent</b> Load in the parent frameset</p><p><b>_top</b> Load in the full body of the window</p>]]></comment>
+				</field>
+			</group>
+			<group id="topcart_settings" translate="label" type="text" sortOrder="250" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Top Cart</label>
+			</group>
+			<group id="search_settings" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Search Box</label>
+				<field id="search" translate="label comment" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enable</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="custom_top_search" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom Style</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="search_bg_color" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Background Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_top_search">1</field></depends>
+				</field>
+				<field id="search_hover_bg_color" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Hover Background Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_top_search">1</field></depends>
+				</field>
+				<field id="search_color" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Text Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_top_search">1</field></depends>
+				</field>
+				<field id="search_hover_color" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Hover Text Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_top_search">1</field></depends>
+				</field>
+				<field id="search_border_color" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Border Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_top_search">1</field></depends>
+				</field>
+				<field id="search_border_hover_color" translate="label comment" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Border Hover Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_top_search">1</field></depends>
+				</field>
+				<field id="search_max_width" translate="label comment" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Maximum Width</label>
+					<depends><field id="search">1</field></depends>
+					<comment><![CDATA[Use to decrease the maximum width of the search box. It works similar to CSS property <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/max-width"><em>max-width</em></a>.<br/>Example values: <em>200px</em>, <em>75%</em>, <em>10em</em>. Leave empty to use the default width.<br/><strong>Important:</strong> don't forget to specify the unit.]]></comment>
+				</field>
+				<field id="searchbox_design_button" translate="label comment" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Search Button</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Separator</frontend_model>
+				</field>
+				<field id="searchbox_format_type" translate="label comment" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Format</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Design\Icon\DisplayType</source_model>
+				</field>
+				<field id="searchbox_format_text" translate="label comment" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Text</label>
+					<depends><field id="searchbox_format_type" separator=",">text,text-icon,icon-text</field></depends>
+				</field>
+				<field id="searchbox_format_class" translate="label comment" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Icon Class</label>
+					<depends><field id="searchbox_format_type" separator=",">text-icon,icon-text,icon</field></depends>
+				</field>
+			</group>
+			<group id="language_switcher_settings" translate="label" type="text" sortOrder="400" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Language Switcher</label>
+				<field id="language_switcher" translate="label comment" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enable</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="language_switcher_template" translate="label comment" type="select" sortOrder="5" showInDefault="10" showInWebsite="1" showInStore="1">
+					<label>Template</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Header\LanguageSwitcher</source_model>
+					<depends><field id="language_switcher">1</field></depends>
+				</field>
+				<field id="language_label" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Language label</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<depends><field id="language_switcher">1</field></depends>
+				</field>
+				<field id="language_label_color" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Label Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="language_switcher">1</field></depends>
+				</field>
+			</group>
+			<group id="currency_switcher_settings" translate="label" type="text" sortOrder="500" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Currency Switcher</label>
+				<field id="currency_switcher" translate="label comment" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enable</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="currency_template" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Template</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Header\CurrencySwitcher</source_model>
+					<depends><field id="currency_switcher">1</field></depends>
+				</field>
+				<field id="currency_label" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Currency label</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<depends><field id="currency_switcher">1</field></depends>
+				</field>
+				<field id="currency_label_color" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Label Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="currency_switcher">1</field></depends>
+				</field>
+			</group>
+			<group id="sticky_settings" translate="label" type="text" sortOrder="550" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Sticky Header</label>
+				<field id="sticky" translate="label comment" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enable</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="custom_sticky" translate="label comment" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom Style</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="bg_color" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Background Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_sticky">1</field></depends>
+				</field>
+				<field id="text_color" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Text Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_sticky">1</field></depends>
+				</field>
+				<field id="link_color" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Link Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_sticky">1</field></depends>
+				</field>
+				<field id="link_hover_color" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Link Hover Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_sticky">1</field></depends>
+				</field>
+				<field id="sticky_element_heading" translate="label comment" type="text" sortOrder="45" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Elements</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="sticky_type" translate="label comment" type="select" sortOrder="48" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Sticky Element</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Header\StickyElementType</source_model>
+				</field>
+				<field id="logo" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Logo on sticky header</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<depends><field id="sticky_type">specify</field></depends>
+				</field>
+				<field id="menu" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Menu on sticky header</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<depends><field id="sticky_type">specify</field></depends>
+				</field>
+				<field id="search" translate="label comment" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Search on sticky header</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<depends><field id="sticky_type">specify</field></depends>
+				</field>
+				<field id="topcart" translate="label comment" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Cart on sticky header</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<depends><field id="sticky_type">specify</field></depends>
+				</field>
+				<field id="toplinks" translate="label comment" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Top links on sticky header</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<depends><field id="sticky_type">specify</field></depends>
+				</field>
+				<field id="languageswitcher" translate="label comment" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Language Switcher on sticky header</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<depends><field id="sticky_type">specify</field></depends>
+				</field>
+				<field id="currencyswitcher" translate="label comment" type="select" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Currency Switcher on sticky header</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<depends><field id="sticky_type">specify</field></depends>
+				</field>
+				<field id="custom_block" translate="label comment" type="select" sortOrder="115" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom Static Block on sticky header</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<depends><field id="sticky_type">specify</field></depends>
+				</field>
+			</group>
+			<group id="topbar" translate="label" type="text" sortOrder="700" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Topbar</label>
+				<field id="show_topbar" translate="label comment" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Topbar Block</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="custom_topbar" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom Style</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="color" translate="label comment" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Text Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_topbar">1</field></depends>
+				</field>
+				<field id="link_color" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Link Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_topbar">1</field></depends>
+				</field>
+				<field id="link_hover_color" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Link Hover Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_topbar">1</field></depends>
+				</field>
+				<field id="topbar_outer_heading" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Outer Container</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="custom_topbar_outer" translate="label comment" type="select" sortOrder="35" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom Style</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+
+				</field>
+				<field id="bg_color" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Background Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_topbar_outer">1</field></depends>
+				</field>
+				<field id="outer_padding_top" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Top Padding</label>
+					<depends><field id="custom_topbar_outer">1</field></depends>
+				</field>
+				<field id="outer_padding_bottom" translate="label comment" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Bottom Padding</label>
+					<depends><field id="custom_topbar_outer">1</field></depends>
+				</field>
+				<field id="topbar_inner_heading" translate="label comment" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Inner Container</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="custom_topbar_inner" translate="label comment" type="select" sortOrder="75" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom Style</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="inner_bg_color" translate="label comment" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Background Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_topbar_inner">1</field></depends>
+				</field>
+				<field id="inner_padding_top" translate="label comment" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Top Padding</label>
+					<depends><field id="custom_topbar_inner">1</field></depends>
+				</field>
+				<field id="inner_padding_right" translate="label comment" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Right Padding</label>
+					<depends><field id="custom_topbar_inner">1</field></depends>
+				</field>
+				<field id="inner_padding_bottom" translate="label comment" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Bottom Padding</label>
+					<depends><field id="custom_topbar_inner">1</field></depends>
+				</field>
+				<field id="inner_padding_left" translate="label comment" type="text" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Left Padding</label>
+					<depends><field id="custom_topbar_inner">1</field></depends>
+				</field>
+			</group>
+			<group id="top_cart" translate="label" type="text" sortOrder="900" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Top Cart</label>
+				<field id="cart_format" translate="label comment" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Format</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Design\Icon\DisplayType</source_model>
+				</field>
+				<field id="cart_text" translate="label comment" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Text</label>
+					<depends><field id="cart_format" separator=",">text,text-icon,icon-text</field></depends>
+				</field>
+				<field id="cart_class" translate="label comment" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Icon Class</label>
+					<depends><field id="cart_format" separator=",">text-icon,icon-text,icon</field></depends>
+				</field>
+			</group>
+		</section>
+		<section id="ves_themesettings_footer" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+			<class>separator-top</class>
+			<label>Footer</label>
+			<tab>vesthemesettings</tab>
+			<resource>Ves_Themesettings::configuration</resource>
+			<group id="general_settings" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>General Settings</label>
+
+				<field id="custom_footer_general" translate="label comment" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom Style</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+
+				<field id="text_color" translate="label comment" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Text Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_footer_general">1</field></depends>
+				</field>
+				<field id="link_color" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Link Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_footer_general">1</field></depends>
+				</field>
+				<field id="link_hover_color" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Link Hover Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_footer_general">1</field></depends>
+				</field>
+				<field id="general_settings_outcontainer_heading" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Outer Container</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+
+				<field id="custom_footer_outer" translate="label comment" type="select" sortOrder="22" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom Style</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="outer_bg_color" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Background Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_footer_outer">1</field></depends>
+				</field>
+				<field id="outer_bg_image" translate="label" type="image" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Background Image</label>
+					<backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+					<upload_dir config="system/filesystem/media" scope_info="1">ves/themesettings/images</upload_dir>
+					<base_url type="media" scope_info="1">ves/themesettings/images</base_url>
+					<comment><![CDATA[Allowed file types: jpeg, gif, png.]]></comment>
+					<depends><field id="custom_footer_outer">1</field></depends>
+				</field>
+				<field id="outer_bg_repeat" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Background Repeat</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Css\Background\Repeat</source_model>
+					<depends><field id="custom_footer_outer">1</field></depends>
+				</field>
+				<field id="outer_bg_attachment" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Background Attachment</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Css\Background\Attachment</source_model>
+					<depends><field id="custom_footer_outer">1</field></depends>
+				</field>
+				<field id="outer_bg_positionx" translate="label comment" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Background Position (x-axis)</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Css\Background\Positionx</source_model>
+					<depends><field id="custom_footer_outer">1</field></depends>
+				</field>
+				<field id="outer_bg_positiony" translate="label comment" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Background Position (y-axis)</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Css\Background\Positiony</source_model>
+					<depends><field id="custom_footer_outer">1</field></depends>
+				</field>
+				<field id="outer_pattern" translate="label comment" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Pattern</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Pattern</frontend_model>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Css\Background\Pattern</source_model>
+					<depends><field id="custom_footer_outer">1</field></depends>
+				</field>
+				<field id="outer_padding_top" translate="label comment" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Top Padding</label>
+					<depends><field id="custom_footer_outer">1</field></depends>
+				</field>
+				<field id="outer_padding_bottom" translate="label comment" type="text" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Bottom Padding</label>
+					<depends><field id="custom_footer_outer">1</field></depends>
+				</field>
+				<field id="general_settings_coppyright_heading" translate="label comment" type="text" sortOrder="170" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Coppyright</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="enable_coppyright" translate="label comment" type="select" sortOrder="180" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enable</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="enable_custom_coppyright" translate="label comment" type="select" sortOrder="190" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom Coppyright</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="custom_coppyright" translate="label comment" type="editor" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Coppyright HTML</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Editor</frontend_model>
+				</field>
+				<field id="scrolltop_heading" translate="label comment" type="text" sortOrder="210" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Scroll Top</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="enable_scrolltop" translate="label comment" type="select" sortOrder="220" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enable</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="custom_scrolltop" translate="label comment" type="select" sortOrder="225" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom Style</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="scrolltop_bg" translate="label comment" type="text" sortOrder="230" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Background</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_scrolltop">1</field></depends>
+				</field>
+				<field id="scrolltop_color" translate="label comment" type="text" sortOrder="240" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_scrolltop">1</field></depends>
+				</field>
+				<field id="scrolltop_hover_bg" translate="label comment" type="text" sortOrder="250" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Hover Background Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_scrolltop">1</field></depends>
+				</field>
+				<field id="scrolltop_hover_color" translate="label comment" type="text" sortOrder="260" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Hover Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_scrolltop">1</field></depends>
+				</field>
+			</group>
+			<group id="footer_top_settings" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Footer Top Settings</label>
+				<field id="enable_footer_top" translate="label comment" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enable Footer Top</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="staticblock" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Choose CMS Static Block</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Footer\StaticBlocks</source_model>
+				</field>
+				<field id="custom_html" translate="label comment" type="editor" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom HTML</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Editor</frontend_model>
+				</field>
+				<field id="custom_footertop" translate="label comment" type="select" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom Style</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="text_color" translate="label comment" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Text Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_footertop">1</field></depends>
+				</field>
+				<field id="link_color" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Link Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_footertop">1</field></depends>
+				</field>
+				<field id="link_hover_color" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Link Hover Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_footertop">1</field></depends>
+				</field>
+				<field id="general_settings_outcontainer_heading" translate="label comment" type="text" sortOrder="22" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Outer Container</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="custom_footertop_outer" translate="label comment" type="select" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom Style</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="outer_bg_color" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Background Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_footertop_outer">1</field></depends>
+				</field>
+				<field id="outer_padding_top" translate="label comment" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Top Padding</label>
+					<depends><field id="custom_footertop_outer">1</field></depends>
+				</field>
+				<field id="outer_padding_bottom" translate="label comment" type="text" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Bottom Padding</label>
+					<depends><field id="custom_footertop_outer">1</field></depends>
+				</field>
+				<field id="general_settings_incontainer_heading" translate="label comment" type="text" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Inner Container</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="custom_footertop_inner" translate="label comment" type="select" sortOrder="135" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom Style</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="inner_bg_color" translate="label comment" type="text" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Inner Background Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_footertop_inner">1</field></depends>
+				</field>
+				<field id="inner_padding_top" translate="label comment" type="text" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Top Padding</label>
+					<depends><field id="custom_footertop_inner">1</field></depends>
+				</field>
+				<field id="inner_padding_right" translate="label comment" type="text" sortOrder="160" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Right Padding</label>
+					<depends><field id="custom_footertop_inner">1</field></depends>
+				</field>
+				<field id="inner_padding_bottom" translate="label comment" type="text" sortOrder="170" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Bottom Padding</label>
+					<depends><field id="custom_footertop_inner">1</field></depends>
+				</field>
+				<field id="inner_padding_left" translate="label comment" type="text" sortOrder="180" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Left Padding</label>
+					<depends><field id="custom_footertop_inner">1</field></depends>
+				</field>
+			</group>
+			<group id="footer_center_settings" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Footer Center Settings</label>
+
+				<field id="enable_footer_center" translate="label comment" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enable Footer Center</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+
+				<field id="staticblock" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Choose CMS Static Block</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Footer\StaticBlocks</source_model>
+				</field>
+				<field id="custom_html" translate="label comment" type="editor" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom HTML</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Editor</frontend_model>
+				</field>
+				<field id="custom_footercenter" translate="label comment" type="select" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom Style</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="text_color" translate="label comment" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Text Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_footercenter">1</field></depends>
+				</field>
+				<field id="link_color" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Link Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_footercenter">1</field></depends>
+				</field>
+				<field id="link_hover_color" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Link Hover Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_footercenter">1</field></depends>
+				</field>
+				<field id="general_settings_outcontainer_heading" translate="label comment" type="text" sortOrder="22" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Outer Container</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="custom_fcenter_outer" translate="label comment" type="select" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom Style</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="outer_bg_color" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Background Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_fcenter_outer">1</field></depends>
+				</field>
+				<field id="outer_padding_top" translate="label comment" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Top Padding</label>
+					<depends><field id="custom_fcenter_outer">1</field></depends>
+				</field>
+				<field id="outer_padding_bottom" translate="label comment" type="text" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Bottom Padding</label>
+					<depends><field id="custom_fcenter_outer">1</field></depends>
+				</field>
+				<field id="general_settings_incontainer_heading" translate="label comment" type="text" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Inner Container</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="custom_fcenter_inner" translate="label comment" type="select" sortOrder="135" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom Style</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="inner_bg_color" translate="label comment" type="text" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Inner Background Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_fcenter_inner">1</field></depends>
+				</field>
+				<field id="inner_padding_top" translate="label comment" type="text" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Top Padding</label>
+					<depends><field id="custom_fcenter_inner">1</field></depends>
+				</field>
+				<field id="inner_padding_right" translate="label comment" type="text" sortOrder="160" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Right Padding</label>
+					<depends><field id="custom_fcenter_inner">1</field></depends>
+				</field>
+				<field id="inner_padding_bottom" translate="label comment" type="text" sortOrder="170" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Bottom Padding</label>
+					<depends><field id="custom_fcenter_inner">1</field></depends>
+				</field>
+				<field id="inner_padding_left" translate="label comment" type="text" sortOrder="180" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Left Padding</label>
+					<depends><field id="custom_fcenter_inner">1</field></depends>
+				</field>
+			</group>
+			<group id="footer_bottom_settings" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Footer Bottom Settings</label>
+
+				<field id="enable_footer_bottom" translate="label comment" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enable Footer Bottom</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="staticblock" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Choose CMS Static Block</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Footer\StaticBlocks</source_model>
+				</field>
+				<field id="custom_html" translate="label comment" type="editor" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom HTML</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Editor</frontend_model>
+				</field>
+				<field id="custom_ffooter" translate="label comment" type="select" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom Style</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="text_color" translate="label comment" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Text Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_ffooter">1</field></depends>
+				</field>
+				<field id="link_color" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Link Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_ffooter">1</field></depends>
+				</field>
+				<field id="link_hover_color" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Link Hover Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_ffooter">1</field></depends>
+				</field>
+				<field id="general_settings_outcontainer_heading" translate="label comment" type="text" sortOrder="22" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Outer Container</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="custom_ffooter_outer" translate="label comment" type="select" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom Style</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="outer_bg_color" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Background Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_ffooter_outer">1</field></depends>
+				</field>
+				<field id="outer_padding_top" translate="label comment" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Top Padding</label>
+					<depends><field id="custom_ffooter_outer">1</field></depends>
+				</field>
+				<field id="outer_padding_bottom" translate="label comment" type="text" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Bottom Padding</label>
+					<depends><field id="custom_ffooter_outer">1</field></depends>
+				</field>
+				<field id="general_settings_incontainer_heading" translate="label comment" type="text" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Inner Container</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="custom_ffooter_inner" translate="label comment" type="select" sortOrder="135" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom Style</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="inner_bg_color" translate="label comment" type="text" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Inner Background Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_ffooter_inner">1</field></depends>
+				</field>
+				<field id="inner_padding_top" translate="label comment" type="text" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Top Padding</label>
+					<depends><field id="custom_ffooter_inner">1</field></depends>
+				</field>
+				<field id="inner_padding_right" translate="label comment" type="text" sortOrder="160" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Right Padding</label>
+					<depends><field id="custom_ffooter_inner">1</field></depends>
+				</field>
+				<field id="inner_padding_bottom" translate="label comment" type="text" sortOrder="170" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Bottom Padding</label>
+					<depends><field id="custom_ffooter_inner">1</field></depends>
+				</field>
+				<field id="inner_padding_left" translate="label comment" type="text" sortOrder="180" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Left Padding</label>
+					<depends><field id="custom_ffooter_inner">1</field></depends>
+				</field>
+			</group>
+		</section>
+		<section id="ves_themesettings_product_listing" translate="label" type="text" sortOrder="250" showInDefault="1" showInWebsite="1" showInStore="1">
+			<class>separator-top</class>
+			<label>Product Listing</label>
+			<tab>vesthemesettings</tab>
+			<resource>Ves_Themesettings::configuration</resource>
+			<group id="general" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>General</label>
+				<field id="ovveride_productlist" translate="label comment" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Override on Product List Widget Settings</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment><![CDATA[If set to Yes: Configs will ovveride product list widget configs.]]></comment>
+				</field>
+			</group>
+			<group id="design" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Product Design</label>
+				<comment><![CDATA[<strong style="color:red;">Important</strong>: In this tab, you can configure text color, backgound color, design button of product in product list(related products, upsell products, crossel product), widget(new product), product list in category page.]]></comment>
+				<field id="general_settings_heading" translate="label comment" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>General Settings</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="custom_product_list" translate="label comment" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom Style</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="bg_color" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Background Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_product_list">1</field></depends>
+				</field>
+				<field id="hover_bg_color" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Hover Background Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_product_list">1</field></depends>
+				</field>
+				<field id="padding_top" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Padding Top</label>
+					<depends><field id="custom_product_list">1</field></depends>
+				</field>
+				<field id="padding_right" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Padding Right</label>
+					<depends><field id="custom_product_list">1</field></depends>
+				</field>
+				<field id="padding_bottom" translate="label comment" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Padding Bottom</label>
+					<depends><field id="custom_product_list">1</field></depends>
+				</field>
+				<field id="padding_left" translate="label comment" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Padding Left</label>
+					<depends><field id="custom_product_list">1</field></depends>
+				</field>
+				<field id="border_heading" translate="label comment" type="text" sortOrder="62" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Border</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Separator</frontend_model>
+					<depends><field id="custom_product_list">1</field></depends>
+				</field>
+				<field id="border_style" translate="label comment" type="select" sortOrder="64" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Border Style</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Product\BorderStyle</source_model>
+					<depends><field id="custom_product_list">1</field></depends>
+				</field>
+				<field id="border_width" translate="label comment" type="select" sortOrder="67" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Border Width</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Product\BorderWidth</source_model>
+					<depends><field id="custom_product_list">1</field></depends>
+				</field>
+				<field id="border_color" translate="label comment" type="text" sortOrder="68" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Border Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_product_list">1</field></depends>
+				</field>
+				<field id="name_heading" translate="label comment" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Product Name</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="custom_pl_name" translate="label comment" type="select" sortOrder="75" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom Style</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="name_color" translate="label comment" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Name Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_pl_name">1</field></depends>
+				</field>
+				<field id="name_hover_color" translate="label comment" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Name Hover Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_pl_name">1</field></depends>
+				</field>
+				<field id="image_heading" translate="label comment" type="text" sortOrder="92" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Image</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="custom_pl_image" translate="label comment" type="select" sortOrder="93" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom Style</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="image_bg_color" translate="label comment" type="text" sortOrder="94" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Image Background Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_pl_image">1</field></depends>
+				</field>
+				<field id="image_hover_bg_color" translate="label comment" type="text" sortOrder="96" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Image Hover Background Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_pl_image">1</field></depends>
+				</field>
+				<field id="price_heading" translate="label comment" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Price</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="custom_pl_price" translate="label comment" type="select" sortOrder="102" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom Style</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="price_color" translate="label comment" type="text" sortOrder="105" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Price Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_pl_price">1</field></depends>
+				</field>
+				<field id="special_price_color" translate="label comment" type="text" sortOrder="115" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Special Price Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_pl_price">1</field></depends>
+				</field>
+				<field id="special_price_label_color" translate="label comment" type="text" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Special Price Label Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_pl_price">1</field></depends>
+				</field>
+				<field id="old_price_color" translate="label comment" type="text" sortOrder="125" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Old Price Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_pl_price">1</field></depends>
+				</field>
+				<field id="old_price_label_color" translate="label comment" type="text" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Old Price Label Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_pl_price">1</field></depends>
+				</field>
+				<field id="quickview_heading" translate="label comment" type="text" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Quickview</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="custom_pl_quickview" translate="label comment" type="select" sortOrder="145" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom Style</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="quickview_color" translate="label comment" type="text" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Quickview Text Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_pl_quickview">1</field></depends>
+				</field>
+				<field id="quickview_hover_color" translate="label comment" type="text" sortOrder="160" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Quickview Hover Tex Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_pl_quickview">1</field></depends>
+				</field>
+				<field id="quickview_bg_color" translate="label comment" type="text" sortOrder="170" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Quickview Background Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_pl_quickview">1</field></depends>
+				</field>
+				<field id="quickview_hover_bg_color" translate="label comment" type="text" sortOrder="180" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Quickview Hover Background Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_pl_quickview">1</field></depends>
+				</field>
+				<field id="quickview_design_button" translate="label comment" type="text" sortOrder="181" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Quickview Button</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Separator</frontend_model>
+				</field>
+				<field id="quickview_format_type" translate="label comment" type="select" sortOrder="182" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Format</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Design\Icon\DisplayType</source_model>
+				</field>
+				<field id="quickview_format_text" translate="label comment" type="text" sortOrder="184" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Text</label>
+					<depends><field id="quickview_format_type" separator=",">text,text-icon,icon-text</field></depends>
+				</field>
+				<field id="quickview_format_class" translate="label comment" type="text" sortOrder="186" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Icon Class</label>
+					<depends><field id="quickview_format_type" separator=",">text-icon,icon-text,icon</field></depends>
+				</field>
+				<field id="addtocart_heading" translate="label comment" type="text" sortOrder="188" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Add To Cart</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="custom_pl_addcart" translate="label comment" type="select" sortOrder="190" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom Style</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="addtocart_color" translate="label comment" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Add To Cart Text Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_pl_addcart">1</field></depends>
+				</field>
+				<field id="addtocart_hover_color" translate="label comment" type="text" sortOrder="210" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Add To Cart Hover Tex Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_pl_addcart">1</field></depends>
+				</field>
+				<field id="addtocart_bg_color" translate="label comment" type="text" sortOrder="220" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Add To Cart Background Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_pl_addcart">1</field></depends>
+				</field>
+				<field id="addtocart_hover_bg_color" translate="label comment" type="text" sortOrder="230" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Add To Cart Hover Background Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_pl_addcart">1</field></depends>
+				</field>
+				<field id="addtocart_design_button" translate="label comment" type="text" sortOrder="231" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Addtocart Button</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Separator</frontend_model>
+				</field>
+				<field id="addtocart_format_type" translate="label comment" type="select" sortOrder="232" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Format</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Design\Icon\DisplayType</source_model>
+				</field>
+				<field id="addtocart_format_text" translate="label comment" type="text" sortOrder="234" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Text</label>
+					<depends><field id="addtocart_format_type" separator=",">text,text-icon,icon-text</field></depends>
+				</field>
+				<field id="addtocart_format_class" translate="label comment" type="text" sortOrder="236" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Icon Class</label>
+					<depends><field id="addtocart_format_type" separator=",">text-icon,icon-text,icon</field></depends>
+				</field>
+				<field id="compare_heading" translate="label comment" type="text" sortOrder="240" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Compare</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="custom_pl_compare" translate="label comment" type="select" sortOrder="245" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom Style</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="compare_color" translate="label comment" type="text" sortOrder="250" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Compare Text Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_pl_compare">1</field></depends>
+				</field>
+				<field id="compare_hover_color" translate="label comment" type="text" sortOrder="260" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Compare Hover Tex Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_pl_compare">1</field></depends>
+				</field>
+				<field id="compare_bg_color" translate="label comment" type="text" sortOrder="270" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Compare Background Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_pl_compare">1</field></depends>
+				</field>
+				<field id="compare_hover_bg_color" translate="label comment" type="text" sortOrder="280" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Compare Hover Background Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_pl_compare">1</field></depends>
+				</field>
+				<field id="compare_design_button" translate="label comment" type="text" sortOrder="281" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Compare Link</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Separator</frontend_model>
+				</field>
+				<field id="compare_format_type" translate="label comment" type="select" sortOrder="282" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Format</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Design\Icon\DisplayType</source_model>
+				</field>
+				<field id="compare_format_text" translate="label comment" type="text" sortOrder="284" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Text</label>
+					<depends><field id="compare_format_type" separator=",">text,text-icon,icon-text</field></depends>
+				</field>
+				<field id="compare_format_class" translate="label comment" type="text" sortOrder="286" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Icon Class</label>
+					<depends><field id="compare_format_type" separator=",">text-icon,icon-text,icon</field></depends>
+				</field>
+				<field id="wishlist_heading" translate="label comment" type="text" sortOrder="290" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Wishlist</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="custom_pl_wishlist" translate="label comment" type="select" sortOrder="295" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom Style</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="whishlist_color" translate="label comment" type="text" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Whishlist Text Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_pl_wishlist">1</field></depends>
+				</field>
+				<field id="whishlist_hover_color" translate="label comment" type="text" sortOrder="310" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Whishlist Hover Tex Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_pl_wishlist">1</field></depends>
+				</field>
+				<field id="whishlist_bg_color" translate="label comment" type="text" sortOrder="320" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Whishlist Background Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_pl_wishlist">1</field></depends>
+				</field>
+				<field id="whishlist_hover_bg_color" translate="label comment" type="text" sortOrder="322" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Whishlist Hover Background Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_pl_wishlist">1</field></depends>
+				</field>
+				<field id="wishlist_design_button" translate="label comment" type="text" sortOrder="324" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Wishlist Link</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Separator</frontend_model>
+				</field>
+				<field id="wishlist_format_type" translate="label comment" type="select" sortOrder="326" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Format</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Design\Icon\DisplayType</source_model>
+				</field>
+				<field id="wishlist_format_text" translate="label comment" type="text" sortOrder="328" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Text</label>
+					<depends><field id="wishlist_format_type" separator=",">text,text-icon,icon-text</field></depends>
+				</field>
+				<field id="wishlist_format_class" translate="label comment" type="text" sortOrder="330" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Icon Class</label>
+					<depends><field id="wishlist_format_type" separator=",">text-icon,icon-text,icon</field></depends>
+				</field>
+				<field id="shortdescription_heading" translate="label comment" type="text" sortOrder="340" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Short Description</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="short_description_color" translate="label comment" type="text" sortOrder="344" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+				</field>
+				<field id="timer_heading" translate="label comment" type="text" sortOrder="360" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Count Down Timer</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="countdown_timer_color" translate="label comment" type="text" sortOrder="370" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Countdown Timer Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+				</field>
+				<field id="productlabel_heading" translate="label comment" type="text" sortOrder="380" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Product Label</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="newlabel_heading" translate="label comment" type="text" sortOrder="388" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>New Label</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Separator</frontend_model>
+				</field>
+				<field id="custom_new_label" translate="label comment" type="select" sortOrder="389" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom Style</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="new_label_color" translate="label comment" type="text" sortOrder="390" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Text Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_new_label">1</field></depends>
+				</field>
+				<field id="new_label_bg_color" translate="label comment" type="text" sortOrder="400" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Background Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_new_label">1</field></depends>
+				</field>
+				<field id="sale_heading" translate="label comment" type="text" sortOrder="405" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Sale Label</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Separator</frontend_model>
+				</field>
+				<field id="custom_sale_label" translate="label comment" type="select" sortOrder="408" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom Style</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="sale_label_color" translate="label comment" type="text" sortOrder="410" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Sale Label Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_sale_label">1</field></depends>
+				</field>
+				<field id="sale_label_bg_color" translate="label comment" type="text" sortOrder="420" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Sale Label Background Color</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Color</frontend_model>
+					<depends><field id="custom_sale_label">1</field></depends>
+				</field>
+				<field id="product_preview" translate="label comment" sortOrder="450" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Product Preview</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Product\Preview</frontend_model>
+				</field>
+			</group>
+			<group id="product_settings" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Product Settings</label>
+				<comment><![CDATA[<strong style="color:red;">Important</strong>: In this tab, you can configure enable/disable product elements in product list(related products, upsell products, crossel product), widget(new product)]]></comment>
+				<field id="show_name" translate="label comment" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Name</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_name_single_line" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Name in Single Line</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment><![CDATA[In case product name is too long to be displayed in a single line, it will be clipped and an ellipsis will be appended at the end of the line to represent clipped text.]]></comment>
+					<depends><field id="show_name">1</field></depends>
+				</field>
+				<field id="show_short_description" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Short Description</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="short_max_char" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Description Character Limit</label>
+					<depends><field id="show_short_description">1</field></depends>
+					<comment><![CDATA[Default is 100]]></comment>
+				</field>
+				<field id="show_learnmore" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Learn More Link</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<depends><field id="show_short_description">1</field></depends>
+				</field>
+				<field id="show_price" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Price</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_review" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Review</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_countdowntimer" translate="label comment" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Countdown Timer</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_quickview" translate="label comment" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Quick View</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="quickview_popup_height" translate="label comment" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Quickview Popup Height</label>
+					<depends><field id="show_quickview">1</field></depends>
+				</field>
+				<field id="quickview_popup_width" translate="label comment" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Quickview Popup Width</label>
+					<depends><field id="show_quickview">1</field></depends>
+				</field>
+				<field id="show_addtocart" translate="label comment" type="select" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Add To Cart</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="addtocart_popup_height" translate="label comment" type="text" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Add To Cart Popup Height</label>
+					<depends><field id="show_addtocart">1</field></depends>
+				</field>
+				<field id="addtocart_popup_width" translate="label comment" type="text" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Add To Cart Popup Width</label>
+					<depends><field id="show_addtocart">1</field></depends>
+				</field>
+				<field id="show_wishlist" translate="label comment" type="select" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Wishlist</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_compare" translate="label comment" type="select" sortOrder="160" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Compare</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_new_label" translate="label comment" type="select" sortOrder="170" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show New Label</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_sale_label" translate="label comment" type="select" sortOrder="180" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Sale Label</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="image_settings_heading" translate="label comment" type="text" sortOrder="190" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Product Image</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="show_image" translate="label comment" type="select" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Image</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="aspect_ratio" translate="label comment" type="select" sortOrder="210" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Keep Image Aspect Ratio</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment><![CDATA[If set to Yes, it will keep aspect ratio of the product image (height of the image will be calculated automatically based on width). If set to No, Magento will automatically transform each image into square. If the original image was rectangular, the empty space at the sides will be filled with white color.]]></comment>
+				</field>
+				<field id="image_width" translate="label comment" type="text" sortOrder="220" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Image Width</label>
+					<depends><field id="show_image">1</field></depends>
+					<comment><![CDATA[If width is not specified, default width will be used (300 pixels). Remember that in the category view the visual size of the product image depends on the number of columns. For example, if you increase the number of columns, columns will be narrower so there will be less space for product image in each column.]]></comment>
+				</field>
+				<field id="image_height" translate="label comment" type="text" sortOrder="230" showInDefault="1" showInWebsite="1" showInStore="1">
+					<depends><field id="show_image">1</field></depends>
+					<label>Image Height</label>
+				</field>
+				<field id="alt_image" translate="label comment" type="select" sortOrder="240" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Alternative Image</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment><![CDATA[Show alternative image on mouse hover over the product image.]]></comment>
+				</field>
+				<field id="alt_image_column" translate="label comment" type="select" sortOrder="250" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Select Alternative Image By Column</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\AltImageColumn</source_model>
+					<comment><![CDATA[Which column of the product image gallery will mark alternative images of your products.]]></comment>
+					<depends><field id="alt_image">1</field></depends>
+				</field>
+				<field id="alt_image_column_value" translate="label comment" type="text" sortOrder="260" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Alternative Image Column Value</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\AltImageColumn</source_model>
+					<comment><![CDATA[Specify the value which will mark alternative images of your products. E.g.: if Select Alt. Image By Column is set to "Sort Order", specify the number which will mark (in "Sort Order" column of the product image gallery) alternative images, for example: "2".]]></comment>
+					<depends><field id="alt_image">1</field></depends>
+				</field>
+			</group>
+		</section>
+		<section id="ves_themesettings_category_page" translate="label" type="text" sortOrder="280" showInDefault="1" showInWebsite="1" showInStore="1">
+			<class>separator-top</class>
+			<label>Category Page</label>
+			<tab>vesthemesettings</tab>
+			<resource>Ves_Themesettings::configuration</resource>
+			<group id="general_settings" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>General Settings</label>
+				<field id="show_name" translate="label comment" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Category Name</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_description" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Category Description</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_image" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Category Image</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="default_image" translate="label" type="image" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Default Image</label>
+					<backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+					<upload_dir config="system/filesystem/media" scope_info="1">ves/themesettings/images</upload_dir>
+					<base_url type="media" scope_info="1">ves/themesettings/images</base_url>
+					<depends><field id="show_image">1</field></depends>
+					<comment><![CDATA[Allowed file types: jpeg, gif, png.]]></comment>
+				</field>
+				<field id="show_toptoolbar" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Top Toolbar</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_bottomtoolbar" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Bottom Toolbar</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+			</group>
+			<group id="product_settings" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Product Settings</label>
+				<field id="show_name" translate="label comment" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Name</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_name_single_line" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Name in Single Line</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment><![CDATA[In case product name is too long to be displayed in a single line, it will be clipped and an ellipsis will be appended at the end of the line to represent clipped text.]]></comment>
+					<depends><field id="show_name">1</field></depends>
+				</field>
+				<field id="show_short_description" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Short Description</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="short_max_char" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Description Character Limit</label>
+					<depends><field id="show_short_description">1</field></depends>
+					<comment><![CDATA[Default is 100]]></comment>
+				</field>
+				<field id="show_learnmore" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Learn More Link</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<depends><field id="show_short_description">1</field></depends>
+				</field>
+				<field id="show_price" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Price</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_review" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Review</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_countdowntimer" translate="label comment" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Countdown Timer</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_new_label" translate="label comment" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show New Label</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_sale_label" translate="label comment" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Sale Label</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="quickview_heading" translate="label comment" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Quickview Button</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Separator</frontend_model>
+				</field>
+				<field id="show_quickview" translate="label comment" type="select" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="quickview_popup_height" translate="label comment" type="text" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Quickview Popup Height</label>
+				</field>
+				<field id="quickview_popup_width" translate="label comment" type="text" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Quickview Popup Width</label>
+				</field>
+				<field id="quickview_format_type" translate="label comment" type="select" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Format</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Design\Icon\DisplayType</source_model>
+				</field>
+				<field id="quickview_format_text" translate="label comment" type="text" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Text</label>
+					<depends><field id="quickview_format_type" separator=",">text,text-icon,icon-text</field></depends>
+				</field>
+				<field id="quickview_format_class" translate="label comment" type="text" sortOrder="160" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Icon Class</label>
+					<depends><field id="quickview_format_type" separator=",">text-icon,icon-text,icon</field></depends>
+				</field>
+				<field id="addtocart_heading" translate="label comment" type="text" sortOrder="170" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Add to Cart Button</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Separator</frontend_model>
+				</field>
+				<field id="show_addtocart" translate="label comment" type="select" sortOrder="180" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="addtocart_popup_height" translate="label comment" type="text" sortOrder="190" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Add To Cart Popup Height</label>
+				</field>
+				<field id="addtocart_popup_width" translate="label comment" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Add To Cart Popup Width</label>
+				</field>
+				<field id="addtocart_format_type" translate="label comment" type="select" sortOrder="210" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Format</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Design\Icon\DisplayType</source_model>
+				</field>
+				<field id="addtocart_format_text" translate="label comment" type="text" sortOrder="220" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Text</label>
+					<depends><field id="addtocart_format_type" separator=",">text,text-icon,icon-text</field></depends>
+				</field>
+				<field id="addtocart_format_class" translate="label comment" type="text" sortOrder="230" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Icon Class</label>
+					<depends><field id="addtocart_format_type" separator=",">text-icon,icon-text,icon</field></depends>
+				</field>
+				<field id="wishlist_heading" translate="label comment" type="text" sortOrder="240" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Wishlist Link</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Separator</frontend_model>
+				</field>
+				<field id="show_wishlist" translate="label comment" type="select" sortOrder="250" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="wishlist_format_type" translate="label comment" type="select" sortOrder="260" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Format</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Design\Icon\DisplayType</source_model>
+				</field>
+				<field id="wishlist_format_text" translate="label comment" type="text" sortOrder="270" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Text</label>
+					<depends><field id="wishlist_format_type" separator=",">text,text-icon,icon-text</field></depends>
+				</field>
+				<field id="wishlist_format_class" translate="label comment" type="text" sortOrder="280" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Icon Class</label>
+					<depends><field id="wishlist_format_type" separator=",">text-icon,icon-text,icon</field></depends>
+				</field>
+				<field id="compare_heading" translate="label comment" type="text" sortOrder="290" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Compare Link</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Separator</frontend_model>
+				</field>
+				<field id="show_compare" translate="label comment" type="select" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="compare_format_type" translate="label comment" type="select" sortOrder="310" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Format</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Design\Icon\DisplayType</source_model>
+				</field>
+				<field id="compare_format_text" translate="label comment" type="text" sortOrder="320" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Text</label>
+					<depends><field id="compare_format_type" separator=",">text,text-icon,icon-text</field></depends>
+				</field>
+				<field id="compare_format_class" translate="label comment" type="text" sortOrder="330" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Icon Class</label>
+					<depends><field id="compare_format_type" separator=",">text-icon,icon-text,icon</field></depends>
+				</field>
+				<field id="image_settings_heading" translate="label comment" type="text" sortOrder="340" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Product Image</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="show_image" translate="label comment" type="select" sortOrder="350" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Image</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="aspect_ratio" translate="label comment" type="select" sortOrder="360" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Keep Image Aspect Ratio</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<depends><field id="show_image">1</field></depends>
+					<comment><![CDATA[If set to Yes, it will keep aspect ratio of the product image (height of the image will be calculated automatically based on width). If set to No, Magento will automatically transform each image into square. If the original image was rectangular, the empty space at the sides will be filled with white color.]]></comment>
+				</field>
+				<field id="image_width" translate="label comment" type="text" sortOrder="370" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Image Width</label>
+					<depends><field id="show_image">1</field></depends>
+					<comment><![CDATA[If width is not specified, default width will be used (300 pixels). Remember that in the category view the visual size of the product image depends on the number of columns. For example, if you increase the number of columns, columns will be narrower so there will be less space for product image in each column.]]></comment>
+				</field>
+				<field id="image_height" translate="label comment" type="text" sortOrder="380" showInDefault="1" showInWebsite="1" showInStore="1">
+					<depends><field id="show_image">1</field></depends>
+					<label>Image Height</label>
+				</field>
+				<field id="alt_image" translate="label comment" type="select" sortOrder="390" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Alternative Image</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment><![CDATA[Show alternative image on mouse hover over the product image.]]></comment>
+				</field>
+				<field id="alt_image_column" translate="label comment" type="select" sortOrder="400" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Select Alternative Image By Column</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\AltImageColumn</source_model>
+					<comment><![CDATA[Which column of the product image gallery will mark alternative images of your products.]]></comment>
+					<depends><field id="alt_image">1</field></depends>
+				</field>
+				<field id="alt_image_column_value" translate="label comment" type="text" sortOrder="410" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Alternative Image Column Value</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\AltImageColumn</source_model>
+					<comment><![CDATA[Specify the value which will mark alternative images of your products. E.g.: if Select Alt. Image By Column is set to "Sort Order", specify the number which will mark (in "Sort Order" column of the product image gallery) alternative images, for example: "2".]]></comment>
+					<depends><field id="alt_image">1</field></depends>
+				</field>
+			</group>
+		</section>
+		<section id="ves_themesettings_product_page" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="1">
+			<class>separator-top</class>
+			<label>Product View Page</label>
+			<tab>vesthemesettings</tab>
+			<resource>Ves_Themesettings::configuration</resource>
+			<group id="element_settings" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Elements</label>
+				<field id="name_settings" translate="label comment" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Name Settings</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="show_name" translate="label comment" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Name</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="enable_customfont" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom Font</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="name_font_size" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Basic Font Size</label>
+				</field>
+				<field id="name_font_family_group" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Font Family</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Css\Font\Groupcustomgoogle</source_model>
+				</field>
+				<field id="name_font_family_custom" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom</label>
+					<comment><![CDATA[Type in your custom font stack, e.g.:<br/><em>Arial, "Helvetica Neue", Helvetica, sans-serif</em>.<br/><strong>Important</strong>: Do not add trailing semicolon.]]></comment>
+					<depends><field id="name_font_family_group">custom</field></depends>
+				</field>
+				<field id="name_font_family" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Google Fonts</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Css\Font\GoogleFonts</source_model>
+					<comment><![CDATA[Font preview is available on <a href="http://www.google.com/webfonts">Google Web Fonts</a><br/><strong style="color:red;">Important</strong>: most of the fonts from Google are not available in all weights. Make sure that you specified correct weight (field <strong>Font Weight</strong> below) for selected font. Otherwise font will not be displayed. Refer to <a href="http://www.google.com/webfonts">Google Web Fonts</a> to check if the selected weight is available for your font.]]></comment>
+					<depends><field id="name_font_family_group">google</field></depends>
+				</field>
+				<field id="name_char_subset" translate="label comment" type="multiselect" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Character Sets</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Css\Font\Subset</source_model>
+					<comment><![CDATA[Some of the fonts support multiple scripts (like Latin and Cyrillic for example). You need to select at least one character set.<br/><strong style="color:red;">Important</strong>: not all fonts support extended character sets. For a complete list of available fonts and font subsets refer to <a href="http://www.google.com/webfonts">Google Web Fonts</a>.<br/><strong style="color:red;">Important</strong>: using multiple character sets affects performance, so only select the character sets that you actually need.]]></comment>
+					<depends><field id="name_font_family_group">google</field></depends>
+				</field>
+				<field id="name_font_weight" translate="label comment" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Font Weight</label>
+					<comment><![CDATA[<div style="float:left;padding-bottom:30px">Specify the weight of the font. You can only use <strong>numeric font weights</strong> which are available for the CSS property <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight"><em>font-weight</em></a>. E.g. normal weight is <em>400</em>, bold is <em>700</em>. Leave empty to use default weight.<br/><strong style="color:red;">Important</strong>: if you selected a font from Google Fonts, note that some fonts are not available in all weights. Refer to <a href="http://www.google.com/webfonts">Google Web Fonts</a> to check if the selected weight is available for your font.</div>]]></comment>
+				</field>
+				<field id="contactus_settings_heading" translate="label comment" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Other Elements</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="show_sku" translate="label comment" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show SKU</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_sharelinks" translate="label comment" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Share Links</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment><![CDATA[Facebook, Twitter]]></comment>
+				</field>
+				<field id="show_short_description" translate="label comment" type="select" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Short Description</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_price" translate="label comment" type="select" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Price</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_rating" translate="label comment" type="select" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Rating</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_countdowntimer" translate="label comment" type="select" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Countdown Timer</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_addtocart" translate="label comment" type="select" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Add To Cart</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_review" translate="label comment" type="select" sortOrder="160" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Review</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_wishlist" translate="label comment" type="select" sortOrder="165" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Wishlist</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_email" translate="label comment" type="select" sortOrder="167" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Email to Friend</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_compare" translate="label comment" type="select" sortOrder="170" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Compare</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_newlabel" translate="label comment" type="select" sortOrder="180" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show New Label</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_salelabel" translate="label comment" type="select" sortOrder="190" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Sale Label</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="thumb_layout" translate="label comment" type="select" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Thumbnail Layout</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\ThumbLayout</source_model>
+				</field>
+				<field id="thumb_location" translate="label comment" type="select" sortOrder="210" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Thumbnail Location</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\ThumbLocation</source_model>
+					<depends><field id="thumb_layout">horizontal</field></depends>
+				</field>
+				<field id="show_zoom" translate="label comment" type="select" sortOrder="220" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Zoom Image</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment><![CDATA[Enable/disable zoom on product image. The theme are using zoom js at here: <a href="http://www.jacklmoore.com/zoom/">http://www.jacklmoore.com/zoom/</a>]]></comment>
+				</field>
+				<field id="zoom_magnify" translate="label comment" type="select" sortOrder="230" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Zoom Magnify</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\ZoomMagnify</source_model>
+					<comment><![CDATA[This value is multiplied against the full size of the zoomed image. The default value is 1, meaning the zoomed image should be at 100% of its natural width and height.]]></comment>
+				</field>
+			</group>
+			<group id="tab_settings" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Tab</label>
+				<field id="mode" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Mode</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Product\Tabs\Mode</source_model>
+				</field>
+				<field id="selected_blocks_heading" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Selected Blocks Show As Tabs</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="enable_description" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Description</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="enable_addtioninfo" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Addition Info</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="enable_reviews" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Reviews</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="enable_related" translate="label comment" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Related Products</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="enable_upsell" translate="label comment" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Up-sell Products</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="customattributes_heading" translate="label comment" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Tab By Product Attribute Code</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Separator</frontend_model>
+				</field>
+				<field id="product_attrs" translate="label" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Add Attribute Code</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\CustomAttributes</frontend_model>
+					<backend_model>Ves\Themesettings\Model\System\Config\Backend\Serialized</backend_model>
+					<comment><![CDATA[Go to Stores > Attributes > Attribute Set, copy "Attribute Code" which you want to show in content of custom tab. Empty for hide]]></comment>
+				</field>
+				<field id="customcmsattributes_heading" translate="label comment" type="text" sortOrder="102" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Tab By CMS Block</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Separator</frontend_model>
+				</field>
+				<field id="cms_block_ids" translate="label" sortOrder="105" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Add CMS Block Identifiers</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\CustomCmsAttributes</frontend_model>
+					<backend_model>Ves\Themesettings\Model\System\Config\Backend\Serialized</backend_model>
+					<comment><![CDATA[Go to Content > Blocks, copy "Identifier" which you want to show in content of custom tab. Empty for hide]]></comment>
+				</field>
+				<field id="custom_tab_heading" translate="label comment" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Tab By Static Html Content</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Separator</frontend_model>
+				</field>
+				<field id="customtab" translate="label comment" type="select" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enable</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="customtab_title" translate="label comment" type="text" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Title</label>
+				</field>
+				<field id="customtab_staticblock" translate="label comment" type="select" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Choose CMS Static Block</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\StaticBlocks</source_model>
+					<comment><![CDATA[Choose a static block to show content in content of custom tab. Empty for hide.]]></comment>
+				</field>
+				<field id="customtab_content" translate="label comment" type="editor" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Or Input Custom Content for Custom Tab</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Editor</frontend_model>
+				</field>
+				<field id="relatedproducts_heading" translate="label comment" type="text" sortOrder="160" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Related Products</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Separator</frontend_model>
+				</field>
+				<field id="relatedproducts_loop" translate="label comment" type="select" sortOrder="161" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Loop Carousel</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="relatedproducts_rtl" translate="label comment" type="select" sortOrder="162" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>RTL Carousel</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="relatedproducts_autoplay" translate="label comment" type="select" sortOrder="163" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Autoplay</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="relatedproducts_timeout" translate="label comment" type="text" sortOrder="165" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Autoplay Timeout</label>
+				</field>
+				<field id="relatedproducts_number_item" translate="label comment" type="text" sortOrder="170" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Number of Visible Products</label>
+				</field>
+				<field id="relatedproducts_large_max_items" translate="label comment" type="text" sortOrder="180" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Number Columns On Page (Large display)</label>
+					<comment><![CDATA[Show number items when screen size 1200px and up]]></comment>
+				</field>
+				<field id="relatedproducts_large_items" translate="label comment" type="text" sortOrder="190" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Number Columns On Page</label>
+					<comment><![CDATA[Show number items when screen size between 1199px and 980px]]></comment>
+				</field>
+				<field id="relatedproducts_portrait_items" translate="label comment" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Number Columns On Page (Portrait tablets)</label>
+					<comment><![CDATA[Show number items when screen size between 979px and 769px]]></comment>
+				</field>
+				<field id="relatedproducts_tablet_items" translate="label comment" type="text" sortOrder="210" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Number Columns On Page (Phones to tablets)</label>
+					<comment><![CDATA[Show number items when screen size between 768px and 641px]]></comment>
+				</field>
+				<field id="relatedproducts_tablet_small_items" translate="label comment" type="text" sortOrder="220" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Number Columns On Page (Phones to Small tablets)</label>
+					<comment><![CDATA[Show number items when screen size between 640px and 480px]]></comment>
+				</field>
+				<field id="relatedproducts_mobile_items" translate="label comment" type="text" sortOrder="230" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Number Columns On Page (Phones)</label>
+					<comment><![CDATA[Show number items when screen size bellow 480px]]></comment>
+				</field>
+				<field id="replace_relatedproducts" translate="label comment" type="select" sortOrder="240" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Replace Related Products With Static Block</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Replacewithblock</source_model>
+				</field>
+				<field id="relatedproducts_staticblock" translate="label comment" type="select" sortOrder="250" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Choose CMS Static Block</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\ReplaceStaticBlocks</source_model>
+					<comment><![CDATA[Choose a static block to show content in content of Related Products. Empty for hide.]]></comment>
+				</field>
+				<field id="upsellproducts_heading" translate="label comment" type="text" sortOrder="260" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Upsell Products</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Separator</frontend_model>
+				</field>
+				<field id="upsellproducts_loop" translate="label comment" type="select" sortOrder="261" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Loop Carousel</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="upsellproducts_rtl" translate="label comment" type="select" sortOrder="262" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>RTL Carousel</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="upsellproducts_autoplay" translate="label comment" type="select" sortOrder="263" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Autoplay</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="upsellproducts_timeout" translate="label comment" type="text" sortOrder="265" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Autoplay Timeout</label>
+				</field>
+				<field id="upsellproducts_number_item" translate="label comment" type="text" sortOrder="270" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Number of Visible Products</label>
+				</field>
+				<field id="upsellproducts_large_max_items" translate="label comment" type="text" sortOrder="280" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Number Columns On Page (Large display)</label>
+					<comment><![CDATA[Show number items when screen size 1200px and up]]></comment>
+				</field>
+				<field id="upsellproducts_large_items" translate="label comment" type="text" sortOrder="290" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Number Columns On Page</label>
+					<comment><![CDATA[Show number items when screen size between 1199px and 980px]]></comment>
+				</field>
+				<field id="upsellproducts_portrait_items" translate="label comment" type="text" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Number Columns On Page (Portrait tablets)</label>
+					<comment><![CDATA[Show number items when screen size between 979px and 769px]]></comment>
+				</field>
+				<field id="upsellproducts_tablet_items" translate="label comment" type="text" sortOrder="310" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Number Columns On Page (Phones to tablets)</label>
+					<comment><![CDATA[Show number items when screen size between 768px and 641px]]></comment>
+				</field>
+				<field id="upsellproducts_tablet_small_items" translate="label comment" type="text" sortOrder="320" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Number Columns On Page (Phones to Small tablets)</label>
+					<comment><![CDATA[Show number items when screen size between 640px and 480px]]></comment>
+				</field>
+				<field id="upsellproducts_mobile_items" translate="label comment" type="text" sortOrder="330" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Number Columns On Page (Phones)</label>
+					<comment><![CDATA[Show number items when screen size bellow 480px]]></comment>
+				</field>
+				<field id="replace_upsellproducts" translate="label comment" type="select" sortOrder="340" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Replace Upsell Products With Static Block</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Replacewithblock</source_model>
+				</field>
+				<field id="upsellproducts_staticblock" translate="label comment" type="select" sortOrder="350" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Choose CMS Static Block</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\ReplaceStaticBlocks</source_model>
+					<comment><![CDATA[Choose a static block to show content in content of Upsell Products. Empty for hide.]]></comment>
+				</field>
+			</group>
+			
+		</section>
+		<section id="ves_themesettings_contact_page" translate="label" type="text" sortOrder="400" showInDefault="1" showInWebsite="1" showInStore="1">
+			<class>separator-top</class>
+			<label>Contact Page</label>
+			<tab>vesthemesettings</tab>
+			<resource>Ves_Themesettings::configuration</resource>
+			<group id="contactform" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Contact Form</label>
+				<field id="show_contactform" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enable</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+			</group>
+			<group id="googlemap" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Google Map</label>
+				<field id="show_googlemap" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enable</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="map_api" translate="label comment" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Google Map API</label>
+					<comment><![CDATA[You should get map api key at here: <a href="https://developers.google.com/maps/documentation/javascript/get-api-key" target="_BLANK">Get Google Map API Key</a><br/>Default: AIzaSyALraGXlzRqFlAOb-tYLhUi6o6Cq9qN4KA]]></comment>
+				</field>
+				<field id="address_preview" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Map</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Gmap</frontend_model>
+				</field>
+				<field id="location_lng" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Longitude</label>
+				</field>
+				<field id="location_lat" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Latitude</label>
+				</field>
+				<field id="radius" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Radius</label>
+				</field>
+				<field id="map_height" translate="label comment" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Map Height</label>
+					<comment><![CDATA[Default is 400px]]></comment>
+				</field>
+				<field id="map_width" translate="label comment" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Map Width</label>
+				</field>
+				<field id="map_zoom" translate="label comment" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Map Zoom</label>
+				</field>
+				<field id="marker_content" translate="label comment" type="editor" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Marker Content</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Editor</frontend_model>
+					<depends><field id="enable_custom_coppyright">1</field></depends>
+				</field>
+				<field id="marker_content_width" translate="label comment" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Marker Content Width</label>
+				</field>
+				<field id="marker_content_height" translate="label comment" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Marker Content Height</label>
+				</field>
+				<field id="contactus_settings_heading" translate="label comment" type="text" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Contact Us Informations</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="enable_contactus" translate="label comment" type="select" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enable</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="address" translate="label comment" type="text" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Address</label>
+				</field>
+				<field id="telephone" translate="label comment" type="text" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Telephone</label>
+				</field>
+				<field id="fax" translate="label comment" type="text" sortOrder="160" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Fax</label>
+				</field>
+				<field id="custom_html" translate="label comment" type="editor" sortOrder="170" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom Html</label>
+					<frontend_model>Ves\Themesettings\Block\Adminhtml\System\Config\Form\Field\Editor</frontend_model>
+				</field>
+			</group>
+		</section>
+		<section id="ves_themesettings_cart_page" translate="label" type="text" sortOrder="500" showInDefault="1" showInWebsite="1" showInStore="1">
+			<class>separator-top</class>
+			<label>Cart Page</label>
+			<tab>vesthemesettings</tab>
+			<resource>Ves_Themesettings::configuration</resource>
+			<group id="crossel_products" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Cross-sell Products</label>
+
+				<field id="crossellproducts_loop" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Loop Carousel</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="crossellproducts_rtl" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>RTL Carousel</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="crossellproducts_autoplay" translate="label comment" type="select" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Autoplay</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="crossellproducts_timeout" translate="label comment" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Autoplay Timeout</label>
+				</field>
+				<field id="number_item" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Number of Visible Products</label>
+				</field>
+				<field id="crossellproducts_large_max_items" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Number Columns On Page (Large display)</label>
+					<comment><![CDATA[Show number items when screen size 1200px and up]]></comment>
+				</field>
+				<field id="crossellproducts_large_items" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Number Columns On Page</label>
+					<comment><![CDATA[Show number items when screen size between 1199px and 980px]]></comment>
+				</field>
+				<field id="crossellproducts_portrait_items" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Number Columns On Page (Portrait tablets)</label>
+					<comment><![CDATA[Show number items when screen size between 979px and 769px]]></comment>
+				</field>
+				<field id="crossellproducts_tablet_items" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Number Columns On Page (Phones to tablets)</label>
+					<comment><![CDATA[Show number items when screen size between 768px and 641px]]></comment>
+				</field>
+				<field id="crossellproducts_tablet_small_items" translate="label comment" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Number Columns On Page (Phones to Small tablets)</label>
+					<comment><![CDATA[Show number items when screen size between 640px and 480px]]></comment>
+				</field>
+				<field id="crossellproducts_mobile_items" translate="label comment" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Number Columns On Page (Phones)</label>
+					<comment><![CDATA[Show number items when screen size bellow 480px]]></comment>
+				</field>
+				<field id="replace_crossel" translate="label comment" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Replace Cross-sell Products With Static Block</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\Replacewithblock</source_model>
+				</field>
+				<field id="staticblock" translate="label comment" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Choose CMS Static Block</label>
+					<source_model>Ves\Themesettings\Model\System\Config\Source\ReplaceStaticBlocks</source_model>
+					<comment><![CDATA[Choose a static block to show content in content of Crossell Products. Empty for hide.]]></comment>
+				</field>
+			</group>
+		</section>
+		<section id="ves_themesettings_customization" translate="label" type="text" sortOrder="550" showInDefault="1" showInWebsite="1" showInStore="1">
+			<class>separator-top</class>
+			<label>Customization</label>
+			<tab>vesthemesettings</tab>
+			<resource>Ves_Themesettings::configuration</resource>
+			<group id="custom_code" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Custom Code</label>
+				<field id="custom_css" translate="label comment" type="textarea" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom CSS</label>
+				</field>
+				<field id="custom_js" translate="label comment" type="textarea" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom Scripts</label>
+					<comment><![CDATA[All code will be put before end footer tag.]]></comment>
+				</field>
+			</group>
+		</section>
+	</system>
+</config>

@@ -1,0 +1,127 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement(EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+ * @package   Ced_Bonanza
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright Copyright CEDCOMMERCE(http://cedcommerce.com/)
+ * @license   http://cedcommerce.com/license-agreement.txt
+ */
+/*$block Ced_Bonanza_Block_Adminhtml_Category_Mapping*/
+$current_profile_id = $this->getCurrentProfile();
+$cat_url = $this->getRueDuCommerceCategoryUrl();
+$cat_attr_url = $this->getCategoryAttributeUrl();
+?>
+<div class="entry-edit">
+    <div class="section" id="rueducommerce-category">
+
+    </div>
+</div>
+<div class="hor-scroll" id="rueducommerce_attribute">
+    <?php echo $block->getChildHtml('rueducommerce_attributes'); ?>
+</div>
+<script type="text/javascript">
+ require(["jquery"],function($) {
+        $(document).ready(function() {
+            
+            var url = "<?php echo $cat_url; ?>";
+
+            var current_profile_id = "<?php echo $current_profile_id?>";
+            document.getElementById('rueducommerce-category').style.display = 'none';
+            getCategoryFronBonanza(url,level=1,category_id=0,current_profile_id);
+            
+            function getCategoryFronBonanza(url,level,category_id,current_profile_id){
+                if(level >1 && !category_id){
+                    alert('Please select Parent Category.');
+                    document.getElementById("select-level-"+level).value = category_id;
+                    var children =  document.getElementById('rueducommerce-category');
+                    var elementlengh = children.childElementCount;
+                    for (var i = level; i <= elementlengh ; i++) {
+                       document.getElementById("select-container-level-"+i).remove();
+                    }
+                    return false;
+                }
+            $.ajax({
+                url: url,
+                type: 'POST',
+                dataType: 'json',
+                data: { id:category_id, current_profile_id: current_profile_id, level:level },
+                showLoader: true,
+            complete: function(transport) {             
+                if(level==1 && transport.responseText=='Unable to fetch category') {
+                           document.getElementById('rueducommerce-category').innerHTML = transport.responseText+' Please check configuration.' ;
+                        }
+                        createNewCategoryLevel(level,transport.responseText);
+                        if(document.getElementById("select-level-"+level) && document.getElementById("select-level-"+level).value && ( transport.responseText!='Unable to fetch category')){
+                            getCategoryFronBonanza(url,level+1,document.getElementById("select-level-"+level).value,current_profile_id);
+                        } 
+                        document.getElementById('rueducommerce-category').style.display = 'block'; 
+                },
+                error: function (xhr, status, errorThrown) {
+                    console.log('Error happens. Try again.');
+                }
+            });
+            }
+
+            function createNewCategoryLevel(level,array) {
+
+                if(document.getElementById("select-container-level-"+level)){
+                    var container_div = document.getElementById("select-container-level-"+level);
+                } else {
+                    var container_div = document.createElement("div");
+                    container_div.id = "select-container-level-"+level;
+                }
+                container_div.style.padding = '10px';
+                if( array!='Unable to fetch category'){
+                    var fieldset_wrapper = document.getElementById("rueducommerce-category");
+                    fieldset_wrapper.appendChild(container_div);
+                    var selectList = document.createElement("select");
+                    selectList.id = "select-level-"+level;
+                    selectList.name = "rueducommerce[select-level"+level+"]";
+                    selectList.setAttribute('data-form-part', 'rueducommerce_profile_edit');
+                    selectList.className = 'required-entry input-text required-entry';
+                    container_div.innerHTML = "";
+                    container_div.appendChild(selectList);
+                    selectList.innerHTML = array;
+                    selectList.onchange =  function() {
+                        getCategoryFronBonanza(url,level+1,this.value , current_profile_id);
+                    };
+                } else {
+                    updateCategoryAttribute(level-1);
+                }
+                var children =  document.getElementById('rueducommerce-category');
+                var elementlengh = children.childElementCount;
+                for (var i = level+1; i <= elementlengh ; i++) {
+                   document.getElementById("select-container-level-"+i).remove();
+                }
+            }
+
+            function updateCategoryAttribute(level) {
+                var attr_update_url = "<?php echo $cat_attr_url; ?>";
+                $.ajax({
+                    url: attr_update_url,
+                    type: 'POST',
+                    dataType: 'json',
+                    data: { id:document.getElementById("select-level-"+level).value, current_profile_id: current_profile_id, level:level ,evalJS: true},
+                     showLoader: true,
+                complete: function(transport) {             
+                    if(transport.responseText) {
+                       $('#rueducommerce_attribute').html(transport.responseText);
+                            }
+                    },
+                    error: function (xhr, status, errorThrown) {
+                        console.log('Error happens. Try again.');
+                    }
+                });
+            }
+        });
+    });
+</script>

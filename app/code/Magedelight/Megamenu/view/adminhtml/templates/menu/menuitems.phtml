@@ -1,0 +1,349 @@
+<?php
+/**
+ * Magedelight
+ * Copyright (C) 2017 Magedelight <info@magedelight.com>
+ *
+ * @category Magedelight
+ * @package Magedelight_Megamenu
+ * @copyright Copyright (c) 2017 Mage Delight (http://www.magedelight.com/)
+ * @license http://opensource.org/licenses/gpl-3.0.html GNU General Public License,version 3 (GPL-3.0)
+ * @author Magedelight <info@magedelight.com>
+ */
+$menu_id = $block->getCurrentMenuId();
+$menu = $block->getCurrentMenu();
+$animationsFields = $block->animationSelect();
+$megamenutype = $menu->getMenuType();
+$depthLevel = '';
+if ($megamenutype == '2') {
+    $depthLevel = '1';
+} elseif ($megamenutype == '1') {
+    $depthLevel = '10';
+}
+?>
+
+<script type="text/javascript">
+    var menuDepthLevel = '<?= /* @noEscape */ $depthLevel; ?>';
+    var animationsFields = '<?= /* @noEscape */ $animationsFields; ?>';
+<?php
+if ($menu_id) {
+    ?>
+        var menuType = '<?= /* @noEscape */ $menu->getMenuType(); ?>';
+        var menuStaticsBlock = '<?= /* @noEscape */ trim(preg_replace('/\s\s+/', ' ', $this->getStaticBlocks())); ?>';
+        menuStaticsBlock = menuStaticsBlock.replace(/(\r\n|\n|\r)/gm, "");
+        var menuCategorySelectStaticsBlock = '<?= /* @noEscape */ trim(preg_replace('/\s\s+/', ' ', $this->getStaticBlocks('', '', true))); ?>';
+        menuCategorySelectStaticsBlock = menuCategorySelectStaticsBlock.replace(/(\r\n|\n|\r)/gm, "");
+        var menuTypes = '<?= /* @noEscape */ $this->getMenuLabels(); ?>';
+    <?php
+}
+?>
+    require([
+        'jquery',
+        'jquery/ui',
+        'Magento_Ui/js/modal/confirm'
+    ], function ($, ui, confirmation) {
+        $(document).ready(function () {
+            $("#tabbed").tabs();
+            $('#delete').click(function () {
+                var url = $(this).attr('data-url');
+                confirmation({
+                    title: 'Delete Menu',
+                    content: 'Are You sure, You want to delete this Menu.',
+                    actions: {
+                        confirm: function () {
+                            setLocation(url)
+                        }
+                    }
+                });
+            });
+        });
+    });
+</script>
+
+<div class="page-main-actions">
+    <div class="page-actions">
+        <div class="page-actions-inner">
+            <div class="page-actions-buttons">
+                <button id="back" onclick="location.href = '<?= /* @noEscape */ $this->getUrl('*/*/'); ?>'" class="action- scalable back" data-ui-id="back-button" type="button" title="<?= /* @noEscape */  __('Back'); ?>"><span><?= /* @noEscape */ __('Back'); ?></span> </button>
+                <button id="delete" data-url="<?= /* @noEscape */ $this->getUrl('*/*/delete', ['menu_id' => $menu_id]); ?>" class="action- scalable delete" data-ui-id="delete-button" type="button" title="Delete Menu"><span><?= /* @noEscape */  __('Delete Menu'); ?></span> </button>
+                <button id="reset" class="action- scalable reset" data-ui-id="reset-button" onclick="location.reload();" type="button" title="Reset"><span><?= /* @noEscape */  __('Reset Menu'); ?></span> </button>
+                <button id="save_and_continue" class="action- scalable save ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only megamenu-save-continue" type="button" title="Save and Continue Edit"><span><?= /* @noEscape */  __('Save and Continue Edit'); ?></span> </button>
+                <button id="save" class="action- scalable save primary ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only megamenu-save" type="button" title="Save Menu"><span><?= /* @noEscape */ __('Save Menu'); ?></span> </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form action="<?= /* @noEscape */ $this->getFormAction(); ?>" method="POST" id="megamenu_form" enctype="multipart/form-data" >
+    <div id="tabbed">
+        <ul class="tabs-horiz ">
+            <li class="ui-state-default ui-corner-top" >
+                <a href="#menu_content" title="Menu Main Content" class="ui-tabs-anchor">
+                    <span>Menu</span>
+                </a>
+            </li>
+            <?php
+            if ($menu_id) {
+                ?>
+                <li class="ui-state-default ui-corner-top">
+                    <a href="#menu_item_content" title="Menu Item Main Content" class="ui-tabs-anchor">
+                        <span> Menu Items</span>
+                    </a>
+                </li>
+                <?php
+            }
+            ?>
+        </ul>
+
+        <input type="hidden" name="form_key" value='<?= /* @noEscape */ $this->getFormKey(); ?>' />
+        <input type="hidden" name="menu_id" value='<?= /* @noEscape */ $menu_id; ?>' />
+        <input type="hidden" name="totalMenus" class="totalMenus" value="" />
+        <input type="hidden" id="menu_back" name="back" value='0' />
+        <div class="admin__fieldset-wrapper-content" id="menu_content">
+            <fieldset class="admin__fieldset">            
+                <?php
+                $status = $menu->getIsActive();
+                if ($status == '1') {
+                    $enable_checked = 'checked';
+                } else {
+                    $enable_checked = '';
+                    $status == '0';
+                }
+                ?>
+                <div class="admin__field">
+                    <label class="admin__field-label" for="is_active">
+                        <span><?= /* @noEscape */ __('Enable Menu'); ?></span>
+                    </label>
+                    <div class="admin__field-control">
+                        <div data-role="switcher" class="admin__actions-switch">
+                            <input type="checkbox" <?= /* @noEscape */  $enable_checked; ?>
+                                   class="admin__actions-switch-checkbox" id="is_active" name="is_active"
+                                   value="<?= /* @noEscape */ $status; ?>">
+                            <label class="admin__actions-switch-label" for="is_active">
+                                <span class="admin__actions-switch-text  is_active_label" data-text-on="Yes"
+                                      data-text-off="No"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="admin__field _required">
+                    <label class="admin__field-label" for="menu_name">
+                        <span><?= /* @noEscape */ __('Menu Title'); ?></span>
+                    </label>
+                    <div class="admin__field-control">
+                        <input type="text" class="admin__control-text required-entry" id="menu_name"
+                               name="menu_name" value="<?= /* @noEscape */ $menu->getMenuName(); ?>">
+                    </div>
+                </div>
+                <div class="admin__field">
+                    <label class="admin__field-label" for="menu_style">
+                        <span><?= /* @noEscape */ __('Menu Style'); ?></span>
+                    </label>
+                    <div class="admin__field-control">
+                        <textarea id="menu_style" class="admin__control-textarea" name="menu_style" cols="15" rows="2" placeholder=""><?= /* @noEscape */ $menu->getMenuStyle(); ?></textarea>
+                        <div class="admin__field-note">
+                            <span><?= /* @noEscape */  __('Only applicable for Megamenu. You can add custom css here'); ?></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="admin__field _required">
+                    <label class="admin__field-label" for="customer_groups">
+                        <span><?= /* @noEscape */ __('Customer Groups'); ?></span>
+                    </label>
+                    <div class="admin__field-control">
+                        <?= /* @noEscape */ $block->getCustomerGroupHtml(); ?>
+                    </div>
+                </div>
+                <?php
+                $enableSelected = '';
+                $disableSelected = '';
+                $disabledoption = '';
+                $status = intval($menu->getMenuType());
+
+                if ($status != 2) {
+                    $enableSelected = 'selected';
+                } else {
+                    $disableSelected = 'selected';
+                }
+                if ($menu_id) {
+                    $disabledoption = 'disabled';
+                }
+                ?>
+                <div class="admin__field">
+                    <label class="admin__field-label" for="menu_type">
+                        <span><?= /* @noEscape */ __('Menu Type'); ?></span>
+                    </label>
+                    <div class="admin__field-control">
+                        <select class="admin__control-select" <?= /* @noEscape */ $disabledoption; ?> name="menu_type" id="menu_type">
+                            <option data-title="NORMAL MENU" <?= /* @noEscape */ $enableSelected; ?> value="1"><?= /* @noEscape */ __('NORMAL MENU'); ?></option>
+                            <option data-title="MEGA MENU" <?= /* @noEscape */ $disableSelected; ?> value="2"><?= /* @noEscape */ __('MEGA MENU'); ?></option>
+                        </select>
+                    </div>
+                </div>
+                <?php
+                $menuDesignType = $menu->getMenuDesignType();
+                ?>
+                <div class="admin__field">
+                    <label class="admin__field-label" for="menu_type">
+                        <span><?= /* @noEscape */ __('Menu Design Type'); ?></span>
+                    </label>
+                    <div class="admin__field-control">
+                        <select class="admin__control-select" name="menu_design_type" id="menu_design_type">
+                            <option data-title="Horizontal Menu" <?= /* @noEscape */ ($menuDesignType == 'horizontal') ? 'selected' : ''; ?> value="horizontal"><?= /* @noEscape */ __('Horizontal Menu'); ?></option>
+                            <option data-title="Vertical Left" <?= /* @noEscape */ ($menuDesignType == 'vertical-left') ? 'selected' : ''; ?> value="vertical-left"><?= /* @noEscape */ __('Vertical Left Menu'); ?></option>
+                            <option data-title="Vertical Right" <?= /* @noEscape */ ($menuDesignType == 'vertical-right') ? 'selected' : ''; ?> value="vertical-right"><?= /* @noEscape */__('Vertical Right Menu'); ?></option>
+                            <option data-title="DrillDown Menu" <?= /* @noEscape */ ($menuDesignType == 'drillDown') ? 'selected' : ''; ?> value="drillDown"><?= /* @noEscape */ __('Drill Down Menu'); ?></option>
+                        </select>
+                    </div>
+                </div>
+
+                <?php
+                if ($menu_id) {
+                    $megamenutype = $menu->getMenuType();
+                    if ($megamenutype == '2') {
+                        $isSticky = $menu->getIsSticky();
+                        ?>
+                        <div class="admin__field">
+                            <label class="admin__field-label" for="is_sticky">
+                                <span><?= /* @noEscape */ __('Is Sticky'); ?></span>
+                            </label>
+                            <div class="admin__field-control">
+                                <select class="admin__control-select" name="is_sticky" id="is_sticky">
+                                    <option data-title="DISABLED" <?= /* @noEscape */ ($isSticky == '2') ? 'selected' : ''; ?> value="2"><?= /* @noEscape */ __('DISABLED'); ?></option>
+                                    <option data-title="ENABLED" <?= /* @noEscape */ ($isSticky == '1') ? 'selected' : ''; ?> value="1"><?= /* @noEscape */ __('ENABLED'); ?></option>
+                                </select>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                }
+                ?> 
+                <div class="admin__field _required">
+                    <label class="admin__field-label" for="store_id">
+                        <span><?= /* @noEscape */ __('Store View'); ?></span>
+                    </label>
+                    <div class="admin__field-control">
+                        <?php echo $this->getStoreHtml(); ?>
+                    </div>
+                </div>
+                <?php
+                if ($menu_id) {
+                    $megamenutype = $menu->getMenuType();
+                    if ($megamenutype == '2') {
+                        ?>
+                        <div class="admin__field">
+                            <label class="admin__field-label">
+                                <span><?= /* @noEscape */ __('Shortcode'); ?></span>
+                            </label>
+                            <div class="admin__field-control">
+                                <input type="text" style="width:715px" class="admin__control-text" value='{{block class="Magedelight\Megamenu\Block\ShortcodeMenu" template="Magedelight_Megamenu::menu/shortcode.phtml" menuid="<?php echo $menu->getMenuId(); ?>"}}' readonly="readonly" />
+                                <div class="admin__field-note">
+                                    <span><?= /* @noEscape */ __('(Paste this code in your CMS page or static blocks)'); ?></span>
+                                </div>
+                            </div>                     
+                        </div>
+                        <?php
+                    }
+                }
+                ?>
+            </fieldset>
+        </div>
+        <?php
+        if ($menu_id) {
+            ?>
+            <div class="menuitems_block" id="menu_item_content">
+                <div class="col-m-3">
+                    <div id="magedelight_menu_view_tabs" data-role="container" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+                        <div data-ui-id="sales-order-tabs-title" data-role="title" class="admin__page-nav-title">
+                            <strong><?= /* @noEscape */ __('Menu Options'); ?></strong>
+                            <span class="admin__page-nav-title-messages" data-role="title-messages"></span>
+                        </div>
+                        <div>
+                            <?php
+                            $megamenutype = $menu->getMenuType();
+                            if ($megamenutype != '1') {
+                                ?>
+                                <div class="megaMenuBlock leftBlocks">
+                                    <div class="entry-edit">
+                                        <div class="entry-edit-head">
+                                            <h4><?= /* @noEscape */ __('Mega Menu Block'); ?></h4>
+                                        </div>
+                                        <div class="fieldset">
+                                            <input class="input-text admin__control-text megamenutext megamenulabel" type="text" value="" name="mcustom_megamenu_text" />
+                                            <button type="button" class="form-button megaMenuBlockAdd ui-button"><?= /* @noEscape */ __('Add to menu'); ?></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php
+                            }
+                            $category = $this->getChildHtml('catalogprint.categories');
+                            if (!empty($category)) {
+                                ?>
+                                <div class="categoryBlock leftBlocks">
+                                    <?= /* @noEscape */ $category; ?>
+                                </div>
+                                <?php
+                            }
+                            ?>
+                            <div class="pageBlock leftBlocks">
+                                <div class="entry-edit">
+                                    <div class="entry-edit-head">
+                                        <h4><?= /* @noEscape */ __('Page Selection'); ?></h4>
+                                    </div>
+                                    <div class="fieldset">
+                                        <?= /* @noEscape */ $this->getPages(); ?>
+                                        <button type="button" class="form-button pageAdd ui-button"/>
+                                        <?= /* @noEscape */ __('Add to Menu'); ?></button>
+                                    </div>
+                                </div>                        
+                            </div>
+                            <div class="linkBlock leftBlocks">
+                                <div class="entry-edit">
+                                    <div class="entry-edit-head">
+                                        <h4><?= /* @noEscape */ __('Add external Links'); ?></h4>
+                                    </div>
+                                    <div class="fieldset">
+                                        <div>
+                                            <h5><?= /* @noEscape */ __('Label'); ?></h5>
+                                            <input class="input-text admin__control-text linktext linklabel" type="text"
+                                                   value="" name="mcustom_link_text" />
+                                        </div>
+                                        <div>
+                                            <h5><?= /* @noEscape */ __('Url'); ?></h5>
+                                            <input class="input-text admin__control-text linktext linkurl" type="url"
+                                                   value="" name="custom_link_url" />
+                                        </div>
+                                        <button type="button" class="form-button linkAdd ui-button"/>
+                                        <?= /* @noEscape */ __('Add to menu'); ?></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-m-9">
+                    <div class="admin__page-section-title">
+                        <span class="title"><?= /* @noEscape */ __('Menu Items'); ?></span>
+                    </div>
+                    <div class="admin__page-section-content">
+                        <div class="cf nestable-lists">
+                            <div class="dd" id="nestable">
+                                <?= /* @noEscape */ $this->getBackendMenuTree($menu->getMenuId()); ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php
+        }
+        ?>
+    </div>
+</form>
+
+<style>
+    .page-main-actions{
+        margin: 0 0 2rem;
+    }
+    .page-main-actions._hidden {
+        margin: 0 0 13.5rem;
+    }
+</style>

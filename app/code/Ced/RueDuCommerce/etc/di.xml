@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!--
+/**
+  * CedCommerce
+  *
+  * NOTICE OF LICENSE
+  *
+  * This source file is subject to the End User License Agreement (EULA)
+  * that is bundled with this package in the file LICENSE.txt.
+  * It is also available through the world-wide-web at this URL:
+  * http://cedcommerce.com/license-agreement.txt
+  *
+  * @category    Ced
+  * @package     Ced_RueDuCommerce
+  * @author      CedCommerce Core Team <connect@cedcommerce.com>
+  * @copyright   Copyright CEDCOMMERCE (http://cedcommerce.com/)
+  * @license     http://cedcommerce.com/license-agreement.txt
+  */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Ced\RueDuCommerce\Helper\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Ced\RueDuCommerce\Helper\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">RueDuCommerce</argument>
+            <argument name="handlers"  xsi:type="array">
+                <item name="system" xsi:type="object">Ced\RueDuCommerce\Helper\Handler</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Config\Model\Config">
+        <plugin name="rueducommerce_admin_system_config_save_plugin"
+                type="Ced\RueDuCommerce\Plugin\Config"
+                sortOrder="10"
+                disabled="false"
+        />
+    </type>
+
+    <type name="Magento\Framework\View\Asset\Minification">
+        <plugin name="rueducommerce-exclude" type="Ced\RueDuCommerce\Plugin\ExcludeFilesFromMinification" />
+    </type>
+
+    <preference for="Magento\Config\Model\Config\SchemaLocator" type="Ced\RueDuCommerce\Model\Config\SchemaLocator" />
+</config>

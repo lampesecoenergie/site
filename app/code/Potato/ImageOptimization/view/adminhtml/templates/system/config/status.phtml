@@ -1,0 +1,55 @@
+<?php
+/**
+ * @var $block \Potato\ImageOptimization\Block\Adminhtml\System\Config\Status
+ */
+?>
+<div class="status-container">
+    <div class="container progress-container">
+        <div class="progress-pie">
+            <span class="progress-pie__percent"><?= $block->getProgressPercentValue()?>
+                <span class="progress-pie__small">%</span>
+            </span>
+            <?php $angle = $block->getProgressAngle();?>
+            <span class="progress-pie__info"><?= $block->getOptimizedCount()?> / <?= $block->getTotalCount()?></span>
+            <div class="progress-pie__circle<?= ($angle>180)?' progress-pie__circle--full':'';?>">
+                <div class="progress-pie__circle-left" style="transform: rotate(<?= $angle;?>deg);"></div>
+                <div class="progress-pie__circle-right<?= ($angle>180)?' progress-pie__circle-right--full':'';?>"></div>
+            </div>
+            <div class="progress-pie__shadow"></div>
+        </div>
+    </div>
+    <div class="container info-container">
+        <div class="info-row">
+            <div class="column-name"><?= __("Last Scan");?></div>
+            <div class="column-value"><?= $block->getScanLastTime()?></div>
+        </div>
+        <div class="info-row">
+            <div class="column-name"><?= __("Last Optimization");?></div>
+            <div class="column-value"><?= $block->getOptimizationLastTime()?></div>
+        </div>
+        <div class="info-row" style="display: none">
+            <div class="column-name"><?= __("Libs status");?></div>
+            <div class="column-value"><?= $block->getLibStatusLabel()?></div>
+        </div>
+    </div>
+    <div class="container error-container">
+        <div class="info-row">
+            <div class="column-name"><?= __("Errors");?></div>
+            <div class="column-value"><?= $block->getErrorByGroupTotal(); ?></div>
+        </div>
+        <div class="error-group-container">
+            <ul class="status-error-group-list">
+                <?php foreach ($block->getErrorByGroup() as $errorType): ?>
+                    <li>
+                        <span><?= $errorType['text'] ?><span>
+                        <a href="<?= $block->getErrorUrlByCode($errorType['code'])?>" class="error-count"><?= $errorType['count'];?></a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+        <div class="button-row">
+            <?= $block->getGridViewButtonHtml() ?>
+        </div>
+    </div>
+</div>
+<div style="clear:both"></div>

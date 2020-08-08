@@ -1,0 +1,506 @@
+<?php
+$element = $block->getElement();
+$_htmlId = 'rueducommerceAttributes' ?>
+<?php $_htmlClass = 'rueducommerceAttributesClass' ?>
+<?php $_htmlName = 'rueducommerce_attributes' ?>
+<?php $_readonly = false ?>
+<div class="field" id="attribute-<?php /* @escapeNotVerified */
+echo $_htmlId ?>-container" data-attribute-code="<?php /* @escapeNotVerified */
+echo $_htmlId ?>"
+>
+    <div class="control">
+        <table class="admin__control-table tiers_table" id="tiers_table">
+            <thead>
+            <div>Please map all RueDuCommerce attributes with Magento attributes.</div>
+            <tr>
+                <th class="col-customer-group"><?php /* @escapeNotVerified */
+                    echo __('RueDuCommerce Attribute') ?></th>
+                <th class="col-qty required"><?php /* @escapeNotVerified */
+                    echo __('Magento Catalog Attribute') ?></th>
+                <th class="col-qty required"><?php /* @escapeNotVerified */
+                    echo __('Default Value') ?></th>
+                <th class="col-delete"><?php /* @escapeNotVerified */
+                    echo __('Action') ?></th>
+            </tr>
+            </thead>
+            <tbody id="<?php /* @escapeNotVerified */
+            echo $_htmlId ?>_container"></tbody>
+            <tfoot>
+            <tr>
+                <td colspan="4" class="col-actions-add"><?php echo $block->getAddButtonHtml() ?></td>
+            </tr>
+            </tfoot>
+            <script>
+            require([
+                'Magento_Ui/js/modal/modal',
+                'mage/template',
+                "prototype",
+                "mage/adminhtml/form"
+            ], function (modal, mageTemplate) {
+                var requiredAttributeRowTemplate = '<tr>'
+                    + '<input data-form-part="rueducommerce_profile_edit" type="hidden" value="0" name="<?php echo $_htmlName ?>[<%- data.index %>][isMandatory]" id="rueducommerce_attribute_row_<%- data.index %>_rueducommerce_required"" />'
+                    + '<input data-form-part="rueducommerce_profile_edit" type="hidden" name="<?php echo $_htmlName ?>[<%- data.index %>][name]" id="rueducommerce_attribute_row_<%- data.index %>_rueducommerce_attribute_hidden"" />'
+                    + '<input data-form-part="rueducommerce_profile_edit" type="hidden" name="<?php echo $_htmlName ?>[<%- data.index %>][attributeType]" id="rueducommerce_attribute_row_<%- data.index %>_attributeType"" />'
+                    + '<input data-form-part="rueducommerce_profile_edit" type="hidden" name="<?php echo $_htmlName ?>[<%- data.index %>][isMandatory]" id="rueducommerce_attribute_row_<%- data.index %>_isMandatory"" />'
+                    + '<input data-form-part="rueducommerce_profile_edit" type="hidden" name="<?php echo $_htmlName ?>[<%- data.index %>][inputType]" id="rueducommerce_attribute_row_<%- data.index %>_inputType"" />'
+                    + '<input data-form-part="rueducommerce_profile_edit" type="hidden" name="<?php echo $_htmlName ?>[<%- data.index %>][options]" id="rueducommerce_attribute_row_<%- data.index %>_options"" />'
+                    + '<td><select data-form-part="rueducommerce_profile_edit" style="margin-left: 10px;" onchange="return rueducommerceAttributeControl.setRueDuCommerceValues(this, <%- data.index %>);" class="<?php echo $_htmlClass ?> custgroup" name="<?php echo $_htmlName ?>[<%- data.index %>][name]" id="rueducommerce_attribute_row_<%- data.index %>_rueducommerce_attribute">'
+
+                    <?php foreach ($block->getRueDuCommerceAttributes() as $optGroup) {
+                    $disable = '';
+                    if ($optGroup['label'] == 'Required Attributes') {
+                        $disable = 'disabled="disabled"';
+                    }
+                    ?>
+                    + '<optgroup <?php echo $disable ?> label="<?php echo $optGroup['label'] ?> ">'
+                    <?php
+                    foreach ($optGroup['value'] as $attribute): ?>
+                    + '<option value="<?=  $block->escapeHtml($attribute['code'])  ?>" isMandatory="<?= $block->escapeHtml($attribute['required']) ?>" attributeType="<?= $block->escapeHtml($attribute['type']) ?>" enum_val=\'<?= $block->escapeHtml(addslashes(json_encode($attribute['values']['_value']))) ?>\' options=\'<?= $block->escapeHtml(addslashes(json_encode($attribute['option_values']))) ?>\' inputType="<?= $block->escapeHtml($attribute['type']) ?>"><?= $block->escapeHtml(__($attribute['label'])) ?></option>'
+                    <?php endforeach
+                    ?>
+                    + '</optgroup>'
+                    <?php  }
+                    ?>
+                    + '</select></td>'
+                    + '<td> <select onChange="return rueducommerceAttributeControl.showDefaultField(this, <%- data.index %>);" data-form-part="rueducommerce_profile_edit" class="<?php echo $_htmlClass ?> required_magento_attr required-entry" name="<?php echo $_htmlName ?>[<%- data.index %>][magento_attribute_code]" id="rueducommerce_attribute_row_<%- data.index %>_magento_attr">'
+                    <?php foreach ($block->getMagentoAttributes() as $_groupId=>$_groupName): ?>
+                    + "<option value='<?php echo $_groupId ?>'  options=\'<?= $block->escapeHtml($_groupName['option_values']) ?>\' ><?php echo __($_groupName['attribute_code']) ?></option>"
+                    <?php endforeach ?>
+                    + '</select>'
+                    + ' </td>'
+                    + '<td><input style="display:none;" type="text" data-form-part="rueducommerce_profile_edit"  name="<?php /* @escapeNotVerified */ echo $_htmlName ?>[<%- data.index %>][default]" value="" id="rueducommerce_attribute_row_<%- data.index %>_default_text" />'
+                    + '<select  style="display:none;" class="<?php echo $_htmlClass ?> required_magento_attr" data-form-part="rueducommerce_profile_edit" name="<?php echo $_htmlName ?>[<%- data.index %>][default]" id="rueducommerce_attribute_row_<%- data.index %>_default_select">'
+                    + '</select></td>'
+                    + '<td class="col-delete">'
+                    + '<input type="hidden" data-form-part="rueducommerce_profile_edit" name="<?php echo $_htmlName ?>[<%- data.index %>][option_mapping]" id="rueducommerce_attribute_row_<%- data.index %>_option_mapping"" value="{}" />'
+                    + '<button title="<?php /* @escapeNotVerified */ echo $block->escapeHtml(__('Map Options')); ?>" type="button" class="action- scalable map icon-btn map-attribute-option" id="rueducommerce_attribute_row_<%- data.index %>_map_option_button"  row_id="<%- data.index %>" id_prefix="rueducommerce_attribute_row_"  onclick="return rueducommerceAttributeControl.mapOption(this);" disabled>'
+                    + '<span><?php /* @escapeNotVerified */ echo __("Map Options") ?></span></button>'
+                    + '<input type="hidden" data-form-part="rueducommerce_profile_edit" name="<?php /* @escapeNotVerified */ echo $_htmlName ?>[<%- data.index %>][delete]" class="delete" value="" id="rueducommerce_attribute_row_<%- data.index %>_delete" />'
+                    + '<button title="<?php /* @escapeNotVerified */ echo $block->escapeHtml(__('Delete Tier')); ?>" type="button" class="action- scalable delete icon-btn delete-product-option" id="rueducommerce_attribute_row_<%- data.index %>_delete_button" onclick="return rueducommerceAttributeControl.deleteItem(event);">'
+                    + '<span><?php /* @escapeNotVerified */ echo __("Delete") ?></span></button></td>'
+                    + '</tr>';
+                var rueducommerceAttributeControl = {
+                    template: mageTemplate(requiredAttributeRowTemplate),
+                    itemsCount: 0,
+                    addItem: function () {
+                        <?php if ($_readonly): ?>
+                        if (arguments.length < 4) {
+                            return;
+                        }
+                        <?php endif; ?>
+                        var data = {
+                            rueducommerce_attribute: '',
+                            magento_attr: '',
+                            isMandatory: '',
+                            attributeType: '',
+                            inputType: '',
+                            options: '',
+                            default: '',
+                            option_mapping: '',
+                            index: this.itemsCount++
+                        };
+
+                        if (arguments.length >= 4) {
+                            data.rueducommerce_attribute = arguments[0];
+                            data.magento_attr = arguments[1];
+                            data.attributeType = arguments[2];
+                            data.isMandatory = arguments[3];
+                            data.inputType = arguments[4];
+                            data.options = arguments[5];
+                            data.default = arguments[6];
+                            data.option_mapping = arguments[7];
+                        }
+                        Element.insert($('<?php /* @escapeNotVerified */ echo $_htmlId ?>_container'), {
+                            bottom: this.template({
+                                data: data
+                            })
+                        });
+                        var rueducommerceAttribute = $('rueducommerce_attribute_row_' + data.index + '_rueducommerce_attribute');
+                        $('rueducommerce_attribute_row_' + data.index + '_rueducommerce_attribute').value = data.rueducommerce_attribute;
+                        if(rueducommerceAttribute.options[rueducommerceAttribute.selectedIndex] != undefined) {
+                            $('rueducommerce_attribute_row_' + data.index + '_magento_attr').value = data.magento_attr;
+                            $('rueducommerce_attribute_row_' + data.index + '_attributeType').value = data.attributeType;
+                            $('rueducommerce_attribute_row_' + data.index + '_isMandatory').value = data.isMandatory;
+                            $('rueducommerce_attribute_row_' + data.index + '_inputType').value = data.inputType;
+                            $('rueducommerce_attribute_row_' + data.index + '_options').value = data.options;
+                            $('rueducommerce_attribute_row_' + data.index + '_option_mapping').value = data.option_mapping;
+
+                            if (data.isMandatory == "true") {
+                                $('rueducommerce_attribute_row_' + data.index + '_delete_button').remove();
+                                $('rueducommerce_attribute_row_' + data.index + '_rueducommerce_attribute').disabled = true;
+                                $('rueducommerce_attribute_row_' + data.index + '_rueducommerce_attribute_hidden').value =
+                                    data.rueducommerce_attribute;
+                                $('rueducommerce_attribute_row_' + data.index + '_rueducommerce_attribute').removeClassName('required-entry');
+                                $('rueducommerce_attribute_row_' + data.index + '_rueducommerce_required').value = data.isMandatory;
+                            }
+
+                            if (data.readOnly == '1') {
+                                ['website', 'cust_group', 'qty', 'price', 'delete'].each(function (idx) {
+                                    $('rueducommerce_attribute_row_' + data.index + '_' + idx).disabled = true;
+                                });
+                                $('rueducommerce_attribute_row_' + data.index + '_delete_button').hide();
+                            }
+
+                            if (data.default != '') {
+                                var rueducommerceAttribute = $('rueducommerce_attribute_row_' + data.index + '_magento_attr');
+                                //var enumVal = rueducommerceAttribute.options[data.index].getAttribute('enum_val');
+                                var text = $('rueducommerce_attribute_row_' + data.index + '_default_text');
+                                var select = $('rueducommerce_attribute_row_' + data.index + '_default_select');
+
+                                rueducommerceAttributeControl.showDefaultField(rueducommerceAttribute, data.index);
+
+                                select.value = data.default;
+                                text.value = data.default;
+                            }
+                            var rueducommerceAttribute = $('rueducommerce_attribute_row_' + data.index + '_rueducommerce_attribute');
+                            rueducommerceAttributeControl.setRueDuCommerceValues(rueducommerceAttribute, data.index);
+
+                            <?php if ($_readonly): ?>
+                            $('<?php /* @escapeNotVerified */ echo $_htmlId ?>_container').select('input', 'select').each(this.disableElement);
+                            $('<?php /* @escapeNotVerified */ echo $_htmlId ?>_container').up('table').select('button').each(this.disableElement);
+                            <?php else: ?>
+                            $('<?php /* @escapeNotVerified */ echo $_htmlId ?>_container').select('input', 'select').each(function (el) {
+                                Event.observe(el, 'change', el.setHasChanges.bind(el));
+                            });
+                            <?php endif; ?>
+                        }
+                    },
+                    disableElement: function (el) {
+                        el.disabled = true;
+                        el.addClassName('disabled');
+                    },
+                    deleteItem: function (event) {
+                        var tr = Event.findElement(event, 'tr');
+                        if (tr) {
+                            Element.select(tr, '.delete').each(function (elem) {
+                                elem.value = '1'
+                            });
+                            Element.select(tr, ['input', 'select']).each(function (elem) {
+                                elem.hide()
+                            });
+                            Element.hide(tr);
+                            Element.addClassName(tr, 'no-display template');
+                        }
+                        return false;
+                    },
+                    setRueDuCommerceValues: function (e, index) {
+                        if (e.options[e.selectedIndex]) {
+                            var attribute = e.options[e.selectedIndex];
+                            var attributeType = attribute.hasOwnProperty('attributeType') ? attribute.getAttribute('attributeType') : '[]';
+                            var isMandatory = attribute.hasOwnProperty('isMandatory') ? attribute.getAttribute('isMandatory') : '[]';
+                            var inputType = attribute.getAttribute('inputType');
+                            var options = attribute.getAttribute('options');
+                            if(inputType == 'LIST') {
+                                $('rueducommerce_attribute_row_'+index+'_map_option_button').enable();
+                            }
+
+                            var rueducommerceAttr = $('rueducommerce_attribute_row_'+index+'_rueducommerce_attribute');
+                            var rueducommerceAttrOptions = JSON.parse(rueducommerceAttr.options[rueducommerceAttr.selectedIndex].getAttribute('options'));
+                            var magentoAttr = $('rueducommerce_attribute_row_'+index+'_magento_attr');
+                            var magentoAttrOptions = magentoAttr.options[magentoAttr.selectedIndex].getAttribute('options');
+
+                            if(rueducommerceAttrOptions != '' && magentoAttrOptions != '') {
+                                magentoAttrOptions = JSON.parse(magentoAttrOptions);
+                                if(magentoAttrOptions.length > 0) {
+                                    $('rueducommerce_attribute_row_'+index+'_map_option_button').enable();
+                                } else {
+                                    $('rueducommerce_attribute_row_'+index+'_map_option_button').disable();
+                                }
+                            } else {
+                                $('rueducommerce_attribute_row_'+index+'_map_option_button').disable();
+                            }
+
+                            /*$('rueducommerce_attribute_row_' + index + '_attributeType').value = attributeType;
+                            $('rueducommerce_attribute_row_' + index + '_isMandatory').value = isMandatory;
+                            $('rueducommerce_attribute_row_' + index + '_inputType').value = inputType;*/
+                            $('rueducommerce_attribute_row_' + index + '_options').value = options;
+                        }
+                    },
+                    showDefaultField: function (e, index) {
+                        var checkdefault = e.options[e.selectedIndex].getAttribute('value');
+                        var text = $('rueducommerce_attribute_row_'+index+'_default_text');
+                        var select = $('rueducommerce_attribute_row_'+index+'_default_select');
+
+                        var rueducommerceAttr = $('rueducommerce_attribute_row_'+index+'_rueducommerce_attribute');
+                        var rueducommerceAttrOptions = JSON.parse(rueducommerceAttr.options[rueducommerceAttr.selectedIndex].getAttribute('options'));
+                        var magentoAttr = $('rueducommerce_attribute_row_'+index+'_magento_attr');
+                        var magentoAttrOptions = magentoAttr.options[magentoAttr.selectedIndex].getAttribute('options');
+
+                        if(rueducommerceAttrOptions != '' && magentoAttrOptions != '') {
+                            magentoAttrOptions = JSON.parse(magentoAttrOptions);
+                            if(magentoAttrOptions.length > 0) {
+                                $('rueducommerce_attribute_row_'+index+'_map_option_button').enable();
+                            } else {
+                                $('rueducommerce_attribute_row_'+index+'_map_option_button').disable();
+                            }
+                        } else {
+                            $('rueducommerce_attribute_row_'+index+'_map_option_button').disable();
+                        }
+
+                        if(checkdefault == 'default') {
+                            var rueducommerceAttribute = $('rueducommerce_attribute_row_' + index + '_rueducommerce_attribute');
+                            var enumVal = 'null';
+                            if(rueducommerceAttribute.options[rueducommerceAttribute.selectedIndex] != undefined) {
+                                var enumVal = rueducommerceAttribute.options[rueducommerceAttribute.selectedIndex].getAttribute('enum_val');
+                            }
+                            if(enumVal !== 'null'){
+                                if(text != null) {
+                                    select.setAttribute("data-form-part", "rueducommerce_profile_edit");
+                                    text.removeAttribute('data-form-part');
+                                    //text.remove();
+                                }
+                                var values = JSON.parse(enumVal);
+                                while (select.options.length > 0) {
+                                    select.remove(0);
+                                }
+                                for ( i = 0; i < values['values_list']['values']['value'].length; i++) {
+                                    select.insert(new Element('option', {"value": values['values_list']['values']['value'][i]['code']}).update(values['values_list']['values']['value'][i]['label']));
+                                }
+                                select.enable();
+                                select.show();
+                            }
+                            else{
+                                if(select != null) {
+                                    text.setAttribute("data-form-part", "rueducommerce_profile_edit");
+                                    select.removeAttribute('data-form-part');
+                                    //select.remove();
+                                }
+                                text.enable();
+                                text.show();
+                            }
+
+                        }else{
+                            if(text != null) {
+                                text.hide();
+                                text.disable();
+                            }
+                            if(select != null) {
+                                select.hide();
+                                select.disable();
+                            }
+                        }
+
+
+                    },
+                    saveMapping: function (id, idPrefix) {
+                        if (id !== null) {
+
+                            var rows = $$('.attribute_option_row');
+                            var mapping = {};
+                            if (rows) {
+                                rows.forEach(
+                                    function (element) {
+                                        var rowId = element.getAttribute('row_id');
+                                        if (rowId !== null) {
+                                            var rueducommerceAttributeOption =
+                                                $('option_' + rowId + '_rueducommerce_attr_option').value;
+                                            var magentoAttributeOption =
+                                                $('option_' + rowId + '_mage_attr_option').getAttribute('option_id');
+                                            if (rueducommerceAttributeOption !== "") {
+                                                mapping[magentoAttributeOption] =
+                                                    rueducommerceAttributeOption === undefined ? "" : rueducommerceAttributeOption;
+                                            }
+                                        }
+                                    }
+                                );
+                            }
+
+                            var mappedOption = $(idPrefix + id + '_option_mapping');
+
+                            if (mappedOption) {
+                                mappedOption.setAttribute('value', JSON.stringify(mapping));
+                            }
+                        }
+                    },
+                    mapOption: function (self) {
+                        $('attributeOption_container').update('');
+
+                        var id = self.getAttribute("row_id");
+                        var idPrefix = self.getAttribute("id_prefix");
+
+                        var loadOptionsMapping = $(idPrefix + id + '_option_mapping').value;
+                        try{
+                            loadOptionsMapping = JSON.parse(loadOptionsMapping);
+                        } catch (e){}
+
+
+                        var magentoOptions = '[]';
+                        var rueducommerceOptions = '[]';
+                        if ($(idPrefix + id + "_magento_attr").selectedIndex >= 0 &&
+                            $(idPrefix + id + "_rueducommerce_attribute").selectedIndex >= 0) {
+                            magentoOptions = JSON.parse($(idPrefix + id + "_rueducommerce_attribute").options[$(idPrefix + id + "_rueducommerce_attribute").selectedIndex].getAttribute('options'));
+                            rueducommerceOptions = $(idPrefix + id + "_magento_attr").options[$(idPrefix + id + "_magento_attr").selectedIndex].getAttribute('options');
+                        }
+                        setRueDuCommerceOptions(rueducommerceOptions);
+                        //populate magento attribute
+                        for (var option in magentoOptions) {
+                            if (magentoOptions.hasOwnProperty(option)) {
+                                optionMappingControl.initialize();
+                                optionMappingControl.addItem(
+                                    option,
+                                    loadOptionsMapping[option]
+                                );
+                            }
+                        }
+
+                        var options = {
+                            type: 'popup',
+                            responsive: true,
+                            innerScroll: true,
+                            title: '<?php echo __("Map Magento Attribute Options") ?>',
+                            buttons: [{
+                                text: jQuery.mage.__('Save'),
+                                class: '',
+                                click: function () {
+                                    rueducommerceAttributeControl.saveMapping(id, idPrefix);
+                                    this.closeModal();
+                                }
+                            }]
+                        };
+
+                        var popup = modal(options, jQuery('#popup-modal-custom'));
+                        popup.openModal();
+
+                    }
+                };
+
+                <?php if($block->getMappedAttribute() && (count($block->getMappedAttribute()) > 0 )):
+                foreach ($block->getMappedAttribute() as $attribute):  ?>
+
+                rueducommerceAttributeControl.addItem(
+                    '<?= $block->escapeHtml(isset($attribute['name'])?$attribute['name']:$attribute['code']) ?>',
+                    '<?= $block->escapeHtml(isset($attribute['magento_attribute_code']) ? $attribute['magento_attribute_code'] : "")?>',
+                    '<?= $block->escapeHtml(isset($attribute['attributeType'])?$attribute['attributeType']:$attribute['type']) ?>',
+                    '<?= $block->escapeHtml(isset($attribute['isMandatory'])?$attribute['isMandatory']:$attribute['required']) ?>',
+                    '<?= $block->escapeHtml(isset($attribute['inputType'])?$attribute['inputType']:$attribute['type']) ?>',
+                    '<?= $block->escapeHtml(json_encode(isset($attribute['values'])?$attribute['values']:$attribute['options'])) ?>',
+                    '<?= $block->escapeHtml(isset($attribute['default'])?$attribute['default']:'') ?>',
+                    '<?= isset($attribute['option_mapping'])?$attribute['option_mapping']:''?>'
+                );
+
+                <?php endforeach; ?>
+                <?php endif; ?>
+                <?php if ($_readonly): ?>
+
+                $('<?php /* @escapeNotVerified */ echo $_htmlId ?>_container').up('table').select('button')
+                    .each(rueducommerceAttributeControl.disableElement);
+                <?php endif; ?>
+
+                window.rueducommerceAttributeControl = rueducommerceAttributeControl;
+            });
+        </script>
+        </table>
+    </div>
+</div>
+<?php $_htmlId = 'attributeOption';
+$_htmlNameOption = "optionMapping";
+?>
+<div id="popup-modal-custom" style="display: none;">
+    <div class="field admin__scope-old" id="attribute-<?php /* @escapeNotVerified */
+    echo $_htmlId ?>-container" data-attribute-code="<?php /* @escapeNotVerified */
+    echo $_htmlId ?>"
+    >
+        <div class="control">
+            <table class="admin__control-table tiers_table" id="tiers_table">
+                <thead>
+                <tr>
+                    <th class="col-customer-group"><?php /* @escapeNotVerified */
+                        echo __('RueDuCommerce Attribute Option') ?></th>
+                    <th class="col-qty required"><?php /* @escapeNotVerified */
+                        echo __('Magento Attribute Option') ?></th>
+                    <th class="col-delete"><?php /* @escapeNotVerified */
+                        echo __('Action') ?></th>
+                </tr>
+                </thead>
+                <tbody id="<?php /* @escapeNotVerified */
+                echo $_htmlId ?>_container"></tbody>
+                <tfoot>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+
+    var optionMappingTemplate = '';
+
+    function setRueDuCommerceOptions(rueducommerceOptions) {
+
+        var rueducommerceOptions = JSON.parse(rueducommerceOptions);
+
+        var optionsHtml = '';
+        if ( rueducommerceOptions.length > 0) {
+            for (var i = 0; i < (rueducommerceOptions).length; i++) {
+                optionsHtml += '<option value='+ rueducommerceOptions[i]['value'] +'>' + rueducommerceOptions[i]['label'] + '</option>';
+            }
+        }
+
+        optionMappingTemplate = '<tr class="attribute_option_row" row_id="<%- data.index %>">'
+            + '<td>'
+            + '<input option_id="" type="text" readonly="readonly" class="<?php echo $_htmlClass ?> required-entry validate-code input-text admin__control-text required-entry _required" name="<?php echo $_htmlNameOption ?>[<%- data.index %>][mage_attr_option]" id="option_<%- data.index %>_mage_attr_option">'
+            + '</td>'
+            + '<td> <select class="<?php echo $_htmlClass ?> required_rueducommerce_attr required-entry" name="<?php echo $_htmlNameOption ?>[<%- data.index %>][rueducommerce_attr_option]" id="option_<%- data.index %>_rueducommerce_attr_option">'
+            + optionsHtml
+            + '</select>'
+            + ' </td>'
+
+            + '<td class="col-delete"><input type="hidden" name="<?php /* @escapeNotVerified */ echo $_htmlNameOption ?>[<%- data.index %>][delete]" class="delete" value="" id="option_<%- data.index %>_delete" />'
+            + '<button title="<?php /* @escapeNotVerified */ echo $block->escapeHtml(__('Delete Tier')); ?>" type="button" class="action- scalable delete icon-btn delete-product-option" id="option_<%- data.index %>_delete_button" onclick="return optionMappingControl.deleteItem(event);">'
+            + '<span><?php /* @escapeNotVerified */ echo __("Delete") ?></span></button></td>'
+            + '</tr>';
+
+    }
+
+    require([
+        'mage/template',
+        "prototype",
+        "mage/adminhtml/form"
+    ], function (mageTemplate) {
+
+//<![CDATA[
+        optionMappingControl = {
+            itemsCount: 0,
+            templateRow: '',
+            initialize: function () {
+                this.templateRow = optionMappingTemplate;
+            },
+            addItem: function () {
+                this.template = mageTemplate(this.templateRow);
+                var data = {
+                    mage_attr_option: '',
+                    rueducommerce_attr_option: '',
+                    index: this.itemsCount++
+                };
+
+                if (arguments.length >= 2) {
+                    data.mage_attr_option = arguments[0];
+                    data.rueducommerce_attr_option = arguments[1];
+                }
+
+                Element.insert($('<?php /* @escapeNotVerified */ echo $_htmlId ?>_container'), {
+                    bottom: this.template({
+                        data: data
+                    })
+                });
+
+                $('option_' + data.index + '_mage_attr_option').value = data.mage_attr_option;
+                $('option_' + data.index + '_rueducommerce_attr_option').value = data.rueducommerce_attr_option;
+                $('option_' + data.index + '_mage_attr_option').setAttribute('option_id', data.mage_attr_option);
+            },
+            disableElement: function (el) {
+                el.disabled = true;
+                el.addClassName('disabled');
+            },
+            deleteItem: function (event) {
+                var tr = Event.findElement(event, 'tr');
+                if (tr) {
+                    Element.remove(tr);
+                }
+                return false;
+            }
+        };
+
+//]]>
+
+    });
+</script>

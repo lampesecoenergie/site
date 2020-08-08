@@ -1,0 +1,159 @@
+<?php if($menu = $this->getMenu()){ ?>
+<?php
+$data = $this->helper("\Ves\Megamenu\Helper\Data");
+$layout = $this->getData('layout');
+if(!$layout) $layout = 'horizontal';
+$menuItems = $menu->getData('menuItems');
+$structure = json_decode($menu->getStructure(), true);
+$items = [];
+$html = '';
+if(is_array($structure)){
+	foreach ($structure as $k => $v) {
+		$itemData = $data->renderMenuItemData($v, [], $menuItems);
+		$html .= $data->drawItem($itemData);
+	}
+}
+$mobileTemplate = $menu->getData("mobile_template");
+if(!$mobileTemplate) $mobileTemplate = 1;
+if($this->hasData("mobile_template")) $mobileTemplate = $this->getData("mobile_template");
+$html = $data->filter($html);
+$alias = $menu->getAlias().time().rand();
+$disableBellow = (int)$menu->getData('disable_bellow');
+$bodyClass = $class = '';
+if($mobileTemplate == 0){
+	$class = 'offcanvas-menu offcanvas-menu-left';
+	$bodyClass = 'ves-offcanvas-menu-left';
+}
+if($mobileTemplate == 2){
+	$class = 'accordion-menu';
+	$bodyClass = 'ves-accordion-menu';
+}
+
+$desktopTemplate = $menu->getData("desktop_template");
+if(!$desktopTemplate) $desktopTemplate = 'horizontal';
+if($this->hasData("desktop_template")) $mobileTemplate = $this->getData("desktop_template");
+$event = $menu->getData("event");
+if(!$event) $event = 'hover';
+if($this->hasData("event")) $event = $this->getData("event");
+$id = time().rand();
+$class = $menu->getData("classes");
+?>
+<div class="block ves-menu <?php echo $class ?>" id="<?php echo $alias ?>-menu" role="navigation" data-action="navigation">
+	<?php if($title = $this->getData("title")){ ?>
+		<div class="block-title"><strong> <span><?php echo $title; ?> </span> </strong> </div>
+	<?php } ?>
+	<?php // Off Canvas Menu ?>
+	<?php if($mobileTemplate == 0){ ?>
+	<div class="navbar navbar-inverse">
+		<a href="javascript:;" class="ves-navbar-toggle <?php echo $alias ?>">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</a>
+	</div>
+	<?php } ?>
+	<ul id="<?php echo $alias ?>" class="ves-megamenu <?php echo 'menu-' . $event ?> ves-<?php echo $desktopTemplate ?> <?php echo $class ?>" <?php if($disableBellow>0){ ?>data-disable-bellow="<?php echo $disableBellow ?>"<?php } ?>>
+		<?php echo $html; ?>
+	</ul>
+	<script type="text/javascript">
+		require(['jquery'],function($){
+			$('.price-box.price-final_price', $("#<?php echo $alias ?>")).each(function(){
+				$(this).removeClass('price-box').addClass('price-box1');
+				$(this).attr('data-role','priceBox1');
+			})
+			jQuery(document).ready(function($) {
+				$("#<?php echo $alias ?> .dynamic-items li:first").addClass("dynamic-active");
+				var id = $("#<?php echo $alias ?> .dynamic-items li:first").data("dynamic-id");
+				$("#<?php echo $alias ?> ."+id).addClass("dynamic-active");
+				$("#<?php echo $alias ?> .level0 .submenu").find(".active").addClass("");
+
+				$("#<?php echo $alias ?>").find(".level0 .submenu").each(function(index, elemetn){
+					var eSelected = $(this).find(".active");
+					if(eSelected.length){
+						$(this).addClass("active");
+					}
+				});
+			});
+
+			$("#<?php echo $alias ?> .dynamic-items li").hover(function(){
+				$(this).parents(".dynamic-items").find("li").removeClass("dynamic-active");
+				$(this).addClass("dynamic-active");
+				var id = $(this).data("dynamic-id");
+				$("#<?php echo $alias ?> ."+id).parent().find(".dynamic-item").removeClass("dynamic-active");
+				$("#<?php echo $alias ?> ."+id).addClass("dynamic-active");
+			});
+
+			$("#<?php echo $alias ?> li a").hover(function(){
+				$(this).css({
+					"background-color": $(this).data("hover-bgcolor"),
+					"color": $(this).data("hover-color")
+				});
+			}, function(){
+				$(this).css({
+					"background-color": $(this).data("bgcolor"),
+					"color": $(this).data("color")
+				});
+			});
+			$(window).on("resize", function(){
+				if($("#<?php echo $alias ?>").data("disable-bellow")){
+					if ($(window).width() <= $("#<?php echo $alias ?>").data("disable-bellow")){
+						$("#<?php echo $alias ?>-menu").hide();
+					}else{
+						$("#<?php echo $alias ?>-menu").show();
+					}
+				}
+				$("#<?php echo $alias ?>").find("li").each(function(index, element){
+					if($(this).data("disable-bellow") && $(window).width() <= $(this).data("disable-bellow")){
+						$(this).addClass("hidden");
+					}else if($(this).hasClass("hidden")){
+						$(this).removeClass("hidden");
+					}
+				});
+				if ($(window).width() <= 991){
+					$("#<?php echo $alias ?>").addClass("nav-mobile");
+				}else{
+					$("#<?php echo $alias ?>").find("div").removeClass("mbactive");
+					$("#<?php echo $alias ?>").removeClass("nav-mobile");
+				}
+			}).resize();
+		//Toggle mobile menu
+		$('#<?php echo $alias ?> .opener').on('click', function(e) {
+			e.preventDefault();
+			$("#<?php echo $alias ?> .nav-item").removeClass("item-active");
+			var parent = $(this).parents(".nav-item").eq(0);
+			$(this).toggleClass('item-active');
+			$(parent).find(".submenu").eq(0).slideToggle();
+			return false;
+		});
+		
+		$(document).on('click', function(e){
+			e.stopPropagation();
+			if ($('body').hasClass('ves-nav-open')) {
+				$('body').removeClass('ves-nav-open');
+				setTimeout(function () {
+					$('body').removeClass('ves-nav-before-open');
+				}, 300);
+			}
+		});
+
+		$(document).on("click", ".<?php echo $alias ?>", function(){
+			$('body').removeClass('ves-offcanvas-menu-left');
+			if ($('body').hasClass('ves-nav-open')) {
+				$('body').removeClass('ves-nav-open');
+				setTimeout(function () {
+					$('body').removeClass('ves-nav-before-open');
+					$('body').removeClass('<?php echo $bodyClass ?>');
+				}, 300);
+			} else {
+				$('body').addClass('ves-nav-before-open');
+				setTimeout(function () {
+					$('body').addClass('ves-nav-open');
+					$('body').addClass('<?php echo $bodyClass ?>');
+				}, 42);
+			}
+			return false;
+		});
+	});
+</script>
+</div>
+<?php } ?>

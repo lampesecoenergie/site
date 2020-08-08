@@ -1,0 +1,48 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="\Fooman\PdfDesign\Model\PdfDesignFactory">
+        <arguments>
+            <argument name="config" xsi:type="object">\Fooman\PdfDesign\Model\Config\PdfDesignData</argument>
+        </arguments>
+    </type>
+
+    <type name="\Fooman\PdfDesign\Model\Config\PdfDesignData">
+        <arguments>
+            <argument name="reader" xsi:type="object">\Fooman\PdfDesign\Model\Config\Reader\PdfDesign</argument>
+            <argument name="cacheId" xsi:type="string">fooman_pdf_design</argument>
+        </arguments>
+    </type>
+    <virtualType name="\Fooman\PdfDesign\Model\Config\Reader\PdfDesign"
+                 type="\Magento\Framework\Config\Reader\Filesystem">
+        <arguments>
+            <argument name="idAttributes" xsi:type="array">
+                <item name="/config/pdfDesign" xsi:type="string">id</item>
+            </argument>
+            <argument name="converter" xsi:type="object">\Fooman\PdfDesign\Model\Config\Converter\PdfDesign</argument>
+            <argument name="schemaLocator" xsi:type="object">\Fooman\PdfDesign\Model\Config\SchemaLocator\PdfDesign</argument>
+            <argument name="fileName" xsi:type="string">fooman_pdfdesign.xml</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="\Fooman\PdfDesign\Model\Config\Converter\PdfDesign"
+                 type="\Magento\Framework\Config\Converter\Dom"/>
+
+    <virtualType name="\Fooman\PdfDesign\Model\Config\SchemaLocator\PdfDesign"
+                 type="\Magento\Framework\Config\GenericSchemaLocator">
+        <arguments>
+            <argument name="moduleName" xsi:type="string">Fooman_PdfDesign</argument>
+            <argument name="schema" xsi:type="string">fooman_pdfdesign.xsd</argument>
+            <argument name="perFileSchema" xsi:type="string">fooman_pdfdesign_file.xsd</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Fooman\PdfDesign\Model\DefaultDesign">
+        <arguments>
+            <argument name="templateFiles" xsi:type="array">
+                <item name="logo" xsi:type="string">Fooman_PdfCore::pdf/logo.phtml</item>
+                <item name="table" xsi:type="string">Fooman_PdfCore::pdf/table.phtml</item>
+            </argument>
+        </arguments>
+    </type>
+
+</config>

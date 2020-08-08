@@ -1,0 +1,341 @@
+<?php
+
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+ * @package   Ced_Cdiscount
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright Copyright CEDCOMMERCE (http://cedcommerce.com/)
+ * @license   http://cedcommerce.com/license-agreement.txt
+ */
+
+$categories = $block->cdiscount->getCategories();
+
+$profileId = '';
+$savedCategoryLevel1 = $savedCategoryLevel2 = $savedCategoryLevel3 = $savedCategoryLevel4 = $savedCategoryLevel5 = $savedCategoryLevel6 = "";
+if ($this->_profile && $this->_profile->getId()) {
+    $profileCategories = json_decode($this->_profile->getData('profile_categories'),true);
+    $savedCategoryLevel1 = isset($profileCategories['category_1']) ? $profileCategories['category_1'] : '';
+    $savedCategoryLevel2 = isset($profileCategories['category_2']) ? $profileCategories['category_2'] : '';
+    $savedCategoryLevel3 = isset($profileCategories['category_3']) ? $profileCategories['category_3'] : '';
+    $savedCategoryLevel4 = isset($profileCategories['category_4']) ? $profileCategories['category_4'] : '';
+    $savedCategoryLevel5 = isset($profileCategories['category_5']) ? $profileCategories['category_5'] : '';
+    $savedCategoryLevel6 = isset($profileCategories['category_6']) ? $profileCategories['category_6'] : '';
+    $profileId = $this->_profile->getId();
+}
+?>
+<script>
+    require([
+        "jquery",
+    ], function ($) {
+        var categories = <?php echo json_encode($categories);?>;
+        var savedCategoryLevel1 = "<?php echo $savedCategoryLevel1; ?>";
+        var savedCategoryLevel2 = "<?php echo $savedCategoryLevel2; ?>";
+        var savedCategoryLevel3 = "<?php echo $savedCategoryLevel3; ?>";
+        var savedCategoryLevel4 = "<?php echo $savedCategoryLevel4; ?>";
+        var savedCategoryLevel5 = "<?php echo $savedCategoryLevel5; ?>";
+        var savedCategoryLevel6 = "<?php echo $savedCategoryLevel6; ?>";
+        // Case 1: No category selected
+        if (savedCategoryLevel1 == "") {
+            $('[name="profile_category_1"]').prepend('<option value="" selected= selected>Please select a parent category</option>');
+
+            $('[name="profile_category_2"]').prepend('<option value="" selected= selected>Please select a sub category</option>');
+            $('[name="profile_category_2"]').attr('disabled', 'disabled');
+
+            $('[name="profile_category_3"]').prepend('<option value="" selected= selected>Please select a sub category</option>');
+            $('[name="profile_category_3"]').attr('disabled', 'disabled');
+
+            $('[name="profile_category_4"]').prepend('<option value="" selected= selected>Please select a sub category</option>');
+            $('[name="profile_category_4"]').attr('disabled', 'disabled');
+
+            $('[name="profile_category_5"]').prepend('<option value="" selected= selected>Please select a sub category</option>');
+            $('[name="profile_category_5"]').attr('disabled', 'disabled');
+
+            $('[name="profile_category_6"]').prepend('<option value="" selected= selected>Please select a sub category</option>');
+            $('[name="profile_category_6"]').attr('disabled', 'disabled');
+        } else {
+            $('[name="profile_category_1"]').val(savedCategoryLevel1);
+            addCategoryOptions(2);
+
+
+            if (savedCategoryLevel2 != "") {
+                addCategoryOptions(3);
+                $('[name="profile_category_2"]').val(savedCategoryLevel2);
+            }
+
+            if (savedCategoryLevel3 != "") {
+                addCategoryOptions(3);
+                $('[name="profile_category_3"]').val(savedCategoryLevel3);
+            }
+
+            if (savedCategoryLevel4 != "") {
+                addCategoryOptions(4);
+                $('[name="profile_category_4"]').val(savedCategoryLevel4);
+
+            }
+
+            if (savedCategoryLevel5 != "") {
+                addCategoryOptions(5);
+                $('[name="profile_category_5"]').val(savedCategoryLevel5);
+
+            }
+
+            if (savedCategoryLevel6 != "") {
+                addCategoryOptions(6);
+                $('[name="profile_category_6"]').val(savedCategoryLevel6);
+
+            }
+
+        }
+
+        // Update level 2 category
+        $('[name="profile_category_1"]').change(function () {
+            addCategoryOptions(2);
+            getAttributes();
+        });
+
+        // Update level 3 category
+        $('[name="profile_category_2"]').change(function () {
+            addCategoryOptions(3);
+            getAttributes();
+        });
+
+        // Update level 4 category
+        $('[name="profile_category_3"]').change(function () {
+            addCategoryOptions(4);
+            getAttributes();
+        });
+
+        // Update level 5 category
+        $('[name="profile_category_4"]').change(function () {
+            addCategoryOptions(5);
+            getAttributes();
+        });
+
+        // Update level 6 category
+        $('[name="profile_category_5"]').change(function () {
+            addCategoryOptions(6);
+            getAttributes();
+        });
+
+
+
+
+        function addCategoryOptions(level) {
+            if (level == 2) {
+                $('.level-1-category').show();
+                $('[name="profile_category_2"]').empty();
+                $('[name="profile_category_2"]').removeAttr('disabled');
+                $('[name="profile_category_2"]').append('<option value="">Please select a sub category</option>');
+                $('[name="profile_category_3"]').empty();
+                $('[name="profile_category_3"]').removeAttr('disabled');
+                $('[name="profile_category_3"]').append('<option value="">Please select a sub category</option>');
+                $('[name="profile_category_4"]').empty();
+                $('[name="profile_category_4"]').removeAttr('disabled');
+                $('[name="profile_category_4"]').append('<option value="">Please select a sub category</option>');
+                $('[name="profile_category_5"]').empty();
+                $('[name="profile_category_5"]').removeAttr('disabled');
+                $('[name="profile_category_5"]').append('<option value="">Please select a sub category</option>');
+                $('[name="profile_category_6"]').empty();
+                $('[name="profile_category_6"]').removeAttr('disabled');
+                $('[name="profile_category_6"]').append('<option value="">Please select a sub category</option>');
+                var catId = $('[name="profile_category_1"]').val();
+
+                $.each(categories, function (index, category) {
+                    if (category['categoryId'] == catId) {
+                        $.each(category['children'], function (i, v) {
+                            $('[name="profile_category_2"]').append('<option value=' + v['categoryId'] + '>' + v['name'] + '</option>');
+                        })
+                    }
+                })
+            } else if (level == 3) {
+                $('.level-2-category').show();
+                $('[name="profile_category_3"]').empty();
+                $('[name="profile_category_3"]').removeAttr('disabled');
+                $('[name="profile_category_3"]').append('<option value="">Please select a sub category</option>');
+                $('[name="profile_category_4"]').empty();
+                $('[name="profile_category_4"]').removeAttr('disabled');
+                $('[name="profile_category_4"]').append('<option value="">Please select a sub category</option>');
+                $('[name="profile_category_5"]').empty();
+                $('[name="profile_category_5"]').removeAttr('disabled');
+                $('[name="profile_category_5"]').append('<option value="">Please select a sub category</option>');
+                $('[name="profile_category_6"]').empty();
+                $('[name="profile_category_6"]').removeAttr('disabled');
+                $('[name="profile_category_6"]').append('<option value="">Please select a sub category</option>');
+
+                var parentId = $('[name="profile_category_1"]').val();
+                var catId = $('[name="profile_category_2"]').val();
+                $.each(categories, function (index, category) {
+                    if (category['categoryId'] == parentId) {
+                        $.each(category['children'], function (i, v) {
+                            if (v['categoryId'] == catId) {
+                                    $.each(v['children'], function (y, z) {
+                                            $('[name="profile_category_3"]').append('<option value=' + z['categoryId'] + '>' + z['name'] + '</option>');
+                                    });
+                            }
+                        })
+                    }
+                })
+            } else if (level == 4) {
+                $('[name="profile_category_4"]').empty();
+                $('[name="profile_category_4"]').removeAttr('disabled');
+                $('[name="profile_category_4"]').append('<option value="">Please select a sub category</option>');
+                $('[name="profile_category_5"]').empty();
+                $('[name="profile_category_5"]').removeAttr('disabled');
+                $('[name="profile_category_5"]').append('<option value="">Please select a sub category</option>');
+                $('[name="profile_category_6"]').empty();
+                $('[name="profile_category_6"]').removeAttr('disabled');
+                $('[name="profile_category_6"]').append('<option value="">Please select a sub category</option>');
+
+                var level1 = $('[name="profile_category_1"]').val();
+                var level2 = $('[name="profile_category_2"]').val();
+                var level3 = $('[name="profile_category_3"]').val();
+                $.each(categories, function (index, category) {
+                    if (category['categoryId'] == level1) {
+                        $.each(category['children'], function (i, v) {
+                            if (v['categoryId'] == level2) {
+                                $.each(v['children'], function (y, z) {
+                                    var flag = false;
+                                    if (z['categoryId'] == level3) {
+                                        $.each(z['children'], function (ax, ay) {
+                                            if (Number.isInteger(ay.categoryId)) {
+                                                flag = true;
+                                                $('[name="profile_category_4"]').append('<option value=' + ay['categoryId'] + '>' + ay['name'] + '</option>');
+                                            }
+                                        });
+                                        if (!flag) {
+                                            $('[name="profile_category_4"]').html('<option value="">No Further Categories Avaliable</option>');
+                                            $('[name="profile_category_4"]').attr('disabled', 'disabled');
+                                            $('[name="profile_category_5"]').html('<option value="">No Further Categories Avaliable</option>');
+                                            $('[name="profile_category_5"]').attr('disabled', 'disabled');
+                                            $('[name="profile_category_6"]').html('<option value="">No Further Categories Avaliable</option>');
+                                            $('[name="profile_category_6"]').attr('disabled', 'disabled');
+                                        }
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            } else if (level == 5) {
+                $('[name="profile_category_5"]').empty();
+                $('[name="profile_category_5"]').removeAttr('disabled');
+                $('[name="profile_category_5"]').append('<option value="">Please select a sub category</option>');
+                $('[name="profile_category_6"]').empty();
+                $('[name="profile_category_6"]').removeAttr('disabled');
+                $('[name="profile_category_6"]').append('<option value="">Please select a sub category</option>');
+
+                var level1 = $('[name="profile_category_1"]').val();
+                var level2 = $('[name="profile_category_2"]').val();
+                var level3 = $('[name="profile_category_3"]').val();
+                var level4 = $('[name="profile_category_4"]').val();
+                $.each(categories, function (index, category) {
+                    if (category['categoryId'] == level1) {
+                        $.each(category['children'], function (i, v) {
+                            if (v['categoryId'] == level2) {
+                                $.each(v['children'], function (y, z) {
+                                    if (z['categoryId'] == level3) {
+                                        $.each(z['children'], function (ax, ay) {
+                                            var flag = false;
+                                            if (ay['categoryId'] == level4) {
+                                                $.each(ay['children'], function (bx, by) {
+                                                    if (Number.isInteger(by.categoryId)) {
+                                                        flag = true;
+                                                        $('[name="profile_category_5"]').append('<option value=' + by['categoryId'] + '>' + by['name'] + '</option>');
+                                                    }
+                                                });
+                                                if (!flag) {
+                                                    $('[name="profile_category_5"]').html('<option value="">No Further Categories Avaliable</option>');
+                                                    $('[name="profile_category_5"]').attr('disabled', 'disabled');
+                                                    $('[name="profile_category_6"]').html('<option value="">No Further Categories Avaliable</option>');
+                                                    $('[name="profile_category_6"]').attr('disabled', 'disabled');
+                                                }
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                    }
+                })
+            } else if (level == 6) {
+                $('[name="profile_category_6"]').empty();
+                $('[name="profile_category_6"]').removeAttr('disabled');
+                $('[name="profile_category_6"]').append('<option value="">Please select a sub category</option>');
+
+                var level1 = $('[name="profile_category_1"]').val();
+                var level2 = $('[name="profile_category_2"]').val();
+                var level3 = $('[name="profile_category_3"]').val();
+                var level4 = $('[name="profile_category_4"]').val();
+                var level5 = $('[name="profile_category_5"]').val();
+                $.each(categories, function (index, category) {
+                    if (category['categoryId'] == level1) {
+                        $.each(category['children'], function (i, v) {
+                            if (v['categoryId'] == level2) {
+                                $.each(v['children'], function (y, z) {
+                                    if (z['categoryId'] == level3) {
+                                        $.each(z['children'], function (ax, ay) {
+                                            if (ay['categoryId'] == level4) {
+                                                $.each(ay['children'], function (bx, by) {
+                                                    var flag = false;
+                                                    if (by['categoryId'] == level5) {
+                                                        $.each(by['children'], function (cx, cy) {
+                                                            flag = true;
+                                                            if (Number.isInteger(cy.categoryId)) {
+                                                                $('[name="profile_category_6"]').append('<option value=' + cy['categoryId'] + '>' + cy['name'] + '</option>');
+                                                            }
+                                                        });
+                                                        if(!flag) {
+                                                            $('[name="profile_category_6"]').html('<option value="">No Further Categories Avaliable</option>');
+                                                            $('[name="profile_category_6"]').attr('disabled', 'disabled');
+                                                        }
+
+                                                    }
+                                                })
+                                            }
+                                        })
+                                    }
+                                });
+                            }
+                        })
+                    }
+                })
+            }
+            return true;
+
+        }
+
+        function getAttributes() {
+            var parameters = {
+                'profile_id': '<?php echo $profileId ?>',
+                "categories": {
+                    "category_1": $('#profile_category_1').val(),
+                    "category_2": $('#profile_category_2').val(),
+                    "category_3": $('#profile_category_3').val(),
+                    "category_4": $('#profile_category_4').val(),
+                    "category_5": $('#profile_category_5').val(),
+                    "category_6": $('#profile_category_6').val()
+                }
+            };
+            var rurl = '<?php echo $this->getUrl('cdiscount/profile/UpdateCategoryAttributes', array('_nosid' => true))?>';
+            $.ajax({
+                url: rurl,
+                type: 'POST',
+                data: parameters,
+                dataType: 'html',
+                showLoader: true,
+                success: function (response) {
+                    $('#attribute-cdiscountAttributes-container').html(response);
+                }
+            });
+        }
+    });
+</script>

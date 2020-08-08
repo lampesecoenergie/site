@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mondial Relay Shipping Module
+ *
+ * @author    Magentix
+ * @copyright Copyright © 2018 Magentix. All rights reserved.
+ * @license   https://www.magentix.fr/en/licence.html Magentix Software Licence
+ * @link      https://mondialrelay.magentix.fr/
+ */
+-->
+<include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
+    <group id="label" translate="label" type="text" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="0">
+        <label>Shipping Label</label>
+        <fieldset_css>mondialrelay-configuration configuration-label</fieldset_css>
+        <field id="size" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+            <label>Label Size</label>
+            <source_model>MondialRelay\Shipping\Model\Config\Source\Size</source_model>
+        </field>
+        <field id="shipper_name" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+            <label>Shipper name</label>
+            <comment>Appears on the labels. Default store name if empty.</comment>
+        </field>
+        <field id="delete_after" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+            <label>Delete label after</label>
+            <validate>validate-number</validate>
+            <comment>Delete label from database X day(s) after shipping. Cron must be enabled.</comment>
+        </field>
+        <field id="shipping_status" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+            <label>Shipping Status</label>
+            <source_model>MondialRelay\Shipping\Model\Config\Source\Status</source_model>
+            <comment>Shipping status after creation</comment>
+        </field>
+        <field id="packaging_weight" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0">
+            <label>Default Packaging weight</label>
+            <validate>validate-number</validate>
+        </field>
+    </group>
+</include>

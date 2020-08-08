@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mondial Relay Shipping Module
+ *
+ * @author    Magentix
+ * @copyright Copyright © 2018 Magentix. All rights reserved.
+ * @license   https://www.magentix.fr/en/licence.html Magentix Software Licence
+ * @link      https://mondialrelay.magentix.fr/
+ */
+-->
+<include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
+    <group id="return" translate="label" type="text" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+        <label>Return</label>
+        <fieldset_css>mondialrelay-configuration configuration-return</fieldset_css>
+        <field id="recipient_return_type" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Return Type</label>
+            <validate>required-entry</validate>
+            <source_model>MondialRelay\Shipping\Model\Config\Source\ReturnType</source_model>
+        </field>
+        <field id="recipient_company" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Company</label>
+        </field>
+        <field id="recipient_email" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Email</label>
+        </field>
+        <field id="recipient_telephone" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Phone Number</label>
+        </field>
+        <field id="recipient_postcode" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Postcode</label>
+            <validate>required-entry</validate>
+        </field>
+        <field id="recipient_country" translate="label" type="select" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Country</label>
+            <source_model>MondialRelay\Shipping\Model\Config\Source\Country\Pickup</source_model>
+            <validate>required-entry</validate>
+        </field>
+        <field id="recipient_pickup" translate="label" type="select" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Pickup location</label>
+            <source_model>MondialRelay\Shipping\Model\Config\Source\Pickup</source_model>
+            <depends>
+                <field id="recipient_return_type">2</field>
+            </depends>
+        </field>
+        <field id="recipient_street" translate="label" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Street</label>
+            <validate>required-entry</validate>
+            <depends>
+                <field id="recipient_return_type">1</field>
+            </depends>
+        </field>
+        <field id="recipient_city" translate="label" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>City</label>
+            <validate>required-entry</validate>
+            <depends>
+                <field id="recipient_return_type">1</field>
+            </depends>
+        </field>
+    </group>
+</include>

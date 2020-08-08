@@ -1,0 +1,8 @@
+<div class="data-grid-cell-content col-tracking-number">
+    <!-- ko if: $row().tracking_number -->
+    <span data-bind="text: $col.formatTrackingNumber($row().tracking_number)"></span>
+    <!-- /ko -->
+    <!-- ko if: $col.canShip($row()) -->
+    <input data-bind="{ attr: { name: inputKey + '[' + $row().entity_id + ']' } }" type="text"  class="admin__control-text" style="width: 125px"/>
+    <!-- /ko -->
+</div>

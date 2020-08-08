@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <!--preference for="Magento\Catalog\Block\Adminhtml\Product\Grid" type="Iksanika\Productimages\Block\Adminhtml\Catalog\Product\Grid"/-->
+    
+    <preference for="Magento\Catalog\Block\Adminhtml\Product\Edit" type="Iksanika\Productmanage\Block\Adminhtml\Product\Edit"/>
+    <preference for="Magento\Catalog\Model\ResourceModel\Product\Collection" type="Iksanika\Productmanage\Model\ResourceModel\Product\Collection"/>
+    <preference for="Magento\CatalogSearch\Model\ResourceModel\Search\Collection" type="Iksanika\Productmanage\Model\ResourceModel\Search\Collection"/>
+
+    <type name="Magento\Catalog\Block\Adminhtml\Product\Edit\Action\Attribute">
+        <plugin name="Iksanika_Productmanage::getSelectCountSql" type="Iksanika\Productmanage\Plugin\Catalog\ProductEditActionAttribute"/>
+    </type>
+    <!-- @TODO: disabled due to issue with Plugin mechanism - it does not allow to enhance protected functions
+    <type name="Magento\Catalog\Model\ResourceModel\Product\Collection">
+        <plugin name="Iksanika_Productmanage::getSelectCountSql" type="Iksanika\Productmanage\Plugin\Catalog\Model\ResourceModel\Product\Collection"/>
+    </type>
+    -->
+</config>

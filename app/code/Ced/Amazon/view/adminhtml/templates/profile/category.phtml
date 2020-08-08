@@ -1,0 +1,132 @@
+<?php
+
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+ * @package   Ced_Amazon
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright Copyright CEDCOMMERCE (http://cedcommerce.com/)
+ * @license   http://cedcommerce.com/license-agreement.txt
+ */
+
+/** @var \Ced\Amazon\Block\Adminhtml\Profile\Edit\Tab\Attribute\CategoryJs $block */
+
+$categories = $block->amazon->getCategories(0);
+$subCategories = $block->amazon->getCategories(1);
+
+$profileId = '';
+$savedCategory = $savedSubCategory = "";
+if ($this->_profile && $this->_profile->getId()) {
+    $savedCategory = $this->_profile->getProfileCategory();
+    $savedSubCategory = $this->_profile->getProfileSubCategory();
+    $profileId = $this->_profile->getId();
+}
+?>
+<script>
+    require([
+        "jquery",
+    ], function ($) {
+        var categories = <?php echo json_encode($categories);?>;
+        var subCategories =<?php echo json_encode($subCategories);?>;
+        var savedCategories = "<?php echo $savedCategory; ?>";
+        var savedSubCategories = "<?php echo $savedSubCategory; ?>";
+        var leaf = true;
+        if (savedCategories == "") {
+            $('[name="profile_category"]').prepend('<option value="" selected= selected>Please select a category</option>');
+            $('[name="profile_sub_category"]').prepend('<option value="" selected= selected>Please select a sub category</option>');
+            $('[name="profile_sub_category"]').attr('disabled', 'disabled');
+        } else {
+            if (savedSubCategories == "") {
+                $('.field-subCategories').hide();
+                $('[name="profile_sub_category"]').removeClass('required-entry _required');
+            }
+        }
+
+        $('[name="profile_category"]').change(function () {
+            leaf = true;
+            $('.field-subCategories').show();
+            $('[name="profile_sub_category"]').empty();
+            $('[name="profile_sub_category"]').removeAttr('disabled');
+            $('[name="profile_sub_category"]').append('<option value="">Please select a sub category</option>');
+            var cat_id = $('[name="profile_category"]').val();
+            for (var key in subCategories) {
+                for (var subkey in subCategories[key]) {
+                    if ((subkey == 'parent') && (subCategories[key][subkey] == cat_id)) {
+                        leaf = false;
+                        $('[name="profile_sub_category"]').append('<option value=' + subCategories[key]['value'] + '>' + subCategories[key]['label'] + '</option>');
+                    }
+                }
+            }
+            if (leaf) {
+                $('[name="profile_sub_category"]').empty();
+                $('[name="profile_sub_category"]').removeClass('required-entry _required');
+                $('[name="profile_sub_category"]').append('<option value="">No sub category available</option>');
+                getAttributes();
+            }
+        });
+
+        $('[name="profile_sub_category"]').change(function () { getAttributes(); });
+
+        // FOR SETTING SAVED VALUES AFTER SAVING THEM IN LEVEL 0
+        if (savedCategories) {
+            $('[name="profile_category"]').empty();
+            for (var key in categories) {
+                for (var subkey in categories[key]) {
+                    if (subkey == 'parent') {
+                        if (savedCategories == categories[key]['value']) {
+                            $('[name="profile_category"]').append('<option  selected="selected" value=' + categories[key]['value'] + '>' + categories[key]['label'] + '</option>');
+                        } else {
+                            $('[name="profile_category"]').append('<option value=' + categories[key]['value'] + '>' + categories[key]['label'] + '</option>');
+                        }
+                    }
+                }
+            }
+        }
+
+        // FOR SETTING SAVED VALUES AFTER SAVING THEM IN LEVEL 1
+        if (savedSubCategories) {
+            $('[name="profile_sub_category"]').empty();
+            var cat_id = $('[name="profile_category"]').val();
+            for (var key in subCategories) {
+                for (var subkey in subCategories[key]) {
+                    if (subkey == 'parent') {
+                        if (subCategories[key][subkey] == cat_id) {
+                            if (savedSubCategories == subCategories[key]['value']) {
+                                $('[name="profile_sub_category"]').append('<option  selected="selected" value=' + subCategories[key]['value'] + '>' + subCategories[key]['label'] + '</option>');
+                            } else {
+                                $('[name="profile_sub_category"]').append('<option value=' + subCategories[key]['value'] + '>' + subCategories[key]['label'] + '</option>');
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        function getAttributes() {
+            var parameters = {
+                'profile_id': '<?php echo $profileId ?>',
+                "profile_category": $('#profile_category').val(),
+                "profile_sub_category": $('#profile_sub_category').val()
+            };
+            var rurl = '<?php echo $this->getUrl('amazon/profile/UpdateCategoryAttributes', array('_nosid' => true))?>';
+            $.ajax({
+                url: rurl,
+                type: 'POST',
+                data: parameters,
+                dataType: 'html',
+                showLoader: true,
+                success: function (response) {
+                    $('#attribute-amazonAttributes-container').html(response);
+                }
+            });
+        }
+    });
+</script>

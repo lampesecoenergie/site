@@ -1,0 +1,214 @@
+<?php
+$categories = $block->getCategories();
+$total = $block->categoryExist();
+?>
+<script>
+    require([
+        "jquery",
+        "Magento_Ui/js/modal/confirm"
+    ], function ($, Confirm) {
+
+        var categories = <?php echo json_encode($categories); ?>;
+        var catExist = <?php echo $total?>
+
+        $('body').on('click', '#show_category', function () {
+            var id = $('#category_id').val();
+            showCategory(id);
+        });
+        if (catExist > 1000) {
+            $('#fetch_category').hide();
+            $('#delete_all_category').show();
+        }
+
+        $('body').on('click', '#delete_all_category', function () {
+            Confirm({
+                title: 'Are You Sure To Delete All Categories',
+                content: 'Categories Delete',
+                actions: {
+                    confirm: function(){
+                        deleteCat()
+                    },
+                    cancel: function(){
+                        return false;
+                    }
+                }
+            });
+        });
+
+        function deleteCat() {
+            $.ajax({
+                url: "<?php echo $block->getDeleteUrl()?>",
+                type: 'GET',
+                showLoader: true,
+
+                success: function (response) {
+                    $('#fetch_category').show();
+                    $('#delete_all_category').hide();
+                    if (response === true) {
+                        Confirm({
+                            title: 'Categories Deleted Successfully',
+                            content: 'Categories Deleted'
+                        });
+                    } else {
+                        Confirm({
+                            title: 'Categories Deleting Failed',
+                            content: 'Categories Not Deleted'
+                        });
+                    }
+                },
+                error: function () {
+                    Confirm({
+                       title: "Something Went Wrong",
+                       content: 'Categories Delete'
+                    });
+                }
+            })
+        }
+
+        $('body').on('click', '#fetch_category', function () {
+            $.ajax({
+                url: "<?php echo $block->getAjaxUrl()?>",
+                type: 'GET',
+                showLoader: true,
+                
+                success: function (response) {
+                    if (response.data === 'Fetched') {
+                        $('#fetch_category').hide();
+                        $('#delete_all_category').show();
+                        Confirm({
+                            title: 'Category Fetchment Completed',
+                            content: 'Successfully Fetched all categories'
+                        })
+                    } else if (response.data === 'Failed') {
+                        Confirm({
+                            title: 'Category Fetching Failed',
+                            content: "Please make sure that credentials are valid"
+                        })
+                    }
+                },
+                error: function () {
+                    Confirm({
+                        title: 'Category Fetching Failed',
+                        content: "Please make sure that credentials are valid"
+                    });
+                }
+            });
+        });
+
+        function showCategory(id) {
+            var result = '';
+            if (categories && Object.keys(categories).length > 0) {
+                $.each(categories, function (index, value) {
+                    if (value['code'] === id) {
+                        result = CreateTableView(value);
+                    }
+                });
+            }
+            $('#categories').html(result);
+
+        }
+
+        // This function creates a standard table with column/rows
+        // Parameter Information
+        // objArray = Anytype of object array, like JSON results
+        // theme (optional) = A css class to add to the table (e.g. <table class="<theme>">
+        // enableHeader (optional) = Controls if you want to hide/show, default is show
+        function CreateTableView(objArray, theme, enableHeader) {
+            // set optional theme parameter
+            if (theme === undefined) {
+                theme = {
+                    'table': 'data-grid',
+                    'td': '',
+                    'th': 'data-grid-th',
+                    'tr': 'data-row'
+                }; //default
+            }
+
+            if (enableHeader === undefined) {
+                enableHeader = true; //default enable headers
+            }
+
+            if (typeof objArray === 'function') {
+                return "";
+            }
+            if (typeof objArray === 'string') {
+                return objArray;
+            }
+
+            // If the returned data is an object do nothing, else try to parse
+            var array = typeof objArray !== 'object' ? JSON.parse(objArray) : new Array(objArray);
+            var keys = Object.keys(array[0]);
+
+            var str = '<table class="' + theme.table + '">';
+
+            // table head
+            if (enableHeader) {
+                str += '<thead><tr class="' + theme.tr + '">';
+                for (var index in keys) {
+                    if (typeof index === 'number' || typeof index === 'string') {
+                        str += '<th scope="col" class="' + theme.th + '">' + keys[index] + '</th>';
+                    }
+                }
+                str += '</tr></thead>';
+            }
+
+            // table body
+            str += '<tbody>';
+            for (var i = 0; i < array.length; i++) {
+                str += (i % 2 == 0) ? '<tr class="alt" class="' + theme.tr + '">' : '<tr>';
+                for (var index in keys) {
+                    var objValue = array[i][keys[index]];
+
+                    // Support for Nested Tables
+                    if (typeof objValue === 'object' && objValue !== null) {
+                        if (Array.isArray(objValue)) {
+                            str += '<td class="' + theme.td + '">';
+                            if (Object.keys(objValue).length > 0) {
+                                for (var aindex in objValue) {
+                                    str += CreateTableView(objValue[aindex], theme, true);
+                                }
+                            } else {
+                                str += '-';
+                            }
+
+                            str += '</td>';
+                        } else {
+                            str += '<td class="' + theme.td + '">' + CreateTableView(objValue, theme, true) + '</td>';
+                        }
+                    } else if (typeof objValue === 'string') {
+                        str += '<td class="' + theme.td + '">' + objValue + '</td>';
+                    } else if (typeof objValue === 'boolean') {
+                        str += '<td class="' + theme.td + '">' + objValue.toString() + '</td>';
+                    } else if (typeof objValue === 'number') {
+                        str += '<td class="' + theme.td + '">' + objValue.toString() + '</td>';
+                    } else {
+                        str += '<td class="' + theme.td + '">-</td>';
+                    }
+                }
+                str += '</tr>';
+            }
+            str += '</tbody>';
+            str += '</table>';
+
+            return str;
+        }
+    });
+</script>
+
+<div style="text-align: center; margin-bottom: 20px">
+    <select id="category_id" class="admin__control-select" style="width: 50%">
+        <option value="">Please select a category</option>
+        <?php
+        foreach ($categories as $category) {
+            echo "<option value='{$category['code']}'>{$category['name']} [{$category['id']}]</option>";
+        }
+        ?>
+
+    </select>
+    <button class="primary" id="show_category">Show</button>
+    <button class="primary" id="fetch_category">Fetch All Categories</button>
+    <button class="primary" id="delete_all_category" style="display: none">Delete All Categories</button>
+</div>
+<div id="categories" style="overflow: auto">
+
+</div>

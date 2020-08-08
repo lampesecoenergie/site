@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Store/etc/config.xsd">
+    <default>
+        <iksanika_productmanage>
+            <columns>
+                <showcolumns>entity_id,name,type_id,attribute_set_id,sku,price,qty,visibility,status,websites,image</showcolumns>
+                <limit>50</limit>
+                <page>1</page>
+                <sort>entity_id</sort>
+                <dir>desc</dir>
+                <associatedShow>1</associatedShow>
+                <redirectAdvancedProductManager>1</redirectAdvancedProductManager>
+            </columns>
+            <stockmanage>
+                <autoStockStatus>0</autoStockStatus>
+            </stockmanage>
+            <images>
+                <showurl>0</showurl>
+                <scale>1</scale>
+                <width>100</width>
+                <height>100</height>
+            </images>
+            <productrelator>
+                <enablerelated>1</enablerelated>
+                <enablecrosssell>1</enablecrosssell>
+                <enableupsell>1</enableupsell>
+            </productrelator>
+            <massactions>
+                <enableaddcategory>1</enableaddcategory>
+                <enableremovecategory>1</enableremovecategory>
+                <categorynames>1</categorynames>
+            </massactions>
+        </iksanika_productmanage>
+    </default>
+</config>

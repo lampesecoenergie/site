@@ -1,0 +1,192 @@
+<?php
+$_post = $this->getPost();
+$helper = $this->helper("Ves\Blog\Helper\Data");
+$imageHelper = $this->helper("Ves\Blog\Helper\Image");
+
+/** General Settings **/
+$dateFormat         = $helper->getConfig("general_settings/dateformat");
+$twitterUsername    = $helper->getConfig("general_settings/twitter_username");
+$enableNetworks     = $helper->getConfig("general_settings/enable_networks");
+$networks           = array_flip(explode(",", $helper->getConfig("general_settings/networks")));
+
+/** POST Settings **/
+$show_image             = $helper->getConfig("post_page/show_image");
+$image_width            = (int)$helper->getConfig("post_page/image_width");
+if(!$image_width) $image_width = 800;
+$image_height           = (int)$helper->getConfig("post_page/image_height");
+$show_title             = $helper->getConfig("post_page/show_title");
+$show_categories        = $helper->getConfig("post_page/show_categories");
+$show_author            = $helper->getConfig("post_page/show_author");
+$show_commentcount      = $helper->getConfig("post_page/show_commentcount");
+$show_updatedtime       = $helper->getConfig("post_page/show_updatedtime");
+$show_createdtime       = $helper->getConfig("post_page/show_createdtime");
+$show_hits              = $helper->getConfig("post_page/show_hits");
+$show_tags              = $helper->getConfig("post_page/show_tags");
+$_post->setData('categories', $_post->getPostCategories());
+?>
+<?php $postUrl = $helper->getPostUrl($_post); ?>
+<div class="post-content-wrap">
+	<?php if($show_image){ ?>
+	<div class="post-image">
+		<?php if( $_post->getImageType() == 1 && $_post->getImage()!=''){ ?>
+		<img src="<?php echo $imageHelper->resizeImage($_post->getImage(), $image_width, $image_height) ?>" alt="<?php echo $_post->getTitle(); ?>"/>
+		<?php }else if($_post->getImageType() == 2){ ?>
+		<?php if($_post->getImageVideoType()==1 && $_post->getImageVideoId()!=''){ ?>
+		<iframe width="<?php echo $image_width ?>" height="<?php echo $image_height ?>" src="https://www.youtube.com/embed/<?php echo $_post->getImageVideoId() ?>" frameborder="0" allowfullscreen></iframe>
+		<?php }else if($_post->getImageVideoType()==2 && $_post->getImageVideoId()!=''){ ?>
+		<iframe src="https://player.vimeo.com/video/<?php echo $_post->getImageVideoId() ?>?color=3498DB&title=0&byline=0&portrait=0" width="<?php echo $image_width ?>" height="<?php echo $image_height ?>" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+		<?php } ?>
+		<?php } ?>
+	</div>
+	<?php } ?>
+
+	<div class="post-meta">
+		<?php if($show_title){ ?>
+		<div class="post-title">
+			<h3><?php echo $_post->getTitle(); ?></h3>
+		</div>
+		<?php } ?>
+		<?php if($show_author){ ?>
+		<div class="post-author">
+			<?php $author = $helper->getPostAuthor($_post) ?>
+			<?php echo __('Posted by: ') ?>
+			<a href="<?php echo $helper->getAuthorUrl($author); ?>" title=""><?php echo $author->getFirstName() . ' ' . $author->getLastName() ?></a>
+		</div>
+		<?php } ?>
+		<?php if($show_createdtime || $show_updatedtime){ ?>
+		<div class="post-date">
+			<?php if($show_createdtime){ ?>
+			<?php $createdTime = $helper->getFormatDate($_post->getCreationTime(), $dateFormat); ?>
+			<span><?php echo __('Created on %1', $createdTime); ?></span>
+			<?php } ?>
+			<?php if($show_updatedtime){ ?>
+			<?php $updateTime = $helper->getFormatDate($_post->getUpdateTime(), $dateFormat); ?>
+			<span><?php echo __('Updated on %1', $createdTime); ?></span>
+			<?php } ?>
+		</div>
+		<?php } ?>
+		<?php if($show_commentcount){ ?>
+		<div class="post-comment">
+			<?php echo __('%1 comments', $_post->getCommentCount()); ?>
+		</div>
+		<?php } ?>
+		<?php if($show_categories){ ?>
+		<div class="post-categories">
+			<?php echo __('Pubslished In: ') ?>
+			<?php
+			$categories = $_post->getPostCategories();
+			$count = count($categories);
+			?>
+			<?php foreach ($categories as $k => $v) { ?>
+			<a href="<?php echo $helper->getCategoryUrl($v['identifier'])  ?>" title="<?php echo $v['name'] ?>"><?php echo $v['name'] ?></a>
+			<?php if(isset($categories[$k+1])) echo __(', '); ?>
+			<?php } ?>
+		</div>
+		<?php } ?>
+		<?php if($show_hits){ ?>
+		<div class="post-hits"><span><?php echo __("Read");?></span> <strong><?php echo (int)$_post->getHits(); ?></strong> <?php echo __("Times"); ?></div>
+		<?php } ?>
+		<?php if($enableNetworks){ ?>
+		<div class="post-social">
+			<ul>
+				<?php if(isset($networks['facebook'])){ ?>
+				<li><div class="fb-like" data-href="<?php echo $postUrl ?>" data-layout="button" data-action="like" data-show-faces="true" data-share="true"></div></li>
+				<?php } ?>
+				<?php if(isset($networks['twitter'])){ ?>
+				<li><div>
+					<a href="http://twitter.com/share" class="twitter-share-button"
+					data-url="<?php echo $postUrl ?>"
+					data-via="twitterapi"
+					data-text="Checking out this page about Tweet Buttons"
+					data-related="anywhere:The Javascript API"
+					data-count="vertical"><i class="blog-icon twitter"></i></a>
+				</div></li>
+				<?php } ?>
+				<?php if(isset($networks['googleplus'])){ ?>
+				<li><div class="g-plusone" data-annotation="none" data-width="300" data-href="<?php echo $postUrl ?>"></div></li>
+				<?php } ?>
+				<?php if(isset($networks['linkedin'])){ ?>
+				<li><script type="IN/Share" data-url="<?php echo $postUrl ?>"></script></li>
+				<?php } ?>
+				<?php if(isset($networks['pinterest'])){ ?>
+				<li><a data-pin-do="buttonPin" href="https://www.pinterest.com/pin/create/button/?url=<?php echo $postUrl ?>&media=<?php echo $imageHelper->resizeImage($_post->getImage(), $image_width, $image_height) ?>&description=<?php echo $_post->getTitle(); ?>"></a></li>
+				<?php } ?>
+			</ul>
+		</div>
+		<?php } ?>
+	</div>
+	<div class="post-content">
+		<?php echo $helper->filter($_post->getContent()) ?>
+	</div>
+	<div class="post-meta">
+		<?php if($show_tags){ ?>
+		<?php $tags = $_post->getPostTags(); ?>
+		<?php if(!empty($tags)){ ?>
+		<div class="post-tag">
+			<span><?php echo __('Tags:'); ?></span>
+			<?php foreach ($tags as $k => $v) { ?>
+			<a href="<?php echo $helper->getTagUrl($v['alias']) ?>"><?php echo $v['name'] ?></a>
+			<?php if(isset($tags[$k+1])) echo __(', '); ?>
+			<?php } ?>
+		</div>
+		<?php } ?>
+		<?php } ?>
+		<?php if($enableNetworks){ ?>
+		<div class="post-social">
+			<ul>
+				<?php if(isset($networks['facebook'])){ ?>
+				<li><div class="fb-like" data-href="<?php echo $postUrl ?>" data-layout="button" data-action="like" data-show-faces="true" data-share="true"></div></li>
+				<?php } ?>
+				<?php if(isset($networks['twitter'])){ ?>
+				<li><div>
+					<a href="http://twitter.com/share" class="twitter-share-button"
+					data-url="<?php echo $postUrl ?>"
+					data-via="twitterapi"
+					data-text="Checking out this page about Tweet Buttons"
+					data-related="anywhere:The Javascript API"
+					data-count="vertical"><i class="blog-icon twitter"></i></a>
+				</div></li>
+				<?php } ?>
+				<?php if(isset($networks['googleplus'])){ ?>
+				<li><div class="g-plusone" data-annotation="none" data-width="300" data-href="<?php echo $postUrl ?>"></div></li>
+				<?php } ?>
+				<?php if(isset($networks['linkedin'])){ ?>
+				<li><script type="IN/Share" data-url="<?php echo $postUrl ?>"></script></li>
+				<?php } ?>
+				<?php if(isset($networks['pinterest'])){ ?>
+				<li><a data-pin-do="buttonPin" href="https://www.pinterest.com/pin/create/button/?url=<?php echo $postUrl ?>&media=<?php echo $imageHelper->resizeImage($_post->getImage(), $image_width, $image_height) ?>&description=<?php echo $_post->getTitle(); ?>"></a></li>
+				<?php } ?>
+			</ul>
+		</div>
+		<?php } ?>
+	</div>
+</div>
+<?php if($enableNetworks){ ?>
+<?php if(isset($networks['linkedin'])){ ?>
+<script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
+<?php } ?>
+<?php if(isset($networks['twitter'])){ ?>
+<script src="https://platform.twitter.com/widgets.js" type="text/javascript"></script>
+<?php } ?>
+<?php if(isset($networks['googleplus'])){ ?>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<?php } ?>
+<?php if(isset($networks['facebook'])){ ?>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+	var js, fjs = d.getElementsByTagName(s)[0];
+	if (d.getElementById(id)) return;
+	js = d.createElement(s); js.id = id;
+	js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1415255422062295";
+	fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<?php } ?>
+<?php if(isset($networks['pinterest'])){ ?>
+<script type="text/javascript" async defer src="//assets.pinterest.com/js/pinit.js"></script>
+<?php } ?>
+<?php } ?>
+<?php echo $this->getChildHtml("post_related"); ?>
+
+<?php if($_post->getEnableComment()){ ?>
+<?php echo $this->getChildHtml("post_comment"); ?>
+<?php } ?>

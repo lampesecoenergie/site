@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Venustheme
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Venustheme.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.venustheme.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category   Venustheme
+ * @package    Ves_Blog
+ * @copyright  Copyright (c) 2014 Venustheme (http://www.venustheme.com/)
+ * @license    http://www.venustheme.com/LICENSE-1.0.html
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<body>
+		<referenceBlock name="head.additional">
+			<block class="Magento\Framework\View\Element\Template" name="blog.category.head" template="Ves_Blog::category/head.phtml"/>
+			<block class="Ves\Blog\Block\Category\Rss\Link" name="rss.head.link" template="Ves_Blog::rss/head.phtml"/>
+		</referenceBlock>
+		<referenceContainer name="columns.top">
+			<container name="category.view.container" htmlTag="div" htmlClass="postcategory-view" after="-">
+				<block class="Magento\Framework\View\Element\Template" name="blog.post.category" template="Ves_Blog::category/meta.phtml"/>
+			</container>
+		</referenceContainer>
+		<referenceContainer name="sidebar.main">
+			<block class="Magento\Framework\View\Element\Template" name="blog.searchform.main" template="Ves_Blog::search/form.phtml" before="-"/>
+			<block class="Ves\Blog\Block\Post\RecentPosts" name="blog.recents.post" template="Ves_Blog::post/recensposts.phtml" after="blog.searchform">
+				<arguments>
+					<argument name="show_title" xsi:type="boolean">true</argument>
+				</arguments>
+			</block>
+			<block class="Ves\Blog\Block\Category\CategoryList" name="blog.category.list.main" template="Ves_Blog::category/list.phtml" after="blog.recents.post"/>
+			<block class="Ves\Blog\Block\Comment\RecentComments" name="blog.recents.comment.main" template="Ves_Blog::comment/recentcomments.phtml" after="blog.category.list">
+				<arguments>
+					<argument name="show_title" xsi:type="boolean">true</argument>
+				</arguments>
+			</block>
+			<block class="Ves\Blog\Block\Tag\TagList" name="blog.tag.list.main" template="Ves_Blog::tag/list.phtml" after="blog.recents.comment"/>
+		</referenceContainer>
+		<referenceContainer name="content">
+			<block class="Ves\Blog\Block\Category\View" name="category.posts" template="Ves_Blog::category/posts.phtml">
+				<block class="Ves\Blog\Block\Post\ListPost" name="blog.posts.list" as="post_list" template="Ves_Blog::post/list.phtml">
+					<!-- <arguments>
+						<argument name="layout_type" xsi:type="string">grid</argument>
+					</arguments> -->
+				</block>
+				<block class="Ves\Blog\Block\Toolbar" name="vesblog_toolbar" template="Ves_Blog::toolbar.phtml">
+					<block class="Magento\Theme\Block\Html\Pager" name="blog_list_toolbar_pager"/>
+				</block>
+			</block>
+		</referenceContainer>
+		<referenceBlock name="page.main.title">
+            <block class="Ves\Blog\Block\Category\Rss\Link" name="rss.link" template="Ves_Blog::rss/rss.phtml"/>
+        </referenceBlock>
+	</body>
+</page>

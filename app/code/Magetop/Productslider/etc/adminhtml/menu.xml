@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magetop
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magetop.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.magetop.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magetop
+ * @package     Magetop_Productslider
+ * @copyright   Copyright (c) Magetop (https://www.magetop.com/)
+ * @license     https://www.magetop.com/LICENSE.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Magetop_Productslider::productslider" title="Product Slider" module="Magetop_Productslider" sortOrder="20" resource="Magetop_Productslider::productslider"/>
+        <add id="Magetop_Productslider::slider" title="Manage Slider" module="Magetop_Productslider" sortOrder="10" parent="Magetop_Productslider::productslider" action="productslider/slider/index" resource="Magetop_Productslider::slider"/>
+        <add id="Magetop_Productslider::configuration" title="Configurations" module="Magetop_Productslider" sortOrder="20" parent="Magetop_Productslider::productslider" action="adminhtml/system_config/edit/section/productslider" resource="Magetop_Productslider::configuration"/>
+    </menu>
+</config>

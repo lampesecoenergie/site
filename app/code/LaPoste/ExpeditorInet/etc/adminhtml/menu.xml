@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="LaPoste_ExpeditorInet::manage" title="La Poste Expeditor INet" translate="title" module="LaPoste_ExpeditorInet" sortOrder="500" parent="Magento_Sales::sales" resource="LaPoste_ExpeditorInet::manage"/>
+        <add id="LaPoste_ExpeditorInet::export_orders" title="Export Orders" translate="title" module="LaPoste_ExpeditorInet" sortOrder="10" parent="LaPoste_ExpeditorInet::manage" action="expeditorinet/export" resource="LaPoste_ExpeditorInet::export_orders"/>
+        <add id="LaPoste_ExpeditorInet::import_shipments" title="Import Shipments" translate="title" module="LaPoste_ExpeditorInet" sortOrder="20" parent="LaPoste_ExpeditorInet::manage" action="expeditorinet/import" resource="LaPoste_ExpeditorInet::import_shipments"/>
+    </menu>
+</config>

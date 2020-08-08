@@ -1,0 +1,29 @@
+<div data-bind="scope: 'ex'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+
+<script type="text/x-magento-init">
+        {
+            "*": {
+                "Magento_Ui/js/core/app": {
+                    "components": {
+                        "ex": {
+                            "component": "Ced_Cdiscount/js/profile/query-builder/viewModel",
+                            "template" : "Ced_Cdiscount/profile/query-builder/query-builder"
+                        }
+                    }
+                }
+            }
+        }
+</script>
+
+
+
+<!-- js -->
+<!--<script>
+    require(['ko'], function (ko) {
+        window.addEventListener('load', function () {
+            ko.applyBindings(new QueryBuilder.ViewModel());
+        }, true);
+    });
+</script>-->

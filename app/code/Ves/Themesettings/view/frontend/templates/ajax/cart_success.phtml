@@ -1,0 +1,37 @@
+<div class="popup_avaiable">
+	<?php
+	$_imgHelper = $this->helper('Ves\Themesettings\Helper\Image');
+	$_themeHelper = $this->helper('Ves\Themesettings\Helper\Theme');
+	$productUrl = $product->getProductUrl();
+	$enable_image = $_themeHelper->getGeneralCfg('general_settings/enable_ajax_img');
+	if($enable_image) {
+		$image_width = (int)$_themeHelper->getGeneralCfg('general_settings/ajax_img_width');
+		$image_height = (int)$_themeHelper->getGeneralCfg('general_settings/ajax_img_height');
+		$image_width = ($image_width)?$image_width:100;
+		$image_height = ($image_height)?$image_height:100;
+		$_image = $_imgHelper->getImg($product, $image_width, $image_height, 'category_page_grid');
+	}
+	
+	?>
+	<a href="<?php echo $productUrl; ?>">
+		<?php echo $product->getName(); ?>
+	</a>
+	<?php echo __('was added to your shopping cart.'); ?>
+	<br/>
+	<?php if($enable_image && $_image) { ?>
+	<div class="text-left ajax-product-image col-lg-4 col-md-5 col-sm-6 col-xs-12">
+		<a href="<?php echo $productUrl; ?>" title="<?php echo addslashes($_image->getLabel()); ?>"><img src="<?php echo $_image->getUrl(); ?>" alt="<?php echo addslashes($_image->getLabel()); ?>" /></a>
+	</div>	
+	<?php } ?>
+	<div class="action_button<?php if($enable_image && $_image) { ?> text-left col-lg-8 col-md-7 col-sm-6 col-xs-12<?php } ?>">
+		<ul>
+			<li>
+				<button onclick="jQuery.fancybox.close();" class="button btn-continue" title="<?php echo __("Continue Shopping");?>"><?php echo __("Continue Shopping");?></button>
+			</li>
+			<li>
+				<a href="<?php echo $this->helper('Magento\Checkout\Helper\Cart')->getCartUrl(); ?>" class="button btn-viewcart" title="<?php echo __("Checkout");?>"><span><?php echo __("View cart &amp; checkout");?></span></a>
+			</li>
+		</ul>
+	</div>
+	<br class="clr clear"/>
+</div>

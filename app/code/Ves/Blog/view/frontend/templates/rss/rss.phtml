@@ -1,0 +1,3 @@
+<?php if ($block->isRssAllowed() && $block->getLink()): ?>
+    <a href="<?php echo $block->getLink() ?>" class="action link rss"><span><?php echo $block->getLabel() ?></span></a>
+<?php endif; ?>

@@ -1,0 +1,3 @@
+<?php if ($block->isRssAllowed() && $block->getLink()): ?>
+<link href="<?php echo $block->getLink() ?>" title="<?php echo __('Blog'); ?>" rel="alternate" type="application/rss+xml" />
+<?php endif; ?>

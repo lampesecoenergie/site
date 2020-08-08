@@ -1,0 +1,184 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author     Kristof Ringleff, Fooman
+ * @package    Fooman_PdfCore
+ * @copyright  Copyright (c) 2015 Fooman Limited (http://www.fooman.co.nz)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="sales_pdf">
+            <group id="all" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Common Pdf Settings</label>
+                <group id="page" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1"
+                       showInStore="1" canRestore="1">
+                    <label>Page Settings</label>
+                    <field id="allpagesize" translate="label" type="select" sortOrder="100" showInDefault="1"
+                           showInWebsite="0" showInStore="0">
+                        <label>Page Size</label>
+                        <source_model>Fooman\PdfCore\Model\Config\Source\Pagesizes</source_model>
+                        <config_path>sales_pdf/all/allpagesize</config_path>
+                    </field>
+                    <field id="allpageorientation" translate="label" type="select" sortOrder="110" showInDefault="1"
+                           showInWebsite="0" showInStore="0" canRestore="1">
+                        <label>Page Orientation</label>
+                        <source_model>Fooman\PdfCore\Model\Config\Source\Pageorientation</source_model>
+                        <config_path>sales_pdf/all/allpageorientation</config_path>
+                    </field>
+                    <field id="allmargintop" translate="label" type="text" sortOrder="200" showInDefault="1"
+                           showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Top Margin</label>
+                        <comment>in milimeters</comment>
+                        <config_path>sales_pdf/all/allmargintop</config_path>
+                    </field>
+                    <field id="allmarginbottom" translate="label" type="text" sortOrder="210" showInDefault="1"
+                           showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Bottom Margin</label>
+                        <comment>in milimeters</comment>
+                        <config_path>sales_pdf/all/allmarginbottom</config_path>
+                        <tooltip>Set the bottom margin large enough to accommodate any footers and the page number.
+                            If the bottom margin is set too low, this can result in the footer blocks taking up all available space
+                            and there being no room to display the page number.
+                        </tooltip>
+                    </field>
+                    <field id="allmarginsides" translate="label" type="text" sortOrder="220" showInDefault="1"
+                           showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Side Margins</label>
+                        <comment>in milimeters</comment>
+                        <config_path>sales_pdf/all/allmarginsides</config_path>
+                    </field>
+                    <field id="allfooter1" translate="label" type="textarea" sortOrder="300" showInDefault="1"
+                           showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Footer Block 1</label>
+                        <config_path>sales_pdf/all/allfooter1</config_path>
+                    </field>
+                    <field id="allfooter2" translate="label" type="textarea" sortOrder="310" showInDefault="1"
+                           showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Footer Block 2</label>
+                        <config_path>sales_pdf/all/allfooter2</config_path>
+                    </field>
+                    <field id="allfooter3" translate="label" type="textarea" sortOrder="320" showInDefault="1"
+                           showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Footer Block 3</label>
+                        <config_path>sales_pdf/all/allfooter3</config_path>
+                    </field>
+                    <field id="allfooter4" translate="label" type="textarea" sortOrder="330" showInDefault="1"
+                           showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Footer Block 4</label>
+                        <config_path>sales_pdf/all/allfooter4</config_path>
+                    </field>
+                    <field id="allbgimage" translate="label" type="image" sortOrder="340" showInDefault="1"
+                           showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Background image</label>
+                        <tooltip>Upload an image that will be used as a background to the pdfs. Images will
+                                be scaled (but not distorted) to fit the page.
+                        </tooltip>
+                        <backend_model>Fooman\PdfCore\Model\Config\Backend\Background</backend_model>
+                        <upload_dir config="system/filesystem/media" scope_info="1">pdf_background</upload_dir>
+                        <base_url type="media" scope_info="1">pdf_background</base_url>
+                    </field>
+                    <field id="nobginadmin" translate="label" type="select" sortOrder="342" showInDefault="1"
+                           showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Hide Background Image in Admin</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <tooltip>When set to Yes, the above background image will not be used, useful if you print on pre-printed branded paper
+                            but still would like the other pdfs to show a background.</tooltip>
+                    </field>
+                </group>
+                <group id="font" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Font and Barcode Settings</label>
+                    <field id="allfont" translate="label" type="select" sortOrder="200" showInDefault="1"
+                           showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Font</label>
+                        <source_model>Fooman\PdfCore\Model\Config\Source\Fonts</source_model>
+                        <config_path>sales_pdf/all/allfont</config_path>
+                        <tooltip><![CDATA[System fonts (Helvetica, Times and Courier) offer the largest potential pdf size reduction
+                                    (up to 95%), but might not show all international characters (see troubleshooting)<br/>
+                                    • Dejavu fonts offer broader international character support (UTF-8),
+                                    but do not offer the same pdf size reduction as system fonts<br/>
+                                    • Use the System Fonts for Chinese, Korean or Japanese markets where the Adobe character package
+                                    is widely installed. This option also offers up to 95% potential pdf size reduction.]]></tooltip>
+                    </field>
+                    <field id="allcustomfont" translate="label" type="file" sortOrder="210" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Upload Custom Font</label>
+                        <config_path>sales_pdf/all/allcustomfont</config_path>
+                        <upload_dir config="system/filesystem/media">downloadable/pdfcustomfonts/orig</upload_dir>
+                        <backend_model>Fooman\PdfCore\Model\Config\Backend\Customfont</backend_model>
+                        <comment>Upload your font here (.ttf file extension).</comment>
+                        <tooltip>Upload any true type font with a .ttf file extension. Once uploaded, save the configuration.
+                            You will then be able to select your font from the drop down box in the “Font” setting above this option.
+                            Custom fonts do not offer the same potential pdf size reduction as system fonts.>
+                        </tooltip>
+                    </field>
+                    <field id="allfontsize" translate="label" type="select" sortOrder="210" showInDefault="1"
+                           showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Base Font Size</label>
+                        <source_model>Fooman\PdfCore\Model\Config\Source\Fontsizes</source_model>
+                        <config_path>sales_pdf/all/allfontsize</config_path>
+                        <tooltip><![CDATA[Change the size of the base font.<br/>
+                                    • Headings will be scaled to 150% of the base font<br/>
+                                    • Footers and line items will be automatically scaled to 80% of the base font,
+                                    when the base font size is set to 12 or higher.]]></tooltip>
+                    </field>
+                    <field id="allbarcode" translate="label" type="select" sortOrder="300" showInDefault="1"
+                           showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Barcode Type</label>
+                        <source_model>Fooman\PdfCore\Model\Config\Source\Barcodes</source_model>
+                        <config_path>sales_pdf/all/allbarcode</config_path>
+                        <tooltip>If you have chosen to show barcodes under the “Columns” setting for each pdf
+                            (Order/Invoice/Shipment/Credit Memo), choose how barcodes will be displayed.
+                            The default setting is CODE 39 EXTENDED + CHECKSUM. Ensure that you select the correct barcode type
+                            for the SKU you are using, or pdf generation could fail!
+                        </tooltip>
+                        <comment>Please make sure the barcode type is appropriate for the content or the pdf generation might fail (Default: CODE 39 EXTENDED + CHECKSUM).</comment>
+                    </field>
+                </group>
+                <group id="logo" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Logo Settings</label>
+                    <field id="image" translate="label" type="image" sortOrder="300" showInDefault="1"
+                           showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Logo for the Pdf</label>
+                        <tooltip>Upload your logo as a gif, jpeg or png file. A good size for the automatic
+                            placement versions is 700 pixels wide and 300 pixels high.
+                        </tooltip>
+                        <backend_model>Fooman\PdfCore\Model\Config\Backend\PdfLogo</backend_model>
+                        <upload_dir config="system/filesystem/media" scope_info="1">pdf_logo</upload_dir>
+                        <base_url type="media" scope_info="1">pdf_logo</base_url>
+
+                    </field>
+                    <field id="placement" translate="label" type="select" sortOrder="310" showInDefault="1"
+                           showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Logo Placement</label>
+                        <source_model>Fooman\PdfCore\Model\Config\Source\LogoPlacement</source_model>
+                    </field>
+                </group>
+                <group id="other" translate="label" type="text" sortOrder="400" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Miscellaneous</label>
+                    <field id="openinbrowser" translate="label" type="select" sortOrder="400" showInDefault="1"
+                           showInWebsite="0" showInStore="0" canRestore="1">
+                        <label>Open in Browser</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>sales_pdf/all/openinbrowser</config_path>
+                    </field>
+                    <field id="allqtyasint" translate="label" type="select" sortOrder="500" showInDefault="1"
+                           showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Display Quantity as full number</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>sales_pdf/all/allqtyasint</config_path>
+                        <tooltip>When set to Yes, quantities will be displayed as a full number
+                            (eg. 1.0000 units will be displayed as 1 unit). This is the default setting.
+                            When set to No, quantities will be displayed as a partial number (eg. 1.9500 units).
+                        </tooltip>
+                    </field>
+                </group>
+            </group>
+        </section>
+    </system>
+</config>

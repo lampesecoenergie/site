@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Venustheme
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Venustheme.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.venustheme.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category   Venustheme
+ * @package    Ves_Themesettings
+ * @copyright  Copyright (c) 2014 Venustheme (http://www.venustheme.com/)
+ * @license    http://www.venustheme.com/LICENSE-1.0.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../lib/internal/Magento/Framework/Event/etc/events.xsd">
+	<event name="admin_system_config_changed_section_ves_themesettings_general">
+		<observer name="ves_themesettings_general" instance="Ves\Themesettings\Observer\VesThemesettingsObserver"/>
+	</event>
+	<event name="admin_system_config_changed_section_ves_themesettings_header">
+		<observer name="ves_themesettings_header" instance="Ves\Themesettings\Observer\VesThemesettingsObserver"/>
+	</event>
+	<event name="admin_system_config_changed_section_ves_themesettings_footer">
+		<observer name="ves_themesettings_footer" instance="Ves\Themesettings\Observer\VesThemesettingsObserver"/>
+	</event>
+	<event name="admin_system_config_changed_section_ves_themesettings_page">
+		<observer name="ves_themesettings_page" instance="Ves\Themesettings\Observer\VesThemesettingsObserver"/>
+	</event>
+	<event name="admin_system_config_changed_section_ves_themesettings_product_listing">
+		<observer name="ves_themesettings_product_listing" instance="Ves\Themesettings\Observer\VesThemesettingsObserver"/>
+	</event>
+	<event name="admin_system_config_changed_section_ves_themesettings_category_page">
+		<observer name="ves_themesettings_category_page" instance="Ves\Themesettings\Observer\VesThemesettingsObserver"/>
+	</event>
+	<event name="admin_system_config_changed_section_ves_themesettings_product_page">
+		<observer name="ves_themesettings_product_page" instance="Ves\Themesettings\Observer\VesThemesettingsObserver"/>
+	</event>
+	<event name="admin_system_config_changed_section_ves_themesettings_contact_page">
+		<observer name="ves_themesettings_contact_page" instance="Ves\Themesettings\Observer\VesThemesettingsObserver"/>
+	</event>
+	<event name="admin_system_config_changed_section_ves_themesettings_cart_page">
+		<observer name="ves_themesettings_cart_page" instance="Ves\Themesettings\Observer\VesThemesettingsObserver"/>
+	</event>
+	<event name="admin_system_config_changed_section_ves_themesettings_customization">
+		<observer name="ves_themesettings_customization" instance="Ves\Themesettings\Observer\VesThemesettingsObserver"/>
+	</event>
+</config>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="jhk" translate="label" sortOrder="10">
+            <label>Jhk</label>
+        </tab>
+        <section id="custom" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Product Managment</label>
+            <tab>jhk</tab>
+            <resource>Jhkinfotech_Custom::custom_config</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Home Configuration</label>                
+                <field id="display_text_1" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Popular Products</label>
+                    <comment>Please enter comma separated SKU</comment>
+                </field>
+                <field id="display_text_2" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Latest Products</label>
+                    <comment>Please enter comma separated SKU</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

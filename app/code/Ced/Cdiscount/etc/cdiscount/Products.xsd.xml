@@ -1,0 +1,40 @@
+<ProductPackage Name="string" xmlns:clr="clr-namespace:Cdiscount.Service.ProductIntegration.Pivot;assembly=Cdiscount.Service.ProductIntegration" xmlns:xaml="http://schemas.microsoft.com/winfx/2006/xaml">
+  <!--Zero or more repetitions:-->
+  <ProductPackage.Products>
+    <!--Zero or more repetitions:-->
+    <ProductCollection Capacity="string">
+      <!--Zero or more repetitions:-->
+      <Product
+              BrandName="string"
+              SellerProductFamily="string"
+              SellerProductColorName="string"
+              Size="string"
+              Navigation="string"
+              Description="string"
+              EncodedMarketingDescription="string"
+              LongLabel="string"
+              Model="string"
+              ProductKind="string"
+              CategoryCode="string"
+              SellerProductId="string"
+              ShortLabel="string"
+      >
+        <!--1 or more repetitions:-->
+        <Product.EanList>
+          <!--1 or more repetitions:-->
+          <ProductEan Ean="string"/>
+        </Product.EanList>
+        <!--Zero or more repetitions:-->
+        <Product.ModelProperties>
+          <!--1 or more repetitions:-->
+          <xaml:String xaml:Key="string">string</xaml:String>
+        </Product.ModelProperties>
+        <!--1 or more repetitions:-->
+        <Product.Pictures>
+          <!--1 or more repetitions:-->
+          <ProductImage Uri="string"/>
+        </Product.Pictures>
+      </Product>
+    </ProductCollection>
+  </ProductPackage.Products>
+</ProductPackage>

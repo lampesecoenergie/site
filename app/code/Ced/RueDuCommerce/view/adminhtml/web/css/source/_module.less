@@ -1,0 +1,69 @@
+@rueducommerce-icons-admin__font-name-path: '@{baseDir}Ced_RueDuCommerce/fonts/rueducommerce';
+@rueducommerce-icons-admin__font-name : 'rueducommerce';
+.lib-font-face(
+  @family-name:@rueducommerce-icons-admin__font-name,
+  @font-path: @rueducommerce-icons-admin__font-name-path,
+  @font-weight: normal,
+  @font-style: normal
+);
+.admin__menu .item-rueducommerce.parent.level-0 > a:before {
+  font-family: @rueducommerce-icons-admin__font-name;
+  content: "\e900";
+  display: block;
+  font-family: "rueducommerce";
+  font-size: 2rem;
+  height: 3rem;
+}
+
+.cedcommerce.actions-li {
+  list-style: none;
+  display: inline;
+
+}
+
+.cedcommerce.actions {
+  font-size: 0;
+}
+
+.cedcommerce.actions.view:before {
+  display: inline-block;
+  content: url('@{baseDir}Ced_RueDuCommerce/images/actions/view.svg');
+  height:16px;
+}
+
+.cedcommerce.actions.delete:before {
+  display: inline-block;
+  content: url('@{baseDir}Ced_RueDuCommerce/images/actions/delete.svg');
+  height:16px;
+}
+
+.cedcommerce.actions.download:before {
+  display: inline-block;
+  content: url('@{baseDir}Ced_RueDuCommerce/images/actions/download.svg');
+  height:16px;
+}
+
+.cedcommerce.actions.edit:before {
+  display: inline-block;
+  content: url('@{baseDir}Ced_RueDuCommerce/images/actions/edit.svg');
+  height:16px;
+}
+
+.cedcommerce.actions.sync:before {
+  display: inline-block;
+  content: url('@{baseDir}Ced_RueDuCommerce/images/actions/sync.svg');
+  height:16px;
+}
+
+.cedcommerce.actions.upload:before {
+  display: inline-block;
+  content: url('@{baseDir}Ced_RueDuCommerce/images/actions/upload.svg');
+  height:16px;
+}
+
+.cedcommerce.actions.validate:before {
+  display: inline-block;
+  content: url('@{baseDir}Ced_RueDuCommerce/images/actions/validate-circle.svg');
+  height:16px;
+}
+

@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<group id="acyba_gls">
+		<job name="import_export" instance="Acyba\GLS\Cron\ImportExport" method="execute">
+			<config_path>gls_section/gls_import_export/gls_cron_expression</config_path>
+		</job>
+		<job name="update_gls_agencies" instance="Acyba\GLS\Cron\UpdateGlsAgencies" method="execute">
+			<schedule>0 0 * * *</schedule>
+		</job>
+	</group>
+</config>

@@ -1,0 +1,11 @@
+<?php /** @var $block \MondialRelay\Shipping\Block\Adminhtml\ReturnLabel\Download\Link */ ?>
+<div class="mondialrelay-label-return-download">
+    <?php if (!$block->isFile()): ?>
+        <?php echo __('No return label has been generated'); ?>
+    <?php else: ?>
+        <ul>
+            <li><span class="label"><?php echo __('Direct download:'); ?></span> <a href="<?php echo $block->getDownloadUrl() ?>"><?php echo __('Download'); ?></a></li>
+            <li><span class="label"><?php echo __('File link:'); ?></span> <?php echo $block->getDirectUrl() ?></li>
+        </ul>
+    <?php endif; ?>
+</div>

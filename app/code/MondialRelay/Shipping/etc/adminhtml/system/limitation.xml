@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mondial Relay Shipping Module
+ *
+ * @author    Magentix
+ * @copyright Copyright © 2018 Magentix. All rights reserved.
+ * @license   https://www.magentix.fr/en/licence.html Magentix Software Licence
+ * @link      https://mondialrelay.magentix.fr/
+ */
+-->
+<include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
+    <group id="limitation" translate="label" type="text" sortOrder="150" showInDefault="1" showInWebsite="0" showInStore="0">
+        <label>Limit</label>
+        <fieldset_css>mondialrelay-configuration configuration-label</fieldset_css>
+        <field id="debug" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+            <label>Debug</label>
+            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+        </field>
+        <field id="weight_limitation" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
+            <label>Weight Limit</label>
+            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+        </field>
+        <field id="weight_calculation" translate="label" type="select" sortOrder="3" showInDefault="1" showInWebsite="0" showInStore="0">
+            <label>Weight Calculation</label>
+            <source_model>MondialRelay\Shipping\Model\Config\Source\Calculation</source_model>
+            <depends>
+                <field id="weight_limitation">1</field>
+            </depends>
+        </field>
+        <field id="size_limitation" translate="label" type="select" sortOrder="4" showInDefault="1" showInWebsite="0" showInStore="0">
+            <label>Size Limit</label>
+            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+        </field>
+        <field id="size_calculation" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="0" showInStore="0">
+            <label>Size Calculation</label>
+            <source_model>MondialRelay\Shipping\Model\Config\Source\Calculation</source_model>
+            <depends>
+                <field id="size_limitation">1</field>
+            </depends>
+        </field>
+        <field id="length_attribute" translate="label" type="select" sortOrder="6" showInDefault="1" showInWebsite="0" showInStore="0">
+            <label>Product Length Attribute</label>
+            <source_model>MondialRelay\Shipping\Model\Config\Source\Attribute</source_model>
+            <depends>
+                <field id="size_limitation">1</field>
+            </depends>
+        </field>
+        <field id="width_attribute" translate="label" type="select" sortOrder="7" showInDefault="1" showInWebsite="0" showInStore="0">
+            <label>Product Width Attribute</label>
+            <source_model>MondialRelay\Shipping\Model\Config\Source\Attribute</source_model>
+            <depends>
+                <field id="size_limitation">1</field>
+            </depends>
+        </field>
+        <field id="height_attribute" translate="label" type="select" sortOrder="8" showInDefault="1" showInWebsite="0" showInStore="0">
+            <label>Product Height Attribute</label>
+            <source_model>MondialRelay\Shipping\Model\Config\Source\Attribute</source_model>
+            <depends>
+                <field id="size_limitation">1</field>
+            </depends>
+        </field>
+    </group>
+</include>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author     Kristof Ringleff
+ * @package    Fooman_OrderManager
+ * @copyright  Copyright (c) 2015 Fooman Limited (http://www.fooman.co.nz)
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="admin">
+        <route id="ordermanager" frontName="ordermanager">
+            <module name="Fooman_OrderManager" before="Magento_Sales" />
+        </route>
+    </router>
+</config>

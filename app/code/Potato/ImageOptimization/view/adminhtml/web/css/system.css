@@ -1,0 +1,165 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:700);
+
+#row_potato_image_optimization_status_html_content .status-error-value {
+    color: #ce0000;
+    font-weight: bold;
+}
+
+#row_potato_image_optimization_status_html_content .status-success-value {
+    color: #15b000;
+    font-weight: bold;
+}
+
+#row_potato_image_optimization_status_html_content .status-container .container {
+    display: inline-block;
+    vertical-align: top;
+}
+
+#row_potato_image_optimization_status_html_content .status-container .progress-container {
+    width: 200px;
+}
+
+#row_potato_image_optimization_status_html_content .status-container .info-container {
+    width: 300px;
+    padding-left: 5%;
+}
+
+#row_potato_image_optimization_status_html_content .status-container .error-container {
+    max-width: 240px;
+}
+
+#row_potato_image_optimization_status_html_content .status-container .title {
+    font-size: 20px;
+    text-align: center;
+    width: 200px;
+}
+
+#row_potato_image_optimization_status_html_content .status-container .info-row {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+#row_potato_image_optimization_status_html_content .status-container .lib-container {
+    width: 200px;
+    font-size: 13px;
+}
+
+#row_potato_image_optimization_status_html_content .status-container .lib-container .lib-row{
+    margin: 8px 0;
+    width: 200px
+}
+
+#row_potato_image_optimization_status_html_content .status-container .lib-container .lib-status {
+    float: right;
+}
+
+#row_potato_image_optimization_status_html_content .status-container .lib-container .lib-status.ok {
+    color: #15b000;
+}
+
+#row_potato_image_optimization_status_html_content .status-container .lib-container .lib-status.fail {
+    color: #ce0000;
+}
+
+#row_potato_image_optimization_status_html_content .status-error-group-list {
+    list-style-type: decimal;
+    margin-left: 15px;
+}
+
+#row_potato_image_optimization_status_html_content .column-name {
+    font-size: 14px;
+    text-align: left;
+    color: #a8a8a8;
+}
+
+#row_potato_image_optimization_status_html_content .column-value {
+    text-align: left;
+    color: #1b1b1b;
+}
+
+#row_potato_image_optimization_status_html_content .error-count {
+    font-weight: bold;
+}
+
+#images_list {
+    margin: auto;
+    display: block;
+}
+
+
+/*** PIE **/
+.progress-pie{
+    margin: auto;
+    height: 160px;
+    width: 160px;
+    font-size: 160px;
+    position: relative;
+    box-sizing: border-box;
+    font-family: "Lato", "Open Sans", Arial, sans-serif;
+}
+.progress-pie__circle{
+    height: 100%;
+    width: 100%;
+    clip: rect(0, 1em, 1em, 0.5em);
+    left: 0;
+    position: absolute;
+    top: 0;
+    box-sizing: border-box;
+}
+.progress-pie__circle--full{
+    clip: rect(auto, auto, auto, auto);
+}
+.progress-pie__circle>div{
+    height: 100%;
+    width: 100%;
+    border: 0.1em solid #2044ff;
+    border-radius: 50%;
+    clip: rect(0, 0.5em, 1em, 0);
+    left: 0;
+    position: absolute;
+    top: 0;
+}
+.progress-pie__circle-right{
+    display: none;
+}
+.progress-pie__circle-right--full{
+    display: block;
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+.progress-pie__percent{
+    border-radius: 50%;
+    bottom: 0.4em;
+    color: #403a35;
+    cursor: default;
+    display: block;
+    font-size: 0.25em;
+    left: 0.4em;
+    line-height: 2.9em;
+    position: absolute;
+    right: 0.4em;
+    text-align: center;
+    top: 0.4em;
+    padding-right: 0.04em;
+}
+.progress-pie__info{
+    font-size: 0.075em;
+    color: #bcbcbc;
+    text-align: center;
+    position: absolute;
+    top: 60%;
+    width: 100%;
+}
+.progress-pie__shadow{
+    height: 100%;
+    width: 100%;
+    border: 0.1em solid #ececec;
+    border-radius: 50%;
+}
+.progress-pie__small{
+    color: #bcbcbc;
+    font-size: .45em;
+    position: absolute;
+    top: -0.45em;
+    padding-left: 0.15em;
+}

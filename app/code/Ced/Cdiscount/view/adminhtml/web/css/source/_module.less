@@ -1,0 +1,82 @@
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Cdiscount
+ * @author 		CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license      http://cedcommerce.com/license-agreement.txt
+ */
+
+@cedcdiscount-icons-admin__font-name-path: '@{baseDir}Ced_Cdiscount/fonts/cdiscount';
+@cedcdiscount-icons-admin__font-name : 'cdiscount';
+.lib-font-face(
+  @family-name:@cedcdiscount-icons-admin__font-name,
+  @font-path: @cedcdiscount-icons-admin__font-name-path,
+  @font-weight: normal,
+  @font-style: normal
+);
+.admin__menu .item-cdiscount.parent.level-0 > a:before {
+  font-family: @cedcdiscount-icons-admin__font-name;
+  content: "\e900";
+  display: block;
+}
+
+.cedcommerce.actions-li {
+  list-style: none;
+  display: inline;
+
+}
+
+.cedcommerce.actions {
+  font-size: 0;
+}
+
+.cedcommerce.actions.view:before {
+  display: inline-block;
+  content: url('@{baseDir}Ced_Cdiscount/images/actions/view.svg');
+  height:16px;
+}
+
+.cedcommerce.actions.delete:before {
+  display: inline-block;
+  content: url('@{baseDir}Ced_Cdiscount/images/actions/delete.svg');
+  height:16px;
+}
+
+.cedcommerce.actions.download:before {
+  display: inline-block;
+  content: url('@{baseDir}Ced_Cdiscount/images/actions/download.svg');
+  height:16px;
+}
+
+.cedcommerce.actions.edit:before {
+  display: inline-block;
+  content: url('@{baseDir}Ced_Cdiscount/images/actions/edit.svg');
+  height:16px;
+}
+
+.cedcommerce.actions.sync:before {
+  display: inline-block;
+  content: url('@{baseDir}Ced_Cdiscount/images/actions/sync.svg');
+  height:16px;
+}
+
+.cedcommerce.actions.upload:before {
+  display: inline-block;
+  content: url('@{baseDir}Ced_Cdiscount/images/actions/upload.svg');
+  height:16px;
+}
+
+.cedcommerce.actions.validate:before {
+  display: inline-block;
+  content: url('@{baseDir}Ced_Cdiscount/images/actions/validate-circle.svg');
+  height:16px;
+}

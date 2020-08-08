@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Slider
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">cdiscount_profile_edit.cdiscount_profile_edit_data_source</item>
+            <item name="namespace" xsi:type="string">cdiscount_profile_edit</item>
+            <item name="deps" xsi:type="string">cdiscount_profile_edit.cdiscount_profile_edit_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Profile Information</item>
+        <item name="layout" xsi:type="array">
+            <item name="type" xsi:type="string">tabs</item>
+            <item name="navContainerName" xsi:type="string">left</item>
+        </item>
+        <!--<item name="template" xsi:type="string">templates/form/collapsible</item>-->
+        <!--<item name="reverseMetadataMerge" xsi:type="boolean">true</item>-->
+
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">Ced\Cdiscount\Block\Adminhtml\Profile\Ui\Button\Back</item>
+            <item name="save" xsi:type="string">Ced\Cdiscount\Block\Adminhtml\Profile\Ui\Button\Save</item>
+        </item>
+    </argument>
+    <dataSource name="cdiscount_profile_edit_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Ced\Cdiscount\Ui\DataProvider\Profile\Form\DataProvider</argument>
+            <argument name="name" xsi:type="string">cdiscount_profile_edit_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="cdiscount/profile/save"/>
+                    <item name="validate_url" xsi:type="url" path="cdiscount/profile/validate"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+
+    <fieldset name="general_information">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">General Information</item>
+                <item name="collapsible" xsi:type="boolean">false</item>
+            </item>
+        </argument>
+
+        <field name="id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">cdiscount_profile_edit_data_source</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="profile_code">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">cdiscount_profile_edit_data_source</item>
+                    <item name="label" xsi:type="string" translate="true">Profile Code</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="letters-only" xsi:type="boolean">true</item>
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="profile_name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">cdiscount_profile_edit_data_source</item>
+                    <item name="label" xsi:type="string" translate="true">Profile Name</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-alphanum-with-spaces" xsi:type="boolean">true</item>
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="profile_status">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Ced\Cdiscount\Model\Selection\Edit\Options</item>
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="component" xsi:type="string">Ced_Cdiscount/js/profile/profile-status/options</item>
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">cdiscount_profile_edit_data_source</item>
+                    <item name="label" xsi:type="string" translate="true">Profile Status</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="product_state">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Ced\Cdiscount\Model\Source\Product\Conditions</item>
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="component" xsi:type="string">Ced_Cdiscount/js/profile/profile-status/options</item>
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">cdiscount_profile_edit_data_source</item>
+                    <item name="label" xsi:type="string" translate="true">Product Status</item>
+                </item>
+            </argument>
+        </field>
+
+    </fieldset>
+
+    <fieldset name="profile_mappings">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Profile Mappings</item>
+                <item name="collapsible" xsi:type="boolean">false</item>
+            </item>
+        </argument>
+        <container name="profile_category_attribute_mapping_js" >
+            <htmlContent name="html_content">
+                <argument name="block" xsi:type="object">Ced\Cdiscount\Block\Adminhtml\Profile\Ui\View\Js</argument>
+            </htmlContent>
+        </container>
+       <field name="profile_category">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Ced\Cdiscount\Ui\Component\Profile\Form\Categories\Options</item>
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="label" xsi:type="string" translate="true">Profile Category</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="componentType" xsi:type="string">field</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="component" xsi:type="string">Ced_Cdiscount/js/profile/profile-category</item>
+                    <item name="elementTmpl" xsi:type="string">Ced_Cdiscount/grid/filters/elements/ui-select</item>
+                    <item name="source" xsi:type="string">item</item>
+                    <item name="breakLine" xsi:type="boolean">true</item>
+                    <item name="filterOptions" xsi:type="boolean">true</item>
+                    <item name="showCheckbox" xsi:type="boolean">true</item>
+                    <item name="disableLabel" xsi:type="boolean">true</item>
+                    <item name="multiple" xsi:type="boolean">true</item>
+                    <item name="visibleValue" xsi:type="string">3</item>
+                    <item name="levelsVisibility" xsi:type="number">1</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="required" xsi:type="boolean">true</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="listens" xsi:type="array">
+                        <item name="${ $.namespace }.${ $.namespace }:responseData" xsi:type="string">setParsed</item>
+                    </item>
+                </item>
+
+            </argument>
+        </field>
+
+
+        <container name="profile_category_attributes">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">1000</item>
+                </item>
+            </argument>
+            <htmlContent name="html_content">
+                <argument name="block" xsi:type="object">Ced\Cdiscount\Block\Adminhtml\Profile\Ui\View\AttributeMapping</argument>
+            </htmlContent>
+        </container>
+    </fieldset>
+
+    <fieldset name="profile_products">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Profile Products</item>
+            </item>
+        </argument>
+        <container name="profile_products_container">
+            <htmlContent name="html_content">
+                <argument name="block" xsi:type="object">Ced\Cdiscount\Block\Adminhtml\Profile\Ui\View\ProfileProducts</argument>
+            </htmlContent>
+        </container>
+    </fieldset>
+</form>

@@ -1,0 +1,207 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement(EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+ * @package   Ced_Amazon
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright Copyright CEDCOMMERCE(http://cedcommerce.com/)
+ * @license   http://cedcommerce.com/license-agreement.txt
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Ced_Amazon::Amazon"
+             title="Amazon Integration"
+             translate="title"
+             module="Ced_Amazon"
+             sortOrder="80"
+             resource="Ced_Amazon::Amazon"
+             dependsOnConfig="amazon/settings/enable"
+        />
+
+        <add id="Ced_Amazon::product"
+             title="Listings"
+             translate="title"
+             module="Ced_Amazon"
+             sortOrder="10"
+             parent="Ced_Amazon::Amazon"
+             resource="Ced_Amazon::product"
+        />
+        <add id="Ced_Amazon::profile"
+             title="Profiles"
+             translate="title"
+             module="Ced_Amazon"
+             sortOrder="1"
+             parent="Ced_Amazon::product"
+             action="amazon/profile/index"
+             resource="Ced_Amazon::profile"
+        />
+        <add id="Ced_Amazon::listing"
+             title="Products"
+             translate="title"
+             module="Ced_Amazon"
+             sortOrder="2"
+             parent="Ced_Amazon::product"
+             action="amazon/product/index"
+             resource="Ced_Amazon::product"
+        />
+
+
+        <!--orders start-->
+        <add id="Ced_Amazon::order"
+             title="Sales"
+             translate="title"
+             module="Ced_Amazon"
+             sortOrder="20"
+             parent="Ced_Amazon::Amazon"
+             resource="Ced_Amazon::order"
+        />
+
+        <add id="Ced_Amazon::order_listing"
+             title="Orders"
+             translate="title"
+             module="Ced_Amazon"
+             sortOrder="10"
+             parent="Ced_Amazon::order"
+             action="amazon/order/index"
+             resource="Ced_Amazon::order_listing"
+        />
+        <!--order end-->
+
+        <!--developer start-->
+        <add id="Ced_Amazon::developer"
+             title="Developer"
+             module="Ced_Amazon"
+             sortOrder="35"
+             parent="Ced_Amazon::Amazon"
+             resource="Ced_Amazon::developer"
+        />
+
+        <add id="Ced_Amazon::feeds"
+             title="Feed"
+             translate="title"
+             module="Ced_Amazon"
+             sortOrder="10"
+             parent="Ced_Amazon::developer"
+             action="amazon/feeds"
+             resource="Ced_Amazon::feeds"
+        />
+
+        <add id="Ced_Amazon::amazon_report"
+             title="Report"
+             translate="title"
+             module="Ced_Amazon"
+             sortOrder="20"
+             parent="Ced_Amazon::developer"
+             action="amazon/report"
+             resource="Ced_Amazon::amazon_report"
+        />
+
+        <add id="Ced_Amazon::queue"
+             title="Queue"
+             translate="title"
+             module="Ced_Amazon"
+             sortOrder="30"
+             parent="Ced_Amazon::developer"
+             action="amazon/queue"
+             resource="Ced_Amazon::queue"
+        />
+
+        <add id="Ced_Amazon::cron"
+             title="Cron"
+             translate="title"
+             module="Ced_Amazon"
+             sortOrder="40"
+             parent="Ced_Amazon::developer"
+             action="integrator/cron/index"
+             resource="Ced_Integrator::cron_log"
+        />
+
+        <add id="Ced_Amazon::logs"
+             title="Log"
+             translate="title"
+             module="Ced_Amazon"
+             sortOrder="50"
+             parent="Ced_Amazon::developer"
+             action="integrator/log/index"
+             resource="Ced_Integrator::activity_log"
+        />
+
+        <add id="Ced_Amazon::system_status"
+             title="System"
+             translate="title"
+             module="Ced_Amazon"
+             sortOrder="60"
+             parent="Ced_Amazon::developer"
+             action="amazon/system/index"
+             resource="Ced_Amazon::system_status"
+        />
+        <!--developer end-->
+
+        <add id="Ced_Amazon::settings"
+             title="Settings"
+             translate="title"
+             module="Ced_Amazon"
+             sortOrder="30"
+             parent="Ced_Amazon::Amazon"
+             resource="Ced_Amazon::settings"
+        />
+
+        <add id="Ced_Amazon::account"
+             title="Accounts"
+             module="Ced_Amazon"
+             sortOrder="1"
+             parent="Ced_Amazon::settings"
+             action="amazon/account/index"
+             resource="Ced_Amazon::account"
+        />
+
+        <add id="Ced_Amazon::configuration"
+             title="Configuration"
+             module="Ced_Amazon"
+             sortOrder="3"
+             parent="Ced_Amazon::settings"
+             action="adminhtml/system_config/edit/section/amazon"
+             resource="Ced_Amazon::configuration"
+        />
+
+        <add id="Ced_Amazon::extras"
+             title="Extras"
+             translate="title"
+             module="Ced_Amazon"
+             sortOrder="40"
+             parent="Ced_Amazon::Amazon"
+             resource="Ced_Amazon::extras"
+        />
+
+        <add id="Ced_Amazon::support"
+             title="Help &amp; Support"
+             translate="title"
+             module="Ced_Integrator"
+             sortOrder="10"
+             parent="Ced_Amazon::extras"
+             action="integrator/support/index"
+             resource="Ced_Integrator::support"
+        />
+        <add id="Ced_Amazon::knowledgebase"
+             title="Knowledgebase"
+             translate="title"
+             module="Ced_Amazon"
+             sortOrder="20"
+             parent="Ced_Amazon::extras"
+             action="amazon/kb"
+             resource="Ced_Amazon::knowledgebase"
+        />
+    </menu>
+</config>

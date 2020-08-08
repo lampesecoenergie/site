@@ -1,0 +1,20 @@
+<?php
+//@codingStandardsIgnoreFile
+?>
+
+<table class="admin__control-table">
+    <thead>
+    <tr>
+        <th class="col-default"><?= __('Product') ?></th>
+        <th class="col-default"><?= __('Value') ?></th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($this->getRandomProducts() as $product): ?>
+        <tr>
+            <td><?=$product->getName() ?></td>
+            <td><?= $this->getPatternValue($product) ?></td>
+        </tr>
+    <?php endforeach ?>
+    </tbody>
+</table>

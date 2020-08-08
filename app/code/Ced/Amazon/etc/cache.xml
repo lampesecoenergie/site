@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Cache/etc/cache.xsd">
+    <type name="ced_amazon_cache" translate="label,description" instance="Ced\Amazon\Model\Cache\Type">
+        <label>Amazon</label>
+        <description>Amazon module cache for integration data.</description>
+    </type>
+</config>

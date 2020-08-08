@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <admin_logger_config>
+            <general>
+                <enable>1</enable>
+            </general>
+            <logs_settings>
+                <auto_logs_deletion_enabled>1</auto_logs_deletion_enabled>
+                <page_view_logging_enabled>1</page_view_logging_enabled>
+                <logs_deletion_enabled>1</logs_deletion_enabled>
+                <clear_actions_logs_after>90</clear_actions_logs_after>
+                <clear_login_logs_after>90</clear_login_logs_after>
+                <clear_page_view_logs_after>90</clear_page_view_logs_after>
+            </logs_settings>
+        </admin_logger_config>
+    </default>
+</config>

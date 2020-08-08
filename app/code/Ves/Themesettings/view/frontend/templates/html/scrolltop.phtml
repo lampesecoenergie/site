@@ -1,0 +1,36 @@
+<?php
+$ves = $this->helper("Ves\Themesettings\Helper\Theme");
+$scrolltop = $ves->getFooterCfg("general_settings/enable_scrolltop");
+?>
+<?php if($scrolltop){ ?>
+<div id="top">
+    <a class="scrollup" href="javascript:void(0)">
+        <i class="fa fa-angle-up"></i>
+        <span><?php echo __('Top'); ?></span>
+    </a>
+</div>
+<script type="text/javascript">
+    require([
+        'jquery',
+        'vestheme'
+        ],function(){
+            jQuery(document).ready(function($) {
+                if(jQuery(".scrollup").length > 0) {
+                    jQuery(document).ready(function(){
+                        jQuery(window).scroll(function(){
+                            if (jQuery(this).scrollTop() > 100) {
+                                jQuery('.scrollup').fadeIn();
+                            } else {
+                                jQuery('.scrollup').fadeOut();
+                            }
+                        });
+                        jQuery('.scrollup').click(function(){
+                            jQuery("html, body").animate({ scrollTop: 0 }, 600);
+                            return false;
+                        });
+                    });
+                }
+            });
+        });
+</script>
+<?php } ?>

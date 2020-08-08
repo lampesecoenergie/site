@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<!--
+ /**
+ * @category  Mageants BannerSlider
+ * @package   Mageants_BannerSlider
+ * @copyright Copyright (c) 2017 Mageants
+ * @author    Mageants Team <support@Mageants.com>
+ */
+ -->
+	<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Config/etc/system_file.xsd">
+		<system>
+			<tab id="mageants" translate="label" sortOrder="10">
+				<label>Mageants</label>
+			</tab>
+			<section id="mageants_bannerslider" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>BannerSlider</label>
+				<tab>mageants</tab>
+				<resource>Mageants_BannerSlider::mageants_bannerslider</resource>
+				<group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>General</label>
+					<field id="enable" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+						<label>Enable Banner Slider</label>
+						<source_model>Mageants\BannerSlider\Model\Source\Status</source_model>
+						<comment>
+							Comment for `Enable Banner Sliders` setting.
+						</comment>
+					</field>
+				</group>
+				<group id="defslidersetting" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Default Slider Setting</label>
+					<field id="show_navigation_bullets" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+						<label>Show Navigation Bullets</label>
+						<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+						 <comment>
+							Show / Hide Bullets navigation
+						</comment>  
+					</field>
+					<field id="show_navigation_arrows" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+						<label>Show Navigation Arrows</label>
+						<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+						 <comment>
+							Show / Hide Arrow navigation
+						</comment>  
+					</field>
+					<field id="speed" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+						<label>Speed</label>
+						 <comment>
+						  transitions speed
+						</comment>
+					</field>
+					<field id="autoplay" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+						<label>Autoplay</label>
+						<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+						 <comment>
+							slideshow on / off
+						</comment>  
+					</field>
+					<field id="keyboard" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+						<label>Keyboard Navigation</label>
+						<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>					
+					</field>
+					<field id="interval" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+						<label>Interval</label>
+						 <comment>
+							time between Slide transitions 
+						</comment>  
+					</field>
+				</group>
+				<group id="advslidersetting" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Advance Slider Setting</label>
+					<field id="optopacity" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+						<label>Enable Opacity</label>
+						<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+						<comment>
+						  if true the item's slices will also animate the opacity value
+						</comment>
+					</field>
+					<field id="translatefactor" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+						<label>Translate Factor</label>
+						 <comment>
+							amount (%) to translate both slices - adjust as necessary
+						</comment>  
+					</field>
+					<field id="maxangle" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+						<label>Max Angle</label>
+						 <comment>
+							maximum possible angle
+						</comment>  
+					</field>
+					<field id="maxscale" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+						<label>Max Scale</label>
+						 <comment>
+							maximum possible scale
+						</comment>  
+					</field>
+					<field id="onbeforechange" translate="label" type="textarea" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+						<label>default JavaScript for Before slide Change</label>
+						 <comment>
+							function( slide, idx ) { // Your Script call here	}
+						</comment>  
+					</field>
+					<field id="onafterchange" translate="label" type="textarea" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+						<label>default JavaScript for After slide Change</label>
+						 <comment>
+							function( slide, idx ) { // Your Script call here	}
+						</comment>  
+					</field>
+				</group>
+			</section>
+		</system>
+	</config>

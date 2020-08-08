@@ -1,0 +1,125 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+ * @package   Ced_EbayMultiAccount
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright Copyright CEDCOMMERCE (http://cedcommerce.com/)
+ * @license   http://cedcommerce.com/license-agreement.txt
+ */
+?>
+<div class="accordion">
+	<div class="entry-edit form-inline">
+		<div class="section-config">
+			<div class="entry-edit-head">
+				<div class="entry-edit-head admin__collapsible-block">
+					<span class="entry-edit-head-link" id="ced-support-link"></span> <a
+						onclick="Fieldset.toggleCollapse('ced-support');return false;"
+						href="#ced-support-link" id="ced-support-head" class="">Cedcommerce
+						Support</a>
+				</div>
+			</div>
+			<fieldset id="ced-support" class="admin__collapsible-block"
+					  style="display: none;">
+				<ul>
+					<a target="_blank"
+					   href="https://cedcommerce.com/magento-2-extensions/ebay-magento-2-multiaccount">EbayMultiAccount Integration Knowledge base</a>
+				</ul>
+			</fieldset>
+			<script type="text/javascript">
+				//&lt;![CDATA[
+				require(['prototype'],
+					function() {Fieldset.applyCollapse('ced-support');});
+				//]]&gt;
+			</script>
+		</div>
+		<div class="section-config">
+			<div class="entry-edit-head">
+				<div class="entry-edit-head admin__collapsible-block">
+					<span class="entry-edit-head-link" id="documentation-link"></span>
+					<a onclick="Fieldset.toggleCollapse('documentation');return false;"
+					   href="#documentation-link" id="documentation-head" class="">Documentation</a>
+				</div>
+			</div>
+			<fieldset id="documentation" class="admin__collapsible-block"
+					  style="display: none;">
+				<ul>
+					<a target="_blank"
+					   href="https://docs.cedcommerce.com/magento-2/ebay-multi-account-integration-magento-2-guide/">EbayMultiAccount
+                        Integration Extension User Guide By CedCommerce</a>
+				</ul>
+			</fieldset>
+			<script type="text/javascript">//&lt;![CDATA[
+				require(['prototype'], function() {Fieldset.applyCollapse('documentation');});
+				//]]&gt;
+			</script>
+		</div>
+		<div class="section-config">
+
+			<div class="entry-edit-head">
+				<div class="entry-edit-head admin__collapsible-block">
+					<span class="entry-edit-head-link" id="ebaymultiaccount-doc-link"></span> <a
+						onclick="Fieldset.toggleCollapse('ebaymultiaccount-doc');return false;"
+						href="#ebaymultiaccount-doc-link" id="ebaymultiaccount-doc-head" class="">Contact Us via Below Available Mediums</a>
+				</div>
+			</div>
+
+			<fieldset id="ebaymultiaccount-doc" class="admin__collapsible-block"
+					  style="display: none;">
+				<div class="ticket-wrap">
+		  			<a title="Click Here to Submit a Support Ticket" href="skype:live:support_35785?call" target="_blank">
+		            	<img src="<?php echo $this->getViewFileUrl('Ced_EbayMultiAccount::images/girl-on-phone.png'); ?>">
+		            	<p><span class="contact-24">Contact Us 24*7 via Skype Call</span></p>
+		        	</a>		        	
+					<a title="Click Here to Submit a Support Ticket" href="http://support.cedcommerce.com/" target="_blank">
+						<img src="<?php echo $this->getViewFileUrl('Ced_EbayMultiAccount::images/ticket.png'); ?>">
+						<p><span class="mail">Submit issue via Ticket</span></p>
+					</a>
+						<a title="Click Here to Contact us through Mail" href="mailto:davidwhite@cedcommerce.com&cc=davetaylor@cedcommerce.com" target="_blank">
+						<img src="<?php echo $this->getViewFileUrl('Ced_EbayMultiAccount::images/mail.png'); ?>">
+						<p><span class="mail">Send us an E-mail</span></p>
+					</a>
+
+					<a title="Click to connect with us over skype " href="skype:live:davidwhite_108;live:jonsnow_92;?chat&topic=<?= $this->getBaseUrl()?>" target="_blank">
+						<img src="<?php echo $this->getViewFileUrl('Ced_EbayMultiAccount::images/skype.png'); ?>">
+						<p><span>Connect via Skype Chat</span></p>
+					</a>
+				</div>
+				<span class="more-contact">For More Informations Please Contact Us: <mark>Toll-Free Number: 888-882-0953 (FOR USA)</mark></span>
+	                			
+			</fieldset>
+			<script type="text/javascript">//&lt;![CDATA[
+				require(['prototype'], function() {Fieldset.applyCollapse('ebaymultiaccount-doc');});
+				//]]&gt;</script>
+		</div>
+	</div>
+</div>
+
+
+<style type="text/css">
+.ticket-wrap::after {
+	clear: both;
+	content: "";
+	display: table;
+}
+.ticket-wrap > a {
+  display: block;
+  float: left;
+  margin-bottom: 30px;
+  text-align: center;
+  width: 25%;
+}
+.ticket-wrap > a img {
+  height: 60px;
+  margin-bottom: 20px;
+  width: auto;
+}
+</style>

@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="cminds"
+             translate="label"
+             sortOrder="900"
+             class="cminds-logo">
+            <label>Cminds</label>
+        </tab>
+        <section id="admin_logger_config"
+                 translate="label"
+                 sortOrder="10"
+                 showInDefault="1"
+                 showInWebsite="1"
+                 showInStore="1">
+            <label>Admin Logger</label>
+            <tab>cminds</tab>
+            <resource>Cmind_AdminLogger::config</resource>
+            <group id="general"
+                   translate="label"
+                   type="text"
+                   sortOrder="10"
+                   showInDefault="1"
+                   showInWebsite="1"
+                   showInStore="1">
+                <label>General</label>
+                <field id="enable"
+                       translate="label"
+                       type="select"
+                       sortOrder="10"
+                       showInDefault="1"
+                       showInWebsite="1"
+                       showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="logs_settings"
+                   translate="label"
+                   type="text"
+                   sortOrder="10"
+                   showInDefault="1"
+                   showInWebsite="1"
+                   showInStore="1">
+                <label>Logs Settings</label>
+                <field id="logs_deletion_enabled"
+                       translate="label"
+                       type="select"
+                       sortOrder="1"
+                       showInDefault="1"
+                       showInWebsite="1"
+                       showInStore="1">
+                    <label>Manual Logs Delete</label>
+                    <comment>You can enable/disable manual logs delete ability.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="auto_logs_deletion_enabled"
+                       translate="label"
+                       type="select"
+                       sortOrder="1"
+                       showInDefault="1"
+                       showInWebsite="1"
+                       showInStore="1">
+                    <label>Auto Delete Logs</label>
+                    <comment>You can enable/disable auto delete logs.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="page_view_logging_enabled"
+                       translate="label"
+                       type="select"
+                       sortOrder="1"
+                       showInDefault="1"
+                       showInWebsite="1"
+                       showInStore="1">
+                    <label>Log Page View</label>
+                    <comment>You can enable/disable page view logging.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="clear_actions_logs_after"
+                       translate="label"
+                       type="text"
+                       sortOrder="1"
+                       showInDefault="1"
+                       showInWebsite="1"
+                       showInStore="1">
+                    <label>Automatically Clear Actions Logs After Days</label>
+                    <comment>You can set how many days would you like to keep action logs.</comment>
+                </field>
+                <field id="clear_login_logs_after"
+                       translate="label"
+                       type="text"
+                       sortOrder="1"
+                       showInDefault="1"
+                       showInWebsite="1"
+                       showInStore="1">
+                    <label>Automatically Clear Login Logs After Days</label>
+                    <comment>You can set how many days would you like to keep login logs.</comment>
+                </field>
+                <field id="clear_page_view_logs_after"
+                       translate="label"
+                       type="text"
+                       sortOrder="1"
+                       showInDefault="1"
+                       showInWebsite="1"
+                       showInStore="1">
+                    <label>Automatically Clear Page View Logs After Days</label>
+                    <comment>You can set how many days would like like to keep page view logs.</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

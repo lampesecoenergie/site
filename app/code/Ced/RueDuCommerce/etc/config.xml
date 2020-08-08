@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement(EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+ * @package   Ced_RueDuCommerce
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright Copyright CEDCOMMERCE(http://cedcommerce.com/)
+ * @license   http://cedcommerce.com/license-agreement.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<default>
+		<rueducommerce_config>
+			<rueducommerce_setting>
+				<version>1.0</version>
+			</rueducommerce_setting>
+			<rueducommerce_product>
+				<inventory_settings>
+					<fullfillment_latency>0</fullfillment_latency>
+					<advanced_threshold_status>0</advanced_threshold_status>
+				</inventory_settings>
+			</rueducommerce_product>
+			<rueducommerce_order>
+				<order_id_prefix>RUE</order_id_prefix>
+			</rueducommerce_order>
+		</rueducommerce_config>
+		<carriers>
+			<shipbyrueducommerce>
+				<active>1</active>
+				<sallowspecific>0</sallowspecific>
+				<name>RueDuCommerce Shipping Method(Default)</name>
+				<title>RueDuCommerce Shipping Method</title>
+				<model>Ced\RueDuCommerce\Model\Carrier\RueDuCommerce</model>
+			</shipbyrueducommerce>
+		</carriers> 
+		<payment>
+			<paybyrueducommerce>
+				<active>1</active>
+				<model>Ced\RueDuCommerce\Model\Payment\RueDuCommerce</model>
+				<order_status>Processing</order_status>
+				<title>RueDuCommerce Payment Method(Default)</title>
+				<payment_action>sale</payment_action>
+				<allowspecific>0</allowspecific>
+			</paybyrueducommerce>
+    </payment>
+  </default> 
+</config>

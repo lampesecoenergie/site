@@ -1,0 +1,220 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement(EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+ * @package   Ced_Cdiscount
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright Copyright CEDCOMMERCE(http://cedcommerce.com/)
+ * @license   http://cedcommerce.com/license-agreement.txt
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Ced_Cdiscount::Cdiscount"
+             title="Cdiscount Integration"
+             translate="title"
+             module="Ced_Cdiscount"
+             sortOrder="14"
+             resource="Ced_Cdiscount::Cdiscount"
+        />
+
+        <add id="Ced_Cdiscount::product"
+             title="Products"
+             translate="title"
+             module="Ced_Cdiscount"
+             sortOrder="10"
+             parent="Ced_Cdiscount::Cdiscount"
+             resource="Ced_Cdiscount::product"
+        />
+        <add id="Ced_Cdiscount::cdiscount_profile"
+             title="Profile Manager"
+             translate="title"
+             module="Ced_Cdiscount"
+             sortOrder="1"
+             parent="Ced_Cdiscount::product"
+             action="cdiscount/profile/index"
+             resource="Ced_Cdiscount::cdiscount_profile"
+        />
+        <add id="Ced_Cdiscount::cdiscount_product"
+             title="Product Listing"
+             translate="title"
+             module="Ced_Cdiscount"
+             sortOrder="2"
+             parent="Ced_Cdiscount::product"
+             action="cdiscount/product/index"
+             resource="Ced_Cdiscount::cdiscount_product"
+        />
+
+
+        <!--orders start-->
+        <add id="Ced_Cdiscount::cdiscount_orders"
+             title="Orders"
+             translate="title"
+             module="Ced_Cdiscount"
+             sortOrder="20"
+             parent="Ced_Cdiscount::Cdiscount"
+             resource="Ced_Cdiscount::cdiscount_orders"
+        />
+
+        <add id="Ced_Cdiscount::cdiscount_order_listing"
+             title="Orders Listing"
+             translate="title"
+             module="Ced_Cdiscount"
+             sortOrder="10"
+             parent="Ced_Cdiscount::cdiscount_orders"
+             action="cdiscount/order/index"
+             resource="Ced_Cdiscount::cdiscount_order_listing"
+        />
+        <add id="Ced_Cdiscount::cdiscount_failed_order"
+             title="Failed Orders"
+             translate="title"
+             module="Ced_Cdiscount"
+             sortOrder="20"
+             parent="Ced_Cdiscount::cdiscount_orders"
+             action="cdiscount/failedorder"
+             resource="Ced_Cdiscount::cdiscount_failed_order"
+        />
+        <!--orders end-->
+
+        <!--developer start-->
+        <add id="Ced_Cdiscount::developer"
+             title="Developer"
+             module="Ced_Cdiscount"
+             sortOrder="35"
+             parent="Ced_Cdiscount::Cdiscount"
+             resource="Ced_Cdiscount::developer"
+        />
+
+        <add id="Ced_Cdiscount::cdiscount_feeds"
+             title="Feeds"
+             translate="title"
+             module="Ced_Cdiscount"
+             sortOrder="10"
+             parent="Ced_Cdiscount::developer"
+             action="cdiscount/feeds"
+             resource="Ced_Cdiscount::cdiscount_feeds"
+        />
+
+        <add id="Ced_Cdiscount::cdiscount_sizes"
+             title="Sizes"
+             translate="title"
+             module="Ced_Cdiscount"
+             sortOrder="12"
+             parent="Ced_Cdiscount::developer"
+             action="cdiscount/sizes"
+             resource="Ced_Cdiscount::cdiscount_sizes"
+        />
+
+       <!-- <add id="Ced_Cdiscount::cdiscount_queue"
+             title="Feed Queues"
+             translate="title"
+             module="Ced_Cdiscount"
+             sortOrder="20"
+             parent="Ced_Cdiscount::developer"
+             action="cdiscount/queue"
+             resource="Ced_Cdiscount::cdiscount_queue"
+        />-->
+
+        <add id="Ced_Cdiscount::cdiscount_cron"
+             title="Cron Logs"
+             translate="title"
+             module="Ced_Cdiscount"
+             sortOrder="30"
+             parent="Ced_Cdiscount::developer"
+             action="cdiscount/cron"
+             resource="Ced_Cdiscount::cdiscount_cron"
+        />
+
+        <add id="Ced_Cdiscount::cdiscount_model_logs"
+             title="Activity Logs"
+             translate="title"
+             module="Ced_Cdiscount"
+             sortOrder="30"
+             parent="Ced_Cdiscount::developer"
+             action="cdiscount/logs"
+             resource="Ced_Cdiscount::cdiscount_model_logs"
+        />
+
+        <add id="Ced_Cdiscount::cdiscount_category"
+             title="Categories"
+             translate="title"
+             module="Ced_Cdiscount"
+             sortOrder="50"
+             parent="Ced_Cdiscount::developer"
+             action="cdiscount/category/index"
+             resource="Ced_Cdiscount::cdiscount_category"
+        />
+
+        <!--<add id="Ced_Cdiscount::query"
+             title="QUERY"
+             translate="title"
+             module="Ced_Cdiscount"
+             sortOrder="50"
+             parent="Ced_Cdiscount::developer"
+             action="cdiscount/query/index"
+             resource="Ced_Cdiscount::cdiscount_category"
+        />-->
+
+        <add id="Ced_Cdiscount::cdiscount_attribute"
+             title="Attributes"
+             translate="title"
+             module="Ced_Cdiscount"
+             sortOrder="60"
+             parent="Ced_Cdiscount::developer"
+             action="cdiscount/attribute/index"
+             resource="Ced_Cdiscount::cdiscount_attribute"
+        />
+        <!--developer end-->
+
+        <add id="Ced_Cdiscount::configuration"
+             title="Configurations"
+             translate="title"
+             module="Ced_Cdiscount"
+             sortOrder="30"
+             parent="Ced_Cdiscount::Cdiscount"
+             resource="Ced_Cdiscount::configuration"
+        />
+        <add id="Ced_Cdiscount::cdiscount_configuration"
+             title="Configuration"
+             module="Ced_Cdiscount"
+             sortOrder="1"
+             parent="Ced_Cdiscount::configuration"
+             action="adminhtml/system_config/edit/section/cdiscount_config"
+             resource="Ced_Cdiscount::cdiscount_configuration"
+        />
+
+
+        <add id="Ced_Cdiscount::extras"
+             title="Extras"
+             translate="title"
+             module="Ced_Cdiscount"
+             sortOrder="40"
+             parent="Ced_Cdiscount::Cdiscount"
+             resource="Ced_Cdiscount::extras"
+        />
+
+        <add id="Ced_Cdiscount::cdiscount_support"
+             title="Help and Support"
+             translate="title"
+             module="Ced_Cdiscount"
+             sortOrder="10"
+             parent="Ced_Cdiscount::extras"
+             action="cdiscount/help"
+             resource="Ced_Cdiscount::cdiscount_support"
+        />
+
+
+
+    </menu>
+</config>

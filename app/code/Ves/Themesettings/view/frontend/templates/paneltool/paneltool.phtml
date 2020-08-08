@@ -1,0 +1,128 @@
+<?php
+$data = $this->helper("Ves\Themesettings\Helper\Data");
+$ves = $this->helper("Ves\Themesettings\Helper\Theme");
+$store_switcher = $this->getStoreSwitcherHtml();
+$skins = $this->getSkins();
+$directions = array(
+	"ltr" => __("Left To Right"),
+	"rtl" => __("Right To Left"));
+$headerLayouts = $this->getHeaderLayouts();
+$yesno = array(
+	0 => 'No',
+	1 => 'Yes'
+	);
+$customWidths = array(
+	'960px' => '960px',
+	'1024px' => '1024px',
+	'1280px' => '1280px',
+	'1360px' => '1330px',
+	'1440px' => '1440px',
+	'1680px' => '1680px',
+	'100%' => '100%',
+	'custom' => __('Custom width..')
+	);
+$layouts = array(
+	'' => __('-- Select Layout --'),
+	'boxed-lg' => __('Boxed Desktop Large'),
+	'boxed-md' => __('Boxed Desktop Medium'),
+	);
+
+	?>
+	<script type="text/javascript">
+		require(["jquery"],function(){
+			jQuery(document).ready( function (){
+				jQuery(".paneltool .panelbutton").click( function(){	
+					jQuery(this).parent().toggleClass("active");
+				} );
+			} );
+			jQuery('#custom-max-width').hide();
+			jQuery("#max-width").change(function(){
+				var val = jQuery(this).val();
+				if(val == 'custom'){
+					jQuery('#custom-max-width').show()
+				}else{
+					jQuery('#custom-max-width').hide();
+				}
+			}).change();
+		});
+	</script>
+
+	<div id="ves-paneltool" class="hidden-md hidden-sm hidden-xs">
+		<div class="paneltool themetool">
+			<div class="panelbutton">
+				<i class="fa fa-sliders"></i>
+			</div>
+			<div class="panelcontent ">
+				<div class="panelinner">
+					<h3><?php echo __("Panel Tool");?></h3>
+					<form action="<?php echo $this->getFormUrl(); ?>" method="post" class="clearfix" id="paneltool_form">
+						
+						<?php if($store_switcher){ ?>
+						<div class="panel-item">
+							<?php echo $store_switcher; ?>
+						</div>
+						<?php } ?>
+
+						<?php if(!empty($skins)){ ?>
+						<div class="panel-item">
+							<label><?php echo __('Theme Skins'); ?></label>
+							<select name="userparams[ves_themesettings_general/general_settings/skin]">
+								<?php foreach( $skins as $skin ) { ?>
+								<option value="<?php echo $skin['value'];?>" <?php if($skin['value'] == $ves->getGeneralCfg('general_settings/skin')){ ?> selected="selected"<?php } ?>><?php echo $skin['label']; ?></option>
+								<?php } ?>
+							</select>
+						</div>
+						<?php } ?>
+						<?php if(!empty($directions)){ ?>
+						<div class="panel-item">
+							<label><?php echo __('Direction'); ?></label>
+							<select name="userparams[ves_themesettings_general/general_settings/direction]">
+								<?php foreach( $directions as $k=>$direction ) {  $direction = basename($direction) ; ?>
+								<option value="<?php echo $k ?>"<?php if($k == $ves->getGeneralCfg('general_settings/direction')){ ?> selected="selected"<?php } ?> ><?php echo $direction; ?></option>
+								<?php } ?>
+							</select>
+						</div>
+						<?php } ?>
+						<?php if(!empty($headerLayouts)){ ?>
+						<div class="panel-item">
+							<label><?php echo __('Header Layout'); ?></label>
+							<select name="userparams[ves_themesettings_header/general_settings/header_layout]">
+								<?php foreach( $headerLayouts as $k=>$layout ) { ?>
+								<option value="<?php echo $layout['value'];?>" <?php if($layout['value']==$ves->getHeaderCfg('general_settings/header_layout')){ ?> selected="selected"<?php } ?>><?php echo $layout['label'];?></option>
+								<?php } ?>
+							</select>
+						</div>
+						<?php } ?>
+						<?php // Layout ?>
+						<div class="panel-item max-width">
+							<label><?php echo __('Layout'); ?></label>
+							<select id="box-layout" name="userparams[ves_themesettings_general/general_settings/layout]">
+								<?php foreach( $layouts as $k=>$s ) {  ?>
+								<option value="<?php echo $k ?>"<?php if($k == $ves->getGeneralCfg('general_settings/layout')){ ?> selected="selected"<?php } ?> ><?php echo $s; ?></option>
+								<?php } ?>
+							</select>
+						</div>
+						<?php // Custom Max Width ?>
+						<div class="panel-item max-width">
+							<label><?php echo __('Custom Max Width'); ?></label>
+							<select id="max-width" name="userparams[ves_themesettings_general/general_settings/max_width]">
+								<?php foreach( $customWidths as $k=>$s ) {  ?>
+								<option value="<?php echo $k ?>"<?php if($k == $ves->getGeneralCfg('general_settings/max_width')){ ?> selected="selected"<?php } ?> ><?php echo $s; ?></option>
+								<?php } ?>
+							</select>
+						</div>
+						<div class="panel-item custom-max-width" id="custom-max-width">
+							<label><?php echo __('Input Custom Max Width'); ?></label>
+							<input type="text" name="userparams[ves_themesettings_general/general_settings/max_width_custom]" value="<?php echo $ves->getGeneralCfg('general_settings/max_width_custom') ?>"/>
+						</div>
+						<div class="panel-apply">
+							<input type="hidden" value="1" id="vespanel" name="vespanel"/>
+							<input type="hidden" value="0" id="vesreset" name="vesreset"/>
+							<button value="Apply" class="btn btn-apply btn-small" name="btn-save" type="submit"><?php echo __('Apply');?></button>
+							<a class="btn btn-small btn-reset" href="javascript:;" onclick="jQuery('#vesreset').val(1);jQuery('#paneltool_form').submit() "><span><?php echo __('Reset');?></span></a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>

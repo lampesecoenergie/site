@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement(EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+ * @package   Ced_Bonanza
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright Copyright CEDCOMMERCE(http://cedcommerce.com/)
+ * @license   http://cedcommerce.com/license-agreement.txt
+ */
+
+* * * * * /opt/lampp/bin/php -d memory_limit=2G  /opt/lampp/htdocs/m2.1.9/bin/magento cron:run | grep -v "Ran jobs by schedule" >> /opt/lampp/htdocs/m2.1.9/var/log/magento.cron.log
+* * * * * /opt/lampp/bin/php -d memory_limit=2G  /opt/lampp/htdocs/m2.1.9/update/cron.php >> /opt/lampp/htdocs/m2.1.9/var/log/update.cron.log
+* * * * * /opt/lampp/bin/php -d memory_limit=2G  /opt/lampp/htdocs/m2.1.9/bin/magento setup:cron:run >> /opt/lampp/htdocs/m2.1.9/var/log/setup.cron.log
+
+const CRON_CUSTOM = 'custom';
+const CRON_1MINUTE = '* * * * *';
+const CRON_5MINUTES = '*/5 * * * *';
+const CRON_10MINUTES = '*/10 * * * *';
+const CRON_15MINUTES = '*/15 * * * *';
+const CRON_20MINUTES = '*/20 * * * *';
+const CRON_HALFHOURLY = '*/30 * * * *';
+const CRON_HOURLY = '0 * * * *';
+const CRON_2HOURLY = '0 */2 * * *';
+const CRON_DAILY = '0 0 * * *';
+const CRON_TWICEDAILY = '0 0,12 * * *';
+
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+       <job name="ced_rueducommerce_order_import" instance="Ced\RueDuCommerce\Cron\Order\Import" method="execute">
+            <!--every 1 Hour-->
+            <schedule>*/10 * * * *</schedule>
+        </job>
+        <job name="ced_rueducommerce_order_sync" instance="Ced\RueDuCommerce\Cron\Order\Sync" method="execute">
+            <!--every 1 Hour-->
+            <schedule>*/15 * * * *</schedule>
+        </job>
+        <!--<job name="ced_rueducommerce_product_inventory_sync" instance="Ced\RueDuCommerce\Cron\Product\Inventory" method="execute">
+            &lt;!&ndash;every 2 Hours&ndash;&gt;
+            <schedule>0 */2 * * *</schedule>
+        </job>-->
+        <job name="ced_rueducommerce_product_feed_sync" instance="Ced\RueDuCommerce\Cron\Feed\Sync" method="execute">
+            <!--every 2 Hours-->
+            <schedule>0 */2 * * *</schedule>
+        </job>
+        <job name="ced_rueducommerce_full_offer_sync" instance="Ced\RueDuCommerce\Cron\Product\Sync" method="execute">
+            <!--every 1 Hour-->
+            <schedule>*/20 * * * *</schedule>
+        </job>
+        <job name="ced_rueducommerce_shipment_cron" instance="Ced\RueDuCommerce\Cron\Order\Shipment" method="execute">
+            <!--every 1 Hour-->
+            <schedule>*/15 * * * *</schedule>
+        </job>
+    </group>
+</config>

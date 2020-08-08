@@ -1,0 +1,200 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement(EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+ * @package   Ced_RueDuCommerce
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright Copyright CEDCOMMERCE(http://cedcommerce.com/)
+ * @license   http://cedcommerce.com/license-agreement.txt
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Ced_RueDuCommerce::RueDuCommerce"
+             title="RueDuCommerce Integration"
+             translate="title"
+             module="Ced_RueDuCommerce"
+             sortOrder="14"
+             resource="Ced_RueDuCommerce::RueDuCommerce"
+        />
+
+        <add id="Ced_RueDuCommerce::product"
+             title="Products"
+             translate="title"
+             module="Ced_RueDuCommerce"
+             sortOrder="10"
+             parent="Ced_RueDuCommerce::RueDuCommerce"
+             resource="Ced_RueDuCommerce::product"
+        />
+        <add id="Ced_RueDuCommerce::rueducommerce_profile"
+             title="Profile Manager"
+             translate="title"
+             module="Ced_RueDuCommerce"
+             sortOrder="1"
+             parent="Ced_RueDuCommerce::product"
+             action="rueducommerce/profile/index"
+             resource="Ced_RueDuCommerce::rueducommerce_profile"
+        />
+        <add id="Ced_RueDuCommerce::rueducommerce_product"
+             title="Product Listing"
+             translate="title"
+             module="Ced_RueDuCommerce"
+             sortOrder="2"
+             parent="Ced_RueDuCommerce::product"
+             action="rueducommerce/product/index"
+             resource="Ced_RueDuCommerce::rueducommerce_product"
+        />
+
+
+        <!--orders start-->
+        <add id="Ced_RueDuCommerce::rueducommerce_orders"
+             title="Orders"
+             translate="title"
+             module="Ced_RueDuCommerce"
+             sortOrder="20"
+             parent="Ced_RueDuCommerce::RueDuCommerce"
+             resource="Ced_RueDuCommerce::rueducommerce_orders"
+        />
+
+        <add id="Ced_RueDuCommerce::rueducommerce_order_listing"
+             title="Orders Listing"
+             translate="title"
+             module="Ced_RueDuCommerce"
+             sortOrder="10"
+             parent="Ced_RueDuCommerce::rueducommerce_orders"
+             action="rueducommerce/order/index"
+             resource="Ced_RueDuCommerce::rueducommerce_order_listing"
+        />
+        <add id="Ced_RueDuCommerce::rueducommerce_failed_order"
+             title="Failed Orders"
+             translate="title"
+             module="Ced_RueDuCommerce"
+             sortOrder="20"
+             parent="Ced_RueDuCommerce::rueducommerce_orders"
+             action="rueducommerce/failedorder"
+             resource="Ced_RueDuCommerce::rueducommerce_failed_order"
+        />
+        <!--orders end-->
+
+        <!--developer start-->
+        <add id="Ced_RueDuCommerce::developer"
+             title="Developer"
+             module="Ced_RueDuCommerce"
+             sortOrder="35"
+             parent="Ced_RueDuCommerce::RueDuCommerce"
+             resource="Ced_RueDuCommerce::developer"
+        />
+
+        <add id="Ced_RueDuCommerce::rueducommerce_feeds"
+             title="Feeds"
+             translate="title"
+             module="Ced_RueDuCommerce"
+             sortOrder="10"
+             parent="Ced_RueDuCommerce::developer"
+             action="rueducommerce/feeds"
+             resource="Ced_RueDuCommerce::rueducommerce_feeds"
+        />
+
+       <!-- <add id="Ced_RueDuCommerce::rueducommerce_queue"
+             title="Feed Queues"
+             translate="title"
+             module="Ced_RueDuCommerce"
+             sortOrder="20"
+             parent="Ced_RueDuCommerce::developer"
+             action="rueducommerce/queue"
+             resource="Ced_RueDuCommerce::rueducommerce_queue"
+        />-->
+
+        <add id="Ced_RueDuCommerce::rueducommerce_cron"
+             title="Cron Logs"
+             translate="title"
+             module="Ced_RueDuCommerce"
+             sortOrder="30"
+             parent="Ced_RueDuCommerce::developer"
+             action="rueducommerce/cron"
+             resource="Ced_RueDuCommerce::rueducommerce_cron"
+        />
+
+        <add id="Ced_RueDuCommerce::rueducommerce_logs"
+             title="Activity Logs"
+             translate="title"
+             module="Ced_RueDuCommerce"
+             sortOrder="40"
+             parent="Ced_RueDuCommerce::developer"
+             action="rueducommerce/logs"
+             resource="Ced_RueDuCommerce::rueducommerce_logs"
+        />
+
+        <add id="Ced_RueDuCommerce::rueducommerce_category"
+             title="Categories"
+             translate="title"
+             module="Ced_RueDuCommerce"
+             sortOrder="50"
+             parent="Ced_RueDuCommerce::developer"
+             action="rueducommerce/category/index"
+             resource="Ced_RueDuCommerce::rueducommerce_category"
+        />
+
+        <add id="Ced_RueDuCommerce::rueducommerce_attribute"
+             title="Attributes"
+             translate="title"
+             module="Ced_RueDuCommerce"
+             sortOrder="60"
+             parent="Ced_RueDuCommerce::developer"
+             action="rueducommerce/attribute/index"
+             resource="Ced_RueDuCommerce::rueducommerce_attribute"
+        />
+        <!--developer end-->
+
+        <add id="Ced_RueDuCommerce::configuration"
+             title="Configurations"
+             translate="title"
+             module="Ced_RueDuCommerce"
+             sortOrder="30"
+             parent="Ced_RueDuCommerce::RueDuCommerce"
+             resource="Ced_RueDuCommerce::configuration"
+        />
+        <add id="Ced_RueDuCommerce::rueducommerce_configuration"
+             title="Configuration"
+             module="Ced_RueDuCommerce"
+             sortOrder="1"
+             parent="Ced_RueDuCommerce::configuration"
+             action="adminhtml/system_config/edit/section/rueducommerce_config"
+             resource="Ced_RueDuCommerce::rueducommerce_configuration"
+        />
+
+
+        <add id="Ced_RueDuCommerce::extras"
+             title="Extras"
+             translate="title"
+             module="Ced_RueDuCommerce"
+             sortOrder="40"
+             parent="Ced_RueDuCommerce::RueDuCommerce"
+             resource="Ced_RueDuCommerce::extras"
+        />
+
+        <add id="Ced_RueDuCommerce::rueducommerce_support"
+             title="Help and Support"
+             translate="title"
+             module="Ced_RueDuCommerce"
+             sortOrder="10"
+             parent="Ced_RueDuCommerce::extras"
+             action="rueducommerce/help"
+             resource="Ced_RueDuCommerce::rueducommerce_support"
+        />
+
+
+
+    </menu>
+</config>

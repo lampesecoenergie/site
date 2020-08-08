@@ -1,0 +1,17 @@
+<div class="alert alert-warning alert-group">
+    <select class="admin__control-select"  data-bind="options: logicalOperators, value: selectedLogicalOperator"></select>
+    <button class="btn btn-xs btn-success" data-bind="click: addCondition"><span
+            class="glyphicon glyphicon-plus-sign"></span> Add Condition
+    </button>
+    <button class="btn btn-xs btn-success" data-bind="click: addGroup"><span
+            class="glyphicon glyphicon-plus-sign"></span> Add Group
+    </button>
+    <button class="btn btn-xs btn-danger" data-bind="click: $parent.removeChild"><span
+            class="glyphicon glyphicon-minus-sign"></span> Remove Group
+    </button>
+    <div class="group-conditions">
+        <div data-bind="foreach: children">
+            <!-- ko template: getTemplate() --><!-- /ko -->
+        </div>
+    </div>
+</div>

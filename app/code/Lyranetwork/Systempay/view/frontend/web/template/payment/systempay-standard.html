@@ -1,0 +1,78 @@
+<!--
+/**
+ * Systempay V2-Payment Module version 2.3.2 for Magento 2.x. Support contact : supportvad@lyra-network.com.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is licensed under the Open Software License version 3.0
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://opensource.org/licenses/osl-3.0.php
+ *
+ * @category  Payment
+ * @package   Systempay
+ * @author    Lyra Network (http://www.lyra-network.com/)
+ * @copyright 2014-2018 Lyra Network and contributors
+ * @license   https://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+
+<div class="payment-method" data-bind="css: {'_active': (getCode() == isChecked())}">
+    <div class="payment-method-title field choice">
+        <input type="radio"
+               name="payment[method]"
+               class="radio"
+               data-bind="attr: {id: getCode()}, value: getCode(), checked: isChecked, click: selectPaymentMethod, visible: isRadioButtonVisible()" />
+        <label data-bind="attr: {for: getCode()}" class="label">
+            <!-- Systempay standard logo -->
+            <img data-bind="attr: {src: getModuleLogoUrl()}"
+                 class="payment-icon"
+                 alt="Systempay"
+                 style="width: 76px;"
+            />
+
+            <span data-bind="text: getTitle()"></span>
+        </label>
+    </div>
+
+    <div class="payment-method-content">
+        <!-- ko foreach: getRegion('messages') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+        <div class="payment-method-billing-address systempay-form">
+            <!-- ko foreach: $parent.getRegion(getBillingAddressFormName()) -->
+                <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </div>
+
+        <fieldset class="fieldset payment method systempay-form" data-bind="attr: {id: 'payment_form_' + getCode()}" style="padding-top: 20px;">
+        <!-- ko if: (getEntryMode() == 2) -->
+            <!-- ko template: 'Lyranetwork_Systempay/payment/cc-type' --><!-- /ko -->
+        <!--/ko-->
+        </fieldset>
+
+        <div class="checkout-agreements-block systempay-form">
+            <!-- ko foreach: $parent.getRegion('before-place-order') -->
+                <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </div>
+
+        <div class="actions-toolbar systempay-form">
+            <div class="primary">
+                <button class="action primary checkout"
+                        type="submit"
+                        data-bind="click: placeOrder,
+                                   attr: {title: $t('Pay with Systempay')},
+                                   css: {disabled: !isPlaceOrderActionAllowed()},
+                                   enable: (getCode() == isChecked())"
+                        disabled>
+                    <span data-bind="i18n: 'Pay with Systempay'"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- ko if: (getEntryMode() == 3) -->
+            <!-- ko template: 'Lyranetwork_Systempay/payment/iframe' --><!-- /ko -->
+        <!--/ko-->
+    </div>
+</div>

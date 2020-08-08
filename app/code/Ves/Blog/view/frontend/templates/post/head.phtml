@@ -1,0 +1,11 @@
+<?php
+$helper = $this->helper('\Ves\Blog\Helper\Data');
+$post = $helper->getCoreRegistry()->registry('current_post');
+$canonicalUrl = $post->getCanonicalUrl();
+if($canonicalUrl==''){
+	$canonicalUrl = $helper->getPostUrl($post);
+}
+?>
+<?php if($post->getIsActive()){ ?>
+<link rel="canonical" href="<?php echo $canonicalUrl ?>" />
+<?php } ?>

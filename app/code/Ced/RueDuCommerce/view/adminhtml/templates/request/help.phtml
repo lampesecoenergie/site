@@ -1,0 +1,180 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+ * @package   Ced_RueDuCommerce
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright Copyright CEDCOMMERCE (http://cedcommerce.com/)
+ * @license   http://cedcommerce.com/license-agreement.txt
+ */
+?>
+<div class="accordion">
+    <div class="entry-edit form-inline">
+        <div class="section-config">
+            <div class="entry-edit-head">
+                <div class="entry-edit-head admin__collapsible-block">
+                    <span class="entry-edit-head-link" id="ced-support-link"></span> <a
+                            onclick="Fieldset.toggleCollapse('ced-support');return false;"
+                            href="#ced-support-link" id="ced-support-head" class="">Cedcommerce
+                        Support</a>
+                </div>
+            </div>
+            <fieldset id="ced-support" class="admin__collapsible-block"
+                      style="display: none;border:0 ">
+                <ul>
+                    <a target="_blank"
+                       href="https://cedcommerce.com/magento-2-extensions/rueducommerce-magento-2-integration">RueDuCommerce
+                        Integration Knowledge base
+                    </a>
+                </ul>
+            </fieldset>
+            <script type="text/javascript">//&lt;![CDATA[
+                require(['prototype'], function(){Fieldset.applyCollapse('ced-support');});
+                //]]&gt;</script>
+        </div>
+        <div class="section-config">
+            <div class="entry-edit-head">
+                <div class="entry-edit-head admin__collapsible-block">
+                    <span class="entry-edit-head-link" id="documentation-link"></span>
+                    <a onclick="Fieldset.toggleCollapse('documentation');return false;"
+                       href="#documentation-link" id="documentation-head" class="">Documentation</a>
+                </div>
+            </div>
+            <fieldset id="documentation" class="admin__collapsible-block"
+                      style="display: none;border:0px">
+                <ul>
+                    <a target="_blank"
+                       href="https://docs.cedcommerce.com/magento-2/rueducommerce-magento-2-integration-guide-0-0-1">RueDuCommerce
+                        Integration Extension User Guide By CedCommerce</a>
+                </ul>
+            </fieldset>
+            <script type="text/javascript">//&lt;![CDATA[
+                require(['prototype'], function(){Fieldset.applyCollapse('documentation');});
+                //]]&gt;
+            </script>
+        </div>
+        <div class="entry-edit-head">
+            <div class="entry-edit-head admin__collapsible-block">
+                <span class="entry-edit-head-link" id="rueducommerce-docs-link"></span>
+                <a>Contact Us via Below Available Mediums</a>
+            </div>
+        </div>
+        <div class="fieldset">
+            <footer class="container-fluid footer-section">
+                <div class="contact-section">
+                    <div class="row">
+
+                        <!--Contact us via phone -->
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                            <a title="Click Here to Submit a Support Ticket" href="skype:live:support_35785?call" target="_blank">
+                                <div class="ticket">
+                                    <div class="icon-box">
+                                        <div class="image">
+                                            <img src="<?php echo $this->getViewFileUrl('Ced_RueDuCommerce::images/girl-on-phone.png'); ?>">
+                                            <span class="contact-24">Contact Us 24*7 via Skype Call</span>
+                                        </div>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!--ticket code-->
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                            <a title="Click Here to Submit a Support Ticket" href="http://support.cedcommerce.com/" target="_blank">
+                                <div class="ticket">
+                                    <div class="icon-box">
+                                        <div class="image">
+                                            <img src="<?php echo $this->getViewFileUrl('Ced_RueDuCommerce::images/ticket.png'); ?>">
+                                            <span class="mail">Submit issue via Ticket</span>
+                                        </div>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                            </a>
+                        </div>
+                        <!--Send Mail codes-->
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                            <a title="Click Here to Contact us through Mail" href="mailto:jonsnow@cedcommerce.com&cc=davetaylor@cedcommerce.com" target="_blank">
+                                <div class="mail">
+                                    <div class="icon-box">
+                                        <div class="image">
+                                            <img src="<?php echo $this->getViewFileUrl('Ced_RueDuCommerce::images/mail.png'); ?>">
+                                            <span class="mail">Send us an E-mail</span>
+                                        </div>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                            </a>
+                        </div>
+                        <!--Make Skype Group Codes-->
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                            <a title="Click to connect with us over skype " href="skype:live:danmorris_7;live:jonsnow_92;?chat&topic=<?= $this->getBaseUrl()?>" target="_blank">
+                                <div class="skype">
+                                    <div class="icon-box">
+                                        <div class="image">
+                                            <img src="<?php echo $this->getViewFileUrl('Ced_RueDuCommerce::images/skype.png'); ?>">
+                                            <span>Connect via Skype Chat</span>
+                                        </div>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!--end of codes for contact us-->
+                        <span class="more-contact">For More Informations Please Contact Us: <mark>7234976892 (FOR INDIA), Toll-Free Number: 888-882-0953 (FOR USA)</mark></span>
+                    </div>
+            </footer>
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<style>
+    .icon-box{
+        background-color: #ffffff;
+        width: 50%;
+        float: left;
+        height: 150px;
+        display: table;
+        text-align: center;
+    }
+    .icon-box .image{
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+    }
+    .contact-section .icon-box.icon {
+        width: 100%;
+    }
+    .image{
+        background-color: #fafafa;
+        padding-left: 5%;
+    }
+    .fieldset{
+        background-color: #fafafa;
+        padding-bottom:1%;
+    }
+    .col-lg-4, .col-md-4, .col-sm-12, .col-xs-12{
+    width:25%;
+    }
+    .mail{
+        padding-left: 5%;
+    }
+    .contact-24{
+        padding-left: 10%;
+    }
+    .more-contact{
+        padding-left: 3.5%;
+    }
+</style>
+

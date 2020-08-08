@@ -1,0 +1,49 @@
+<div class="grid">
+    <table cellspacing="0" class="admin__control-table">
+        <col width="200" />
+        <thead>
+        <tr class="headings">
+            <th><?php echo __('Value'); ?></th>
+            <th><?php echo __('Enabled'); ?></th>
+        </tr>
+        </thead>
+        <tbody id="<?php echo $this->getId()?>">
+        <?php foreach ($this->getOptions() as $option):?>
+            <?php $isDisabled = $this->isDisabled($option['value']);?>
+            <tr>
+                <td class="priority_handle">
+                    <span><?php echo $option['label']?></span>
+                    <input type="hidden" name="<?php echo $this->getName()?>" value="<?php echo $option['value']; ?>" <?php if ($isDisabled):?> disabled="disabled"<?php endif;?> />
+                </td>
+                <td>
+                    <div>
+                        <input class="enabled-checkbox" name="priority_disabled[]" type="checkbox" value="<?php echo $option['value']; ?>" <?php if (!$isDisabled):?> checked<?php endif;?> <?php if ($this->getElement()->getData('disabled')):?> disabled="disabled"<?php endif;?>/>
+                    </div>
+                </td>
+            </tr>
+        <?php endforeach;?>
+        </tbody>
+    </table>
+</div>
+
+<script type="text/javascript">
+    require([
+        'jquery',
+        'mage/adminhtml/events'
+    ], function() {
+        var container = jQuery("#<?php echo $this->getId()?>");
+        if (container) {
+            container.sortable({
+                axis: "y",
+                dropOnEmpty: false
+            });
+        }
+        jQuery(".enabled-checkbox").click(function() {
+            if (this.checked) {
+                this.up('tr').select('input')[0].removeAttribute('disabled');
+            } else {
+                this.up('tr').select('input')[0].setAttribute('disabled', 'disabled');
+            }
+        });
+    });
+</script>

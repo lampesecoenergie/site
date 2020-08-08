@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @copyright Copyright (c) 2014 X.commerce, Inc. (http://www.magentocommerce.com)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+
+            <resource id="Magento_Backend::admin">
+
+                <resource id="Magento_Backend::system">
+                    <resource id="Magento_Backend::system_other_settings">
+                        <resource id="BoostMyShop_AdminLogger::main" title="Admin logger" />
+                    </resource>
+                </resource>
+
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="BoostMyShop_AdminLogger::config" title="Admin logger section" />
+                        </resource>
+                    </resource>
+                </resource>
+
+            </resource>
+
+        </resources>
+    </acl>
+</config>

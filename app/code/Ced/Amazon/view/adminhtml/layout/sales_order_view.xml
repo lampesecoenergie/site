@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement(EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+ * @package   Ced_Amazon
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright Copyright CEDCOMMERCE(http://cedcommerce.com/)
+ * @license   http://cedcommerce.com/license-agreement.txt
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="sales_order_tabs">
+            <block class="Ced\Amazon\Block\Adminhtml\Order\Shipment" name="sales_ship_amazon_order"
+                   template="Ced_Amazon::order/shipment.phtml" cacheable="false">
+                <block name="ced_amazon_order_shipment_form" class="Magento\Backend\Block\Template" template="Ced_Amazon::order/shipment/create.phtml"/>
+            </block>
+            <action method="addTabAfter">
+                <argument name="name" xsi:type="string">Amazon</argument>
+                <argument name="block" xsi:type="string">sales_ship_amazon_order</argument>
+                <argument name="after" xsi:type="string">order_transactions</argument>
+            </action>
+        </referenceBlock>
+    </body>
+</page>

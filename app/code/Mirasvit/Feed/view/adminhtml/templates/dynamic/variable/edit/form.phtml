@@ -1,0 +1,87 @@
+<fieldset class="fieldset admin__fieldset">
+    <legend class="legend">
+        <span><?php echo __('Code') ?></span>
+    </legend>
+
+    <div class="feed__variable">
+        <div class="feed__variable-code">
+            <textarea name="php_code" id="php-code"><?= $block->getPhpCode() ?></textarea>
+
+            <div class="help-note">$product and $objectManager available in context for use</div>
+        </div>
+        <div class="feed__variable-result">
+            <div class="feed__variable-products">
+                <div class="input">
+                    <input type="text" name="product_ids" id="product-ids"
+                       placeholder="<?= __('Product IDs separated by comma') ?>">
+                </div>
+                <div class="action">
+                 <button class="button" id="reload"><?= __('Reload') ?></button>
+                </div>
+            </div>
+
+            <div id="php_result"></div>
+        </div>
+    </div>
+</fieldset>
+
+<script>
+    require([
+        'jquery',
+        'CodeMirror',
+        'CodeMirrorPhp'
+    ], function ($, CodeMirror) {
+        var originalCode = '';
+        var editor = CodeMirror.fromTextArea($('#php-code')[0], {
+            lineNumbers: true,
+            matchBrackets: true,
+            mode: "application/x-httpd-php-open",
+            indentUnit: 4,
+            indentWithTabs: false,
+            viewportMargin: Infinity,
+            styleActiveLine: true,
+            tabSize: 4
+        });
+
+        setInterval(function () {
+            refresh(false);
+        }, 100);
+
+        $('#reload').click(function (e) {
+            e.preventDefault();
+            refresh(true);
+        });
+
+        function refresh(force) {
+            var $result = $('#php_result');
+            var phpCode = editor.getValue();
+
+            if (!force) {
+                if (phpCode == originalCode || $result.hasClass('refresh')) {
+                    return;
+                }
+            }
+            originalCode = phpCode;
+
+            $result.addClass('refresh');
+
+            $.ajax({
+                method: 'POST',
+                url: '<?= $this->getUrl('*/*/validate', ['id' => $this->getId()]) ?>',
+                data: {
+                    php_code: phpCode,
+                    product_ids: $('#product-ids').val(),
+                }
+            }).done(function (html) {
+                $result.removeClass('refresh')
+                    .html(html);
+            }).fail(function (response) {
+                $result.removeClass('refresh')
+                    .html(response.responseText);
+            });
+        }
+    });
+</script>
+<script type="text/x-magento-init">
+    <?php echo \Zend_Json_Encoder::encode($block->getJsConfig()) ?>
+</script>

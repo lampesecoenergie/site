@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Integrator
+ * @author 		CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Ced_Integrator::integrator"
+             title="Cedcommerce Integrator"
+             module="Ced_Integrator"
+             sortOrder="79"
+             resource="Ced_Integrator::integrator"/>
+
+        <add id="Ced_Integrator::setup"
+             title="Setup"
+             module="Ced_Integrator"
+             sortOrder="10"
+             parent="Ced_Integrator::integrator"
+             resource="Ced_Integrator::setup" />
+
+        <add id="Ced_Integrator::configuration"
+             title="Configuration"
+             module="Ced_Integrator"
+             sortOrder="10"
+             parent="Ced_Integrator::setup"
+             action="adminhtml/system_config/edit/section/ced_integrator"
+             resource="Ced_Integrator::configuration"
+        />
+
+        <add id="Ced_Integrator::authorize"
+             title="Authorize"
+             module="Ced_Integrator"
+             sortOrder="20"
+             parent="Ced_Integrator::setup"
+             action="adminhtml/integration/index"
+             resource="Ced_Integrator::support"/>
+
+        <add id="Ced_Integrator::developer"
+             title="Developer"
+             module="Ced_Integrator"
+             sortOrder="20"
+             parent="Ced_Integrator::integrator"
+             resource="Ced_Integrator::developer"
+        />
+
+        <add id="Ced_Integrator::cron_log"
+             title="Cron"
+             translate="title"
+             module="Ced_Integrator"
+             sortOrder="30"
+             parent="Ced_Integrator::developer"
+             action="integrator/cron/index"
+             resource="Ced_Integrator::cron_log"
+        />
+
+        <add id="Ced_Integrator::logs"
+             title="Log"
+             translate="title"
+             module="Ced_Integrator"
+             sortOrder="40"
+             parent="Ced_Integrator::developer"
+             action="integrator/log/index"
+             resource="Ced_Integrator::activity_log"
+        />
+
+        <add id="Ced_Integrator::support"
+             title="Support"
+             module="Ced_Integrator"
+             sortOrder="30"
+             parent="Ced_Integrator::integrator"
+             resource="Ced_Integrator::support"/>
+
+        <add id="Ced_Integrator::instant_support"
+             title="Instant Support"
+             module="Ced_Integrator"
+             sortOrder="10"
+             parent="Ced_Integrator::support"
+             action="integrator/support/index"
+             resource="Ced_Integrator::support"/>
+    </menu>
+</config>

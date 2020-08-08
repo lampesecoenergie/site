@@ -1,0 +1,64 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var $block Ced\Cdiscount\Block\Adminhtml\Profile\Ui\View\Grid\CategoryTree */
+?>
+<div class="cdiscount" data-mage-init='{"globalSearch": {}}'>
+    <form action="#" id="cdis">
+        <div class="search">
+            <label class="search" for="search"></label>
+            <input
+                type="text"
+                class="search"
+                id="cdis"
+                name="query"
+                data-mage-init='<?= /* @noEscape */ $this->helper('Magento\Framework\Json\Helper\Data')->jsonEncode($block->getWidgetInitOptions()) ?>'>
+            <button
+                type="submit"
+                class="search"
+                title="<?= /* @escapeNotVerified */ __('Search') ?>"
+            ></button>
+        </div>
+    </form>
+    <script data-template="search-suggest" type="text/x-magento-template">
+        <ul class="search-global-menu">
+            <li class="item">
+                <a id="cdiscount-searchPreviewProducts" href="<?= /* @escapeNotVerified */ $block->getURL('catalog/product/index/') ?>?search=<%- data.term%>" class="title">"<%- data.term%>" in Products</a>
+            </li>
+            <li class="item">
+                <a id="cdiscount-searchPreviewOrders" href="<?= /* @escapeNotVerified */ $block->getURL('sales/order/index/') ?>?search=<%- data.term%>" class="title">"<%- data.term%>" in Orders</a>
+            </li>
+            <li class="item">
+                <a id="cdiscount-searchPreviewCustomers" href="<?= /* @escapeNotVerified */ $block->getURL('customer/index/index/') ?>?search=<%- data.term%>" class="title">"<%- data.term%>" in Customers</a>
+            </li>
+            <li class="item">
+                <a id="cdiscount-searchPreviewPages" href="<?= /* @escapeNotVerified */ $block->getURL('cms/page/index/') ?>?search=<%- data.term%>" class="title">"<%- data.term%>" in Pages</a>
+            </li>
+            <li class="item">
+                <a id="cdiscount-searchPreviewCateg" href="<?= /* @escapeNotVerified */ $block->getURL('cdiscount/category/category/') ?>?search=<%- data.term%>" class="title">"<%- data.term%>" in Categories</a>
+            </li>
+            <% if (data.items.length) { %>
+            <% _.each(data.items, function(value){ %>
+            <li class="item"
+            <%- data.optionData(value) %>
+            >
+            <a href="<%- value.url %>" class="title"><%- value.name %></a>
+            <span class="type"><%- value.type %></span>
+            <%- value.description || "" %>
+            </li>
+            <% }); %>
+            <% } else { %>
+            <li>
+                <span class="mage-suggest-no-records">
+                    <?= /* @escapeNotVerified */ __('No records found.') ?>
+                </span>
+            </li>
+            <% } %>
+        </ul>
+    </script>
+</div>

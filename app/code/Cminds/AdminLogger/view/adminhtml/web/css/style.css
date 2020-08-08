@@ -1,0 +1,11 @@
+.config-nav-block.cminds-logo div::before {
+    content: '';
+    background-image: url('../images/cminds-logo.ico');
+    background-size: auto 18px;
+    background-repeat: no-repeat;
+    padding-left: 20px;
+}
+
+.admin__menu .item-security > a:before {
+    content: '\e60f' !important;
+}

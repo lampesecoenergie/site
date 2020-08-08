@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+ /**
+ * @category  Mageants BannerSlider
+ * @package   Mageants_BannerSlider
+ * @copyright Copyright (c) 2017 Mageants
+ * @author    Mageants Team <support@Mageants.com>
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+			<add id="Mageants_BannerSlider::bannerslider" title="Banner Sliders" module="Mageants_BannerSlider" 
+				sortOrder="51" resource="Mageants_BannerSlider::bannerslider" parent="Magento_Backend::content"/>
+			
+			<add id="Mageants_BannerSlider::sliders" title="Sliders" module="Mageants_BannerSlider" 
+				sortOrder="10" action="mageants_bannerslider/sliders" resource="Mageants_BannerSlider::sliders" 
+				parent="Mageants_BannerSlider::bannerslider"/>
+				
+			<add id="Mageants_BannerSlider::slides" title="Slides" module="Mageants_BannerSlider" 
+				sortOrder="10" action="mageants_bannerslider/slides" resource="Mageants_BannerSlider::slides" 
+				parent="Mageants_BannerSlider::bannerslider"/>
+				
+			<add id="Mageants_BannerSlider::bannerslider_configuration" title="Configuration" module="Mageants_BannerSlider" 
+				sortOrder="99" parent="Mageants_BannerSlider::bannerslider" action="adminhtml/system_config/edit/section/mageants_bannerslider" 
+				resource="Mageants_BannerSlider::bannerslider_configuration"/>
+    </menu>
+</config>
+

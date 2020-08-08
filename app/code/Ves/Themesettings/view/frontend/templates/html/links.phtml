@@ -1,0 +1,24 @@
+<?php
+$ves = $this->_ves;
+$vesData = $this->_vesData;
+$html = '';
+if ($this->getLinks()) {
+    ?>
+    <ul <?php echo ($this->hasCssClass() ? ' class="' . $this->escapeHtml(
+        $this->getCssClass()
+        ) . '"' : '') ?> >
+    <?php
+    foreach ($this->getLinks() as $link) {
+        $html .= $this->renderLink($link);
+    }
+    echo $html;
+    $custom_links = $vesData->getUnserializeText($ves->getHeaderCfg('toplinks_settings/custom_links'));
+    unset($custom_links['__empty']);
+    foreach ($custom_links as $_link) { ?>
+    <li class="<?php echo $_link['classes'] ?>" >
+        <a href="<?php echo $vesData->filter($_link['link']) ?>" target="<?php echo $_link['target'] ?>"><?php echo $_link['title'] ?></a>
+    </li>
+    <?php } ?>
+</ul>
+<?php
+}

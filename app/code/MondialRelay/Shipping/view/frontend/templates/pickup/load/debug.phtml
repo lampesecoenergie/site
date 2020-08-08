@@ -1,0 +1,55 @@
+<?php /** @var $block MondialRelay\Shipping\Block\Frontend\Pickup\Load\Debug */ ?>
+<?php if ($block->isDebug()): ?>
+    <div style="display:none" id="mr-debug-content">
+        <ul class="mondialrelay-info">
+            <li>
+                <h2><?php echo __('Limit') ?></h2>
+                <strong><?php echo __('Weight Limit') ?></strong> <?php echo $block->isLimitationActive('weight', true) ?><br />
+                <strong><?php echo __('Weight Calculation') ?></strong> <?php echo $block->getCalculation('weight') ?><br />
+                <strong><?php echo __('Size Limit') ?></strong> <?php echo $block->isLimitationActive('size', true) ?><br />
+                <strong><?php echo __('Size Calculation') ?></strong> <?php echo $block->getCalculation('size') ?>
+            </li>
+            <li>
+                <h2><?php echo __('Cart Calculation') ?></h2>
+                <?php if ($block->isLimitationActive('weight')): ?>
+                    <strong><?php echo __('Package Weight') ?></strong> <?php echo $block->getWeight() ?><br />
+                <?php endif; ?>
+                <?php if ($block->isLimitationActive('size')): ?>
+                    <strong><?php echo __('Package Size') ?></strong> <?php echo $block->getSize() ?><br />
+                <?php endif; ?>
+            </li>
+            <li>
+                <h2><?php echo __('Pickup') ?></h2>
+                <table>
+                    <tr>
+                        <th><?php echo __('Code') ?></th>
+                        <?php if ($block->isLimitationActive('weight')): ?>
+                            <th><?php echo __('Maximum Weight') ?></th>
+                        <?php endif; ?>
+                        <?php if ($block->isLimitationActive('size')): ?>
+                            <th><?php echo __('Maximum Size') ?></th>
+                        <?php endif; ?>
+                    </tr>
+                    <?php foreach ($this->getPickupConfig() as $code => $limit): ?>
+                        <tr>
+                            <td><?php echo $code ?></td>
+                            <?php if ($block->isLimitationActive('weight')): ?>
+                                <td class="<?php if ($limit['weight'] > $block->getWeight()): ?>valid<?php endif; ?>">
+                                    <?php echo $limit['weight'] ?>
+                                </td>
+                            <?php endif; ?>
+                            <?php if ($block->isLimitationActive('size')): ?>
+                                <td class="<?php if ($limit['size'] > $block->getSize()): ?>valid<?php endif; ?>">
+                                    <?php echo $limit['size'] ?>
+                                </td>
+                            <?php endif; ?>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
+            </li>
+            <li class="mondialrelay-actions">
+                <button type="button" class="mondialrelay-previous"><span><?php echo __('Close') ?></span></button>
+            </li>
+        </ul>
+    </div>
+<?php endif; ?>

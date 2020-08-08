@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Systempay V2-Payment Module version 2.3.2 for Magento 2.x. Support contact : supportvad@lyra-network.com.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is licensed under the Open Software License version 3.0
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://opensource.org/licenses/osl-3.0.php
+ *
+ * @category  Payment
+ * @package   Systempay
+ * @author    Lyra Network (http://www.lyra-network.com/)
+ * @copyright 2014-2018 Lyra Network and contributors
+ * @license   https://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="payment">
+            <group id="systempay" translate="comment" sortOrder="35" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label><![CDATA[Systempay]]></label>
+                <comment><![CDATA[Accept payments by credit card securely via Systempay payment gateway.]]></comment>
+                <attribute type="expanded">1</attribute>
+                <fieldset_css>complex systempay-section</fieldset_css>
+                <frontend_model>Magento\Config\Block\System\Config\Form\Fieldset</frontend_model>
+
+                <include path="Lyranetwork_Systempay::system/general.xml"/>
+                <include path="Lyranetwork_Systempay::system/standard.xml"/>
+                <include path="Lyranetwork_Systempay::system/multi.xml"/>
+                <include path="Lyranetwork_Systempay::system/choozeo.xml"/>
+                <!--
+                <include path="Lyranetwork_Systempay::system/gift.xml"/>
+                <include path="Lyranetwork_Systempay::system/oney.xml"/>
+                <include path="Lyranetwork_Systempay::system/paypal.xml"/>
+                <include path="Lyranetwork_Systempay::system/sofort.xml"/>
+                <include path="Lyranetwork_Systempay::system/postfinance.xml"/>
+                -->
+            </group>
+        </section>
+    </system>
+</config>

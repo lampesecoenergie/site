@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="config">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="pdfDesign" type="pdfDesignType" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="pdfDesignType">
+        <xs:attribute name="id" type="xs:string" use="required"/>
+        <xs:attribute name="name" type="xs:string" use="optional"/>
+        <xs:attribute name="classname" type="xs:string" use="optional"/>
+        <xs:attribute name="thumbnail" type="xs:string" use="optional"/>
+        <xs:attribute name="supported" type="xs:boolean" use="optional"/>
+    </xs:complexType>
+</xs:schema>

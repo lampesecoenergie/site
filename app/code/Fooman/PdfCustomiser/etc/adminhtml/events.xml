@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author     Kristof Ringleff
+ * @package    Fooman_PdfCustomiser
+ * @copyright  Copyright (c) 2016 Fooman Limited (http://www.fooman.co.nz)
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="controller_action_predispatch_adminhtml_system_config_edit">
+        <observer name="fooman_pdfcustomiser_enable_notice" instance="Fooman\PdfCustomiser\Observer\Config\EnableNotice" />
+    </event>
+    <event name="controller_action_predispatch_sales_order_index">
+        <observer name="fooman_pdfcustomiser_enable_notice" instance="Fooman\PdfCustomiser\Observer\Config\EnableNotice" />
+    </event>
+</config>

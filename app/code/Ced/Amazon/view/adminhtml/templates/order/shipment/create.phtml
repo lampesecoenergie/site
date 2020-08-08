@@ -1,0 +1,160 @@
+<?php
+
+/**
+ * Cedcommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * ${licenseUrl}
+ *
+ * @category    Ced
+ * @package     Ced_Amazon
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright © 2018 CedCommerce. All rights reserved.
+ * @license     EULA http://cedcommerce.com/license-agreement.txt
+ */
+
+/** @var array $mpOrderItemsData */
+$mpOrderItemsData = $block->getParentBlock()->processOrderItems();
+
+/** @var \Ced\Amazon\Api\Data\OrderInterface $mpOrder */
+$mpOrder = $block->getParentBlock()->getModel();
+
+/** @var \Magento\Sales\Model\Order $magentoOrder */
+$magentoOrder = $block->getParentBlock()->getOrder();
+?>
+
+<div id="marketplace-create-shipment-form" style="display: none">
+    <?php
+    //@TODO ack for imported orders, calculate qty on basis of history
+    if (!empty($mpOrderItemsData)) {
+        ?>
+        <p>
+            <input type="hidden" id="formKey" value="<?= $block->getFormKey(); ?>">
+            <input type="hidden" id="AmazonOrderID" value="<?= $mpOrder->getAmazonOrderId() ?>" readonly>
+            <input type="hidden" id="IncrementId" value="<?= $magentoOrder->getIncrementId() ?>">
+            <input type="hidden" id="OrderId" value="<?= $magentoOrder->getId() ?>">
+        </p>
+
+        <div class="admin__page-section-content">
+            <div class="admin__page-section-item">
+                <div class="admin__page-section-item-title">
+                    <span class="title">Amazon Order Information</span>
+                </div>
+                <div class="admin__page-section-item-content">
+                    <table class="admin__table-secondary">
+                        <tbody>
+                        <tr>
+                            <th>Amazon Order Id</th>
+                            <td><?= $block->escapeHtml($mpOrder->getAmazonOrderId()); ?></td>
+                        </tr>
+                        <tr>
+                            <th>Amazon Order Status</th>
+                            <td><?= $block->escapeHtml($mpOrder->getStatus()); ?></td>
+                        </tr>
+                        <tr>
+                            <th>Order Place Date</th>
+                            <td><?= $block->escapeHtml(date('l, F jS Y', strtotime($mpOrder->getOrderPlaceDate()))); ?></td>
+                        </tr>
+                        <tr>
+                            <th>Shipping Carrier</th>
+                            <td>
+                                <select class="admin__control-select" id="CarrierCode">
+                                    <option value="">Select a carrier</option>
+                                    <?php
+                                    foreach (\Amazon\Sdk\Order\Fulfillment\CarrierCode::getCarrierCodes() as $code) {
+                                        echo "<option value='{$code}'>{$code}</option>";
+                                    } ?>
+                                </select>
+                                <div style="text-align: center; padding: 5px; font-weight:bold;">or</div>
+                                <input class="admin__control-text" type="text" id="CarrierName"
+                                       placeholder="Provide a carrier name">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Shipping Method</th>
+                            <td><input class="admin__control-text" type="text" id="ShippingMethod" value=""></td>
+                        </tr>
+                        <tr>
+                            <th>Tracking Number</th>
+                            <td><input class="admin__control-text" type="text" id="ShipperTrackingNumber" value=""></td>
+                        </tr>
+                        <tr>
+                            <th>Fulfillment Date</th>
+                            <td>
+                                <input class="admin__control-text input-text required-entry" type="text"
+                                       id="FulfillmentDate"
+                                       name="ship_date"/>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="admin__page-section-title">
+            <span class="title">Shipment Order Items</span>
+        </div>
+        <div class="admin__table-wrapper">
+            <table class="data-table admin__table-primary edit-order-table" id="_prod_table">
+                <thead>
+                <tr class="headings">
+                    <th>Product sku</th>
+                    <th>Quantity ordered</th>
+                    <th>Quantity to Ship</th>
+                    <th>Quantity to Cancel</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                foreach ($mpOrderItemsData as $k => $item) {
+                    $cancelQty = 0;
+                    $availQty = $item['QuantityOrdered'];
+                    if ($availQty > 0) {
+                        ?>
+                        <tr>
+                        <td>
+                            <input type="hidden" id="sku_<?= $k; ?>" value="<?= $item['SellerSKU'] ?>">
+                            <input type="hidden" id="order_item_id_<?= $k; ?>"
+                                   value="<?= $item['OrderItemId'] ?>">
+                            <strong><?= $item['SellerSKU'] ?></strong>
+                        </td>
+                        <td><input type="hidden" id="qty_<?= $k; ?>" value="<?= $availQty ?>">
+                            <strong><?= $availQty ?></strong>
+                        </td>
+                        <td>
+                            <select id="ship_<?= $k; ?>" class="admin__control-select">
+                                <option value="0">0</option>
+                                <option value="<?= $availQty; ?>"><?= $availQty; ?></option>
+                            </select>
+                        </td>
+                        <td>
+                            <select style="width: 30% !important;" id="can_<?= $k; ?>" class="admin__control-select">
+                                <option value="0">0</option>
+                                <option value="<?= $availQty; ?>"><?= $availQty; ?></option>
+                            </select>
+                            <select style="width: 65% !important;"
+                                    class="admin__control-select" type="text" id="cancel_reason_<?= $k; ?>">
+                                <option value="">Select a reason</option>
+                                <?php
+                                foreach (\Amazon\Sdk\Order\Adjustment::getAdjustmentReasons() as $reason) {
+                                    echo "<option value='{$reason}'>{$reason}</option>";
+                                } ?>
+                            </select>
+                        </td>
+                        </tr><?php
+                    }
+                    $k++;
+                } ?>
+                </tbody>
+            </table>
+            <div style="float: right; margin-right:30px">
+                <button class="primary" id="submit-shipment">Submit Shipment</button>
+            </div>
+        </div>
+    <?php
+    } ?>
+</div>

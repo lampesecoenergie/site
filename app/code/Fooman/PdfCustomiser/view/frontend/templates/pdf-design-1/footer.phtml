@@ -1,0 +1,66 @@
+<?php
+/**
+ * @author     Kristof Ringleff
+ * @package    Fooman_PdfCore
+ * @copyright  Copyright (c) 2015 Fooman Limited (http://www.fooman.co.nz)
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+/**
+ * @var \Fooman\PdfCore\Block\Pdf\Template\Footer $block
+ *
+ * Note on the use of @noEscape throughout this template
+ * html output is allowed by design to allow users to customise their pdfs
+ * Before pdf rendering all output is run filtered by @see \Magento\Framework\Filter\Input\MaliciousCode
+ */
+?>
+<?php
+$width = $block->getWidth();
+$footerBlocks = $block->getFooterBlocks();
+$marginBetween = $block->getMarginBetween();
+$order = $block->getOrder();
+
+$design = $block->getPdfDesign();
+$primColour = $design->getPrimaryColour($order->getStoreId());
+$secColour = $design->getSecondaryColour($order->getStoreId());
+$rgb = $design->hexToRGBArray($primColour);
+
+$x = $block->getFooterXOffset();
+$cellParams = [
+    0, 15, $x , -15, '', 0, 1, 1, false, 'C'
+];
+?>
+
+<tcpdf method="SetFillColor" <?= /* @noEscape */ $block->getEncodedParams([$rgb[0], $rgb[1], $rgb[2]]) ?> />
+<tcpdf method="writeHTMLCell" <?= /* @noEscape */ $block->getEncodedParams($cellParams) ?>/>
+<tcpdf method="SetY" <?= /* @noEscape */ $block->getEncodedParams(['-10']) ?> />
+
+<?php if ($block->hasFooter()) : ?>
+    <table width="100%">
+        <tr>
+            <?php foreach ($footerBlocks as $key => $footer) : ?>
+                <?php /* don't display first element as $footers[0] is the number of footers we have to display*/ ?>
+                <?php if ($key > 0) : ?>
+                    <?php if ($key < $footerBlocks[0]) : ?>
+                        <?php /* not last element */ ?>
+                        <td align="center"
+                            style="color: <?= /* @noEscape */ $secColour?>"
+                            width="<?= /* @noEscape */ $width ?>%"
+                        ><?= /* @noEscape */ $footer ? nl2br($footer) : '' ?></td>
+                        <td width="<?= /* @noEscape */ $marginBetween ?>%"></td>
+                    <?php elseif ($key == $footerBlocks[0]) : ?>
+                        <?php /* last element */ ?>
+                        <?php if (!empty($footer)) : ?>
+                            <td align="center"
+                                style="color: <?= /* @noEscape */ $secColour?>"
+                                width="<?= /* @noEscape */ $width ?>%"
+                            ><?= /* @noEscape */ $footer ? nl2br($footer) : '' ?></td>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </tr>
+    </table>
+<?php endif; ?>

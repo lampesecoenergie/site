@@ -1,0 +1,201 @@
+<?php
+
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Amazon
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright © 2018 CedCommerce. All rights reserved.
+ * @license     EULA http://cedcommerce.com/license-agreement.txt
+ */
+/** @var \Magento\Backend\Block\Template $block
+ */
+?>
+<div class="accordion">
+    <div class="entry-edit form-inline">
+        <div class="section-config">
+            <div class="entry-edit-head">
+                <div class="entry-edit-head admin__collapsible-block">
+                    <span class="entry-edit-head-link" id="documentation-link"></span>
+                    <a onclick="Fieldset.toggleCollapse('documentation');return false;"
+                       href="#documentation-link" id="documentation-head" class="">Documentation</a>
+                </div>
+            </div>
+            <fieldset id="documentation" class="admin__collapsible-block"
+                      style="display: none;border:0">
+                <ul>
+                    <li>
+                        <a target="_blank"
+                           href="https://docs.cedcommerce.com/magento-2/amazon-integration-magento-2-user-guide/">Amazon
+                            Integration Extension User Guide By CedCommerce</a>
+                    </li>
+                </ul>
+            </fieldset>
+            <script type="text/javascript">//&lt;![CDATA[
+                require(['prototype'], function () {
+                    Fieldset.applyCollapse('documentation');
+                });
+                //]]&gt;
+            </script>
+        </div>
+        <!--<div class="section-config">
+
+            <div class="entry-edit-head">
+                <div class="entry-edit-head admin__collapsible-block">
+                    <span class="entry-edit-head-link" id="amazon-video-link"></span> <a
+                        onclick="Fieldset.toggleCollapse('amazon-video');return false;"
+                        href="#amazon-video-link" id="amazon-video-head" class="">Integration
+                        Video from Amazon.com</a>
+                </div>
+            </div>
+
+            <fieldset id="amazon-video" class="admin__collapsible-block"
+                      style="display: none;border:0">
+                <div class="admin__data-grid-wrap admin__data-grid-wrap-static">
+                    <ul style="padding-left: 20px">
+                        <li><a target="_blank" href="https://www.youtube.com/watch?v=DJXgKgqqCLI&feature=youtu.be">Integration
+                                Process Introduction of Amazon.com</a></li>
+                        <li><a target="_blank" href="https://youtu.be/e0jg73m1L_I">API
+                                Overview</a></li>
+                        <li><a target="_blank" href="https://youtu.be/aKEF2kBNs6A">Merchant
+                                Basic Information Setup at Partner Portal</a></li>
+                        <li><a target="_blank" href="https://youtu.be/4UsuZux4vug">Products
+                                Overview</a></li>
+                        <li><a target="_blank" href="https://youtu.be/MVHCjB7jhww">Products
+                                API call test</a></li>
+                        <li><a target="_blank" href="https://youtu.be/q1rW7wFzBAg">Orders
+                                Setup</a></li>
+                        <li><a target="_blank" href="https://youtu.be/7ZUjRQLTxUw">Returns
+                                Setup </a></li>
+                        <li><a target="_blank"
+                               href="https://developer.amazon.com/v1.0/page/integration-videos">Integration
+                                Videos </a></li>
+                    </ul>
+                </div>
+
+            </fieldset>
+            <script type="text/javascript">//&lt;![CDATA[
+                require(['prototype'], function () {
+                    Fieldset.applyCollapse('amazon-video');
+                });
+                //]]&gt;</script>
+        </div>
+        <div class="section-config">
+            <div class="entry-edit-head">
+                <div class="entry-edit-head admin__collapsible-block">
+                    <span class="entry-edit-head-link" id="amazon-docs-link"></span> <a
+                        onclick="Fieldset.toggleCollapse('amazon-docs');return false;"
+                        href="#amazon-docs-link" id="amazon-docs-head" class="">Integration
+                        Documents from Amazon.com</a>
+                </div>
+            </div>
+
+            <fieldset id="amazon-docs" class="admin__collapsible-block"
+                      style="display: none;border:0">
+                <div class="admin__data-grid-wrap admin__data-grid-wrap-static">
+                    <ul style="padding-left: 20px">
+                        <li>
+                            <a target="_blank"
+                               href="https://marketplace.amazon.com/knowledgebase/articles/Article/Defining-Attributes">
+                                How to Define Attributes For Item Setup?
+                            </a>
+                        </li>
+                        <li>
+                            <a target="_blank"
+                               href="https://marketplace.amazon.com/knowledgebase/articles/File_Download/Selecting-The-Best-Category-For-An-Item">
+                                How to Select The Best Category For An Item?
+                            </a>
+                        </li>
+                        <li>
+                            <a target="_blank"
+                               href="https://marketplace.amazon.com/knowledgebase/articles/Article/How-To-Set-Up-A-Variant-Group">
+                                How To Set Up A Variant Group/Products?
+                            </a>
+                        </li>
+                        <li>
+                            <a target="_blank"
+                               href="https://marketplace.amazon.com/knowledgebase/articles/File_Download/Current-Taxware-Tax-Codes-for-the-Amazon-Marketplace">
+                                How to Choose Current Tax Codes For The Amazon Marketplace?
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+
+            </fieldset>
+            <script type="text/javascript">//&lt;![CDATA[
+                require(['prototype'], function () {
+                    Fieldset.applyCollapse('amazon-docs');
+                });
+                //]]&gt;</script>
+        </div>-->
+    </div>
+</div>
+
+<style>
+    .icon-box {
+        background-color: #ffffff;
+        width: 50%;
+        float: left;
+        height: 150px;
+        display: table;
+        text-align: center;
+    }
+
+    .icon-box .image {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+    }
+
+    .image {
+        min-width: 150px;
+        background-color: #fafafa;
+        padding-left: 5%;
+    }
+
+    .txt {
+        min-width: 200px;
+        margin-top: 37px;
+        background-color: #fafafa;
+        text-transform: uppercase;
+        vertical-align: middle;
+        text-align: left;
+        color: #252323;
+    }
+
+    .fieldset {
+        background-color: #fafafa;
+        padding-bottom: 1%;
+    }
+
+    .col-lg-4, .col-md-4, .col-sm-12, .col-xs-12 {
+        width: 33%;
+    }
+
+    .mail {
+        padding-left: 5%;
+    }
+
+    .contact-section {
+        padding-left: 5%;
+    }
+
+    .more-contact {
+        padding-left: 1%;
+        font-weight: 900;
+        font-size: 15px;
+    }
+
+    span {
+        display: block;
+    }
+</style>

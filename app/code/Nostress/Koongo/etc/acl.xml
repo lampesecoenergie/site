@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+            	<resource id="Nostress_Koongo::koongo" title="Koongo" sortOrder="10" >
+                    <resource id="Nostress_Koongo::koongo_channel_profile" title="Export Profiles" sortOrder="10">
+                    	<resource id="Nostress_Koongo::execute" title="Execute Profile" sortOrder="10" />
+                    	<resource id="Nostress_Koongo::save" title="Save Profile" sortOrder="20" /> 
+                    	<resource id="Nostress_Koongo::license_management" title="License Management" sortOrder="30" />                 
+                	</resource>
+                	<resource id="Nostress_Koongo::configuration" title="Settings" sortOrder="20"/>
+                	<resource id="Nostress_Koongo::license" title="License" sortOrder="20"/>                	
+                </resource>
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Nostress_Koongo::nostress_koongo_settings" title="Koongo Settings" />
+                            <resource id="Nostress_Koongo::nostress_koongo_license" title="Koongo License" />
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

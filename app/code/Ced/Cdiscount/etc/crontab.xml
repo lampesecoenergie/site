@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement(EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Cedsudo /opt/lampp/bin/php bin/magento dev:urn-catalog:generate .idea/misc.xml
+
+
+
+
+ * @package   Ced_Cdiscount
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright Copyright CEDCOMMERCE(http://cedcommerce.com/)
+ * @license   http://cedcommerce.com/license-agreement.txt
+ */
+
+* * * * * /opt/lampp/bin/php -d memory_limit=2G  /opt/lampp/htdocs/m2.2/bin/magento cron:run | grep -v "Ran jobs by schedule" >> /opt/lampp/htdocs/m2.2/var/log/magento.cron.log
+* * * * * /opt/lampp/bin/php -d memory_limit=2G  /opt/lampp/htdocs/m2.2/update/cron.php >> /opt/lampp/htdocs/m2.2/var/log/update.cron.log
+* * * * * /opt/lampp/bin/php -d memory_limit=2G  /opt/lampp/htdocs/m2.2/bin/magento setup:cron:run >> /opt/lampp/htdocs/m2.2/var/log/setup.cron.log
+
+const CRON_CUSTOM = 'custom';
+const CRON_1MINUTE = '* * * * *';
+const CRON_5MINUTES = '*/5 * * * *';
+const CRON_10MINUTES = '*/10 * * * *';
+const CRON_15MINUTES = '*/15 * * * *';
+const CRON_20MINUTES = '*/20 * * * *';
+const CRON_HALFHOURLY = '*/30 * * * *';
+const CRON_HOURLY = '0 * * * *';
+const CRON_2HOURLY = '0 */2 * * *';
+const CRON_DAILY = '0 0 * * *';
+const CRON_TWICEDAILY = '0 0,12 * * *';
+
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job name="ced_cdiscount_order_import" instance="Ced\Cdiscount\Cron\Order\Import" method="execute">
+            <!--every 20 mins-->
+            <config_path>cdiscount_config/cdiscount_cron/order_cron_expression</config_path>
+        </job>
+        <job name="ced_cdiscount_product_inventory_sync" instance="Ced\Cdiscount\Cron\Product\InventoryPrice" method="execute">
+            <!--every 1 Hours-->
+            <config_path>cdiscount_config/cdiscount_cron/inventory_price_cron_expression</config_path>
+        </job>
+        <job name="ced_cdiscount_all_product_inventory_sync" instance="Ced\Cdiscount\Cron\Product\AllInventoryPrice" method="execute">
+            <!--Daily-->
+            <config_path>cdiscount_config/cdiscount_cron/all_inventory_price_cron_expression</config_path>
+        </job>
+
+        <job name="ced_cdiscount_resync" instance="Ced\Cdiscount\Cron\Feeds\Resync" method="execute">
+            <!--Daily-->
+            <schedule>0 */2 * * *</schedule>
+        </job>
+
+        <job name="ced_cdiscount_all_orders_sync" instance="Ced\Cdiscount\Cron\Order\Sync" method="execute">
+            <!--Daily-->
+            <config_path>cdiscount_config/cdiscount_cron/order_shipment_cron_expression</config_path>
+        </job>
+
+    </group>
+</config>

@@ -1,0 +1,25 @@
+{
+  "name": "cedcoss/m2-amazon",
+  "description": "Amazon Magento2 integration",
+  "require": {
+    "ext-curl": "*",
+    "ext-json": "*",
+    "psr/log": ">=1.0",
+    "psr/container":"*",
+    "ced/integrator":">=0.0.8",
+    "cedcommerce/validator": ">=2.0.1"
+  },
+  "type": "magento2-module",
+  "version": "0.1.8",
+  "license": [
+    "EULA"
+  ],
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Ced\\Amazon\\": ""
+    }
+  }
+}

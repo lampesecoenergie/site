@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Venustheme
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Venustheme.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.venustheme.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category   Venustheme
+ * @package    Ves_Themesettings
+ * @copyright  Copyright (c) 2014 Venustheme (http://www.venustheme.com/)
+ * @license    http://www.venustheme.com/LICENSE-1.0.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="Magento\Checkout\CustomerData\DefaultItem" type="Ves\Themesettings\Checkout\CustomerData\DefaultItem" />
+	<preference for="Magento\Checkout\Model\Sidebar" type="Ves\Themesettings\Checkout\Model\Sidebar" />
+	<preference for="Magento\Checkout\Controller\Cart\Add" type="Ves\Themesettings\Controller\Cart\Add" />
+	<type name="Magento\Framework\View\Result\Page">
+        <plugin name="ves-themesettings-resultpage" type="Ves\Themesettings\Plugin\ResultPage" sortOrder="10" disabled="false"/>
+    </type>
+    <preference for="Magento\Checkout\Block\Cart\Crosssell" type="Ves\Themesettings\Block\Cart\Crosssell" />
+</config>

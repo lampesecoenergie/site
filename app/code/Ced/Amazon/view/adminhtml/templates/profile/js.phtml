@@ -1,0 +1,28 @@
+<?php
+
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Amazon
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright © 2018 CedCommerce. All rights reserved.
+ * @license     EULA http://cedcommerce.com/license-agreement.txt
+ */
+
+/** @var \Ced\Amazon\Block\Adminhtml\Profile\Ui\Form\Js $block */
+?>
+
+<script>
+    var MARKETPLACE_ATTRIBUTE_UPDATE_URL =
+        '<?php echo $block->getUrl('amazon/profile/attribute_update', ['_nosid' => true])?>';
+    var MARKETPLACE_PROFILE_ID = '<?php echo $block->getProfileId()?>';
+    var MARKETPLACE_GET_ACCOUNT_URL =  '<?php echo $block->getUrl('amazon/account/view', ['_nosid' => true])?>';
+</script>

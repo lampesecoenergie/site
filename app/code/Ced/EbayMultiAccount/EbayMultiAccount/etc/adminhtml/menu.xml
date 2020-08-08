@@ -1,0 +1,174 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement(EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+ * @package   Ced_EbayMultiAccount
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright Copyright CEDCOMMERCE(http://cedcommerce.com/)
+ * @license   http://cedcommerce.com/license-agreement.txt
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Ced_EbayMultiAccount::EbayMultiAccount"
+             title="eBay Multi Account"
+             translate="title"
+             module="Ced_EbayMultiAccount"
+             sortOrder="14"
+             resource="Ced_EbayMultiAccount::EbayMultiAccount"
+        />
+        <add id="Ced_EbayMultiAccount::product"
+             title="Products"
+             translate="title"
+             module="Ced_EbayMultiAccount"
+             sortOrder="1"
+             parent="Ced_EbayMultiAccount::EbayMultiAccount"
+             resource="Ced_EbayMultiAccount::EbayMultiAccount"
+        />
+        <add id="Ced_EbayMultiAccount::ebaymultiaccount_profile"
+             title="Profile Manager"
+             translate="title"
+             module="Ced_EbayMultiAccount"
+             sortOrder="1"
+             parent="Ced_EbayMultiAccount::product"
+             action="ebaymultiaccount/profile/index"
+             resource="Ced_EbayMultiAccount::EbayMultiAccount"
+        />
+        <add id="Ced_EbayMultiAccount::ebaymultiaccount_product"
+             title="Product Manager"
+             translate="title"
+             module="Ced_EbayMultiAccount"
+             sortOrder="5"
+             parent="Ced_EbayMultiAccount::product"
+             action="ebaymultiaccount/product/index"
+             resource="Ced_EbayMultiAccount::EbayMultiAccount"
+        />
+        <add id="Ced_EbayMultiAccount::ebaymultiaccount_bulk_scheduler"
+             title="Bulk Scheduler"
+             translate="title"
+             module="Ced_EbayMultiAccount"
+             sortOrder="10"
+             parent="Ced_EbayMultiAccount::product"
+             action="ebaymultiaccount/jobScheduler/index"
+             resource="Ced_EbayMultiAccount::EbayMultiAccount"
+        />
+
+
+        <add id="Ced_EbayMultiAccount::orders"
+             title="Orders"
+             translate="title"
+             module="Ced_EbayMultiAccount"
+             sortOrder="3"
+             parent="Ced_EbayMultiAccount::EbayMultiAccount"
+             resource="Ced_EbayMultiAccount::EbayMultiAccount"
+        />
+
+        <add id="Ced_EbayMultiAccount::ebaymultiaccount_order_listing"
+             title="Manage Orders"
+             translate="title"
+             module="Ced_EbayMultiAccount"
+             sortOrder="1"
+             parent="Ced_EbayMultiAccount::orders"
+             action="ebaymultiaccount/order/index"
+             resource="Ced_EbayMultiAccount::EbayMultiAccount"
+        />
+
+        <add id="Ced_EbayMultiAccount::configuration"
+             title="eBay Configuration"
+             translate="title"
+             module="Ced_EbayMultiAccount"
+             sortOrder="4"
+             parent="Ced_EbayMultiAccount::EbayMultiAccount"
+             resource="Ced_EbayMultiAccount::EbayMultiAccount"
+        />
+        <add id="Ced_EbayMultiAccount::account"
+             title="Manage Accounts"
+             module="Ced_EbayMultiAccount"
+             sortOrder="1"
+             parent="Ced_EbayMultiAccount::configuration"
+             action="ebaymultiaccount/account/index"
+             resource="Ced_EbayMultiAccount::EbayMultiAccount"
+        />
+
+        <add id="Ced_EbayMultiAccount::accountconfig"
+             title="Manage Account Config"
+             module="Ced_EbayMultiAccount"
+             sortOrder="5"
+             parent="Ced_EbayMultiAccount::configuration"
+             action="ebaymultiaccount/accountconfig/index"
+             resource="Ced_EbayMultiAccount::EbayMultiAccount"
+        />
+
+        <add id="Ced_EbayMultiAccount::ebaymultiaccount_configuration"
+             title="Configuration"
+             module="Ced_EbayMultiAccount"
+             sortOrder="10"
+             parent="Ced_EbayMultiAccount::configuration"
+             action="adminhtml/system_config/edit/section/ebaymultiaccount_config"
+             resource="Ced_EbayMultiAccount::EbayMultiAccount"
+        />
+
+
+        <add id="Ced_EbayMultiAccount::developer"
+             title="Developer"
+             module="Ced_EbayMultiAccount"
+             sortOrder="20"
+             parent="Ced_EbayMultiAccount::EbayMultiAccount"
+             resource="Ced_EbayMultiAccount::EbayMultiAccount"
+        />
+
+        <add id="Ced_EbayMultiAccount::ebaymultiaccount_cron"
+             title="Cron Logs"
+             module="Ced_EbayMultiAccount"
+             sortOrder="5"
+             parent="Ced_EbayMultiAccount::developer"
+             action="ebaymultiaccount/cron/index"
+             resource="Ced_EbayMultiAccount::EbayMultiAccount"
+        />
+
+        <add id="Ced_EbayMultiAccount::logs"
+             title="Activity Logs"
+             translate="title"
+             module="Ced_EbayMultiAccount"
+             sortOrder="40"
+             parent="Ced_EbayMultiAccount::developer"
+             action="integrator/log/index"
+             resource="Ced_Integrator::activity_log"
+        />
+        <add id="Ced_EbayMultiAccount::ebaymultiaccount_products_feeds"
+             title="Product Feeds"
+             module="Ced_EbayMultiAccount"
+             sortOrder="20"
+             parent="Ced_EbayMultiAccount::developer"
+             action="ebaymultiaccount/product/feeds"
+             resource="Ced_EbayMultiAccount::EbayMultiAccount"
+        />
+
+        <add id="Ced_EbayMultiAccount::extra"
+             title="Extras"
+             module="Ced_EbayMultiAccount"
+             sortOrder="25"
+             parent="Ced_EbayMultiAccount::EbayMultiAccount"
+             resource="Ced_EbayMultiAccount::EbayMultiAccount"
+        />
+        <add id="Ced_EbayMultiAccount::knowledge_base"
+             title="Help And Support"
+             module="Ced_EbayMultiAccount"
+             sortOrder="2"
+             parent="Ced_EbayMultiAccount::extra"
+             action="ebaymultiaccount/request/help"
+             resource="Ced_EbayMultiAccount::EbayMultiAccount"
+        />
+    </menu>
+</config>

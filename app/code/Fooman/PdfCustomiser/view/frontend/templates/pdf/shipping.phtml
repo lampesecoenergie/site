@@ -1,0 +1,39 @@
+<?php
+/**
+ * @var \Fooman\PdfCustomiser\Block\Shipping $block
+ */
+
+$tracks = $block->getTracks();
+$shippingDescription = $block->getShippingDescription();
+$salesObject = $block->getSalesObject();
+$displayWeight = $block->shouldDisplayWeight();
+?>
+<?= $block->escapeHtml($shippingDescription) ?>
+<?php if (count($tracks)) : ?>
+    <?php foreach ($tracks as $track) : ?>
+        <?php if ($track->getNumber()) : ?>
+            <br/><?= $block->escapeHtml($track->getTitle()) ?> :
+            <?php if ($block->shouldPrintTrackingBarcode()) :?>
+                <?php $barcodeParams = [
+                    $block->escapeHtml($track->getNumber()),
+                    $block->getBarcodeType(),
+                    //the parameters below refer to x, y, width, and height of the barcode respectively
+                    '', '', '35', '8'
+                ]; ?>
+                <tcpdf method="write1DBarcode" <?= /* @noEscape */ $block->getEncodedParams($barcodeParams) ?>/><br/>
+            <?php else :?>
+                <?= $block->escapeHtml($track->getNumber()) ?>
+            <?php endif; ?>
+        <?php endif; ?>
+    <?php endforeach; ?>
+<?php endif; ?>
+<?php if ($displayWeight) : ?>
+    <br/>
+    <?= $block->escapeHtml(__('Total Order Weight:')) ?>
+    <?= /* @noEscape */ $block->getTotalOrderWeight() ?> <?= /* @noEscape */ $block->getUnit() ?>
+    <?php if ($salesObject instanceof \Magento\Sales\Model\Order\Shipment) : ?>
+        <br/>
+        <?= $block->escapeHtml(__('Shipment Weight:')) ?>
+        <?= /* @noEscape */ $block->getTotalWeight() ?><?= /* @noEscape */ $block->getUnit() ?>
+    <?php endif; ?>
+<?php endif; ?>

@@ -1,0 +1,25 @@
+{
+  "name": "ced/integrator",
+  "description": "Omni-channel Integration for Magento 2",
+  "keywords": ["amazon", "walmart", "ebay", "jet", "integration", "cedcommerce"],
+  "require": {
+    "php": ">=5.6",
+    "ext-curl": "*",
+    "ext-json": "*",
+    "psr/log": "*",
+    "monolog/monolog":"*"
+  },
+  "type": "magento2-module",
+  "version": "0.0.9",
+  "license": [
+    "EULA"
+  ],
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Ced\\Integrator\\": ""
+    }
+  }
+}

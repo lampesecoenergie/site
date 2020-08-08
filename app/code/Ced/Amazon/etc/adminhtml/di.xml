@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Amazon
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright © 2018 CedCommerce. All rights reserved.
+ * @license     EULA http://cedcommerce.com/license-agreement.txt
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Element\Message\MessageConfigurationsPool">
+        <arguments>
+            <argument name="configurationsMap" xsi:type="array">
+                <item name="addAmazonError" xsi:type="array">
+                    <item name="renderer" xsi:type="const">\Magento\Framework\View\Element\Message\Renderer\BlockRenderer::CODE</item>
+                    <item name="data" xsi:type="array">
+                        <item name="template" xsi:type="string">Ced_Amazon::messages/error.phtml</item>
+                    </item>
+                </item>
+                <item name="addAmazonSuccess" xsi:type="array">
+                    <item name="renderer" xsi:type="const">\Magento\Framework\View\Element\Message\Renderer\BlockRenderer::CODE</item>
+                    <item name="data" xsi:type="array">
+                        <item name="template" xsi:type="string">Ced_Amazon::messages/success.phtml</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Overriding allowed countries    -->
+    <type name="Magento\Directory\Model\AllowedCountries">
+        <plugin name="amazon-order-country" type="Ced\Amazon\Plugin\Order\AllowedCountries" />
+    </type>
+    <preference for="Magento\Directory\Helper\Data" type="Ced\Amazon\Helper\Directory\Data"/>
+
+    <!-- Modifier for product form        -->
+    <virtualType name="Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\Pool" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="ced_amazon" xsi:type="array">
+                    <item name="class" xsi:type="string">Ced\Amazon\Ui\DataProvider\Product\Form\Modifier\Amazon</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Ced\Amazon\Ui\DataProvider\Profile\Form\Modifier\Pool" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="account_modifier" xsi:type="array">
+                    <item name="class" xsi:type="string">Ced\Amazon\Ui\DataProvider\Profile\Form\Modifier\Account</item>
+                    <item name="sortOrder" xsi:type="number">1000</item>
+                </item>
+                <item name="meta_modifier" xsi:type="array">
+                    <item name="class" xsi:type="string">Ced\Amazon\Ui\DataProvider\Profile\Form\Modifier\Meta</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Ced\Amazon\Ui\DataProvider\Profile\Form">
+        <arguments>
+            <argument name="pool" xsi:type="object">Ced\Amazon\Ui\DataProvider\Profile\Form\Modifier\Pool</argument>
+        </arguments>
+    </type>
+
+    <!-- Reason filter for order grid    -->
+    <type name="Ced\Amazon\Ui\DataProvider\Order\DataProvider">
+        <arguments>
+            <argument name="addFilterStrategies" xsi:type="array">
+                <item name="reason" xsi:type="object">Ced\Amazon\Ui\DataProvider\Order\Grid\Strategies\AddReasonToCollection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Profile Product Grid   -->
+    <type name="Ced\Amazon\Ui\DataProvider\Profile\Products">
+        <arguments>
+            <argument name="addFieldStrategies" xsi:type="array">
+                <item name="websites" xsi:type="object">Magento\Catalog\Ui\DataProvider\Product\AddWebsitesFieldToCollection</item>
+                <item name="qty" xsi:type="object">Magento\CatalogInventory\Ui\DataProvider\Product\AddQuantityFieldToCollection</item>
+            </argument>
+            <argument name="addFilterStrategies" xsi:type="array">
+                <item name="store_id" xsi:type="object">Magento\Catalog\Ui\DataProvider\Product\AddStoreFieldToCollection</item>
+                <item name="qty" xsi:type="object">Magento\CatalogInventory\Ui\DataProvider\Product\AddQuantityFilterToCollection</item>
+                <item name="category" xsi:type="object">Ced\Amazon\Ui\DataProvider\Product\AddCategoryToCollection</item>
+                <item name="amazon_product_status" xsi:type="object">Ced\Amazon\Ui\DataProvider\Product\Grid\Strategies\AddStatusToCollection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Product Listing Grid -->
+    <type name="Ced\Amazon\Ui\DataProvider\Product\Grid">
+        <arguments>
+            <argument name="addFieldStrategies" xsi:type="array">
+                <item name="qty" xsi:type="object">Magento\CatalogInventory\Ui\DataProvider\Product\AddQuantityFieldToCollection</item>
+            </argument>
+            <argument name="addFilterStrategies" xsi:type="array">
+                <item name="qty" xsi:type="object">Magento\CatalogInventory\Ui\DataProvider\Product\AddQuantityFilterToCollection</item>
+                <item name="amazon_product_status" xsi:type="object">Ced\Amazon\Ui\DataProvider\Product\Grid\Strategies\AddStatusToCollection</item>
+                <item name="amazon_validation_errors" xsi:type="object">Ced\Amazon\Ui\DataProvider\Product\Grid\Strategies\AddErrorToCollection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\InventorySales\Model\IsProductSalableCondition\BackOrderCondition">
+        <plugin name="amazon-order-backorder" type="Ced\Amazon\Plugin\Order\BackOrderCondition" />
+    </type>
+
+    <!--Mass Actions-->
+    <type name="Ced\Amazon\Controller\Adminhtml\Processor\Create">
+        <arguments>
+            <argument name="actions" xsi:type="array">
+                <item name="order_sync" xsi:type="array">
+                    <item name="chunk_size" xsi:type="string">50</item>
+                    <item name="back_url" xsi:type="string">amazon/order/index</item>
+                    <item name="collection" xsi:type="object">Ced\Amazon\Model\ResourceModel\Order\Collection</item>
+                    <item name="messages" xsi:type="array">
+                        <item name="title" xsi:type="string" translatable="true">Sync Orders</item>
+                        <item name="finished_msg" xsi:type="string" translatable="true">Finished order syncing.</item>
+                    </item>
+                </item>
+                <item name="fetch_order_sync" xsi:type="array">
+                    <item name="chunk_size" xsi:type="string">50</item>
+                    <item name="back_url" xsi:type="string">amazon/order/index</item>
+                    <item name="collection" xsi:type="object">Ced\Amazon\Model\ResourceModel\Order\Collection</item>
+                    <item name="messages" xsi:type="array">
+                        <item name="title" xsi:type="string" translatable="true">Fetch &amp; Sync Orders</item>
+                        <item name="finished_msg" xsi:type="string" translatable="true">Finished order syncing.</item>
+                    </item>
+                </item>
+                <item name="shipment" xsi:type="array">
+                    <item name="chunk_size" xsi:type="string">50</item>
+                    <item name="back_url" xsi:type="string">amazon/order/index</item>
+                    <item name="collection" xsi:type="object">Ced\Amazon\Model\ResourceModel\Order\Collection</item>
+                    <item name="messages" xsi:type="array">
+                        <item name="title" xsi:type="string" translatable="true">Sync Order Shipments</item>
+                        <item name="finished_msg" xsi:type="string" translatable="true">Finished order shipment syncing.</item>
+                    </item>
+                </item>
+                <item name="order_delete" xsi:type="array">
+                    <item name="chunk_size" xsi:type="string">10</item>
+                    <item name="back_url" xsi:type="string">amazon/order/index</item>
+                    <item name="collection" xsi:type="object">Ced\Amazon\Model\ResourceModel\Order\Collection</item>
+                    <item name="messages" xsi:type="array">
+                        <item name="title" xsi:type="string" translatable="true">Delete Orders</item>
+                        <item name="finished_msg" xsi:type="string" translatable="true">Finished deleting orders.</item>
+                    </item>
+                </item>
+                <item name="feed_delete" xsi:type="array">
+                    <item name="chunk_size" xsi:type="string">10</item>
+                    <item name="back_url" xsi:type="string">amazon/feeds/index</item>
+                    <item name="collection" xsi:type="object">Ced\Amazon\Model\ResourceModel\Feed\Collection</item>
+                    <item name="messages" xsi:type="array">
+                        <item name="title" xsi:type="string" translatable="true">Delete Feeds</item>
+                        <item name="finished_msg" xsi:type="string" translatable="true">Finished deleting feeds.</item>
+                    </item>
+                </item>
+                <item name="feed_sync" xsi:type="array">
+                    <item name="chunk_size" xsi:type="string">10</item>
+                    <item name="back_url" xsi:type="string">amazon/feeds/index</item>
+                    <item name="collection" xsi:type="object">Ced\Amazon\Model\ResourceModel\Feed\Collection</item>
+                    <item name="messages" xsi:type="array">
+                        <item name="title" xsi:type="string" translatable="true">Sync Feeds</item>
+                        <item name="finished_msg" xsi:type="string" translatable="true">Finished feeds syncing.</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Ced\Amazon\Controller\Adminhtml\Processor\Process">
+        <arguments>
+            <argument name="actions" xsi:type="array">
+                <item name="order_sync" xsi:type="array">
+                    <item name="processor" xsi:type="object">Ced\Amazon\Service\Order\Sync</item>
+                    <item name="messages" xsi:type="array">
+                        <item name="success" xsi:type="string" translatable="true">Order Synced Successfully</item>
+                        <item name="failure" xsi:type="string" translatable="true">Order Sync Failed</item>
+                    </item>
+                </item>
+                <item name="fetch_order_sync" xsi:type="array">
+                    <item name="processor" xsi:type="object">Ced\Amazon\Service\Order\Fetch\Sync</item>
+                    <item name="messages" xsi:type="array">
+                        <item name="success" xsi:type="string" translatable="true">Order Synced Successfully</item>
+                        <item name="failure" xsi:type="string" translatable="true">Order Sync Failed</item>
+                    </item>
+                </item>
+                <item name="shipment" xsi:type="array">
+                    <item name="processor" xsi:type="object">Ced\Amazon\Service\Order\Shipment\Sync</item>
+                    <item name="messages" xsi:type="array">
+                        <item name="success" xsi:type="string" translatable="true">Order Shipment Synced Successfully</item>
+                        <item name="failure" xsi:type="string" translatable="true">Order Shipment Sync Failed</item>
+                    </item>
+                </item>
+                <item name="order_delete" xsi:type="array">
+                    <item name="processor" xsi:type="object">Ced\Amazon\Service\Order\Delete</item>
+                    <item name="messages" xsi:type="array">
+                        <item name="success" xsi:type="string" translatable="true">Order Deleted Successfully.</item>
+                        <item name="failure" xsi:type="string" translatable="true">Order Delete Failed.</item>
+                    </item>
+                </item>
+                <item name="feed_delete" xsi:type="array">
+                    <item name="processor" xsi:type="object">Ced\Amazon\Service\Feed\Delete</item>
+                    <item name="messages" xsi:type="array">
+                        <item name="success" xsi:type="string" translatable="true">Feed Deleted Successfully.</item>
+                        <item name="failure" xsi:type="string" translatable="true">Feed Delete Failed.</item>
+                    </item>
+                </item>
+                <item name="feed_sync" xsi:type="array">
+                    <item name="processor" xsi:type="object">Ced\Amazon\Service\Feed\Sync</item>
+                    <item name="messages" xsi:type="array">
+                        <item name="success" xsi:type="string" translatable="true">Feed Synced Successfully.</item>
+                        <item name="failure" xsi:type="string" translatable="true">Feed Sync Failed.</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+</config>

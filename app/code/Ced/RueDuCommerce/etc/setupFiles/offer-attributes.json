@@ -1,0 +1,806 @@
+[{
+        "code" : "price",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Price",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Price"
+        } ],
+        "required" : "true",
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Price"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false,
+        "options" : null
+}, {
+        "code" : "state",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "State",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "State"
+        } ],
+        "required" : "true",
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "State"
+        } ],
+        "type" : "LIST",
+        "type_parameter" : null,
+        "values" : {"_value":{"values_list":{"code":"state","label":"State","label_translations":{"label_translation":{"locale":"en","value":"State"}},"values":{"value":[{"code":"New","label":"New","label_translations":{"label_translation":{"locale":"en","value":"New"}}},{"code":"Refurbished","label":"Refurbished","label_translations":{"label_translation":{"locale":"en","value":"Refurbished"}}}]}}},"_attribute":{"nil":"true"}},
+        "values_list" : [{"code":"New","label":"New","label_translations":{"label_translation":{"locale":"en","value":"New"}}},{"code":"Refurbished","label":"Refurbished","label_translations":{"label_translation":{"locale":"en","value":"Refurbished"}}}],
+        "variant" : false,
+        "options" : null
+}, {
+        "code" : "description",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Description",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Description"
+        } ],
+        "required" : "false",
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Description"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false,
+        "options" : null
+}, {
+        "code" : "internal-description",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Internal Description",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Internal Description"
+        } ],
+        "required" : "false",
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Internal Description"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false,
+        "options" : null
+}, {
+        "code" : "price-additional-info",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Price Additional Info",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Price Additional Info"
+        } ],
+        "required" : "false",
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Price Additional Info"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false,
+        "options" : null
+}, {
+        "code" : "min-quantity-alert",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Min Quantity Alert",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Min Quantity Alert"
+        } ],
+        "required" : "false",
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Min Quantity Alert"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false,
+        "options" : null
+}, {
+        "code" : "available-start-date",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Available Start Date",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Available Start Date"
+        } ],
+        "required" : "false",
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Available Start Date"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false,
+        "options" : null
+}, {
+        "code" : "available-end-date",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Available End Date",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Available End Date"
+        } ],
+        "required" : "false",
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Available End Date"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false,
+        "options" : null
+}, {
+        "code" : "logistic-class",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Logistic Class",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Logistic Class"
+        } ],
+        "required" : "false",
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Logistic Class"
+        } ],
+        "type" : "LIST",
+        "type_parameter" : null,
+        "values" : {"_value":{"values_list":{"code":"logistic-class","label":"Logistic Class","label_translations":{"label_translation":{"locale":"en","value":"Logistic Class"}},"values":{"value":[{"code":"Free","label":"Offert Encombrant","label_translations":{"label_translation":{"locale":"en","value":"Free"}}},{"code":"Gr4tui7","label":"Offret Non Encombrant","label_translations":{"label_translation":{"locale":"en","value":"Gr4tui7"}}},{"code":"AQW1","label":"Famille A","label_translations":{"label_translation":{"locale":"en","value":"AQW1"}}},{"code":"BRT3","label":"Famille B","label_translations":{"label_translation":{"locale":"en","value":"BRT3"}}},{"code":"CTN8","label":"Famille C","label_translations":{"label_translation":{"locale":"en","value":"CTN8"}}},{"code":"DNJ4","label":"Famille D","label_translations":{"label_translation":{"locale":"en","value":"DNJ4"}}},{"code":"DNJ4","label":"Famille D","label_translations":{"label_translation":{"locale":"en","value":"DNJ4"}}},{"code":"ERT7","label":"Famille E","label_translations":{"label_translation":{"locale":"en","value":"ERT7"}}},{"code":"FMO1","label":"Famille F","label_translations":{"label_translation":{"locale":"en","value":"FMO1"}}},{"code":"GOI9","label":"Famille G","label_translations":{"label_translation":{"locale":"en","value":"GOI9"}}},{"code":"LHW","label":"Large - Heavy Weight","label_translations":{"label_translation":{"locale":"en","value":"LHW"}}},{"code":"LSHW","label":"Large - Super Heavy Weight","label_translations":{"label_translation":{"locale":"en","value":"LSHW"}}},{"code":"L2MC","label":"Large - 2 Men Carry","label_translations":{"label_translation":{"locale":"en","value":"L2MC"}}},{"code":"OLW","label":"Oversize - Light Weight","label_translations":{"label_translation":{"locale":"en","value":"OLW"}}},{"code":"OMW","label":"Oversize - Medium Weight","label_translations":{"label_translation":{"locale":"en","value":"OMW"}}},{"code":"OHW","label":"Oversize - Heavy Weight","label_translations":{"label_translation":{"locale":"en","value":"OHW"}}},{"code":"OSHW","label":"Oversize - Super Heavy Weight","label_translations":{"label_translation":{"locale":"en","value":"OSHW"}}},{"code":"O2MC","label":"Oversize - 2 Men Carry","label_translations":{"label_translation":{"locale":"en","value":"O2MC"}}},{"code":"SOA","label":"Super Oversize - A","label_translations":{"label_translation":{"locale":"en","value":"SOA"}}},{"code":"SOB","label":"Super Oversize - B","label_translations":{"label_translation":{"locale":"en","value":"SOB"}}},{"code":"FREE","label":"FREE","label_translations":{"label_translation":{"locale":"en","value":"FREE"}}}]}}},"_attribute":{"nil":"true"}},
+        "values_list" : [{"code":"Free","label":"Offert Encombrant","label_translations":{"label_translation":{"locale":"en","value":"Free"}}},{"code":"Gr4tui7","label":"Offret Non Encombrant","label_translations":{"label_translation":{"locale":"en","value":"Gr4tui7"}}},{"code":"AQW1","label":"Famille A","label_translations":{"label_translation":{"locale":"en","value":"AQW1"}}},{"code":"BRT3","label":"Famille B","label_translations":{"label_translation":{"locale":"en","value":"BRT3"}}},{"code":"CTN8","label":"Famille C","label_translations":{"label_translation":{"locale":"en","value":"CTN8"}}},{"code":"DNJ4","label":"Famille D","label_translations":{"label_translation":{"locale":"en","value":"DNJ4"}}},{"code":"DNJ4","label":"Famille D","label_translations":{"label_translation":{"locale":"en","value":"DNJ4"}}},{"code":"ERT7","label":"Famille E","label_translations":{"label_translation":{"locale":"en","value":"ERT7"}}},{"code":"FMO1","label":"Famille F","label_translations":{"label_translation":{"locale":"en","value":"FMO1"}}},{"code":"GOI9","label":"Famille G","label_translations":{"label_translation":{"locale":"en","value":"GOI9"}}},{"code":"LHW","label":"Large - Heavy Weight","label_translations":{"label_translation":{"locale":"en","value":"LHW"}}},{"code":"LSHW","label":"Large - Super Heavy Weight","label_translations":{"label_translation":{"locale":"en","value":"LSHW"}}},{"code":"L2MC","label":"Large - 2 Men Carry","label_translations":{"label_translation":{"locale":"en","value":"L2MC"}}},{"code":"OLW","label":"Oversize - Light Weight","label_translations":{"label_translation":{"locale":"en","value":"OLW"}}},{"code":"OMW","label":"Oversize - Medium Weight","label_translations":{"label_translation":{"locale":"en","value":"OMW"}}},{"code":"OHW","label":"Oversize - Heavy Weight","label_translations":{"label_translation":{"locale":"en","value":"OHW"}}},{"code":"OSHW","label":"Oversize - Super Heavy Weight","label_translations":{"label_translation":{"locale":"en","value":"OSHW"}}},{"code":"O2MC","label":"Oversize - 2 Men Carry","label_translations":{"label_translation":{"locale":"en","value":"O2MC"}}},{"code":"SOA","label":"Super Oversize - A","label_translations":{"label_translation":{"locale":"en","value":"SOA"}}},{"code":"SOB","label":"Super Oversize - B","label_translations":{"label_translation":{"locale":"en","value":"SOB"}}},{"code":"FREE","label":"FREE","label_translations":{"label_translation":{"locale":"en","value":"FREE"}}}],
+        "variant" : false,
+        "options" : null
+}, {
+        "code" : "discount-price",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Discount Price",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Discount Price"
+        } ],
+        "required" : "false",
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Discount Price"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false,
+        "options" : null
+}, {
+        "code" : "discount-start-date",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Discount Start Date",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Discount Start Date"
+        } ],
+        "required" : "false",
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Discount Start Date"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false,
+        "options" : null
+}, {
+        "code" : "discount-end-date",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Discount End Date",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Discount End Date"
+        } ],
+        "required" : "false",
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Discount End Date"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false,
+        "options" : null
+}, {
+        "code" : "leadtime-to-ship",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Leadtime To Ship",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Leadtime To Ship"
+        } ],
+        "required" : "false",
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Leadtime To Ship"
+        } ],
+        "type" : "LIST",
+        "type_parameter" : null,
+        "values" : {"_value":{"values_list":{"code":"leadtime-to-ship","label":"Leadtime To Ship","label_translations":{"label_translation":{"locale":"en","value":"Leadtime To Ship"}},"values":{"value":[{"code":1,"label":"1 Days","label_translations":{"label_translation":{"locale":"en","value":"1 Days"}}},{"code":2,"label":"2 Days","label_translations":{"label_translation":{"locale":"en","value":"2 Days"}}},{"code":3,"label":"3 Days","label_translations":{"label_translation":{"locale":"en","value":"3 Days"}}},{"code":4,"label":"4 Days","label_translations":{"label_translation":{"locale":"en","value":"4 Days"}}},{"code":5,"label":"5 Days","label_translations":{"label_translation":{"locale":"en","value":"5 Days"}}},{"code":6,"label":"6 Days","label_translations":{"label_translation":{"locale":"en","value":"6 Days"}}},{"code":7,"label":"7 Days","label_translations":{"label_translation":{"locale":"en","value":"7 Days"}}},{"code":8,"label":"8 Days","label_translations":{"label_translation":{"locale":"en","value":"8 Days"}}},{"code":9,"label":"9 Days","label_translations":{"label_translation":{"locale":"en","value":"9 Days"}}},{"code":10,"label":"10 Days","label_translations":{"label_translation":{"locale":"en","value":"10 Days"}}},{"code":11,"label":"11 Days","label_translations":{"label_translation":{"locale":"en","value":"11 Days"}}},{"code":12,"label":"12 Days","label_translations":{"label_translation":{"locale":"en","value":"12 Days"}}},{"code":13,"label":"13 Days","label_translations":{"label_translation":{"locale":"en","value":"13 Days"}}},{"code":14,"label":"14 Days","label_translations":{"label_translation":{"locale":"en","value":"14 Days"}}},{"code":15,"label":"15 Days","label_translations":{"label_translation":{"locale":"en","value":"15 Days"}}},{"code":16,"label":"16 Days","label_translations":{"label_translation":{"locale":"en","value":"16 Days"}}},{"code":17,"label":"17 Days","label_translations":{"label_translation":{"locale":"en","value":"17 Days"}}},{"code":18,"label":"18 Days","label_translations":{"label_translation":{"locale":"en","value":"18 Days"}}},{"code":19,"label":"19 Days","label_translations":{"label_translation":{"locale":"en","value":"19 Days"}}},{"code":20,"label":"20 Days","label_translations":{"label_translation":{"locale":"en","value":"20 Days"}}},{"code":21,"label":"21 Days","label_translations":{"label_translation":{"locale":"en","value":"21 Days"}}},{"code":22,"label":"22 Days","label_translations":{"label_translation":{"locale":"en","value":"22 Days"}}},{"code":23,"label":"23 Days","label_translations":{"label_translation":{"locale":"en","value":"23 Days"}}},{"code":24,"label":"24 Days","label_translations":{"label_translation":{"locale":"en","value":"24 Days"}}},{"code":25,"label":"25 Days","label_translations":{"label_translation":{"locale":"en","value":"25 Days"}}},{"code":26,"label":"26 Days","label_translations":{"label_translation":{"locale":"en","value":"26 Days"}}},{"code":27,"label":"27 Days","label_translations":{"label_translation":{"locale":"en","value":"27 Days"}}},{"code":28,"label":"28 Days","label_translations":{"label_translation":{"locale":"en","value":"28 Days"}}},{"code":29,"label":"29 Days","label_translations":{"label_translation":{"locale":"en","value":"29 Days"}}},{"code":30,"label":"30 Days","label_translations":{"label_translation":{"locale":"en","value":"30 Days"}}},{"code":31,"label":"31 Days","label_translations":{"label_translation":{"locale":"en","value":"31 Days"}}},{"code":32,"label":"32 Days","label_translations":{"label_translation":{"locale":"en","value":"32 Days"}}},{"code":33,"label":"33 Days","label_translations":{"label_translation":{"locale":"en","value":"33 Days"}}},{"code":34,"label":"34 Days","label_translations":{"label_translation":{"locale":"en","value":"34 Days"}}},{"code":35,"label":"35 Days","label_translations":{"label_translation":{"locale":"en","value":"35 Days"}}},{"code":36,"label":"36 Days","label_translations":{"label_translation":{"locale":"en","value":"36 Days"}}},{"code":37,"label":"37 Days","label_translations":{"label_translation":{"locale":"en","value":"37 Days"}}},{"code":38,"label":"38 Days","label_translations":{"label_translation":{"locale":"en","value":"38 Days"}}},{"code":39,"label":"39 Days","label_translations":{"label_translation":{"locale":"en","value":"39 Days"}}},{"code":40,"label":"40 Days","label_translations":{"label_translation":{"locale":"en","value":"40 Days"}}},{"code":41,"label":"41 Days","label_translations":{"label_translation":{"locale":"en","value":"41 Days"}}},{"code":42,"label":"42 Days","label_translations":{"label_translation":{"locale":"en","value":"42 Days"}}},{"code":43,"label":"43 Days","label_translations":{"label_translation":{"locale":"en","value":"43 Days"}}},{"code":44,"label":"44 Days","label_translations":{"label_translation":{"locale":"en","value":"44 Days"}}},{"code":45,"label":"45 Days","label_translations":{"label_translation":{"locale":"en","value":"45 Days"}}}]}}},"_attribute":{"nil":"true"}},
+        "values_list" : [{"code":1,"label":"1 Days","label_translations":{"label_translation":{"locale":"en","value":"1 Days"}}},{"code":2,"label":"2 Days","label_translations":{"label_translation":{"locale":"en","value":"2 Days"}}},{"code":3,"label":"3 Days","label_translations":{"label_translation":{"locale":"en","value":"3 Days"}}},{"code":4,"label":"4 Days","label_translations":{"label_translation":{"locale":"en","value":"4 Days"}}},{"code":5,"label":"5 Days","label_translations":{"label_translation":{"locale":"en","value":"5 Days"}}},{"code":6,"label":"6 Days","label_translations":{"label_translation":{"locale":"en","value":"6 Days"}}},{"code":7,"label":"7 Days","label_translations":{"label_translation":{"locale":"en","value":"7 Days"}}},{"code":8,"label":"8 Days","label_translations":{"label_translation":{"locale":"en","value":"8 Days"}}},{"code":9,"label":"9 Days","label_translations":{"label_translation":{"locale":"en","value":"9 Days"}}},{"code":10,"label":"10 Days","label_translations":{"label_translation":{"locale":"en","value":"10 Days"}}},{"code":11,"label":"11 Days","label_translations":{"label_translation":{"locale":"en","value":"11 Days"}}},{"code":12,"label":"12 Days","label_translations":{"label_translation":{"locale":"en","value":"12 Days"}}},{"code":13,"label":"13 Days","label_translations":{"label_translation":{"locale":"en","value":"13 Days"}}},{"code":14,"label":"14 Days","label_translations":{"label_translation":{"locale":"en","value":"14 Days"}}},{"code":15,"label":"15 Days","label_translations":{"label_translation":{"locale":"en","value":"15 Days"}}},{"code":16,"label":"16 Days","label_translations":{"label_translation":{"locale":"en","value":"16 Days"}}},{"code":17,"label":"17 Days","label_translations":{"label_translation":{"locale":"en","value":"17 Days"}}},{"code":18,"label":"18 Days","label_translations":{"label_translation":{"locale":"en","value":"18 Days"}}},{"code":19,"label":"19 Days","label_translations":{"label_translation":{"locale":"en","value":"19 Days"}}},{"code":20,"label":"20 Days","label_translations":{"label_translation":{"locale":"en","value":"20 Days"}}},{"code":21,"label":"21 Days","label_translations":{"label_translation":{"locale":"en","value":"21 Days"}}},{"code":22,"label":"22 Days","label_translations":{"label_translation":{"locale":"en","value":"22 Days"}}},{"code":23,"label":"23 Days","label_translations":{"label_translation":{"locale":"en","value":"23 Days"}}},{"code":24,"label":"24 Days","label_translations":{"label_translation":{"locale":"en","value":"24 Days"}}},{"code":25,"label":"25 Days","label_translations":{"label_translation":{"locale":"en","value":"25 Days"}}},{"code":26,"label":"26 Days","label_translations":{"label_translation":{"locale":"en","value":"26 Days"}}},{"code":27,"label":"27 Days","label_translations":{"label_translation":{"locale":"en","value":"27 Days"}}},{"code":28,"label":"28 Days","label_translations":{"label_translation":{"locale":"en","value":"28 Days"}}},{"code":29,"label":"29 Days","label_translations":{"label_translation":{"locale":"en","value":"29 Days"}}},{"code":30,"label":"30 Days","label_translations":{"label_translation":{"locale":"en","value":"30 Days"}}},{"code":31,"label":"31 Days","label_translations":{"label_translation":{"locale":"en","value":"31 Days"}}},{"code":32,"label":"32 Days","label_translations":{"label_translation":{"locale":"en","value":"32 Days"}}},{"code":33,"label":"33 Days","label_translations":{"label_translation":{"locale":"en","value":"33 Days"}}},{"code":34,"label":"34 Days","label_translations":{"label_translation":{"locale":"en","value":"34 Days"}}},{"code":35,"label":"35 Days","label_translations":{"label_translation":{"locale":"en","value":"35 Days"}}},{"code":36,"label":"36 Days","label_translations":{"label_translation":{"locale":"en","value":"36 Days"}}},{"code":37,"label":"37 Days","label_translations":{"label_translation":{"locale":"en","value":"37 Days"}}},{"code":38,"label":"38 Days","label_translations":{"label_translation":{"locale":"en","value":"38 Days"}}},{"code":39,"label":"39 Days","label_translations":{"label_translation":{"locale":"en","value":"39 Days"}}},{"code":40,"label":"40 Days","label_translations":{"label_translation":{"locale":"en","value":"40 Days"}}},{"code":41,"label":"41 Days","label_translations":{"label_translation":{"locale":"en","value":"41 Days"}}},{"code":42,"label":"42 Days","label_translations":{"label_translation":{"locale":"en","value":"42 Days"}}},{"code":43,"label":"43 Days","label_translations":{"label_translation":{"locale":"en","value":"43 Days"}}},{"code":44,"label":"44 Days","label_translations":{"label_translation":{"locale":"en","value":"44 Days"}}},{"code":45,"label":"45 Days","label_translations":{"label_translation":{"locale":"en","value":"45 Days"}}}],
+        "variant" : false,
+        "options" : null
+}, {
+        "code" : "sales-price-1",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Sales Price 1",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Sales Price 1"
+        } ],
+        "required" : "false",
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Sales Price 1"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false,
+        "options" : null
+}, {
+        "code" : "sales-start-date-1",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Sales Start Date 1",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Sales Start Date 1"
+        } ],
+        "required" : "false",
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Sales Start Date 1"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false,
+        "options" : null
+}, {
+        "code" : "sales-end-date-1",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Sales End Date 1",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Sales End Date 1"
+        } ],
+        "required" : "false",
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Sales End Date 1"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false,
+        "options" : null
+}, {
+        "code" : "sales-price-2",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Sales Price 2",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Sales Price 2"
+        } ],
+        "required" : "false",
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Sales Price 2"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false,
+        "options" : null
+}, {
+        "code" : "sales-start-date-2",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Sales Start Date 2",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Sales Start Date 2"
+        } ],
+        "required" : "false",
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Sales Start Date 2"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false,
+        "options" : null
+}, {
+        "code" : "sales-end-date-2",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Sales End Date 2",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Sales End Date 2"
+        } ],
+        "required" : "false",
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Sales End Date 2"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false,
+        "options" : null
+}, {
+        "code" : "sales-price-3",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Sales Price 3",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Sales Price 3"
+        } ],
+        "required" : "false",
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Sales Price 3"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false,
+        "options" : null
+}, {
+        "code" : "sales-start-date-3",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Sales Start Date 3",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Sales Start Date 3"
+        } ],
+        "required" : "false",
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Sales Start Date 3"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false,
+        "options" : null
+}, {
+        "code" : "sales-end-date-3",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Sales End Date 3",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Sales End Date 3"
+        } ],
+        "required" : "false",
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Sales End Date 3"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false,
+        "options" : null
+}, {
+        "code" : "sales-flash-price",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Sales Flash Price",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Sales Flash Price"
+        } ],
+        "required" : "false",
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Sales Flash Price"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false,
+        "options" : null
+}, {
+        "code" : "sales-flash-start-date",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Sales Flash Start Date",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Sales Flash Start Date"
+        } ],
+        "required" : "false",
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Sales Flash Start Date"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false,
+        "options" : null
+}, {
+        "code" : "sales-flash-end-date",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Sales Flash End Date",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Sales Flash End Date"
+        } ],
+        "required" : "false",
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Discount End Date"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false,
+        "options" : null
+}, {
+        "code" : "copyright-tax",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Copyright Tax",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Copyright Tax"
+        } ],
+        "required" : "false",
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Copyright Tax"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false,
+        "options" : null
+}, {
+        "code" : "corepile-tax",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Corepile tax",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Corepile tax"
+        } ],
+        "required" : "false",
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Corepile tax"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false,
+        "options" : null
+}, {
+        "code" : "dea-tax",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Dea Tax",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Dea Tax"
+        } ],
+        "required" : "false",
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Dea Tax"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false,
+        "options" : null
+}, {
+        "code" : "deb-tax",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Deb Tax",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Deb Tax"
+        } ],
+        "required" : "false",
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Deb Tax"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false,
+        "options" : null
+}, {
+        "code" : "deee-tax",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Deee Tax",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Deee Tax"
+        } ],
+        "required" : "false",
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Deee Tax"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false,
+        "options" : null
+}, {
+        "code" : "ecoemballage-tax",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Ecoemballage Tax",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Ecoemballage Tax"
+        } ],
+        "required" : "false",
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Ecoemballage Tax"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false,
+        "options" : null
+}, {
+        "code" : "ecofolio-tax",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Ecofolio Tax",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Ecofolio Tax"
+        } ],
+        "required" : "false",
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Ecofolio Tax"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false,
+        "options" : null
+}, {
+        "code" : "ecomobilier-tax",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Ecomobilier Tax",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Ecomobilier Tax"
+        } ],
+        "required" : "false",
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Ecomobilier Tax"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false,
+        "options" : null
+}, {
+        "code" : "merchant-warranty",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Merchant Warranty",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Merchant Warranty"
+        } ],
+        "required" : "false",
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Merchant Warranty"
+        } ],
+        "type" : "TEXT",
+        "type_parameter" : null,
+        "values" : null,
+        "values_list" : null,
+        "variant" : false,
+        "options" : null
+}, {
+        "code" : "grade",
+        "default_value" : null,
+        "description" : null,
+        "description_translations" : [ ],
+        "example" : null,
+        "hierarchy_code" : "",
+        "label" : "Grade",
+        "label_translations" : [ {
+                "locale" : "en",
+                "value" : "Grade"
+        } ],
+        "required" : "false",
+        "roles" : [ {
+                "parameters" : [ ],
+                "type" : "Grade"
+        } ],
+        "type" : "LIST",
+        "type_parameter" : null,
+        "values" : {"_value":{"values_list":{"code":"grade","label":"Grade","label_translations":{"label_translation":{"locale":"en","value":"Grade"}},"values":{"value":[{"code":"great","label":"Great","label_translations":{"label_translation":{"locale":"en","value":"Great"}}},{"code":"good","label":"Good","label_translations":{"label_translation":{"locale":"en","value":"Good"}}},{"code":"premium","label":"Premium","label_translations":{"label_translation":{"locale":"en","value":"Premium"}}}]}}},"_attribute":{"nil":"true"}},
+        "values_list" : [{"code":"great","label":"Great","label_translations":{"label_translation":{"locale":"en","value":"Great"}}},{"code":"good","label":"Good","label_translations":{"label_translation":{"locale":"en","value":"Good"}}},{"code":"premium","label":"Premium","label_translations":{"label_translation":{"locale":"en","value":"Premium"}}}],
+        "variant" : false,
+        "options" : null
+}]

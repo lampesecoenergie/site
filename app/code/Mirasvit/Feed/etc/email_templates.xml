@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../Magento/Email/etc/email_templates.xsd">
+    <template id="feed_export_success" label="feed_export_success" file="export/success.html"
+              type="html" module="Mirasvit_Feed" area="adminhtml"/>
+    <template id="feed_export_fail" label="feed_export_fail" file="export/fail.html" type="html"
+              module="Mirasvit_Feed" area="adminhtml"/>
+
+    <template id="feed_delivery_success" label="feed_delivery_success" file="delivery/success.html"
+              type="html" module="Mirasvit_Feed" area="adminhtml"/>
+    <template id="feed_delivery_fail" label="feed_export_fail" file="delivery/fail.html" type="html"
+              module="Mirasvit_Feed" area="adminhtml"/>
+</config>

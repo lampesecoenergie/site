@@ -1,0 +1,19 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Sales\Controller\Adminhtml\Invoice\AbstractInvoice\PrintAction">
+        <plugin name="fooman_pdfcustomiser_adminhtml_invoice"
+                type="Fooman\PdfCustomiser\Plugin\Adminhtml\Invoice\PrintAction" sortOrder="110"/>
+    </type>
+    <type name="Magento\Sales\Controller\Adminhtml\Shipment\AbstractShipment\PrintAction">
+        <plugin name="fooman_pdfcustomiser_adminhtml_shipment"
+                type="Fooman\PdfCustomiser\Plugin\Adminhtml\Shipment\PrintAction" sortOrder="110"/>
+    </type>
+    <type name="Magento\Sales\Controller\Adminhtml\Creditmemo\AbstractCreditmemo\PrintAction">
+        <plugin name="fooman_pdfcustomiser_adminhtml_creditmemo"
+                type="Fooman\PdfCustomiser\Plugin\Adminhtml\Creditmemo\PrintAction" sortOrder="110"/>
+    </type>
+    <type name="\Fooman\PrintOrderPdf\Controller\Adminhtml\Order\PrintAction">
+        <plugin name="fooman_pdfcustomiser_adminhtml_order"
+                type="Fooman\PdfCustomiser\Plugin\Adminhtml\Order\PrintAction" sortOrder="110"/>
+    </type>
+</config>

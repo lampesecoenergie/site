@@ -1,0 +1,40 @@
+<?php /** @var $block MondialRelay\Shipping\Block\Adminhtml\Order\Create\Pickup */ ?>
+<script>
+    var mondialRelayPickupMethod = '<?php echo $block->getPickupMethod() ?>';
+    var mondialRelayPickupSelectorId = 'order-' + mondialRelayPickupMethod;
+
+    require(["jquery", "Magento_Sales/order/create/form"], function($) {
+        (function(prepareArea) {
+            order.prepareArea = function (area) {
+                if (area.includes('shipping_method')) {
+                    area.push(mondialRelayPickupMethod);
+                    order.addMondialRelayContainer();
+                }
+                return prepareArea.call(this, area);
+            }
+        }(order.prepareArea));
+
+        order.setMondialRelayPickup = function (pickup) {
+            var data = {};
+            data['mondialrelay[pickup]'] = pickup;
+            data['order[shipping_method]'] = mondialRelayPickupMethod;
+            this.loadArea(['totals'], true, data);
+        };
+
+        order.addMondialRelayContainer = function() {
+            var pickupElement = $('#' + mondialRelayPickupSelectorId);
+            if (!pickupElement.length) {
+                $('#order-shipping_method').after(
+                    '<div id="' + mondialRelayPickupSelectorId + '" class="admin__page-section-item mondialrelay-pickup-selector"></div>'
+                );
+            }
+        };
+
+        <?php if ($block->canLoad()): ?>
+            order.addMondialRelayContainer();
+            $(window).load(function() {
+                order.loadArea([mondialRelayPickupMethod], true, {});
+            });
+        <?php endif; ?>
+    });
+</script>

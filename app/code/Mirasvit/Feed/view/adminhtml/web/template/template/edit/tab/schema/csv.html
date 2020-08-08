@@ -1,0 +1,160 @@
+<fieldset class="fieldset admin__fieldset schema schema__type-csv" data-bind="afterRender: afterRender">
+    <legend class="legend">
+        <span><?php echo __('Fields Mapping') ?></span>
+    </legend>
+
+    <div class="clearfix"></div>
+
+    <div>
+        <div class="schema-header">
+            <div class="row">
+                <div class="schema-header__name">Column Name</div>
+                <div class="schema-header__type">Value Type</div>
+                <div class="schema-header__value">Value</div>
+            </div>
+        </div>
+
+        <div class="schema__grid" data-role="sortable" data-bind="foreach: rows">
+            <div class="schema-pattern" data-bind="css: {_opened: opened}">
+                <div class="row">
+                    <div class="schema-pattern__actions">
+                        <i class="fa fa-arrows-v fa-fw">
+                            <input data-role="order" type="hidden"
+                                   data-bind="value: $index(), attr: {name: 'csv[schema][' + $index() + '][order]'}"/>
+                        </i>
+                        <i class="fa fa-cog fa-fw" data-bind="click: $parent.toggle"></i>
+                    </div>
+
+                    <div class="schema-pattern__header">
+                        <input type="text" class="input-text"
+                               data-bind="
+                        value: header,
+                        attr: {name: 'csv[schema][' + $index() + '][header]'}"/>
+                    </div>
+
+                    <div class="schema-pattern__type">
+                        <select
+                                data-bind="
+                        options: jQuery.patternTypes,
+                        optionsText: 'label',
+                        optionsValue: 'value',
+                        value: type,
+                        attr: {name: 'csv[schema][' + $index() + '][type]'}">
+                        </select>
+                    </div>
+
+                    <div class="schema-pattern__value">
+                        <input type="text" class="input-text"
+                               data-bind="
+                        visible: type() == 'pattern',
+                        value: pattern,
+                        attr: {name: 'csv[schema][' + $index() + '][pattern]'}"/>
+
+                        <select
+                                data-bind="
+                        visible: type() != 'pattern',
+                        foreach: jQuery.attributes,
+                        value: attribute,
+                        attr: {name: 'csv[schema][' + $index() + '][attribute]'}">
+                            <!-- ko if: $index() == 0 -->
+                            <option value="">-- Please Select --</option>
+                            <!-- /ko -->
+                            <optgroup data-bind="attr: {label: label}, foreach: value">
+                                <option data-bind="text: label, value: value"></option>
+                            </optgroup>
+                        </select>
+
+                        <div class="more"
+                             data-bind="css: {_hidden: modifiers().length == 0}"></div>
+                    </div>
+
+                    <div class="schema-pattern__additional">
+                        <i class="fa fa-times-circle" data-bind="click: $parent.removeRow"></i>
+                    </div>
+                </div>
+
+                <div class="schema-modifiers" data-bind="visible: opened">
+                    <div data-role="sortable" data-bind="foreach: modifiers">
+                        <div class="schema-modifier">
+                            <div class="row">
+                                <div class="schema-modifier__actions">
+                                    <i class="fa fa-arrows-v fa-fw"></i>
+                                </div>
+
+                                <div class="schema-modifier__modifier">
+                                    <select
+                                            data-bind="
+                        options: jQuery.modifiers,
+                        optionsText: 'label',
+                        optionsValue: 'value',
+                        optionsCaption: '-- Please Select --',
+                        value: modifier,
+                        attr: {name: 'csv[schema][' + $parentContext.$index() + '][modifiers][' + $index() + '][modifier]'}">
+                                    </select>
+                                </div>
+
+                                <!--ko foreach: args() -->
+                                <div class="schema-modifier__arg">
+                                    <input type="text"
+                                           data-bind="
+                        value: $data.argument,
+                        attr: {
+                            placeholder: $data.default,
+                            title: label,
+                            name: 'csv[schema][' + $parentContext.$parentContext.$index() + '][modifiers][' + $parentContext.$index() + '][args][]'}">
+                                </div>
+                                <!-- /ko -->
+
+                                <div class="schema-modifier__additional">
+                                    <i class="fa fa-times-circle fa-fw" data-bind="click: $parent.removeModifier"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <pre data-bind="text:toString()"></pre>
+
+                    <button data-bind="click: addModifier">
+                        <i class="fa fa-plus"></i> Add modifier
+                    </button>
+                </div>
+
+                <div class="schema-modifiers" data-bind="visible: opened">
+                    <div data-role="sortable" data-bind="foreach: validators">
+                        <div class="schema-modifier">
+                            <div class="row">
+                                <div class="schema-modifier__actions">
+                                    <i class="fa fa-arrows-v fa-fw"></i>
+                                </div>
+
+                                <div class="schema-modifier__modifier">
+                                    <select
+                                            data-bind="
+                        options: jQuery.validators,
+                        optionsText: 'label',
+                        optionsValue: 'value',
+                        optionsCaption: '-- Please Select --',
+                        value: validator,
+                        attr: {name: 'csv[schema][' + $parentContext.$index() + '][validators][' + $index() + '][validator]'}">
+                                    </select>
+                                </div>
+
+                                <div class="schema-modifier__additional">
+                                    <i class="fa fa-times-circle fa-fw" data-bind="click: $parent.removeValidator"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button data-bind="click: addValidator">
+                        <i class="fa fa-plus"></i> Add validator
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <button data-bind="click: addRow">
+            <i class="fa fa-plus"></i> Add column
+        </button>
+    </div>
+</fieldset>

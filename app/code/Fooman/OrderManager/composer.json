@@ -1,0 +1,27 @@
+{
+    "name": "fooman/ordermanager-implementation-m2",
+    "description": "Save time by managing your Magento orders in bulk",
+    "type": "magento2-module",
+    "license": "proprietary",
+    "version": "111.0.0",
+    "require": {
+        "php": "7.0.2|7.0.4|~7.0.6|~7.1.0|~7.2.0|~7.3.0",
+        "magento/framework": "^101.0.0 | ^102.0.0",
+        "magento/module-shipping": "^100.2.0 | ^101.0.0",
+        "magento/module-ui": "^101.0.0 | ^102.0.0",
+        "magento/module-backend": "^100.2.0 | ^101.0.0",
+        "magento/module-sales": "~101.0.0 | ^102.0.0",
+        "psr/log": "^1.0.0",
+        "ext-json": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Fooman\\OrderManager\\": ""
+        },
+        "files": [
+            "registration.php"
+        ]
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

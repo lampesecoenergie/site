@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <block class="Magento\Framework\View\Element\Template"
+               name="head.additional"
+               as="head.additional"
+               template="Fooman_OrderManager::container.phtml"/>
+
+        <referenceContainer name="content">
+            <block class="Fooman\OrderManager\Block\Adminhtml\Carriers"
+                   name="sales_order.grid.carriers"
+                   template="Fooman_OrderManager::carriers.phtml"/>
+        </referenceContainer>
+        <referenceContainer name="head.additional">
+            <block class="Fooman\OrderManager\Block\Adminhtml\PrintRedirector"
+                   name="fooman.sales_order.print.redirector" />
+        </referenceContainer>
+    </body>
+</page>

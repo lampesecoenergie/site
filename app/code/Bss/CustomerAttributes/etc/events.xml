@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_CustomerAttributes
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2018-2019 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="email_order_set_template_vars_before">
+        <observer name="bss-add-customer-attributes-data-order" instance="Bss\CustomerAttributes\Observer\Order\EmailTemplateVars"/>
+    </event>
+    <event name="controller_action_predispatch_customer_account_createpost">
+        <observer name="validation_customercreate" instance="Bss\CustomerAttributes\Observer\ValidationCreate" shared="false" />
+    </event>
+    <event name="sales_order_place_after">
+        <observer name="bssSaveCustomerAttr" instance="Bss\CustomerAttributes\Observer\CustomerAttrSave" />
+    </event>
+    <event name="layout_load_before">
+        <observer name="bss_layout_load_before" instance="Bss\CustomerAttributes\Observer\BeforeLoad" />
+    </event>
+    <event name='sales_order_load_after'>
+        <observer name='bss_customerattribute_after_load_order' instance='Bss\CustomerAttributes\Observer\Adminhtml\AfterLoadOrder'
+        />
+    </event>
+</config>

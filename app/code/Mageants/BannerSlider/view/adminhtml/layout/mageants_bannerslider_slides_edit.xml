@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category  Mageants BannerSlider
+ * @package   Mageants_BannerSlider
+ * @copyright Copyright (c) 2017 Mageants
+ * @author    Mageants Team <support@Mageants.com>
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <update handle="editor"/>
+    <body>
+        <referenceContainer name="content">
+            <block class="Mageants\BannerSlider\Block\Adminhtml\Slides\Edit" name="mageants_bannerslider_slides_edit"/> 
+        </referenceContainer>
+        <referenceContainer name="left">
+            <block class="Mageants\BannerSlider\Block\Adminhtml\Slides\Edit\Tabs" name="mageants_bannerslider_slides_tabs">
+                <block class="Mageants\BannerSlider\Block\Adminhtml\Slides\Edit\Tab\Slide" name="mageants_bannerslider_slides_edit_tab_slide"/>
+                <block class="Mageants\BannerSlider\Block\Adminhtml\Slides\Edit\Tab\Setting" name="mageants_bannerslider_slides_edit_tab_setting"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">slide</argument>
+                    <argument name="block" xsi:type="string">mageants_bannerslider_slides_edit_tab_slide</argument>
+                </action>
+				<action method="addTab">
+                    <argument name="name" xsi:type="string">setting</argument>
+                    <argument name="block" xsi:type="string">mageants_bannerslider_slides_edit_tab_setting</argument>
+                </action>
+            </block>
+        </referenceContainer> 
+    </body>
+</page>

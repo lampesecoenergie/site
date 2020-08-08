@@ -1,0 +1,31 @@
+<style>
+    .query-builder.action-delete {
+        background-color: transparent;
+        border-color: transparent;
+        box-shadow: none;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .query-builder.action-delete:hover {
+        background-color: transparent;
+        border-color: transparent;
+        box-shadow: none;
+    }
+    .query-builder.action-delete:before {
+        content: '\e630';
+        font-size: 2rem;
+    }
+    .query-builder.action-delete > span {
+        display: none;
+    }
+</style>
+
+<div class="condition">
+    <select class="admin__control-select" data-bind="options: fields, value: selectedField"></select>
+    <select class="admin__control-select" data-bind="options: comparisons, value: selectedComparison"></select>
+    <input class="admin__control-text" type="text" data-bind="value: value" />
+    <button class="query-builder action-delete"
+            data-bind="click: $parent.removeChild">
+        <span>Delete</span>
+    </button>
+</div>

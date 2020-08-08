@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © MagePal LLC. All rights reserved.
+ * See COPYING.txt for license details.
+ * http://www.magepal.com | support@magepal.com
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <carriers>
+            <customshippingrate>
+                <active>0</active>
+                <sallowspecific>0</sallowspecific>
+                <show_on_frontend>0</show_on_frontend>
+                <model>MagePal\CustomShippingRate\Model\Carrier</model>
+                <title>Custom Shipping Rate</title>
+            </customshippingrate>
+        </carriers>
+    </default>
+</config>

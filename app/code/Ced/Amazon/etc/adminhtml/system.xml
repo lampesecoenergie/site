@@ -1,0 +1,513 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement(EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+ * @package   Ced_Amazon
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright Copyright CEDCOMMERCE(http://cedcommerce.com/)
+ * @license   http://cedcommerce.com/license-agreement.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="cedcommerce" translate="label" sortOrder="1">
+            <label>Cedcommerce</label>
+        </tab>
+        <!-- section start for Amazon Configuration Tab in Cedcommerce section -->
+        <section id="amazon" translate="label" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Amazon Configuration</label>
+            <tab>cedcommerce</tab>
+            <resource>Ced_Amazon::system_config</resource>
+            <group id="settings" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0"
+                   showInStore="0"
+            >
+                <label>Amazon Settings</label>
+
+                <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0"
+                       showInStore="0">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="product" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1"
+                   showInStore="0">
+                <label>Amazon Product Settings</label>
+                <group id="profile" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" >
+                    <label>Profile Settings</label>
+                    <field id="auto_upload" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0"
+                           showInStore="0">
+                        <label>Auto Upload Product</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <comment><![CDATA[The product assigned to profile will be auto assigned for upload on Amazon.]]></comment>
+                    </field>
+                </group>
+                <group id="chunk_settings" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" >
+                    <label>Amazon Chunk Settings</label>
+                    <field id="queue_size" translate="label comment" type="text" sortOrder="20" showInDefault="1"
+                           showInWebsite="0" showInStore="0">
+                        <label>Product Queue Chunk Size</label>
+                        <validate>validate-number</validate>
+                        <comment><![CDATA[Enter the size of a chunk for a product upload queued task]]></comment>
+                    </field>
+                    <field id="feed_size" translate="label comment" type="text" sortOrder="30" showInDefault="1"
+                           showInWebsite="0" showInStore="0">
+                        <label>Product Feed Chunk Size</label>
+                        <validate>validate-number</validate>
+                        <comment><![CDATA[Enter the size of a chunk for a product upload feed]]></comment>
+                    </field>
+                    <field id="price_queue_size" translate="label comment" type="text" sortOrder="40" showInDefault="1"
+                           showInWebsite="0" showInStore="0">
+                        <label>Price Queue Chunk Size</label>
+                        <validate>validate-number</validate>
+                        <comment><![CDATA[Enter the size of a chunk for a price queued task]]></comment>
+                    </field>
+                    <field id="price_feed_size" translate="label comment" type="text" sortOrder="50" showInDefault="1"
+                           showInWebsite="0" showInStore="0">
+                        <label>Price Upload Feed Chunk Size</label>
+                        <validate>validate-number</validate>
+                        <comment><![CDATA[Enter the size of a chunk for a price feed]]></comment>
+                    </field>
+                    <field id="inventory_queue_size" translate="label comment" type="text" sortOrder="60" showInDefault="1"
+                           showInWebsite="0" showInStore="0">
+                        <label>Inventory Queue Chunk Size</label>
+                        <validate>validate-number</validate>
+                        <comment><![CDATA[Enter the size of a chunk for a inventory queued task]]></comment>
+                    </field>
+                    <field id="inventory_feed_size" translate="label comment" type="text" sortOrder="70" showInDefault="1"
+                           showInWebsite="0" showInStore="0">
+                        <label>Inventory Feed Chunk Size</label>
+                        <validate>validate-number</validate>
+                        <comment><![CDATA[Enter the size of a chunk for a inventory feed]]></comment>
+                    </field>
+                    <field id="status_queue_size" translate="label comment" type="text" sortOrder="80" showInDefault="1"
+                           showInWebsite="0" showInStore="0">
+                        <label>Status Queue Chunk Size</label>
+                        <validate>validate-number</validate>
+                        <comment><![CDATA[Enter the size of a chunk for a status queued task]]></comment>
+                    </field>
+                    <field id="status_feed_size" translate="label comment" type="text" sortOrder="90" showInDefault="1"
+                           showInWebsite="0" showInStore="0">
+                        <label>Status Feed Chunk Size</label>
+                        <validate>validate-number</validate>
+                        <comment><![CDATA[Enter the size of a chunk for a status feed]]></comment>
+                    </field>
+                </group>
+
+                <group id="price" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" >
+                    <label>Amazon Price Settings</label>
+                    <field id="type" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Product Price</label>
+                        <source_model>Ced\Amazon\Model\Source\Config\Price</source_model>
+                        <comment><![CDATA[Select to send a different product price to <b>Amazon</b>]]></comment>
+                    </field>
+
+                    <field id="fixed" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Modify by Fix Price</label>
+                        <validate>required-entry validate-number</validate>
+                        <depends>
+                            <field id="type" separator=",">plus_fixed,min_fixed</field>
+                        </depends>
+                    </field>
+
+                    <field id="percentage" translate="label" type="text" sortOrder="12" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Modify by Percenctage Price</label>
+                        <validate>required-entry validate-number</validate>
+                        <comment><![CDATA[Numeric value Required for <b>Add/subtract % on Magento price</b> 5 for Example: Magento price +/- 5% of Magento price.<b>]]></comment>
+                        <depends>
+                            <field id="type" separator=",">plus_per,min_per</field>
+                        </depends>
+                    </field>
+                    <field id="map_attribute" translate="label comment tooltip" sortOrder="14" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Map Attribute</label>
+                        <frontend_model>Ced\Amazon\Block\Adminhtml\System\Config\Form\Field\Mappings</frontend_model>
+                        <backend_model>Ced\Amazon\Block\Adminhtml\System\Config\Form\Field\ArraySerialized</backend_model>
+                        <comment>
+                                <![CDATA[Map your <b>price</b> attribute for the marketplace with any <b>custom</b> attribute using <b>'Add Attribute'</b> [BETA]]]>
+                        </comment>
+                        <depends>
+                            <field id="type">differ</field>
+                        </depends>
+                    </field>
+                    <field id="allow_sale_price" translate="label comment" type="select" sortOrder="20" showInDefault="1"
+                           showInWebsite="0" showInStore="0">
+                        <label>Allow Sale Price</label>
+                        <validate>required-entry</validate>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <comment>
+                            <![CDATA[Your <b>price</b> and <b>special_price</b> will be updated to Amazon. [BETA]]]>
+                        </comment>
+                    </field>
+                    <field id="send_price_marketplace_wise" translate="label comment" type="select" sortOrder="20" showInDefault="1"
+                           showInWebsite="0" showInStore="0">
+                        <label>Send Price Feed marketplace wise</label>
+                        <validate>required-entry</validate>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                </group>
+                <group id="inventory" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" >
+                    <label>Amazon Inventory Settings</label>
+                    <field id="fulfilment_latency" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Inventory Fullfillment Latency</label>
+                        <validate>validate-number</validate>
+                        <comment><![CDATA[The number of days between the order date and the ship date (a whole number between <b>1
+and 30</b>).]]></comment>
+                    </field>
+                    <field id="fulfilment_channel" translate="label" type="select" sortOrder="6" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Inventory Fullfillment Channel</label>
+                        <validate>required-entry</validate>
+                        <source_model>Ced\Amazon\Model\Source\Product\Inventory\Channel</source_model>
+                        <comment><![CDATA[Use <b>AFN</b> for FBA fulfilment type (if availed). Use <b>MFN</b> for merchant fulfilment type.).]]></comment>
+                    </field>
+                    <field id="fulfilment_center_id" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0" >
+                        <label>Inventory Fullfillment Center Id</label>
+                        <depends>
+                            <field id="fulfilment_channel">AFN</field>
+                        </depends>
+                    </field>
+
+                    <field id="advanced_threshold_status" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0" >
+                        <label>Set Inventory on Basis of Threshold</label>
+                        <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                        <comment>Choose yes to send inventory on amazon by condition. [BETA]</comment>
+                    </field>
+                    <field id="inventory_rule_threshold" translate="label comment" type="text" sortOrder="11" showInDefault="1" showInWebsite="0" showInStore="0" >
+                        <label>Inventory Threshold Breakpoint Value</label>
+                        <comment>Set inventory quantity on which lesser and greater condition will act upon.</comment>
+                        <depends>
+                            <field id="advanced_threshold_status">1</field>
+                        </depends>
+                        <validate>required-entry</validate>
+                    </field>
+                    <field id="send_inventory_for_lesser_than_threshold" translate="label comment" type="text" sortOrder="12" showInDefault="1" showInWebsite="0" showInStore="0" >
+                        <label>Inventory Value for Less Than</label>
+                        <comment>Send Quantity to Amazon for those products, whose inventory is LESS than or equal to the inventory threshold breakpoint.
+                        </comment>
+                        <depends>
+                            <field id="advanced_threshold_status">1</field>
+                        </depends>
+                    </field>
+                    <field id="send_inventory_for_greater_than_threshold" translate="label comment" type="text" sortOrder="13" showInDefault="1" showInWebsite="0" showInStore="0" >
+                        <label>Inventory Value for Greater Than</label>
+                        <comment>Send Quantity to Amazon for those products, whose inventory is GREATER than the inventory threshold breakpoint.
+                        </comment>
+                        <depends>
+                            <field id="advanced_threshold_status">1</field>
+                        </depends>
+                    </field>
+
+                    <field id="override_inventory" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0" >
+                        <label>Override Inventory</label>
+                        <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                        <comment><![CDATA[Choose yes to override inventory for syncing. <br/> Magento inventory will be taken from the product <b>qty</b> field, irrespect of any rules or condition set (like 'Manage Stock' is No).[BETA]]]></comment>
+                    </field>
+
+                    <field id="map_attribute" translate="label comment tooltip" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Map Attribute</label>
+                        <frontend_model>Ced\Amazon\Block\Adminhtml\System\Config\Form\Field\InventoryMappings</frontend_model>
+                        <backend_model>Ced\Amazon\Block\Adminhtml\System\Config\Form\Field\InventoryArraySerialized</backend_model>
+                        <comment>
+                            <![CDATA[Map your <b>qty</b> attribute for the marketplace with any <b>custom</b> attribute using <b>'Add Attribute'</b> [BETA]]]>
+                        </comment>
+                    </field>
+                </group>
+            </group>
+            <group id="order" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1"
+                   showInStore="0">
+                <label>Amazon Order Settings</label>
+                <field id="status" translate="label" type="multiselect" sortOrder="5" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Status for auto import</label>
+                    <comment>Cron auto import order from Amazon for the selected "Amazon Status".</comment>
+                    <source_model>Ced\Amazon\Model\Source\Order\Status</source_model>
+                </field>
+                <field id="time" translate="label" type="select" sortOrder="8" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Time for auto import</label>
+                    <comment>Cron auto import order from Amazon by reducing the current time with above selected.</comment>
+                    <source_model>Ced\Amazon\Model\Source\Order\Time</source_model>
+                </field>
+                <field id="auto_invoice" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Auto invoice imported order</label>
+                    <comment>Auto Invoice Order Imported from Amazon in any case of successfull import.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="auto_acknowledgement" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Auto acknowledge imported orders</label>
+                    <comment>Auto acknowledge order on Amazon in any case of successfull import.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="auto_cancellation" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Auto cancel failed order</label>
+                    <comment>Auto Cancel Order on Amazon in any case of failure such as 'No Inventory'.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+
+                <field id="increment_id_rules" translate="label" type="multiselect" sortOrder="35" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Increment Id Rules</label>
+                    <comment><![CDATA[
+                        <ul>
+                        <li><b>Add Marketplace Code</b>: It will add the Marketplace Code as prefix in the Magento Order Increment Id.<br>
+                            Ex: US-1100001
+                        </li>
+                        <li><b>Add Amazon Order Id</b>: It will replace the Magento Order Increment Id with Amazon Order Id.<br>
+                            Ex: 111-111111-111111
+                        </li>
+                        <li><b>Add Prefix</b>: It will add a prefix provided in the Magento Order Increment Id.<br>
+                            Ex: AMZN-1100001
+                        </li>
+                        <li><b>Add Fulfillment channel</b>: It will add Fulfillment channel AFN or MFN in the Magento Order Increment Id.<br>
+                            Ex: AFN-1100001 or MFN-1100001
+                        </li>
+                        <li><b>All Rules Applied</b>: the increment id will look like<br>
+                            <b>Ex: AMZ-AFN-US111-111111-111111</b>
+                        </li>
+                        </ul>
+                    ]]></comment>
+                    <can_be_empty>1</can_be_empty>
+                    <source_model>Ced\Amazon\Model\Source\Order\Config\IncrementId</source_model>
+                </field>
+
+                <field id="order_id_prefix" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Amazon order id prefix</label>
+                    <comment>Prefix for Amazon Increment ID</comment>
+                </field>
+                <field id="order_notification" translate="label" type="select" sortOrder="55" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Order Import Notification</label>
+                    <comment>Order import notification in Notifications for store admin</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="order_notify_email_enable" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Email Notification</label>
+                    <comment>Order import notification via email to store admin</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="order_notify_email" translate="label comment" type="text" sortOrder="60" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Notification Email</label>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="order_notify_email_enable">1</field>
+                    </depends>
+                </field>
+                <field id="backorder" translate="label comment" type="select" sortOrder="65" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Create Backorder</label>
+                    <validate>required-entry</validate>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Create Backorder in case the Magento product qty is 'out of stock' or 'less than the order qty'.</comment>
+                </field>
+                <field id="enable_default_customer" translate="label comment" type="select" sortOrder="70" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Enable Default Customer</label>
+                    <validate>required-entry</validate>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="guest">0</field>
+                    </depends>
+                </field>
+                <field id="guest" translate="label comment" type="select" sortOrder="75" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Enable Guest Customer</label>
+                    <validate>required-entry</validate>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>All customer will be created as Guest on order import.</comment>
+                    <depends>
+                        <field id="enable_default_customer">0</field>
+                    </depends>
+                </field>
+                <field id="default_customer" translate="label comment" type="text" sortOrder="80" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Default Customer</label>
+                    <validate>required-entry</validate>
+                    <comment>Provide the email for the default customer for order import</comment>
+                    <!--<source_model>Ced\Amazon\Model\Source\Customer</source_model>-->
+                    <depends>
+                        <field id="enable_default_customer">1</field>
+                    </depends>
+                </field>
+                <field id="use_default_billing_address" translate="label comment" type="select" sortOrder="90" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Use Default Customer's Billing Address</label>
+                    <validate>required-entry</validate>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enable_default_customer">1</field>
+                    </depends>
+                </field>
+
+                <field id="import_taxes_for_us_selected_regions" translate="label comment" type="select" sortOrder="100" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Import Tax [Only For GA, FL, NC] US Marketplace</label>
+                    <validate>required-entry</validate>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="import_shipping_taxes" translate="label comment" type="select" sortOrder="110" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Import Shipping Tax</label>
+                    <validate>required-entry</validate>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="create_region" translate="label comment" type="select" sortOrder="120" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Create Region/State</label>
+                    <validate>required-entry</validate>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Allow to create the state or region in Magento Directory on order import if state/region is not available.</comment>
+                </field>
+                <field id="use_geocode" translate="label comment" type="select" sortOrder="130" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Use Geocode API</label>
+                    <validate>required-entry</validate>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="create_region">1</field>
+                        <field id="use_dash">0</field>
+                    </depends>
+                    <comment>Use Geocode API to find the correct state to create while order import.</comment>
+                </field>
+                <field id="use_dash" translate="label comment" type="select" sortOrder="140" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Create Default Region</label>
+                    <validate>required-entry</validate>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Create and Use Default value "-" if state/region is not available.</comment>
+                </field>
+                <field id="alternate_sku" translate="label comment" type="select" sortOrder="200" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Alternate SKU</label>
+                    <source_model>Ced\Amazon\Model\Source\Attribute</source_model>
+                    <comment><![CDATA[
+                        <ul>
+                            <li>If you have different Amazon SKU then Magento SKU. Then map the custom SKU field in above and provide the values as mentioned.</li>
+                            <li><b>Single Amazon SKU:</b> Just add the value of SKU in the selected attribute.</li>
+                            <li><b>Multiple Amazon SKU:</b> Just add the value of SKU in the selected attribute seperated by pipe.<br>
+                                <b>Ex: "||AMZ-SKU-1||AMZ-SKU2||AMZ-SKU-3||"</b>
+                            </li>
+                            <li>Default value is Magento "sku" attribute.</li>
+                        </ul>
+                    ]]></comment>
+                </field>
+                <field id="tracking_number_required" translate="label comment" type="select" sortOrder="250" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Is Tracking Number Required</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>If Required, then empty tracking number shipments will be ignored.</comment>
+                </field>
+                <field id="create_unavailable_product" translate="label comment" type="select" sortOrder="250" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Automatically create unavailable product</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>If yes, then it will automatically create unavailable product during order import.</comment>
+                </field>
+            </group>
+            <group id="cron" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Amazon Cron Settings</label>
+                <field id="order_cron" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Order Cron</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>Order import cron. By default set to import orders every 15 mins.</comment>
+                </field>
+                <field id="price_cron" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Price Cron</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>Price sync cron. All active profile products will be synced once a day.</comment>
+                </field>
+                <field id="inventory_cron" translate="label comment" type="select" sortOrder="3" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Inventory Cron</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>Inventory sync cron. All active profile products will be synced every 2 hr.</comment>
+                </field>
+                <field id="shipment_cron" translate="label comment" type="select" sortOrder="3" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Shipment Cron</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>This will automatically sync shipments status. All new shipments are synced every 15 mins.</comment>
+                </field>
+            </group>
+            <group id="developer" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Amazon Developer Settings</label>
+                <field id="throttle" translate="label comment" type="select" sortOrder="10" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Throttle Mode</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment><![CDATA[Amazon API allows only <b>60 calls per hour</b> for product upload. <br/> Hence, the module works in 2 modes: <br/>
+                    1. <b>Throttle Mode</b>: By default, it takes the Magento request and process it later, which never exceed the 60 calls per hour.<br/>
+                    2. <b>Non-Throttle Mode</b>: It process the request immediately, but may exceed the API throttle. <b>Disable only for integration testing</b>.]]></comment>
+                </field>
+                <field id="shipment_async" translate="label comment" type="select" sortOrder="15" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Shipment Async Mode</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment><![CDATA[For synchronous shipment processing. <b>Disable only for integration testing</b>.]]></comment>
+                </field>
+                <field id="debug_mode" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="0"
+                       showInStore="0">
+                    <label>Debug</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="logging_level" translate="label comment" type="select" sortOrder="30" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Logging Level</label>
+                    <validate>required-entry</validate>
+                    <source_model>Ced\Integrator\Model\Source\Log\Level</source_model>
+                </field>
+            </group>
+        </section>
+        <!-- section end for Amazon Cofiguration Tab in Cedcommerce Tab -->
+
+        <!-- section start for Shipping Methods Tab in Sales Tab -->
+        <section id="carriers">
+            <group id="shipbyamazon" translate="label" type="text" sortOrder="21" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Amazon Shipping Method(Default)</label>
+                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="title" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Title</label>
+                </field>
+            </group>
+        </section>
+        <!-- section end for Shipping Methods Tab in Sales Tab -->
+
+        <!-- section start for Payment Methods Tab in Sales Tab -->
+        <section id="payment">
+            <group id="paybyamazon" translate="label" type="text" sortOrder="22" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Amazon MWS Payment</label>
+                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="title" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Title</label>
+                </field>
+                <field id="order_status" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>New Order Status</label>
+                    <source_model>Magento\Sales\Model\Config\Source\Order\Status\Newprocessing</source_model>
+                </field>
+                <field id="payment_action" translate="label" type="select" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Automatically Invoice All Items</label>
+                    <source_model>Magento\Payment\Model\Source\Invoice</source_model>
+                    <depends>
+                        <field id="order_status" separator=",">processing</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

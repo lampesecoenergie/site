@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016-2019 Owebia. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="carriers">
+            <group id="owsh1" translate="label" type="text" sortOrder="-10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Advanced Shipping by Owebia</label>
+                <field id="about" translate="label" type="label" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>About</label>
+                    <frontend_model>Owebia\AdvancedShipping\Block\System\Config\Form\Field\About</frontend_model>
+                    <comment><![CDATA[<p>Discover <a href="https://en.store.owebia.com/magento2-module-advanced-shipping-pro.html" target="_blank">Advanced Shipping Pro</a> and our <a href="https://en.store.owebia.com/magento2-module-advanced-shipping-pro.html#description" target="_blank">add-ons for Advanced Shipping</a></p>]]></comment>
+                </field>
+                <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="title" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Title</label>
+                </field>
+                <field id="config" translate="label" type="textarea" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Configuration</label>
+                    <frontend_model>Owebia\AdvancedShipping\Block\System\Config\Form\Field\Config</frontend_model>
+                </field>
+                <field id="required_fields" translate="label" type="multiselect" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Required Fields</label>
+                    <source_model>Owebia\AdvancedShipping\Model\Config\Source\RequiredFields</source_model>
+                    <comment><![CDATA[If the value of a selected field is changed, the shipping methods will be recalculated]]></comment>
+                </field>
+                <field id="showmethod" translate="label" type="select" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Method if Not Applicable</label>
+                    <frontend_class>shipping-skip-hide</frontend_class>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="tracking_url" translate="label" type="text" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Tracking URL</label>
+                    <comment><![CDATA[Ex: https://www.carrier-website.com/?trackingNumber={{trackingNumber}}]]></comment>
+                </field>
+                <field id="debug" translate="label" type="select" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Debug</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="sort_order" translate="label" type="text" sortOrder="220" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Sort Order</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

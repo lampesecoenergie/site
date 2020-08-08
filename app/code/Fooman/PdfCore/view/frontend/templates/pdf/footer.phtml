@@ -1,0 +1,42 @@
+<?php
+/**
+ * @author     Kristof Ringleff
+ * @package    Fooman_PdfCore
+ * @copyright  Copyright (c) 2015 Fooman Limited (http://www.fooman.co.nz)
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+/**
+ * @var \Fooman\PdfCore\Block\Pdf\Template\Footer $block
+ */
+?>
+<?php
+$width = $block->getWidth();
+$footerBlocks = $block->getFooterBlocks();
+$marginBetween = $block->getMarginBetween();
+?>
+<?php if ($block->hasFooter()) : ?>
+    <table width="100%">
+        <tr>
+            <?php foreach ($footerBlocks as $key => $footer) : ?>
+                <?php /* don't display first element as $footers[0] is the number of footers we have to display*/ ?>
+                <?php if ($key > 0) : ?>
+                    <?php if ($key < $footerBlocks[0]) : ?>
+                        <?php /* not last element */ ?>
+                        <td width="<?= /* @noEscape@ */ $width ?>%"
+                        ><?= /* @noEscape@ */ $footer ? nl2br($footer) : '' ?></td>
+                        <td width="<?= /* @noEscape@ */ $marginBetween ?>%"></td>
+                    <?php elseif ($key == $footerBlocks[0]) : ?>
+                        <?php /* last element */ ?>
+                        <?php if (!empty($footer)) : ?>
+                            <td width="<?= /* @noEscape@ */ $width ?>%"
+                            ><?= /* @noEscape@ */ $footer ? nl2br($footer) : '' ?></td>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </tr>
+    </table>
+<?php endif; ?>

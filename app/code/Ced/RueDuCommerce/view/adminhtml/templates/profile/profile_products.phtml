@@ -1,0 +1,31 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\Catalog\Block\Adminhtml\Category\AssignProducts $block */
+
+/** @var \Magento\Catalog\Block\Adminhtml\Category\Tab\Product $blockGrid */
+$blockGrid = $block->getBlockGrid();
+$filters = $block->getFilters();
+$gridJsObjectName = $blockGrid->getJsObjectName();
+?>
+<?= $block->getGridHtml() ?>
+<input type="hidden" name="profile_products" id="in_profile_products" data-form-part="rueducommerce_profile_edit" value="" />
+<input type="hidden" name="profile_products_filters" id="profile_products_filters" data-form-part="rueducommerce_profile_edit" value="<?php echo $filters?>" />
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Ced_RueDuCommerce/js/profile/profile-products": {
+                "selectedProducts": <?= /* @escapeNotVerified */ $block->getProductsJson() ?>,
+                "gridJsObjectName": <?= /* @escapeNotVerified */ '"' . $gridJsObjectName . '"' ?: '{}' ?>,
+                "filters": <?= /* @escapeNotVerified */ '"' . $filters . '"' ?>
+            }
+        }
+    }
+</script>
+<!-- @todo remove when "UI components" will support such initialization -->
+<script>
+    require('mage/apply/main').apply();
+</script>

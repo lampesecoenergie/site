@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd"
+      label="Pdf Credit Memo Layout"
+      design_abstraction="custom">
+    <body>
+        <block class="Fooman\PdfCustomiser\Block\Creditmemo" name="creditmemo"
+               template="Fooman_PdfCustomiser::pdf-design-1/creditmemo.phtml">
+        </block>
+    </body>
+</page>

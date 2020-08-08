@@ -1,0 +1,19 @@
+<!-- ko if: (address()) -->
+<div id="mondialrelay-pickup-selected">
+    <div class="line">
+        <strong data-bind="text: address().lgadr1"></strong>
+    </div>
+    <div class="line">
+        <span data-bind="text: address().lgadr3"></span>
+    </div>
+    <div class="line">
+        <span data-bind="text: address().cp"></span>
+        <span data-bind="text: address().ville"></span>
+    </div>
+    <div class="change">
+        <a href="#" data-bind="click: updatePickupAddress" class="mr-update-pickup">
+            <span data-bind="i18n: 'Change pickup location'"></span>
+        </a>
+    </div>
+</div>
+<!-- /ko -->

@@ -1,0 +1,11 @@
+{
+  "name": "boostmyshop/module-admin-logger",
+  "description": "Log every events from admin panel",
+  "type": "magento2-module",
+  "version": "1.0.8",
+  "autoload": {
+    "files": [ "registration.php" ],
+    "psr-4": {
+      "BoostMyShop\\AdminLogger\\": ""}
+  }
+}

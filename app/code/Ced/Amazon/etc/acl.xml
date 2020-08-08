@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement(EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+ * @package   Ced_Amazon
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright Copyright CEDCOMMERCE(http://cedcommerce.com/)
+ * @license   http://cedcommerce.com/license-agreement.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Ced_Amazon::Amazon" title="Amazon" sortOrder="50">
+                    <resource id="Ced_Amazon::listing" title="Listings">
+                        <resource id="Ced_Amazon::profile" title="Profiles"/>
+                        <resource id="Ced_Amazon::product" title="Products"/>
+                    </resource>
+                    <resource id="Ced_Amazon::order" title="Sales">
+                        <resource id="Ced_Amazon::order_listing" title="Orders"/>
+                    </resource>
+                    <resource id="Ced_Amazon::developer" title="Developer">
+                        <resource id="Ced_Amazon::feeds" title="Feed"/>
+                        <resource id="Ced_Amazon::amazon_report" title="Report"/>
+                        <resource id="Ced_Amazon::queue" title="Queue"/>
+                        <resource id="Ced_Amazon::system_status" title="System"/>
+                    </resource>
+
+                    <resource id="Ced_Amazon::settings" title="Settings">
+                        <resource id="Ced_Amazon::account" title="Accounts"/>
+                        <resource id="Ced_Amazon::configuration" title="Configuration"/>
+                    </resource>
+
+                    <resource id="Ced_Amazon::extras" title="Extras">
+                        <resource id="Ced_Amazon::knowledgebase" title="Knowledgebase"/>
+                    </resource>
+                </resource>
+
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Ced_Amazon::system_config" title="Amazon Configurations"/>
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

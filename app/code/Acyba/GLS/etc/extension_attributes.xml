@@ -1,0 +1,5 @@
+<config>
+    <extension_attributes for="Magento\Sales\Api\Data\OrderInterface">
+        <attribute code="glsRelayId" type="string"/>
+    </extension_attributes>
+</config>

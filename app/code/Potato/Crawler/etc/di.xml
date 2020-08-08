@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Potato\Crawler\Api\CounterRepositoryInterface" type="Potato\Crawler\Model\ResourceModel\CounterRepository" />
+    <preference for="Potato\Crawler\Api\Data\CounterInterface" type="Potato\Crawler\Model\Data\Counter" />
+    <preference for="Potato\Crawler\Api\Data\CounterSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+
+    <preference for="Potato\Crawler\Api\PopularityRepositoryInterface" type="Potato\Crawler\Model\ResourceModel\PopularityRepository" />
+    <preference for="Potato\Crawler\Api\Data\PopularityInterface" type="Potato\Crawler\Model\Data\Popularity" />
+    <preference for="Potato\Crawler\Api\Data\PopularitySearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+
+    <preference for="Potato\Crawler\Api\QueueRepositoryInterface" type="Potato\Crawler\Model\ResourceModel\QueueRepository" />
+    <preference for="Potato\Crawler\Api\Data\QueueInterface" type="Potato\Crawler\Model\Data\Queue" />
+    <preference for="Potato\Crawler\Api\Data\QueueSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+
+    <preference for="Potato\Crawler\Api\QueueManagerInterface" type="Potato\Crawler\Model\Manager\QueueManager" />
+    <preference for="Potato\Crawler\Api\ProductSitemapManagerInterface" type="Potato\Crawler\Model\ResourceModel\Sitemap\Catalog\Product" />
+    <preference for="Potato\Crawler\Api\CategorySitemapManagerInterface" type="Potato\Crawler\Model\ResourceModel\Sitemap\Catalog\Category" />
+    <preference for="Potato\Crawler\Api\CmsPageSitemapManagerInterface" type="Potato\Crawler\Model\ResourceModel\Sitemap\Cms\Page" />
+
+    <type name="Potato\Crawler\Logger\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Potato\Crawler\Logger\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">po_crawler</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="system" xsi:type="object">Potato\Crawler\Logger\Handler</item>
+                <item name="debug" xsi:type="object">Magento\Framework\Logger\Handler\Debug</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="po_crawler_queue" xsi:type="object">Potato\Crawler\Model\Command\Queue</item>
+                <item name="po_crawler_warmer" xsi:type="object">Potato\Crawler\Model\Command\Warmer</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="\Magento\PageCache\Model\Cache\Type">
+        <plugin name="po-crawler-cache-type-clean" type="Potato\Crawler\Plugin\PageCache\Clean"/>
+    </type>
+    <type name="\Magento\CacheInvalidate\Model\PurgeCache">
+        <plugin name="po-crawler-purge-cache" type="Potato\Crawler\Plugin\CacheInvalidate\PurgeCache"/>
+    </type>
+</config>

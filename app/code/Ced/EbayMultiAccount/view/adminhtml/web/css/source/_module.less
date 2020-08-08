@@ -1,0 +1,16 @@
+@ebaymultiaccount-icons-admin__font-name-path: '@{baseDir}Ced_EbayMultiAccount/fonts/ebaymultiaccount';
+@ebaymultiaccount-icons-admin__font-name : 'CedEbayMultiAccount';
+.lib-font-face(
+  @family-name:@ebaymultiaccount-icons-admin__font-name,
+  @font-path: @ebaymultiaccount-icons-admin__font-name-path,
+  @font-weight: normal,
+  @font-style: normal
+);
+.admin__menu .item-ebaymultiaccount.parent.level-0 > a:before {
+  font-family: @ebaymultiaccount-icons-admin__font-name;
+  content: "\e910";
+  display: block;
+  font-family: "CedEbayMultiAccount";
+  font-size: 3rem;
+  height: 3rem;
+}

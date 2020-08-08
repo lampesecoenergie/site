@@ -1,0 +1,26 @@
+{
+  "name": "acyba/module-gls",
+  "description": "Magento module for GLS Shipping. This extension is compatible with Magento v2",
+  "type": "magento2-module",
+  "license": "OSL-3.0",
+  "version": "1.1.0",
+  "authors": [
+    {
+      "email": "ecommerce@acyba.com",
+      "name": "Acyba"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "owebia/magento2-module-advanced-setting-core": "^2.6.2",
+    "owebia/magento2-module-advanced-shipping": "^2.6.4"
+  },
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Acyba\\GLS\\": ""
+    }
+  }
+}

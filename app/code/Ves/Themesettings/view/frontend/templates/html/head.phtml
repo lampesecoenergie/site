@@ -1,0 +1,23 @@
+<?php
+$ves = $this->helper('Ves\Themesettings\Helper\Theme');
+$max_width = $ves->getGeneralCfg("general_settings/max_width");
+$max_width_custom = $ves->getGeneralCfg("general_settings/max_width_custom");
+$paneltool = $ves->getGeneralCfg("general_settings/paneltool");
+?>
+<?php if($paneltool){ ?>
+<style type="text/css">
+<?php
+// LAYOUT
+if($max_width && $max_width){ ?>
+.navigation, .page-header .header.panel, .header.content, .footer.content, .page-wrapper > .widget, .page-wrapper > .page-bottom, .block.category.event, .top-container, .page-main, .container {
+<?php if($max_width == 'custom'){ ?>
+max-width: <?php echo $max_width_custom; ?>;
+width: <?php echo $max_width_custom; ?>;
+<?php }else{ ?>
+max-width: <?php echo $max_width; ?>;
+width: <?php echo $max_width; ?>;
+<?php } ?>
+}
+<?php } ?>
+</style>
+<?php } ?>

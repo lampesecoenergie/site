@@ -1,0 +1,69 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement(EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_EbayMultiAccount
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CEDCOMMERCE(http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+/**
+ * @see Ced\EbayMultiAccount\Block\Adminhtml\Token
+ */
+?>
+<script>
+    require(['prototype'], function() {
+
+//<![CDATA[
+        function validate() {
+            var validationMessage = $('validation_result');
+            params = {
+                location: $('<?php  echo $block->escapeHtml($block->getLocation()); ?>').value,
+                env: $('<?php  echo $block->escapeHtml($block->getEnvironment()); ?>').value,
+                developer:  $('<?php  echo $block->escapeHtml($block->getDeveloper()); ?>').value,
+                appid:  $('<?php  echo $block->escapeHtml($block->getAppid()); ?>').value,
+                devid:  $('<?php  echo $block->escapeHtml($block->getDevid()); ?>').value,
+                certid:  $('<?php  echo $block->escapeHtml($block->getCertid()); ?>').value,
+                runnameid:  $('<?php  echo $block->escapeHtml($block->getRunnameid()); ?>').value
+            };
+            new Ajax.Request('<?php  echo $block->escapeXssInUrl($block->getAjaxUrl()) ?>', {
+                parameters: params,
+                onSuccess: function(response) {
+                    try {
+                        if (response.responseText.isJSON()) {
+                            if (response.responseText.evalJSON().msg == "success") {
+                                window.location = response.responseText.evalJSON().data;
+                            } else if (response.responseText.evalJSON().msg == "error") {
+                                var result = response.responseText.evalJSON().data;
+                                validationMessage.removeClassName('hidden').addClassName('error')
+                            }
+                        }
+                    } catch(e) {
+                        validationMessage.removeClassName('hidden').addClassName('error')
+                    }
+                    validationMessage.update(result);
+                }
+            });
+        }
+
+        window.validate = validate;
+//]]>
+
+    });
+</script>
+<?php if(!$this->token) { ?>
+<div class="actions actions-validate">
+    <div id="validation_result" class="message-validation hidden"></div>
+    <button onclick="validate(); return false;" class="action-validate" type="button" id="<?php echo $block->getHtmlId() ?>">
+        <span><?php echo $block->escapeHtml($block->getButtonLabel()) ?></span>
+    </button>
+</div>
+<?php }?>

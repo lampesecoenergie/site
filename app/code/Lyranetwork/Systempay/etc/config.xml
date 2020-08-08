@@ -1,0 +1,184 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Systempay V2-Payment Module version 2.3.2 for Magento 2.x. Support contact : supportvad@lyra-network.com.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is licensed under the Open Software License version 3.0
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://opensource.org/licenses/osl-3.0.php
+ *
+ * @category  Payment
+ * @package   Systempay
+ * @author    Lyra Network (http://www.lyra-network.com/)
+ * @copyright 2014-2018 Lyra Network and contributors
+ * @license   https://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <systempay>
+            <general>
+                <module_version>2.3.2</module_version>
+                <platform_version>V2</platform_version>
+                <enable_logs>1</enable_logs>
+
+                <site_id>12345678</site_id>
+                <key_test>1111111111111111</key_test>
+                <key_prod>2222222222222222</key_prod>
+                <ctx_mode>TEST</ctx_mode>
+                <sign_algo>SHA-256</sign_algo>
+                <platform_url>https://paiement.systempay.fr/vads-payment/</platform_url>
+                <notify_url>systempay/payment/check</notify_url>
+
+                <language>fr</language>
+                <validation_mode></validation_mode>
+
+                <redirect_enabled>0</redirect_enabled>
+                <redirect_success_timeout>5</redirect_success_timeout>
+                <redirect_success_message>Redirection vers la boutique dans quelques instants...</redirect_success_message>
+                <redirect_error_timeout>5</redirect_error_timeout>
+                <redirect_error_message>Redirection vers la boutique dans quelques instants...</redirect_error_message>
+                <return_mode>GET</return_mode>
+                <refill_cart>1</refill_cart>
+                <registered_order_status>processing</registered_order_status>
+                <capture_auto>1</capture_auto>
+
+                <oney_contract>0</oney_contract>
+                <common_category>FOOD_AND_GROCERY</common_category>
+            </general>
+        </systempay>
+
+        <payment>
+            <systempay_standard>
+                <model>Lyranetwork\Systempay\Model\Method\Standard</model>
+                <group>systempay</group>
+
+                <active>1</active>
+                <allowspecific>0</allowspecific>
+                <title>Paiement par carte bancaire</title>
+                <sort_order>1</sort_order>
+                <module_logo>standard-logo.png</module_logo>
+                <payment_action>authorize</payment_action>
+
+                <validation_mode>-1</validation_mode>
+                <payment_cards></payment_cards>
+
+                <card_info_mode>1</card_info_mode>
+                <oneclick_active>0</oneclick_active>
+                <oneclick_title>Acheter maintenant</oneclick_title>
+                <oneclick_location>BOTH</oneclick_location>
+                <card_register_mode>1</card_register_mode>
+                <card_register_message><![CDATA[Cochez cette case pour enregistrer les données de votre carte et effectuer des paiements en un clic. <b>Les données de la carte seront enregistrées sur le serveur sécurisé de la plateforme de paiement.</b>]]></card_register_message>
+            </systempay_standard>
+
+            <systempay_multi>
+                <model>Lyranetwork\Systempay\Model\Method\Multi</model>
+                <group>systempay</group>
+
+                <active>0</active>
+                <allowspecific>0</allowspecific>
+                <title>Paiement par carte bancaire en plusieurs fois</title>
+                <sort_order>2</sort_order>
+                <module_logo>multi-logo.png</module_logo>
+                <payment_action>authorize</payment_action>
+
+                <validation_mode>-1</validation_mode>
+                <payment_cards></payment_cards>
+
+                <card_info_mode>1</card_info_mode>
+            </systempay_multi>
+
+            <systempay_choozeo>
+                <model>Lyranetwork\Systempay\Model\Method\Choozeo</model>
+                <group>systempay</group>
+
+                <active>0</active>
+                <allowspecific>0</allowspecific>
+                <title>Paiement Choozeo</title>
+                <sort_order>3</sort_order>
+                <module_logo>choozeo-logo.png</module_logo>
+                <payment_action>authorize</payment_action>
+            </systempay_choozeo>
+
+            <!--
+            <systempay_gift>
+                <model>Lyranetwork\Systempay\Model\Method\Gift</model>
+                <group>systempay</group>
+
+                <active>0</active>
+                <allowspecific>0</allowspecific>
+                <title>Paiement par carte cadeau</title>
+                <sort_order>3</sort_order>
+                <module_logo>gift-logo.png</module_logo>
+                <payment_action>authorize</payment_action>
+
+                <validation_mode>-1</validation_mode>
+            </systempay_gift>
+
+            <systempay_oney>
+                <model>Lyranetwork\Systempay\Model\Method\Oney</model>
+                <group>systempay</group>
+
+                <active>0</active>
+                <allowspecific>1</allowspecific>
+                <specificcountry>FR</specificcountry>
+                <specificcountry_display>France</specificcountry_display>
+                <title>FacilyPay Oney</title>
+                <sort_order>5</sort_order>
+                <module_logo>oney-logo.png</module_logo>
+                <payment_action>authorize</payment_action>
+
+                <validation_mode>-1</validation_mode>
+
+                <enable_payment_options>0</enable_payment_options>
+            </systempay_oney>
+
+            <systempay_paypal>
+                <model>Lyranetwork\Systempay\Model\Method\Paypal</model>
+                <group>systempay</group>
+
+                <active>0</active>
+                <allowspecific>0</allowspecific>
+                <title>Paiement PayPal</title>
+                <sort_order>6</sort_order>
+                <module_logo>paypal-logo.png</module_logo>
+                <payment_action>authorize</payment_action>
+
+                <validation_mode>-1</validation_mode>
+            </systempay_paypal>
+
+            <systempay_sofort>
+                <model>Lyranetwork\Systempay\Model\Method\Sofort</model>
+                <group>systempay</group>
+
+                <active>0</active>
+                <allowspecific>0</allowspecific>
+                <title>Paiement Sofort Banking</title>
+                <sort_order>6</sort_order>
+                <module_logo>sofort-logo.png</module_logo>
+                <payment_action>authorize</payment_action>
+
+                <validation_mode>-1</validation_mode>
+            </systempay_sofort>
+
+            <systempay_postfinance>
+                <model>Lyranetwork\Systempay\Model\Method\Postfinance</model>
+                <group>systempay</group>
+
+                <active>0</active>
+                <allowspecific>0</allowspecific>
+                <title>Paiement PostFinance</title>
+                <sort_order>7</sort_order>
+                <module_logo>postfinance-logo.png</module_logo>
+                <payment_action>authorize</payment_action>
+
+                <validation_mode>-1</validation_mode>
+            </systempay_postfinance>
+            -->
+        </payment>
+    </default>
+</config>

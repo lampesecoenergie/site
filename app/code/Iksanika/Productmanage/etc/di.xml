@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <type name="Magento\Catalog\Block\Adminhtml\Product\Edit\Action\Attribute">
+        <plugin name="Iksanika_Productmanage::productEditActionAttribute" type="Iksanika\Productmanage\Plugin\Catalog\ProductEditActionAttribute" sortOrder="1" disabled="false"/>
+    </type>
+    <type name="Magento\Catalog\Block\Adminhtml\Product\Edit\Button\Back">
+        <plugin name="Iksanika_Productmanage::productEditButtonBack" type="Iksanika\Productmanage\Plugin\Catalog\ProductEditButtonBack" sortOrder="1" disabled="false"/>
+    </type>
+    <type name="Magento\Backend\Model\View\Result\Redirect">
+        <plugin name="Iksanika_Productmanage::viewResultRedirect" type="Iksanika\Productmanage\Plugin\Backend\ModelViewResultRedirect" sortOrder="1" disabled="false"/>
+    </type>
+    <!--
+    <type name="Magento\Framework\App\Action\Action">
+        <plugin name="Iksanika_Ajaxcart::afterDispatch" type="Iksanika\Ajaxcart\Plugin\Dispatcher" sortOrder="1" disabled="false" />
+    </type>
+    -->
+</config>

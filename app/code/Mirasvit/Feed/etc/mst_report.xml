@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xsi:noNamespaceSchemaLocation="urn:magento:module:Mirasvit_ReportApi:etc/mst_report.xsd">
+    <table name="mst_feed_report">
+        <pk name="row_id" label="Row"/>
+        <fk name="product_id" label="Product" table="catalog_product_entity"/>
+
+        <column name="created_at" label="Date" type="date"/>
+
+        <column name="is_click" label="Number of Clicks" type="number"/>
+
+        <column name="unique_orders" label="Number of Orders" fields="order_id" type="number"
+                expr="COUNT(DISTINCT(%1))"/>
+
+        <column name="subtotal" label="Revenue" type="money"/>
+
+        <column name="subtotal_per_click" label="Revenue per Click" fields="is_click,subtotal" type="money"
+                expr="SUM(%2) / SUM(%1)"/>
+
+        <column name="feed_id" label="Feed" type="select" options="Mirasvit\Feed\Model\ResourceModel\Feed\Collection"/>
+    </table>
+
+    <table name="mst_feed_feed">
+        <pk name="feed_id" label="Feed"/>
+
+        <column name="name" label="Feed" />
+    </table>
+
+    <relation name="mst_feed_feed-mst_feed_report" type="1n">
+        <leftTable>mst_feed_feed</leftTable>
+        <rightTable>mst_feed_report</rightTable>
+        <condition>%1.feed_id=%2.feed_id</condition>
+    </relation>
+</config>

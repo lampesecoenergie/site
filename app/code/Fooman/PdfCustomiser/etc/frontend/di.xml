@@ -1,0 +1,39 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <type name="\Magento\Sales\Controller\Order\PrintShipment">
+        <plugin name="fooman_pdfcustomiser_shipment"
+                type="Fooman\PdfCustomiser\Plugin\Order\PrintShipment" sortOrder="110"/>
+    </type>
+    <type name="\Magento\Sales\Controller\Guest\PrintShipment">
+        <plugin name="fooman_pdfcustomiser_guestshipment"
+                type="Fooman\PdfCustomiser\Plugin\Order\GuestPrintShipment" sortOrder="110"/>
+    </type>
+
+    <type name="\Magento\Sales\Controller\Order\PrintInvoice">
+        <plugin name="fooman_pdfcustomiser_invoice"
+                type="Fooman\PdfCustomiser\Plugin\Order\PrintInvoice" sortOrder="110"/>
+    </type>
+    <type name="\Magento\Sales\Controller\Guest\PrintInvoice">
+        <plugin name="fooman_pdfcustomiser_guestinvoice"
+                type="Fooman\PdfCustomiser\Plugin\Order\GuestPrintInvoice" sortOrder="110"/>
+    </type>
+
+    <type name="\Magento\Sales\Controller\Order\PrintCreditmemo">
+        <plugin name="fooman_pdfcustomiser_creditmemo"
+                type="Fooman\PdfCustomiser\Plugin\Order\PrintCreditmemo" sortOrder="110"/>
+    </type>
+    <type name="\Magento\Sales\Controller\Guest\PrintCreditmemo">
+        <plugin name="fooman_pdfcustomiser_guestcreditmemo"
+                type="Fooman\PdfCustomiser\Plugin\Order\GuestPrintCreditmemo" sortOrder="110"/>
+    </type>
+
+    <type name="\Magento\Sales\Controller\Order\PrintAction">
+        <plugin name="fooman_pdfcustomiser_order"
+                type="Fooman\PdfCustomiser\Plugin\Order\PrintAction" sortOrder="110"/>
+    </type>
+    <type name="\Magento\Sales\Controller\Guest\PrintAction">
+        <plugin name="fooman_pdfcustomiser_guestorder"
+                type="Fooman\PdfCustomiser\Plugin\Order\GuestPrintAction" sortOrder="110"/>
+    </type>
+</config>

@@ -1,0 +1,449 @@
+Code,Code
+Title,Title
+"Category IDs","Category IDs"
+"Product Skus","Product Skus"
+Add,Add
+"Block Identifier","Block Identifier"
+"Media Rules","Media Rules"
+Selector,Selector
+Width,Width
+"Gutter Width","Gutter Width"
+Fonts,Fonts
+"Google Fonts","Google Fonts"
+"Custom, Google Fonts","Custom, Google Fonts"
+"Font Size","Font Size"
+"Font Weight","Font Weight"
+"Font Targets","Font Targets"
+"Comma-separated. For example: h1,h2,h3,h4,h5,h6,p... ","Comma-separated. For example: h1,h2,h3,h4,h5,h6,p... "
+Link,Link
+Target,Target
+Class,Class
+"We can't find the quote item.","We can't find the quote item."
+"You added %1 to your shopping cart.","You added %1 to your shopping cart."
+"We can't add this item to your shopping cart right now.","We can't add this item to your shopping cart right now."
+"Out of stock","Out of stock"
+"The system has an issue when create css file","The system has an issue when create css file"
+"The %1 file updated successfully.","The %1 file updated successfully."
+fixed,fixed
+scroll,scroll
+None,None
+"Pattern 1","Pattern 1"
+"Pattern 2","Pattern 2"
+"Pattern 3","Pattern 3"
+"Pattern 4","Pattern 4"
+"Pattern 5","Pattern 5"
+"Pattern 6","Pattern 6"
+"Pattern 7","Pattern 7"
+"Pattern 8","Pattern 8"
+"Pattern 9","Pattern 9"
+"Pattern 10","Pattern 10"
+"Pattern 11","Pattern 11"
+"Pattern 12","Pattern 12"
+"Pattern 13","Pattern 13"
+"Pattern 14","Pattern 14"
+"Pattern 15","Pattern 15"
+"Pattern 16","Pattern 16"
+"Pattern 17","Pattern 17"
+"Pattern 18","Pattern 18"
+"Pattern 19","Pattern 19"
+"Pattern 20","Pattern 20"
+"Pattern 21","Pattern 21"
+"Pattern 22","Pattern 22"
+"Pattern 23","Pattern 23"
+"Pattern 24","Pattern 24"
+"Pattern 25","Pattern 25"
+"Pattern 26","Pattern 26"
+"Pattern 27","Pattern 27"
+"Pattern 28","Pattern 28"
+"Pattern 29","Pattern 29"
+"Pattern 30","Pattern 30"
+"Pattern 31","Pattern 31"
+"Pattern 32","Pattern 32"
+"Pattern 33","Pattern 33"
+"Pattern 34","Pattern 34"
+"Pattern 35","Pattern 35"
+"Pattern 36","Pattern 36"
+"Pattern 37","Pattern 37"
+"Pattern 38","Pattern 38"
+"Pattern 39","Pattern 39"
+"Pattern 40","Pattern 40"
+left,left
+center,center
+right,right
+top,top
+bottom,bottom
+no-repeat,no-repeat
+repeat,repeat
+repeat-x,repeat-x
+repeat-y,repeat-y
+Custom...,Custom...
+"Google Fonts...","Google Fonts..."
+"Arial, Helvetica Neue, Helvetica, sans-serif","Arial, Helvetica Neue, Helvetica, sans-serif"
+"Georgia, serif","Georgia, serif"
+"Lucida Sans Unicode, Lucida Grande, sans-serif","Lucida Sans Unicode, Lucida Grande, sans-serif"
+"Palatino Linotype, Book Antiqua, Palatino, serif","Palatino Linotype, Book Antiqua, Palatino, serif"
+"Tahoma, Geneva, sans-serif","Tahoma, Geneva, sans-serif"
+"Trebuchet MS, Helvetica, sans-serif","Trebuchet MS, Helvetica, sans-serif"
+"Verdana, Geneva, sans-serif","Verdana, Geneva, sans-serif"
+Text,Text
+"Icon Class","Icon Class"
+"Text, Icon Class","Text, Icon Class"
+"Icon Class, Text","Icon Class, Text"
+"Left To Right","Left To Right"
+"Rigth To Left","Rigth To Left"
+No,No
+Yes,Yes
+"Boxed Desktop Large","Boxed Desktop Large"
+"Boxed Desktop Medium","Boxed Desktop Medium"
+Default,Default
+"Horizontal Bottom","Horizontal Bottom"
+"Horizontal Top","Horizontal Top"
+"Vertical Left","Vertical Left"
+"Vertical Right","Vertical Right"
+Solid,Solid
+Dashed,Dashed
+Dotted,Dotted
+Double,Double
+Groove,Groove
+Inset,Inset
+Outset,Outset
+Ridge,Ridge
+1px,1px
+2px,2px
+3px,3px
+4px,4px
+5px,5px
+6px,6px
+7px,7px
+8px,8px
+9px,9px
+10px,10px
+11px,11px
+12px,12px
+Tabs,Tabs
+Accordion,Accordion
+Cursor,Cursor
+Crosshair,Crosshair
+"Basic Zoom","Basic Zoom"
+"Inner Zoom","Inner Zoom"
+"Lens Zoom","Lens Zoom"
+Lens,Lens
+Window,Window
+Inner,Inner
+"Disable Completely","Disable Completely"
+"Don't Replace With Static Block","Don't Replace With Static Block"
+"If Empty, Replace With Static Block","If Empty, Replace With Static Block"
+"Replace With Static Block","Replace With Static Block"
+Horizontal,Horizontal
+Vertical,Vertical
+Top,Top
+Bottom,Bottom
+"960 px","960 px"
+"1024 px","1024 px"
+"1280 px","1280 px"
+"1360 px","1360 px"
+"1440 px","1440 px"
+"1680 px","1680 px"
+"Custom width...","Custom width..."
+"was added to your shopping cart.","was added to your shopping cart."
+"Continue Shopping","Continue Shopping"
+Checkout,Checkout
+"View cart &amp; checkout","View cart &amp; checkout"
+"Right To Left","Right To Left"
+"Custom width..","Custom width.."
+"-- Select Layout --","-- Select Layout --"
+"Panel Tool","Panel Tool"
+"Theme Skins","Theme Skins"
+Direction,Direction
+"Header Layout","Header Layout"
+Layout,Layout
+"Custom Max Width","Custom Max Width"
+"Input Custom Max Width","Input Custom Max Width"
+Apply,Apply
+Reset,Reset
+"Select Store","Select Store"
+"VES Themesettings","VES Themesettings"
+"General Settings","General Settings"
+Skins,Skins
+"Width Settings","Width Settings"
+"Maximum Page Width","Maximum Page Width"
+"Input Maximum Page Width","Input Maximum Page Width"
+"Enable Custom Width For Selector","Enable Custom Width For Selector"
+<br/>,<br/>
+"Element Selector Width","Element Selector Width"
+"Ajax Cart Settings","Ajax Cart Settings"
+"Enable Product Image","Enable Product Image"
+"Product Image Width","Product Image Width"
+"Product Image Height","Product Image Height"
+"Body Settings","Body Settings"
+"Body Classes","Body Classes"
+"Background Color","Background Color"
+"Background color of the web browser viewport (applied for HTML body element). Set the same color as for footer background to avoid blank space below the footer on large screens.","Background color of the web browser viewport (applied for HTML body element). Set the same color as for footer background to avoid blank space below the footer on large screens."
+"Background Image","Background Image"
+"Background Repeat","Background Repeat"
+"Background Attachment","Background Attachment"
+"Background Position (x-axis)","Background Position (x-axis)"
+"Background Position (y-axis)","Background Position (y-axis)"
+Pattern,Pattern
+"Top Padding","Top Padding"
+"Bottom Padding","Bottom Padding"
+Enable,Enable
+"Font Settings","Font Settings"
+"Body Font","Body Font"
+"Basic Font Size","Basic Font Size"
+"Font Family","Font Family"
+Custom,Custom
+"Type in your custom font stack, e.g.:<br/><em>Arial, ""Helvetica Neue"", Helvetica, sans-serif</em>.<br/><strong>Important</strong>: Do not add trailing semicolon.","Type in your custom font stack, e.g.:<br/><em>Arial, ""Helvetica Neue"", Helvetica, sans-serif</em>.<br/><strong>Important</strong>: Do not add trailing semicolon."
+"Font preview is available on <a href=""http://www.google.com/webfonts"">Google Web Fonts</a><br/><strong style=""color:red;"">Important</strong>: most of the fonts from Google are not available in all weights. Make sure that you specified correct weight (field <strong>Font Weight</strong> below) for selected font. Otherwise font will not be displayed. Refer to <a href=""http://www.google.com/webfonts"">Google Web Fonts</a> to check if the selected weight is available for your font.","Font preview is available on <a href=""http://www.google.com/webfonts"">Google Web Fonts</a><br/><strong style=""color:red;"">Important</strong>: most of the fonts from Google are not available in all weights. Make sure that you specified correct weight (field <strong>Font Weight</strong> below) for selected font. Otherwise font will not be displayed. Refer to <a href=""http://www.google.com/webfonts"">Google Web Fonts</a> to check if the selected weight is available for your font."
+"Character Sets","Character Sets"
+"Some of the fonts support multiple scripts (like Latin and Cyrillic for example). You need to select at least one character set.<br/><strong style=""color:red;"">Important</strong>: not all fonts support extended character sets. For a complete list of available fonts and font subsets refer to <a href=""http://www.google.com/webfonts"">Google Web Fonts</a>.<br/><strong style=""color:red;"">Important</strong>: using multiple character sets affects performance, so only select the character sets that you actually need.","Some of the fonts support multiple scripts (like Latin and Cyrillic for example). You need to select at least one character set.<br/><strong style=""color:red;"">Important</strong>: not all fonts support extended character sets. For a complete list of available fonts and font subsets refer to <a href=""http://www.google.com/webfonts"">Google Web Fonts</a>.<br/><strong style=""color:red;"">Important</strong>: using multiple character sets affects performance, so only select the character sets that you actually need."
+"<div style=""float:left;padding-bottom:30px"">Specify the weight of the font. You can only use <strong>numeric font weights</strong> which are available for the CSS property <a href=""https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight""><em>font-weight</em></a>. E.g. normal weight is <em>400</em>, bold is <em>700</em>. Leave empty to use default weight.<br/><strong style=""color:red;"">Important</strong>: if you selected a font from Google Fonts, note that some fonts are not available in all weights. Refer to <a href=""http://www.google.com/webfonts"">Google Web Fonts</a> to check if the selected weight is available for your font.</div>","<div style=""float:left;padding-bottom:30px"">Specify the weight of the font. You can only use <strong>numeric font weights</strong> which are available for the CSS property <a href=""https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight""><em>font-weight</em></a>. E.g. normal weight is <em>400</em>, bold is <em>700</em>. Leave empty to use default weight.<br/><strong style=""color:red;"">Important</strong>: if you selected a font from Google Fonts, note that some fonts are not available in all weights. Refer to <a href=""http://www.google.com/webfonts"">Google Web Fonts</a> to check if the selected weight is available for your font.</div>"
+"Custom Fonts","Custom Fonts"
+"Element Fonts","Element Fonts"
+Colors,Colors
+"Basic Colors","Basic Colors"
+"Text Color","Text Color"
+"Link Color","Link Color"
+"Link Hover Color","Link Hover Color"
+Buttons,Buttons
+"Button Background Color","Button Background Color"
+"Button Text Color","Button Text Color"
+"Button Hover Background Color","Button Hover Background Color"
+"Button Hover Text Color","Button Hover Text Color"
+"Button Active Background Color","Button Active Background Color"
+"Button Active Text Color","Button Active Text Color"
+Header,Header
+"Static Block ID","Static Block ID"
+"Choose a static block to show on header","Choose a static block to show on header"
+"Custom Style","Custom Style"
+"Outer Container","Outer Container"
+"Inner Container","Inner Container"
+"Inner Background Color","Inner Background Color"
+"Right Padding","Right Padding"
+"Left Padding","Left Padding"
+"Top links","Top links"
+"Add Custom Links","Add Custom Links"
+"Top Cart","Top Cart"
+"Search Box","Search Box"
+"Hover Background Color","Hover Background Color"
+"Hover Text Color","Hover Text Color"
+"Border Color","Border Color"
+"Border Hover Color","Border Hover Color"
+"Maximum Width","Maximum Width"
+"Use to decrease the maximum width of the search box. It works similar to CSS property <a href=""https://developer.mozilla.org/en-US/docs/Web/CSS/max-width""><em>max-width</em></a>.<br/>Example values: <em>200px</em>, <em>75%</em>, <em>10em</em>. Leave empty to use the default width.<br/><strong>Important:</strong> don't forget to specify the unit.","Use to decrease the maximum width of the search box. It works similar to CSS property <a href=""https://developer.mozilla.org/en-US/docs/Web/CSS/max-width""><em>max-width</em></a>.<br/>Example values: <em>200px</em>, <em>75%</em>, <em>10em</em>. Leave empty to use the default width.<br/><strong>Important:</strong> don't forget to specify the unit."
+"Search Button","Search Button"
+Format,Format
+"Language Switcher","Language Switcher"
+Template,Template
+"Language label","Language label"
+"Label Color","Label Color"
+"Currency Switcher","Currency Switcher"
+"Currency label","Currency label"
+"Sticky Header","Sticky Header"
+Elements,Elements
+"Sticky Element","Sticky Element"
+"Logo on sticky header","Logo on sticky header"
+"Menu on sticky header","Menu on sticky header"
+"Search on sticky header","Search on sticky header"
+"Cart on sticky header","Cart on sticky header"
+"Top links on sticky header","Top links on sticky header"
+"Language Switcher on sticky header","Language Switcher on sticky header"
+"Currency Switcher on sticky header","Currency Switcher on sticky header"
+"Custom Static Block on sticky header","Custom Static Block on sticky header"
+Topbar,Topbar
+"Show Topbar Block","Show Topbar Block"
+Footer,Footer
+Coppyright,Coppyright
+"Custom Coppyright","Custom Coppyright"
+"Coppyright HTML","Coppyright HTML"
+"Scroll Top","Scroll Top"
+Background,Background
+Color,Color
+"Hover Color","Hover Color"
+"Footer Top Settings","Footer Top Settings"
+"Enable Footer Top","Enable Footer Top"
+"Choose CMS Static Block","Choose CMS Static Block"
+"Custom HTML","Custom HTML"
+"Footer Center Settings","Footer Center Settings"
+"Enable Footer Center","Enable Footer Center"
+"Footer Bottom Settings","Footer Bottom Settings"
+"Enable Footer Bottom","Enable Footer Bottom"
+"Product Listing","Product Listing"
+General,General
+"Override on Product List Widget Settings","Override on Product List Widget Settings"
+"If set to Yes: Configs will ovveride product list widget configs.","If set to Yes: Configs will ovveride product list widget configs."
+"Product Design","Product Design"
+"Padding Top","Padding Top"
+"Padding Right","Padding Right"
+"Padding Bottom","Padding Bottom"
+"Padding Left","Padding Left"
+Border,Border
+"Border Style","Border Style"
+"Border Width","Border Width"
+"Product Name","Product Name"
+"Name Color","Name Color"
+"Name Hover Color","Name Hover Color"
+Image,Image
+"Image Background Color","Image Background Color"
+"Image Hover Background Color","Image Hover Background Color"
+Price,Price
+"Price Color","Price Color"
+"Special Price Color","Special Price Color"
+"Special Price Label Color","Special Price Label Color"
+"Old Price Color","Old Price Color"
+"Old Price Label Color","Old Price Label Color"
+Quickview,Quickview
+"Quickview Text Color","Quickview Text Color"
+"Quickview Hover Tex Color","Quickview Hover Tex Color"
+"Quickview Background Color","Quickview Background Color"
+"Quickview Hover Background Color","Quickview Hover Background Color"
+"Quickview Button","Quickview Button"
+"Add To Cart","Add To Cart"
+"Add To Cart Text Color","Add To Cart Text Color"
+"Add To Cart Hover Tex Color","Add To Cart Hover Tex Color"
+"Add To Cart Background Color","Add To Cart Background Color"
+"Add To Cart Hover Background Color","Add To Cart Hover Background Color"
+"Addtocart Button","Addtocart Button"
+Compare,Compare
+"Compare Text Color","Compare Text Color"
+"Compare Hover Tex Color","Compare Hover Tex Color"
+"Compare Background Color","Compare Background Color"
+"Compare Hover Background Color","Compare Hover Background Color"
+"Compare Link","Compare Link"
+Wishlist,Wishlist
+"Whishlist Text Color","Whishlist Text Color"
+"Whishlist Hover Tex Color","Whishlist Hover Tex Color"
+"Whishlist Background Color","Whishlist Background Color"
+"Whishlist Hover Background Color","Whishlist Hover Background Color"
+"Wishlist Link","Wishlist Link"
+"Short Description","Short Description"
+"Count Down Timer","Count Down Timer"
+"Countdown Timer Color","Countdown Timer Color"
+"Product Label","Product Label"
+"New Label","New Label"
+"Sale Label","Sale Label"
+"Sale Label Color","Sale Label Color"
+"Sale Label Background Color","Sale Label Background Color"
+"Product Preview","Product Preview"
+"Product Settings","Product Settings"
+"Show Name","Show Name"
+"Show Name in Single Line","Show Name in Single Line"
+"In case product name is too long to be displayed in a single line, it will be clipped and an ellipsis will be appended at the end of the line to represent clipped text.","In case product name is too long to be displayed in a single line, it will be clipped and an ellipsis will be appended at the end of the line to represent clipped text."
+"Show Short Description","Show Short Description"
+"Description Character Limit","Description Character Limit"
+"Default is 100","Default is 100"
+"Show Learn More Link","Show Learn More Link"
+"Show Price","Show Price"
+"Show Review","Show Review"
+"Show Countdown Timer","Show Countdown Timer"
+"Show Quick View","Show Quick View"
+"Quickview Popup Height","Quickview Popup Height"
+"Quickview Popup Width","Quickview Popup Width"
+"Show Add To Cart","Show Add To Cart"
+"Add To Cart Popup Height","Add To Cart Popup Height"
+"Add To Cart Popup Width","Add To Cart Popup Width"
+"Show Wishlist","Show Wishlist"
+"Show Compare","Show Compare"
+"Show New Label","Show New Label"
+"Show Sale Label","Show Sale Label"
+"Product Image","Product Image"
+"Show Image","Show Image"
+"Keep Image Aspect Ratio","Keep Image Aspect Ratio"
+"If set to Yes, it will keep aspect ratio of the product image (height of the image will be calculated automatically based on width). If set to No, Magento will automatically transform each image into square. If the original image was rectangular, the empty space at the sides will be filled with white color.","If set to Yes, it will keep aspect ratio of the product image (height of the image will be calculated automatically based on width). If set to No, Magento will automatically transform each image into square. If the original image was rectangular, the empty space at the sides will be filled with white color."
+"Image Width","Image Width"
+"If width is not specified, default width will be used (300 pixels). Remember that in the category view the visual size of the product image depends on the number of columns. For example, if you increase the number of columns, columns will be narrower so there will be less space for product image in each column.","If width is not specified, default width will be used (300 pixels). Remember that in the category view the visual size of the product image depends on the number of columns. For example, if you increase the number of columns, columns will be narrower so there will be less space for product image in each column."
+"Image Height","Image Height"
+"Alternative Image","Alternative Image"
+"Show alternative image on mouse hover over the product image.","Show alternative image on mouse hover over the product image."
+"Select Alternative Image By Column","Select Alternative Image By Column"
+"Which column of the product image gallery will mark alternative images of your products.","Which column of the product image gallery will mark alternative images of your products."
+"Alternative Image Column Value","Alternative Image Column Value"
+"Specify the value which will mark alternative images of your products. E.g.: if Select Alt. Image By Column is set to ""Sort Order"", specify the number which will mark (in ""Sort Order"" column of the product image gallery) alternative images, for example: ""2"".","Specify the value which will mark alternative images of your products. E.g.: if Select Alt. Image By Column is set to ""Sort Order"", specify the number which will mark (in ""Sort Order"" column of the product image gallery) alternative images, for example: ""2""."
+"Category Page","Category Page"
+"Category Name","Category Name"
+"Category Description","Category Description"
+"Category Image","Category Image"
+"Default Image","Default Image"
+"Top Toolbar","Top Toolbar"
+"Bottom Toolbar","Bottom Toolbar"
+Show,Show
+"Add to Cart Button","Add to Cart Button"
+"Product View Page","Product View Page"
+"Name Settings","Name Settings"
+"Custom Font","Custom Font"
+"Other Elements","Other Elements"
+"Show SKU","Show SKU"
+"Show Share Links","Show Share Links"
+"Facebook, Twitter","Facebook, Twitter"
+"Show Rating","Show Rating"
+"Show Email to Friend","Show Email to Friend"
+"Thumbnail Layout","Thumbnail Layout"
+"Thumbnail Location","Thumbnail Location"
+"Show Zoom Image","Show Zoom Image"
+Tab,Tab
+Mode,Mode
+"Selected Blocks Show As Tabs","Selected Blocks Show As Tabs"
+Description,Description
+"Addition Info","Addition Info"
+Reviews,Reviews
+"Related Products","Related Products"
+"Up-sell Products","Up-sell Products"
+"Tab By Product Attribute Code","Tab By Product Attribute Code"
+"Add Attribute Code","Add Attribute Code"
+"Tab By CMS Block","Tab By CMS Block"
+"Add CMS Block Identifiers","Add CMS Block Identifiers"
+"Tab By Static Html Content","Tab By Static Html Content"
+"Choose a static block to show content in content of custom tab. Empty for hide.","Choose a static block to show content in content of custom tab. Empty for hide."
+"Or Input Custom Content for Custom Tab","Or Input Custom Content for Custom Tab"
+"Loop Carousel","Loop Carousel"
+"RTL Carousel","RTL Carousel"
+Autoplay,Autoplay
+"Autoplay Timeout","Autoplay Timeout"
+"Number of Visible Products","Number of Visible Products"
+"Number Columns On Page (Large display)","Number Columns On Page (Large display)"
+"Show number items when screen size 1200px and up","Show number items when screen size 1200px and up"
+"Number Columns On Page","Number Columns On Page"
+"Show number items when screen size between 1199px and 980px","Show number items when screen size between 1199px and 980px"
+"Number Columns On Page (Portrait tablets)","Number Columns On Page (Portrait tablets)"
+"Show number items when screen size between 979px and 769px","Show number items when screen size between 979px and 769px"
+"Number Columns On Page (Phones to tablets)","Number Columns On Page (Phones to tablets)"
+"Show number items when screen size between 768px and 641px","Show number items when screen size between 768px and 641px"
+"Number Columns On Page (Phones to Small tablets)","Number Columns On Page (Phones to Small tablets)"
+"Show number items when screen size between 640px and 480px","Show number items when screen size between 640px and 480px"
+"Number Columns On Page (Phones)","Number Columns On Page (Phones)"
+"Show number items when screen size bellow 480px","Show number items when screen size bellow 480px"
+"Replace Related Products With Static Block","Replace Related Products With Static Block"
+"Choose a static block to show content in content of Related Products. Empty for hide.","Choose a static block to show content in content of Related Products. Empty for hide."
+"Upsell Products","Upsell Products"
+"Replace Upsell Products With Static Block","Replace Upsell Products With Static Block"
+"Choose a static block to show content in content of Upsell Products. Empty for hide.","Choose a static block to show content in content of Upsell Products. Empty for hide."
+"Contact Page","Contact Page"
+"Contact Form","Contact Form"
+"Google Map","Google Map"
+"Google Map API","Google Map API"
+"You should get map api key at here: <a href=""https://developers.google.com/maps/documentation/javascript/get-api-key"" target=""_BLANK"">Get Google Map API Key</a><br/>Default: AIzaSyALraGXlzRqFlAOb-tYLhUi6o6Cq9qN4KA","You should get map api key at here: <a href=""https://developers.google.com/maps/documentation/javascript/get-api-key"" target=""_BLANK"">Get Google Map API Key</a><br/>Default: AIzaSyALraGXlzRqFlAOb-tYLhUi6o6Cq9qN4KA"
+Map,Map
+Longitude,Longitude
+Latitude,Latitude
+Radius,Radius
+"Map Height","Map Height"
+"Default is 400px","Default is 400px"
+"Map Width","Map Width"
+"Map Zoom","Map Zoom"
+"Marker Content","Marker Content"
+"Marker Content Width","Marker Content Width"
+"Marker Content Height","Marker Content Height"
+"Contact Us Informations","Contact Us Informations"
+Address,Address
+Telephone,Telephone
+Fax,Fax
+"Custom Html","Custom Html"
+"Cart Page","Cart Page"
+"Cross-sell Products","Cross-sell Products"
+"Replace Cross-sell Products With Static Block","Replace Cross-sell Products With Static Block"
+"Choose a static block to show content in content of Crossell Products. Empty for hide.","Choose a static block to show content in content of Crossell Products. Empty for hide."
+Customization,Customization
+"Custom Code","Custom Code"
+"Custom CSS","Custom CSS"
+"Custom Scripts","Custom Scripts"
+"All code will be put before end footer tag.","All code will be put before end footer tag."

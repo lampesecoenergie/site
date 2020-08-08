@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="sales_model_service_quote_submit_success">
+        <observer name="feed_sales_order_place_after" instance="Mirasvit\Feed\Observer\OrderPlaceAfter" />
+    </event>
+
+    <event name="feed_export_success">
+        <observer name="feed_notifier_export_success" instance="Mirasvit\Feed\Observer\FeedExportSuccess"/>
+    </event>
+
+    <event name="feed_export_fail">
+        <observer name="feed_notifier_export_fail" instance="Mirasvit\Feed\Observer\FeedExportFail"/>
+    </event>
+
+    <event name="feed_delivery_success">
+        <observer name="feed_notifier_delivery_success" instance="Mirasvit\Feed\Observer\FeedDeliverySuccess"/>
+    </event>
+    <event name="feed_delivery_fail">
+        <observer name="feed_notifier_delivery_fail" instance="Mirasvit\Feed\Observer\FeedDeliveryFail"/>
+    </event>
+</config>

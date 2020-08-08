@@ -1,0 +1,70 @@
+<?php
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_CustomerAttributes
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2018-2019 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+// @codingStandardsIgnoreFile
+
+?>
+<?php /** @var $block \Bss\CustomerAttributes\Block\Frontend\Order\Info */ ?>
+<?php $data = $block->getCustomer();
+/** @var  $customAttributes */
+try {
+    $customAttributes = $block->resultHelper()->getAttributesHtml($data->getId(), $block->getOrder());
+} catch (\Magento\Framework\Exception\NoSuchEntityException $e) {
+} catch (\Magento\Framework\Exception\LocalizedException $e) {
+}
+?>
+<?php if ($customAttributes) : ?>
+<div class="block block-order-details-view">
+    <div class="block-title">
+        <strong><?= /* @escapeNotVerified */ __('Customer Attributes Information') ?></strong>
+    </div>
+    <div class="block-content">
+        <?php echo $customAttributes;  ?>
+    </div>
+</div>
+<?php endif; ?>
+<style>
+    .orderAttribute {
+        width: 50%;
+    }
+    .orderAttribute img {
+        min-height: 100px;
+    }
+    .orderAttribute div {
+        display: inline-block;
+    }
+    .label_attribute {
+        float: left;
+        overflow: hidden;
+        margin: auto 0;
+        width: 40%;
+    }
+    .value_attribute {
+        width: 60%;
+        height: 100%;
+    }
+    .value_attribute img {
+        height: 100%;
+    }
+    .value_attribute video {
+        height: 150px;
+    }
+    .disabled {
+        pointer-events: none;
+        cursor: default;
+    }
+</style>

@@ -1,0 +1,17 @@
+<?php /** @var \Magento\Backend\Block\Template $block */ ?>
+<script type="text/x-magento-init">
+    <?php echo \Zend_Json_Encoder::encode($block->getJsConfig()) ?>
+</script>
+<script type="text/javascript">
+    var _autocompleteUrl = '<?php echo $block->getUrl('feed/dynamic_category/search') ?>';
+
+    // we disabled mutation observers that used in ui/../lib/dom-observer.js for prevent slow rendering if we have many categories
+    window.MutationObserver = function() {
+        this.observe = function () {
+
+        }
+    }
+</script>
+<div data-bind="scope: 'dynamic_category'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>

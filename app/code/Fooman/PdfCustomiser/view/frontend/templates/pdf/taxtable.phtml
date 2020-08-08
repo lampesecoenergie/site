@@ -1,0 +1,32 @@
+<?php
+/**
+ * @var \Fooman\PdfCustomiser\Block\TaxTable $block
+ *
+ * Note on the use of @noEscape throughout this template
+ * html output is allowed by design to allow users to customise their pdfs
+ * Before pdf rendering all output is run filtered by @see \Magento\Framework\Filter\Input\MaliciousCode
+ */
+
+$items = $block->getItems();
+?>
+<?php if (!empty($items)) : ?>
+    <br/>
+    <br/>
+    <table border="0" cellpadding="2" cellspacing="0">
+        <tr>
+            <td align="right" width="20%"><b><?= $block->escapeHtml(__('Tax Rate')) ?></b></td>
+            <td align="right" width="20%"><b><?= $block->escapeHtml(__('Base Amount')) ?></b></td>
+            <td align="right" width="20%"><b><?= $block->escapeHtml(__('Tax Amount')) ?></b></td>
+            <td align="right" width="20%"><b><?= $block->escapeHtml(__('Subtotal')) ?></b></td>
+        </tr>
+        <?php foreach ($items as $item) : ?>
+            <tr>
+                <td align="right" width="20%"><?= ((float)$item['percent']) ?>%</td>
+                <td align="right" width="20%"><?= /* @noEscape */ $item['base_tax_basis'] ?></td>
+                <td align="right" width="20%"><?= /* @noEscape */ $item['base_tax_amount'] ?></td>
+                <td align="right" width="20%"><?= /* @noEscape */ $item['base_subtotal'] ?></td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+    <br/>
+<?php endif; ?>

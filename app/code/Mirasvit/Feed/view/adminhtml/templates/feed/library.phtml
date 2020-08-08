@@ -1,0 +1,39 @@
+<?php
+//@codingStandardsIgnoreFile
+
+/** @var \Mirasvit\Feed\Helper\Output $outputHelper */
+$outputHelper = $this->helper('Mirasvit\Feed\Helper\Output');
+?>
+
+<script>
+    require([
+        'jquery'
+    ], function ($) {
+        $.attributes = <?php echo \Zend_Json_Encoder::encode($outputHelper->getAttributeOptions()) ?>;
+    });
+</script>
+
+<table class="admin__control-table">
+    <thead>
+    <tr>
+        <th class="col-default"><?= __('Attribute') ?></th>
+        <th class="col-default"><?= __('Pattern') ?></th>
+        <th class="col-default"></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <!-- ko foreach: attributes -->
+        <tr>
+            <td class="col-default" colspan="3"><b data-bind="text: label"></b></td>
+        </tr>
+        <!-- ko foreach: value -->
+        <tr data-bind="click: $root.toggleRow">
+            <td class="col-default" data-bind="text: label"></td>
+            <td class="col-default" data-bind="text: '{{ product.' + value + ' }}'"></td>
+            <td class="col-default"><a href="#">Preview</a></td>
+        </tr>
+        <!-- /ko -->
+    <!-- /ko -->
+    </tbody>
+</table>

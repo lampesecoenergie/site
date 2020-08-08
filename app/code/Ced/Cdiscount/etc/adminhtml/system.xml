@@ -1,0 +1,377 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement(EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+ * @package   Ced_Cdiscount
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright Copyright CEDCOMMERCE(http://cedcommerce.com/)
+ * @license   http://cedcommerce.com/license-agreement.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="cedcommerce" translate="label" sortOrder="1">
+            <label>Cedcommerce</label>
+        </tab>
+        <!-- section start for Cdiscount Configuration Tab in Cedcommerce section -->
+        <section id="cdiscount_config" translate="label" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Cdiscount Configuration</label>
+            <tab>cedcommerce</tab>
+            <resource>Ced_Cdiscount::system_config</resource>
+            <group id="cdiscount_setting" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0"
+                   showInStore="0">
+                <label>Cdiscount Seller/Developer Settings</label>
+                <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0"
+                       showInStore="0">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <!--<field id="mode" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="0"
+                       showInStore="0">
+                    <label>Mode</label>
+                    <options>
+                        <option label="Sandbox">sandbox</option>
+                        <option label="Live">live</option>
+                    </options>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>-->
+
+                <field id="debug_mode" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="0"
+                       showInStore="0">
+                    <label>Debug</label>
+                    <options>
+                        <option label="Yes">1</option>
+                        <option label="No">0</option>
+                    </options>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+
+
+                <field id="user_name" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="0"
+                       showInStore="0">
+                    <label>User Name</label>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+
+                <field id="api_password" translate="label" type="password" sortOrder="80" showInDefault="1" showInWebsite="0"
+                       showInStore="0">
+                    <label>Api Password</label>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="storeid" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="0"
+                       showInStore="0">
+                    <label>Select Store</label>
+                    <source_model>Magento\Config\Model\Config\Source\Store</source_model>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="cdiscount_product" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1"
+                   showInStore="0">
+                <label>Cdiscount Product Settings</label>
+                <field id="product_condition" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="0"
+                       showInStore="0">
+                    <label>Default Product Condition</label>
+                    <validate>required-entry</validate>
+                    <options>
+                        <option label="Neuf - Neuf">6</option>
+                        <option label="Neuf - Reconditionné">5</option>
+                        <option label="Occasion - Etat Correct">4</option>
+                        <option label="Occasion - Bon état">3</option>
+                        <option label="Occasion - Très bon état">2</option>
+                        <option label="Occasion - Comme neuf">1</option>
+                    </options>
+                    <comment>
+                        <![CDATA[Choose Your Product Conditions.]]>
+                    </comment>
+                    <tooltip> <![CDATA[Add a default product condition to be assigned on your uploading product]]></tooltip>
+                </field>
+                <field id="prepration_time" translate="label" type="text" sortOrder="55" showInDefault="1" showInWebsite="1"
+                showInStore="0">
+                    <label>Cdiscount Product Prepration Time</label>
+                    <validate>required-entry validate-number</validate>
+                    <comment>
+                        <![CDATA[Choose Your Product Prepration Time.]]>
+                    </comment>
+                    <tooltip> <![CDATA[Add a default product prepration time to be assigned on your uploading product. Example<br>1, 2, 3</br>]]></tooltip>
+                </field>
+
+                <field id="price_map" translate="label" type="select" sortOrder="55" showInDefault="1" showInWebsite="1"
+                showInStore="0">
+                    <label>Map Price Attribute</label>
+                    <source_model>Ced\Cdiscount\Block\System\Config\Form\Field\MagentoAttributeValues</source_model>
+                    <comment>
+                        <![CDATA[Map Attribute For Price]]>
+                    </comment>
+                    <tooltip> <![CDATA[Add attribute of your magento taht goes for <b>'Cdiscount Price'</b>]]></tooltip>
+                </field>
+
+
+                <field id="vat" translate="label" type="text" sortOrder="55" showInDefault="1" showInWebsite="1"
+                       showInStore="0">
+                    <label>Cdiscount Product VAT</label>
+                    <validate>required-entry validate-number</validate>
+                    <comment>
+                        <![CDATA[Choose Your Product's Value Added Tax.]]>
+                    </comment>
+                    <tooltip> <![CDATA[Add a default product vat to be assigned on your uploading product. Example<br>10, 20, 30</br>]]></tooltip>
+                </field>
+                <field id="dea_tax" translate="label" type="text" sortOrder="55" showInDefault="1" showInWebsite="1"
+                       showInStore="0">
+                    <label>Cdiscount Product DEA TAX</label>
+                    <validate>required-entry validate-number</validate>
+                    <comment>
+                        <![CDATA[Choose Your Product's Dea Tax.]]>
+                    </comment>
+                    <tooltip> <![CDATA[Add a default product DEATAX to be assigned on your uploading product. Example<br>10, 20, 30</br>]]></tooltip>
+                </field>
+                <field id="eco_part" translate="label" type="text" sortOrder="55" showInDefault="1" showInWebsite="1"
+                       showInStore="0">
+                    <label>Cdiscount Product ECO PART</label>
+                    <validate>required-entry validate-number</validate>
+                    <comment>
+                        <![CDATA[Choose Your Product's Eco Part.]]>
+                    </comment>
+                    <tooltip> <![CDATA[Add a default product ECOPART to be assigned on your uploading product. Example<br>10, 20, 30</br>]]></tooltip>
+                </field>
+                <field id="cdav" translate="label" type="select" sortOrder="55" showInDefault="1" showInWebsite="1"
+                       showInStore="0">
+                    <label>isCDAV</label>
+                    <validate>required-entry</validate>
+                    <options>
+                        <option label="Yes">1</option>
+                        <option label="No">0</option>
+                    </options>
+                </field>
+
+                <field id="pro_sub" translate="label" type="select" sortOrder="56" showInDefault="1" showInWebsite="1"
+                       showInStore="0">
+                    <label>Pro Subscription of Cdiscount</label>
+                    <validate>required-entry</validate>
+                    <options>
+                        <option label="Yes">1</option>
+                        <option label="No">0</option>
+                    </options>
+                </field>
+                <field id="chunk_product" translate="label" type="select" sortOrder="55" showInDefault="1" showInWebsite="1"
+                       showInStore="0">
+                    <label>Product|Offers Chunk</label>
+                    <validate>required-entry</validate>
+                    <options>
+                        <option label="25">25</option>
+                        <option label="50">50</option>
+                        <option label="150">150</option>
+                        <option label="250">250</option>
+                        <option label="500">500</option>
+                        <option label="1000">1000</option>
+                        <option label="2500">2500</option>
+                    </options>
+                    <comment>
+                        <![CDATA[<b>Product|Offer Upload Chunk Size</b>]]>
+                    </comment>
+                    <tooltip> <![CDATA[Product|Offer Uploading Chunk Size]]></tooltip>
+                </field>
+
+                <field id="cdiscount_attributes" translate="label" type="multiselect" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <comment>
+                        <![CDATA[<b>Choose The Attribute Values That Will Be Fetched From Configurable Product</b>]]>
+                    </comment>
+                    <tooltip> <![CDATA[The Values That You Will Select Will Be Taken From Parent Product In Case Of Configurable Product]]></tooltip>
+                    <label>Parent Values In Case Of Configurable Product</label>
+                    <source_model>Ced\Cdiscount\Model\Source\Cdiscount\Attributes</source_model>
+                    <can_be_empty>1</can_be_empty>
+                </field>
+
+                <!--<group id="price_settings" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" showInProfile="1">
+                    <label>Cdiscount Price Settings</label>
+                    <field id="price" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0" showInProfile="1">
+                        <label>Product Price</label>
+                        <source_model>Ced\Cdiscount\Model\Source\Config\Price</source_model>
+                        <comment><![CDATA[Select to send a different product price to <b>Cdiscount</b>]]></comment>
+                    </field>
+                    <field id="fix_price" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="0" showInStore="0" showInProfile="1">
+                        <label>Modify by Fix Price</label>
+                        <validate>required-entry validate-number</validate>
+                        <depends>
+                            <field id="price" separator=",">plus_fixed,min_fixed</field>
+                        </depends>
+                    </field>
+                    <field id="percentage_price" translate="label" type="text" sortOrder="12" showInDefault="1" showInWebsite="0" showInStore="0" showInProfile="1">
+                        <label>Modify by Percenctage Price</label>
+                        <validate>required-entry validate-number</validate>
+                        <comment><![CDATA[Numeric value Required for <b>Add/subtract % on Magento price</b> 5 for Example: Magento price +/- 5% of Magento price.<b>]]></comment>
+                        <depends>
+                            <field id="price" separator=",">plus_per,min_per</field>
+                        </depends>
+                    </field>
+                    <field id="different_price" translate="label" type="text" sortOrder="13" showInDefault="1" showInWebsite="0" showInStore="0" showInProfile="1">
+                        <label>Map Price Attribute</label>
+                        <validate>required-entry</validate>
+                        <comment><![CDATA[<b>Attribute Code Required in case of <b>Custom Fixed Price</b>]]></comment>
+                        <depends>
+                            <field id="price">differ</field>
+                        </depends>
+                    </field>
+                </group>-->
+
+            </group>
+            <group id="cdiscount_order" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1"
+                   showInStore="0">
+                <label>Cdiscount Order Settings</label>
+                <field id="order_id_prefix" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Cdiscount Order Id Prefix</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>Prefix for Cdiscount Increment ID</comment>
+                </field>
+                <field id="order_notify_email" translate="label comment" type="text" sortOrder="20" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Order Notification Email</label>
+                    <validate>required-entry</validate>
+                </field>
+            </group>
+            <group id="cdiscount_cron" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Cdiscount Cron Settings</label>
+                <field id="order_cron" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Order Cron</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>Order Fetch Cron </comment>
+                </field>
+
+                <field id="resync_cron" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Feeds Resync Cron</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>Resends Failed Feeds</comment>
+                </field>
+
+
+                <field id="order_cron_expression" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Order Cron Expression</label>
+                    <source_model>Ced\Cdiscount\Model\Source\Config\Cron</source_model>
+                    <comment>Order Fetch Expression </comment>
+                    <depends>
+                        <field id="order_cron">1</field>
+                    </depends>
+                </field>
+                <field id="inventory_price_cron" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Inventory|Price Cron</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>Inventory Sync Cron</comment>
+                </field>
+                <field id="inventory_price_cron_expression" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Inventory|Price Cron Expression</label>
+                    <source_model>Ced\Cdiscount\Model\Source\Config\Cron</source_model>
+                    <comment>Inventory|Price Cron Expression </comment>
+                    <depends>
+                        <field id="inventory_price_cron">1</field>
+                    </depends>
+                    <tooltip> <![CDATA[This Cron Will Run When Any Products Price/Inventory Is Modified In Store]]></tooltip>
+
+                </field>
+                <field id="all_inventory_price_cron" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>All Inventory|Price Cron</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>All Inventory Sync Cron</comment>
+                </field>
+                <field id="all_inventory_price_cron_expression" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>All Inventory|Price Cron Expression</label>
+                    <source_model>Ced\Cdiscount\Model\Source\Config\Cron</source_model>
+                    <comment>All Inventory|Price Cron Expression </comment>
+                    <depends>
+                        <field id="all_inventory_price_cron">1</field>
+                    </depends>
+                    <tooltip> <![CDATA[This Cron Will Run For All Inventory Price]]></tooltip>
+                </field>
+
+                <field id="order_shipment_cron" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Orders Shipment Cron</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>All Orders Status Sync Cron</comment>
+                </field>
+                <field id="order_shipment_cron_expression" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>All Orders Shipment Cron Expression</label>
+                    <source_model>Ced\Cdiscount\Model\Source\Config\Cron</source_model>
+                    <comment>All Orders Shipment Cron Expression </comment>
+                    <depends>
+                        <field id="order_shipment_cron">1</field>
+                    </depends>
+                    <tooltip> <![CDATA[This Cron Will Run For All Orders Shipment]]></tooltip>
+                </field>
+
+
+            </group>
+
+            <!--<group id="configurable_cron" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Cron Timer Settings</label>
+                <field id="frequency" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Frequency</label>
+                    <source_model>Magento\Cron\Model\Config\Source\Frequency</source_model>
+                    <backend_model>Ced\Cdiscount\Model\Config\CronConfig</backend_model>
+                </field>
+                <field id="time" translate="label comment" sortOrder="2" type="time" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Start Time</label>
+                </field>
+            </group>-->
+
+            <group id="shipping_settings" translate="label" type="text" sortOrder="31" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Cdiscount Shipping Settings</label>
+
+                <field id="shipping_methods" translate="label comment tooltip" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Shipping Methods</label>
+                    <frontend_model>Ced\Cdiscount\Block\System\Config\Form\Field\ShippingMethods</frontend_model>
+                    <backend_model>Ced\Cdiscount\Block\System\Config\Form\Field\ArraySerialized</backend_model>
+                    <comment>
+                        <![CDATA[Add atleast <b>2</b> shipping methods.]]>
+                    </comment>
+                    <tooltip> <![CDATA[Add a shipping method, using the <b>'Add Method'</b>, and set the <b>'Shipping Charges'</b> and <b>'Additional Shipping Charges'</b>]]></tooltip>
+
+                </field>
+
+            </group>
+
+        </section>
+        <!-- section end for Shipping Methods Tab in Sales Tab -->
+
+        <!-- section start for Payment Methods Tab in Sales Tab -->
+        <section id="payment">
+            <group id="paybycdiscount" translate="label" type="text" sortOrder="42" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Cdiscount</label>
+                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="title" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Title</label>
+                </field>
+                <field id="order_status" translate="label" type="select" sortOrder="3" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>New order status</label>
+                    <source_model>Magento\Sales\Model\Config\Source\Order\Status</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

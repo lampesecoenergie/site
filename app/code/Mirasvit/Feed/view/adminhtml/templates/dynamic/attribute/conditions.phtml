@@ -1,0 +1,93 @@
+<?php
+/** @var \Mirasvit\Feed\Block\Adminhtml\Dynamic\Attribute\Edit\Tab\Conditions $block */
+?>
+<?php
+$_htmlHelper = $block->getfeedHtml();
+$_attribute = $block->getModel();
+$_conditions = $_attribute->getConditions();
+if (!is_array($_conditions)) {
+    $_conditions = [];
+}
+?>
+<fieldset class="fieldset admin__fieldset" id="content" style="padding-bottom: 0px;">
+    <legend class="legend">
+        <span><?php echo __('Conditions') ?></span>
+    </legend>
+</fieldset>
+
+<div class="grid" data-mage-init='{"dynamicAttribute": {}}'>
+    <table id="data-table" cellspacing="0" cellpadding="0" class="data">
+        <thead>
+        <tr class="headings">
+            <th></th>
+            <th><?php echo __('Condition') ?></th>
+            <th><?php echo __('Output Type') ?></th>
+            <th><?php echo __('Output Value') ?></th>
+            <th></th>
+        </tr>
+        </thead>
+
+        <tbody data-role="rows-container"></tbody>
+
+        <tfoot>
+        <th colspan="5" class="col-actions-add">
+            <button id="add_new_row_btn" title="<?php echo __('Add Row') ?>"
+                    type="button" class="scalable add">
+                <span><?php echo __('Add Row') ?></span>
+            </button>
+        </th>
+        </tfoot>
+    </table>
+</div>
+
+<script id="row_template" type="text/x-magento-template">
+    <tr data-role="row">
+        <td class="col-draggable">
+            <div data-role="draggable-handle" class="draggable-handle" title="<?php echo __('Sort Option'); ?>"></div>
+            <input data-role="order" type="hidden" name="csv[mapping][order][]" value="<%- data.sort_order %>"/>
+        </td>
+
+        <td>
+            <table cellspacing="0" cellpadding="0" class="data">
+                <tbody data-role="conditions-container"></tbody>
+                <tfoot>
+                <th colspan="3" class="col-actions-add">
+                    <button type="button" class="scalable add" data-role="add-new-condition">
+                        <span><?php echo __('Add Condition') ?></span>
+                    </button>
+                </th>
+                </tfoot>
+            </table>
+        </td>
+
+        <td>
+        </td>
+
+        <td>
+        </td>
+
+        <td>
+            <button title="<?php echo __('Delete') ?>" type="button"
+                    class="delete"
+                    data-role="remove">
+                <span>&times;</span>
+            </button>
+        </td>
+    </tr>
+</script>
+
+<script id="row_condition_template" type="text/x-magento-template">
+    <tr data-role="row">
+        <td>
+            <?php echo $_htmlHelper->getAttributeSelectHtml('condition[]', '1') ?>
+        </td>
+
+        <td>
+            2
+        </td>
+
+        <td>
+            3
+        </td>
+    </tr>
+</script>

@@ -1,0 +1,38 @@
+<?php
+/**
+ * @var \Fooman\PdfCustomiser\Block\Table\Extras $block
+ */
+
+$orderItem = $block->getOrderItem();
+$options = $orderItem->getProductOptions();
+$giftMessage = $block->getGiftMessage($orderItem);
+$magePlazaGiftMessage = $orderItem->getMpGiftWrapData();
+if (!empty($magePlazaGiftMessage)) {
+    $magePlazaGiftMessage = json_decode($magePlazaGiftMessage, true);
+}
+
+$arrayKeys = ['options', 'additional_options', 'attributes_info'];
+?>
+
+<?php foreach ($arrayKeys as $key) :?>
+    <?php if (isset($options[$key])) :?>
+        <?php foreach ($options[$key] as $option) :?>
+            <br/>&nbsp;&nbsp;&nbsp;&nbsp;
+            <?= $block->escapeHtml($option['label']) ?> : <?= $block->escapeHtml($option['value']) ?>
+        <?php endforeach; ?>
+    <?php endif; ?>
+<?php endforeach; ?>
+
+
+<?php if ($giftMessage) : ?>
+    <br/><strong><?= $block->escapeHtml(__('Gift Message')) ?></strong><br/>
+    <b><?= $block->escapeHtml(__('From:')) ?></b> <?= $block->escapeHtml($giftMessage->getSender()) ?><br/>
+    <b><?= $block->escapeHtml(__('To:')) ?></b> <?= $block->escapeHtml($giftMessage->getRecipient()) ?><br/>
+    <b><?= $block->escapeHtml(__('Message:')) ?></b> <?= $block->escapeHtml($giftMessage->getMessage()) ?><br/>
+<?php endif; ?>
+
+<?php if ($magePlazaGiftMessage) : ?>
+    <br/><strong><?= $block->escapeHtml(__('Gift Message')) ?></strong><br/>
+    <b><?= $block->escapeHtml(__('To:')) ?></b> <?= $block->escapeHtml($magePlazaGiftMessage['name']) ?><br/>
+    <b><?= $block->escapeHtml(__('Message:')) ?></b> <?= $block->escapeHtml($magePlazaGiftMessage['gift_message']) ?><br/>
+<?php endif; ?>

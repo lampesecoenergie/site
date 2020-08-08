@@ -1,0 +1,292 @@
+"Manage Categories","Manage Categories"
+"Add New Category","Add New Category"
+"Save Category","Save Category"
+"Save and Continue Edit","Save and Continue Edit"
+"Delete Category","Delete Category"
+"Edit Category '%1'","Edit Category '%1'"
+"New Category","New Category"
+"Page Template","Page Template"
+Type,Type
+"Order By","Order By"
+"Number Post Per Page","Number Post Per Page"
+"Number Column on Large Desktop","Number Column on Large Desktop"
+"Large devices Desktops (≥1200px). Use in grid layout and masonry layout.","Large devices Desktops (≥1200px). Use in grid layout and masonry layout."
+"Medium devices Desktops (≥992px)","Medium devices Desktops (≥992px)"
+"Number Column on Tablets","Number Column on Tablets"
+"Small devices Tablets (≥768px)","Small devices Tablets (≥768px)"
+"Extra small devices Phones (<768px)","Extra small devices Phones (<768px)"
+"Page Layout","Page Layout"
+"Layout Update XML","Layout Update XML"
+Design,Design
+"Category Information","Category Information"
+Name,Name
+Identifier,Identifier
+"Relative to Web Site Base URL","Relative to Web Site Base URL"
+Image,Image
+Description,Description
+"Store View","Store View"
+Position,Position
+Status,Status
+"Category Status","Category Status"
+SEO,SEO
+"Canonical URL","Canonical URL"
+"The canonical URL that this page should poin to, leave empty to default to category link","The canonical URL that this page should poin to, leave empty to default to category link"
+"Page Title","Page Title"
+Keywords,Keywords
+"Meta Keywords","Meta Keywords"
+"Meta Description","Meta Description"
+ID,ID
+Title,Title
+Action,Action
+Posts,Posts
+"Save Comment","Save Comment"
+"Delete Comment","Delete Comment"
+"Edit Comment '%1'","Edit Comment '%1'"
+"New Post","New Post"
+"Comment Information","Comment Information"
+Post,Post
+"User Name","User Name"
+"User Email","User Email"
+Content,Content
+"Post Information","Post Information"
+General,General
+"Manage Pots","Manage Pots"
+"Add New Post","Add New Post"
+"Save Post","Save Post"
+"Save and Duplicate","Save and Duplicate"
+"Delete Post","Delete Post"
+"Edit Post '%1'","Edit Post '%1'"
+"Creation Time","Creation Time"
+"Short Content","Short Content"
+Layout,Layout
+"Post Title","Post Title"
+"Image Types","Image Types"
+"Video Types","Video Types"
+"Video ID","Video ID"
+"Thumbnail Types","Thumbnail Types"
+Category,Category
+Tags,Tags
+Comma-separated.,Comma-separated.
+Hits,Hits
+Author,Author
+"Enable Comments","Enable Comments"
+"Disabling will close the post to new comments","Disabling will close the post to new comments"
+"Post Status","Post Status"
+"The canonical URL that this page should poin to, leave empty to default to post link","The canonical URL that this page should poin to, leave empty to default to post link"
+Comments,Comments
+"Posts Related","Posts Related"
+"WYSIWYG Editor","WYSIWYG Editor"
+"URL Key","URL Key"
+"Subscribe to RSS Feed","Subscribe to RSS Feed"
+Home,Home
+"Go to Home Page","Go to Home Page"
+Blog,Blog
+"Return to Blog","Return to Blog"
+"Tag: %1","Tag: %1"
+"The category has been deleted.","The category has been deleted."
+"We can't find a category to delete.","We can't find a category to delete."
+"This category no longer exists.","This category no longer exists."
+"Edit Category","Edit Category"
+Categories,Categories
+Ves_Blog,Ves_Blog
+"A total of %1 record(s) have been deleted.","A total of %1 record(s) have been deleted."
+"A total of %1 record(s) have been disabled.","A total of %1 record(s) have been disabled."
+"A total of %1 record(s) have been enabled.","A total of %1 record(s) have been enabled."
+"You saved this category.","You saved this category."
+"Something went wrong while saving the category.","Something went wrong while saving the category."
+"The comment has been deleted.","The comment has been deleted."
+"We can't find a comment to delete.","We can't find a comment to delete."
+"Manage Comments","Manage Comments"
+"This comment no longer exists.","This comment no longer exists."
+"The post has been deleted.","The post has been deleted."
+"We can't find a post to delete.","We can't find a post to delete."
+"Manage Posts","Manage Posts"
+"This post no longer exists.","This post no longer exists."
+"Edit Post","Edit Post"
+"You saved this post.","You saved this post."
+"Something went wrong while saving the post.","Something went wrong while saving the post."
+"You duplicated this post","You duplicated this post"
+"Something went wrong while duplicating the post.","Something went wrong while duplicating the post."
+"Your comment added","Your comment added"
+"Your comment added, it will be published soon.","Your comment added, it will be published soon."
+"We can't process your request right now. Sorry, that's all we know.","We can't process your request right now. Sorry, that's all we know."
+"Please click reCAPTCHA","Please click reCAPTCHA"
+"Make sure that category content does not reference the block itself.","Make sure that category content does not reference the block itself."
+Enabled,Enabled
+Disabled,Disabled
+"Newest first","Newest first"
+"Older first","Older first"
+"Position: High to Low","Position: High to Low"
+"Position: Low to High","Position: Low to High"
+Default,Default
+Disqus,Disqus
+Facebook,Facebook
+No,No
+Yes,Yes
+Full,Full
+Long,Long
+Medium,Medium
+Short,Short
+List,List
+Grid,Grid
+Masonry,Masonry
+Twitter,Twitter
+"Google Plus","Google Plus"
+LinkedIn,LinkedIn
+Pinterest,Pinterest
+Empty,Empty
+"1 column","1 column"
+"2 columns with left bar","2 columns with left bar"
+"2 columns with right bar","2 columns with right bar"
+"3 columns","3 columns"
+"OWL Carousel","OWL Carousel"
+Video,Video
+Youtube,Youtube
+Vimeo,Vimeo
+"Hits: High to Low","Hits: High to Low"
+"Hits: Low to High","Hits: Low to High"
+"A category identifier with the same properties already exists in the selected store.","A category identifier with the same properties already exists in the selected store."
+"A post identifier with the same properties already exists in the selected store.","A post identifier with the same properties already exists in the selected store."
+"Image Preview","Image Preview"
+Edit,Edit
+"All Store Views","All Store Views"
+"There are no posts yet","There are no posts yet"
+"Recent Comments","Recent Comments"
+"Leave a Comment","Leave a Comment"
+"Make sure you enter the (*) required information where indicated. HTML code is not allowed.","Make sure you enter the (*) required information where indicated. HTML code is not allowed."
+Email,Email
+Comment,Comment
+"Post Comment","Post Comment"
+"Posted by: ","Posted by: "
+"Created on %1","Created on %1"
+"Updated on %1","Updated on %1"
+"%1 comments","%1 comments"
+"Pubslished In: ","Pubslished In: "
+", ",", "
+Read,Read
+Times,Times
+Tags:,Tags:
+"Read more","Read more"
+"Recent Posts","Recent Posts"
+"Related Posts","Related Posts"
+"Blog Search","Blog Search"
+"Search for:","Search for:"
+"Search …","Search …"
+Search,Search
+"There are no posts yet.","There are no posts yet."
+"Name: %name","Name: %name"
+"Email: %email","Email: %email"
+"Phone Number: %telephone","Phone Number: %telephone"
+"Comment: %comment","Comment: %comment"
+"Venustheme Extensions","Venustheme Extensions"
+"General Settings","General Settings"
+"Blog Url Prefix","Blog Url Prefix"
+"Must NOT contain any slashes. For example: http://domain.com/blog","Must NOT contain any slashes. For example: http://domain.com/blog"
+"Blog Url Suffix","Blog Url Suffix"
+"Add Your extension at end of Link, for example: http://domain.com/your_route/POST_IDENTIFIER.URLSUFFIX","Add Your extension at end of Link, for example: http://domain.com/your_route/POST_IDENTIFIER.URLSUFFIX"
+"Use Categories Identifier in Posts URLs","Use Categories Identifier in Posts URLs"
+"Date Format","Date Format"
+"Full: Tuesday, April 12, 1952 AD or 3:30:42pm PST<br/>LONG: January 12, 1952 or 3:30:32pm<br/>MEDIUM: Jan 12, 1952<br/>SHORT: 12/13/52 or 3:30pm","Full: Tuesday, April 12, 1952 AD or 3:30:42pm PST<br/>LONG: January 12, 1952 or 3:30:32pm<br/>MEDIUM: Jan 12, 1952<br/>SHORT: 12/13/52 or 3:30pm"
+"Twitter Username","Twitter Username"
+"Social Buttons","Social Buttons"
+Networks,Networks
+"RSS Feed","RSS Feed"
+"RSS Items to Show","RSS Items to Show"
+"Number of item to display in the RSS feed. Empty to show all","Number of item to display in the RSS feed. Empty to show all"
+"Latest Posts Page","Latest Posts Page"
+"Category Page","Category Page"
+"Tag Page","Tag Page"
+"Author Page","Author Page"
+"Latest Posts Page URL Key","Latest Posts Page URL Key"
+"Empty to disable. Link: http://domain.com/BlogUrlPrefix/ROUTE+BlogUrlSuffiX","Empty to disable. Link: http://domain.com/BlogUrlPrefix/ROUTE+BlogUrlSuffiX"
+"SEO - Search Engine Optimization","SEO - Search Engine Optimization"
+"Show Breadcrumbs","Show Breadcrumbs"
+"Show Toolbar Top","Show Toolbar Top"
+"Show Toolbar Bottom","Show Toolbar Bottom"
+"Show Image","Show Image"
+"Image Width","Image Width"
+"Image Height","Image Height"
+"Show Title","Show Title"
+"Show Short Description","Show Short Description"
+"Short Description Character Count","Short Description Character Count"
+"Number of characters in a post to be displayed before it is truncated and the Read More link is added. 0 for unlimited.","Number of characters in a post to be displayed before it is truncated and the Read More link is added. 0 for unlimited."
+"Show Readmore Link","Show Readmore Link"
+"Show Categories","Show Categories"
+"Show Author","Show Author"
+"Show Comment Count","Show Comment Count"
+"Show Updated Time","Show Updated Time"
+"Show Created Time","Show Created Time"
+"Show Hits","Show Hits"
+"Show Tags","Show Tags"
+"Post Page","Post Page"
+"Show Description","Show Description"
+"Show Social Block","Show Social Block"
+"Coment Block","Coment Block"
+"Auto Publish Comment","Auto Publish Comment"
+"Number Comments per Page","Number Comments per Page"
+"Enable ReCAPTCHA","Enable ReCAPTCHA"
+"Enable Recaptch in service<br/>http://www.google.com/recaptcha","Enable Recaptch in service<br/>http://www.google.com/recaptcha"
+"ReCAPTCHA Site Key","ReCAPTCHA Site Key"
+"ReCAPTCHA Secret Key","ReCAPTCHA Secret Key"
+"Send Emails To","Send Emails To"
+"Email Sender","Email Sender"
+"Email Template","Email Template"
+"Email template chosen based on theme fallback when ""Default"" option is selected.","Email template chosen based on theme fallback when ""Default"" option is selected."
+"Disqus Short name","Disqus Short name"
+"Facebook Width","Facebook Width"
+"Related Posts Block","Related Posts Block"
+"Carousel Layout","Carousel Layout"
+"Number Columns On Page (Phones)","Number Columns On Page (Phones)"
+"Show number items when screen size bellow 480px","Show number items when screen size bellow 480px"
+"Number Columns On Page (Phones to Small tablets)","Number Columns On Page (Phones to Small tablets)"
+"Show number items when screen size between 641px and 480px","Show number items when screen size between 641px and 480px"
+"Number Columns On Page (Phones to tablets)","Number Columns On Page (Phones to tablets)"
+"Show number items when screen size between 768px and 641px","Show number items when screen size between 768px and 641px"
+"Number Columns On Page (Portrait tablets)","Number Columns On Page (Portrait tablets)"
+"Show number items when screen size between 979px and 769px","Show number items when screen size between 979px and 769px"
+"Number Columns On Page (Default)","Number Columns On Page (Default)"
+"Show number items when screen size between 1199px and 980px","Show number items when screen size between 1199px and 980px"
+"Number Columns On Page (Large display)","Number Columns On Page (Large display)"
+"Show number items when screen size 1200px and up","Show number items when screen size 1200px and up"
+Autoplay,Autoplay
+"Autoplay Timeout","Autoplay Timeout"
+"Autoplay interval timeout.","Autoplay interval timeout."
+"Show dots navigations","Show dots navigations"
+"Show next/prev buttons.","Show next/prev buttons."
+"Author Page, Latest Posts Page, Tag Page, Search Page","Author Page, Latest Posts Page, Tag Page, Search Page"
+Template,Template
+"Empty to show all item","Empty to show all item"
+"Grid Layout","Grid Layout"
+"Large devices Desktops (≥1200px). Use in grid layout and masonry layout","Large devices Desktops (≥1200px). Use in grid layout and masonry layout"
+"Number Column on Desktop","Number Column on Desktop"
+"Number Column on Phones","Number Column on Phones"
+"Ves Blog: Latest Posts","Ves Blog: Latest Posts"
+"Show Latest Blog Posts as List layout or Carousel layout","Show Latest Blog Posts as List layout or Carousel layout"
+"Select Static Block","Select Static Block"
+"Pretext HTML","Pretext HTML"
+"Addtion Class","Addtion Class"
+"Layout Type","Layout Type"
+"Number Post","Number Post"
+"OWL Carousel Settings","OWL Carousel Settings"
+"Item Height","Item Height"
+"Unit: pixel. Empty to set auto height","Unit: pixel. Empty to set auto height"
+"Number of Item per Column","Number of Item per Column"
+"Multiple Row","Multiple Row"
+"Number Columns On Page","Number Columns On Page"
+"Show number items when screen size between 640px and 480px","Show number items when screen size between 640px and 480px"
+"Right to Left","Right to Left"
+"Autoplay HoverPause","Autoplay HoverPause"
+"Nav Prev Text","Nav Prev Text"
+"Nav Next Text","Nav Next Text"
+Loop,Loop
+"Infinity loop. Duplicate last and first items to get loop illusion.","Infinity loop. Duplicate last and first items to get loop illusion."
+"Post Settings","Post Settings"
+"Show Social Network","Show Social Network"
+Delete,Delete
+"Delete items","Delete items"
+"Are you sure you wan't to delete selected items?","Are you sure you wan't to delete selected items?"
+Disable,Disable
+Enable,Enable
+Created,Created
+Modified,Modified
+Thumbnail,Thumbnail

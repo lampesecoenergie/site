@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <sales_pdf>
+            <all>
+                <alltaxsummary>0</alltaxsummary>
+                <alldisplayweight>0</alldisplayweight>
+                <default_bundle_item_display>1</default_bundle_item_display>
+            </all>
+            <order>
+                <ordertitle>ORDER CONFIRMATION</ordertitle>
+                <orderaddresses>both</orderaddresses>
+                <columns backend_model="Fooman\PdfCore\Model\Config\Backend\Columns">{"_1447025709509_509":{"columntype":"sku","width":""},"_1447025710900_900":{"columntype":"name","width":""},"_1447025713747_747":{"columntype":"price","width":""},"_1447025725144_144":{"columntype":"qtyOrdered","width":""},"_1447025729867_867":{"columntype":"subtotal","width":""}}</columns>
+                <ordercustom/>
+                <orderintegratedlabels>0</orderintegratedlabels>
+            </order>
+            <invoice>
+                <invoicetitle>TAX INVOICE</invoicetitle>
+                <invoiceaddresses>both</invoiceaddresses>
+                <columns backend_model="Fooman\PdfCore\Model\Config\Backend\Columns">{"_1438324813122_122":{"columntype":"sku","width":""},"_1438325761673_673":{"columntype":"name","width":""},"_1438325764026_26":{"columntype":"price","width":""},"_1438325767477_477":{"columntype":"qty","width":""},"_1438325771259_259":{"columntype":"subtotal","width":""}}</columns>
+                <invoicecustom/>
+                <invoiceintegratedlabels>0</invoiceintegratedlabels>
+            </invoice>
+            <shipment>
+                <shipmenttitle>PACKING SLIP</shipmenttitle>
+                <shipmentaddresses>both</shipmentaddresses>
+                <columns backend_model="Fooman\PdfCore\Model\Config\Backend\Columns">{"_1445557718827_827":{"columntype":"sku","width":""},"_1445557789429_429":{"columntype":"name","width":""},"_1445557792294_294":{"columntype":"qty","width":""}}</columns>
+                <shipmentcustom/>
+                <shipmentintegratedlabels>0</shipmentintegratedlabels>
+            </shipment>
+            <creditmemo>
+                <creditmemotitle>CREDIT MEMO</creditmemotitle>
+                <creditmemoaddresses>both</creditmemoaddresses>
+                <columns backend_model="Fooman\PdfCore\Model\Config\Backend\Columns">{"_1445557799542_542":{"columntype":"sku","width":""},"_1445557800613_613":{"columntype":"name","width":""},"_1445557803518_518":{"columntype":"price","width":""},"_1445557813982_982":{"columntype":"qty","width":""},"_1445557816276_276":{"columntype":"subtotal","width":""}}</columns>
+                <creditmemocustom/>
+                <creditmemointegratedlabels>0</creditmemointegratedlabels>
+            </creditmemo>
+        </sales_pdf>
+    </default>
+</config>

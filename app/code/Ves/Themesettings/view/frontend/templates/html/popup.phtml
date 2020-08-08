@@ -1,0 +1,113 @@
+<?php 
+$all_helper = $this->helper("Ves\All\Helper\Data");
+    $popup_id = (isset($popup_id)&&$popup_id)?$popup_id:"vespromotion_popup";
+    $timeout_to_show = isset($timeout)?(int)$timeout:5000;
+    $padding = isset($padding)?(int)$padding:0;
+    $padding = $padding."px";
+?>
+<div class="my-promotion <?php echo $prefix_class; ?>" id="<?php echo $popup_id; ?>" style="display: none;">
+    <div class="block-content">
+        <?php echo $promotion_content; ?>
+        <?php if($show_newsletter_form) { ?>
+        <form class="form subscribe"
+            novalidate
+            action="<?php /* @escapeNotVerified */ echo $block->getFormActionUrl() ?>"
+            method="post"
+            data-mage-init='{"validation": {"errorClass": "mage-error"}}'
+            id="newsletter-validate-detail">
+            <div class="field newsletter">
+                <div class="control">
+                    <input name="email" type="email" id="popup_newsletter"
+                                data-validate="{required:true, 'validate-email':true}"/>
+                </div>
+            </div>
+            <div class="actions">
+                <button class="action subscribe btn-primary" title="<?php echo __("Go"); ?>" type="submit">
+                    <span><?php echo __("Go"); ?></span>
+                </button>
+            </div>
+        </form>
+        <?php } ?>
+        <?php if($show_dontshow_button){ ?>
+        <div class="promotion-bottom">
+            <input type="checkbox" id="<?php echo $popup_id; ?>_dont_show_again"/>
+            <label for="<?php echo $popup_id; ?>_dont_show_again"><?php echo __("Don't show this popup again"); ?></label>
+        </div>
+        <?php } ?>
+    </div>
+</div>
+<?php if($popup_width || $popup_height){ ?>
+<style type="text/css">
+    #<?php echo $popup_id; ?>{
+    width:<?php echo (int)$popup_width."px";?>;height:<?php echo (int)$popup_height."px";?>;
+    }
+</style>
+<?php } ?>
+<script type="text/javascript">
+require(['jquery'],function($){
+    $(document).ready(function(){
+        require([
+                'jquery',
+                'jquery/jquery.cookie',
+                <?php if($all_helper->getConfig("enable_fancybox")): ?>
+                "Ves_All/lib/fancybox/jquery.fancybox.pack"
+                <?php endif; ?>
+            ], function ($) {
+                $(document).ready(function(){
+                    if($("body").hasClass("cms-index-index")) {
+                        var check_cookie = $.cookie('<?php echo $popup_id; ?>');
+                        if(window.location!=window.parent.location){
+                            $('#<?php echo $popup_id; ?>').remove();
+                        } else {
+                            if(check_cookie == null || check_cookie == 'shown') {
+                                setTimeout(function(){
+                                    startShowPopup();
+                                }, <?php echo $timeout_to_show; ?>);
+                            }
+                            if($('#<?php echo $popup_id; ?>_dont_show_again').length > 0) {
+                                $('#<?php echo $popup_id; ?>_dont_show_again').on('change', function(){
+                                    if($(this).length){        
+                                        var check_cookie = $.cookie('<?php echo $popup_id; ?>');
+                                        if(check_cookie == null || check_cookie == 'shown') {
+                                            $.cookie('<?php echo $popup_id; ?>','dontshowitagain');            
+                                        }
+                                        else
+                                        {
+                                            $.cookie('<?php echo $popup_id; ?>','shown');
+                                            startShowPopup();
+                                        }
+                                    } else {
+                                        $.cookie('<?php echo $popup_id; ?>','shown');
+                                    }
+                                });
+                            }
+                        }
+                    }
+                });
+        
+            function startShowPopup() {
+                $.fancybox({
+                    'padding': '<?php echo $padding; ?>',
+                    'autoScale': true,
+                    'transitionIn': 'fade',
+                    'transitionOut': 'fade',
+                    'type': 'inline',
+                    'href': '#<?php echo $popup_id; ?>',
+                    'onComplete': function() {
+                        $.cookie('<?php echo $popup_id; ?>', 'shown');
+                    },
+                    'tpl': { 
+                        closeBtn: '<a title="<?php echo __("Close"); ?>" class="fancybox-item fancybox-close fancybox-newsletter-close" href="javascript:;"></a>' 
+                    },
+                    'helpers': {
+                        overlay: {
+                            locked: false
+                        }
+                    }
+                });
+                $('#<?php echo $popup_id; ?>').trigger('click');
+            }
+        });
+    });
+});
+</script>

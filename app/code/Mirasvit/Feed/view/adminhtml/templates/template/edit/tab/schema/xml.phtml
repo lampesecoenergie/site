@@ -1,0 +1,36 @@
+<?php
+//@codingStandardsIgnoreFile
+
+/** @var \Mirasvit\Feed\Helper\Output $outputHelper */
+$outputHelper = $this->helper('Mirasvit\Feed\Helper\Output');
+
+$libraryInit = [
+    'FeedLibrary' => [
+        'url' => $this->getUrl('feed/feed/library')
+    ]
+];
+?>
+
+<script>
+    require([
+        'jquery'
+    ], function ($) {
+        $.attributes = <?php echo \Zend_Json_Encoder::encode($outputHelper->getAttributeOptions()) ?>;
+        $.modifiers = <?php echo \Zend_Json_Encoder::encode($outputHelper->getFilterOptions()) ?>;
+        $.patternTypes = <?php echo \Zend_Json_Encoder::encode($outputHelper->getPatternTypeOptions()) ?>;
+    });
+</script>
+
+<button data-mage-init='<?= \Zend_Json_Encoder::encode($libraryInit) ?>'
+        class="feed__library-button"
+        onclick="return false;"><i class="fa fa-graduation-cap"></i> Library of patterns
+</button>
+
+<script type="text/x-magento-init">
+    <?php echo \Zend_Json_Encoder::encode($block->getJsConfig()) ?>
+
+</script>
+
+<div data-bind="scope: 'schema_xml'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>

@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <po_crawler>
+            <general>
+                <is_enabled>0</is_enabled>
+                <acceptable_cpu_load>70</acceptable_cpu_load>
+                <cronjob>0 2 * * *</cronjob>
+            </general>
+            <priority>
+                <store_priority>1</store_priority>
+                <page_group_priority>1,2,3</page_group_priority>
+                <customer_group>guest</customer_group>
+                <protocol>http</protocol>
+            </priority>
+            <advanced>
+                <debug>0</debug>
+                <useragent>a:1:{s:18:"_1429288830188_188";a:2:{s:5:"title";s:15:"Magento Crawler";s:9:"useragent";s:14:"MagentoCrawler";}}</useragent>
+                <source>1</source>
+                <short_product_url>0</short_product_url>
+                <debug>0</debug>
+                <use_popularity>0</use_popularity>
+            </advanced>
+        </po_crawler>
+    </default>
+</config>

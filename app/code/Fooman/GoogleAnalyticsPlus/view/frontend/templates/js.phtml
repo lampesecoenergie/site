@@ -1,0 +1,6 @@
+<?php /** @var $block \Magento\Framework\View\Element\Template */ ?>
+<?php $urlParts = $block->getViewModel()->getUnifiedUrlParts(); ?>
+
+<script>
+    var foomanGaBaseUrl = '<?= isset($urlParts['path'])?$block->escapeUrl($urlParts['path']):''?>';
+</script>

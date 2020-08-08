@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Mageants_BannerSlider::mageants_bannerslider" title="Banner Slider Section" sortOrder="50"></resource>
+                        </resource>
+                    </resource>
+                </resource>
+				 <resource id="Magento_Backend::content">
+					 <resource id="Magento_Backend::content_elements">
+						 <resource id="Mageants_BannerSlider::bannerslider" title="Banner Manage" translate="title" sortOrder="10">
+							<resource id="Mageants_BannerSlider::sliders" title="Banner Slider  Manage" translate="title" sortOrder="10">
+									<resource id="Mageants_BannerSlider::slider_grid" title="Slider Grid " sortOrder="20" />
+									<resource id="Mageants_BannerSlider::slider_new_edit" title="Create / Edit Slider" sortOrder="20" />
+									<resource id="Mageants_BannerSlider::slider_save" title="Save Slider" sortOrder="20" />
+									<resource id="Mageants_BannerSlider::slider_delete" title="Delete Slider" sortOrder="20" />									
+									<resource id="Mageants_BannerSlider::slider_massdelete" title="Mass Delete Slider" sortOrder="20" />
+							</resource> 
+							<resource id="Mageants_BannerSlider::slides" title="Slides Manage" translate="title" sortOrder="10">
+									<resource id="Mageants_BannerSlider::slide_grid" title="Slide Grid " sortOrder="20" />
+									<resource id="Mageants_BannerSlider::slide_new_edit" title="Create / Edit Slide" sortOrder="20" />
+									<resource id="Mageants_BannerSlider::slide_save" title="Save Slide" sortOrder="20" />
+									<resource id="Mageants_BannerSlider::slide_delete" title="Delete Slide" sortOrder="20" />		
+									<resource id="Mageants_BannerSlider::slide_massdelete" title="Mass Delete Slide" sortOrder="20" />
+							</resource> 
+						</resource>
+					</resource>
+				</resource>
+			</resource>
+        </resources>
+    </acl>
+</config>

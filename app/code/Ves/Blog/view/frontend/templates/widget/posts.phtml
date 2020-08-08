@@ -1,0 +1,329 @@
+<?php
+$collection  = $this->getCollection();
+$helper      = $this->helper("Ves\Blog\Helper\Data");
+$imageHelper = $this->helper("Ves\Blog\Helper\Image");
+
+
+/** General Settings **/
+$dateFormat         = $helper->getConfig("general_settings/dateformat");
+$twitterUsername    = $helper->getConfig("general_settings/twitter_username");
+$networks           = array_flip(explode(",", $helper->getConfig("general_settings/networks")));
+$widget_title		= $this->getConfig("widget_title");
+$addition_class		= $this->getConfig("addition_class");
+$layout_type		= $this->getConfig("layout_type");
+
+
+/** Owl Carousel Settings **/
+$item_height           = (int)$this->getConfig("item_height");
+$enableNetworks        = $this->getConfig("show_socialnetwork");
+$number_item_percolumn = $this->getConfig("number_item_percolumn");
+$large_max_items       = $this->getConfig("large_max_items");
+$large_items           = $this->getConfig("large_items");
+$portrait_items        = $this->getConfig("portrait_items");
+$tablet_items          = $this->getConfig("tablet_items");
+$tablet_small_items    = $this->getConfig("tablet_small_items");
+$mobile_items          = $this->getConfig("mobile_items");
+$rtl				   = $this->getConfig("rtl");
+$autoplay              = $this->getConfig("autoplay");
+$autoplay_timeout      = $this->getConfig("autoplay_timeout");
+$autoplay_hoverpause   = $this->getConfig("autoplay_hoverpause");
+$dots                  = $this->getConfig("dots");
+$nav                   = $this->getConfig("nav");
+$nav_prev              = $this->getConfig("nav_prev");
+$nav_next              = $this->getConfig("nav_next");
+$loop                  = $this->getConfig("loop");
+$lazyload              = $this->getConfig("lazyload");
+
+
+
+/** Post Settings **/
+$show_image             = $this->getConfig("show_image");
+$image_width            = (int)$this->getConfig("image_width", 800);
+$image_height           = (int)$this->getConfig("image_height");
+$show_title             = $this->getConfig("show_title");
+$show_shortdescription  = $this->getConfig("show_shortdescription");
+$shortdescription_count = $this->getConfig("shortdescription_count");
+$show_readmorelink		= $this->getConfig("show_readmorelink");
+$show_categories        = $this->getConfig("show_categories");
+$show_author            = $this->getConfig("show_author");
+$show_commentcount      = $this->getConfig("show_commentcount");
+$show_updatedtime       = $this->getConfig("show_updatedtime");
+$show_createdtime       = $this->getConfig("show_createdtime");
+$show_hits              = $this->getConfig("show_hits");
+$show_tags              = $this->getConfig("show_tags");
+
+$html = '';
+
+$cmsblock = $this->getConfig('cmsblock');
+$pretext_html = $this->getConfig('pretext_html');
+if($cmsblock === 'pretext_html' && $pretext_html){
+	$html = base64_decode($pretext_html);
+}elseif($cmsblock!=''){
+	$html = $this->getCmsBlockModel()->load($cmsblock)->getContent();
+}
+$html = $helper->filter($html);
+
+$i = 1;
+$x = 0;
+$total = $collection->count();
+
+if($total%$number_item_percolumn == 0){
+	$column = $total/$number_item_percolumn;
+}else{
+	$column = floor($total/$number_item_percolumn)+1;
+}
+
+$_postCollection = [];
+$i = $x = 0;
+foreach ($collection as $_post) {
+	if($i<$column){
+		$i++;
+	}else{
+		$i = 1;
+		$x++;
+	}
+	$_postCollection[$i][$x] = $_post;
+}
+
+$blockId = 'block' . time().rand();
+$classes = '';
+if($layout_type == 'owl_carousel'){
+	$classes = 'owl-carousel';
+}else{
+	$classes = 'plist';
+}
+?>
+<div class="block blog-posts <?php echo $addition_class ?>">
+	<?php if($widget_title!=''){ ?>
+	<div class="block-title">
+		<strong><?php echo $widget_title; ?></strong>
+	</div>
+	<?php } ?>
+	<?php if($html!=''){ ?>
+	<div class="pretext-html"><?php echo $html ?></div>
+	<?php } ?>
+	<div class="block-content">
+		<?php if($total>0){ ?>
+		<ul id="<?php echo $blockId ?>" class="<?php echo $classes ?> owl-theme">
+			<?php foreach ($_postCollection as $_columnCollection) { ?>
+			<li class="ves-post post-item">
+
+				<?php foreach ($_columnCollection as $_post){ ?>
+				<?php $postUrl = $helper->getPostUrl($_post); ?>
+				<?php
+				$style = '';
+				if($layout_type=='owl_carousel' && $item_height>0){
+					$style = 'style="' . $item_height . 'px"';
+				}
+				?>
+				<div class="post-block" <?php echo $style; ?>>
+					<?php if($show_image){ ?>
+					<div class="post-image">
+						<a href="<?php echo $postUrl ?>" title="<?php echo $_post->getTitle(); ?>">
+							<?php if( $_post->getThumbnailType() == 1 && $_post->getThumbnail()!=''){ ?>
+							<img class="img-responsive <?php if ($lazyload) { ?>owl-lazy<?php } ?>"
+							<?php if ($lazyload) { ?>
+							data-src="<?php echo $imageHelper->resizeImage($_post->getThumbnail(), $image_width, $image_height) ?>" alt="<?php echo $_post->getTitle(); ?>"
+							src="#"
+							<?php } else { ?>
+							src="<?php echo $imageHelper->resizeImage($_post->getThumbnail(), $image_width, $image_height) ?>" alt="<?php echo $_post->getTitle(); ?>"
+							<?php } ?>
+							/>
+							<?php }else if($_post->getThumbnailType() == 2){ ?>
+							<?php if($_post->getThumbnailVideoType()==1 && $_post->getThumbnailVideoId()!=''){ ?>
+							<iframe width="<?php echo $image_width ?>" height="<?php echo $image_height ?>" src="https://www.youtube.com/embed/<?php echo $_post->getThumbnailVideoId() ?>" frameborder="0" allowfullscreen></iframe>
+							<?php }else if($_post->getThumbnailVideoType()==2 && $_post->getThumbnailVideoId()!=''){ ?>
+							<iframe src="https://player.vimeo.com/video/<?php echo $_post->getThumbnailVideoId() ?>?color=3498DB&title=0&byline=0&portrait=0" width="<?php echo $image_width ?>" height="<?php echo $image_height ?>" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+							<?php } ?>
+							<?php } ?>
+						</a>
+					</div>
+					<?php } ?>
+					<div class="post-meta">
+						<?php if($show_title){ ?>
+						<div class="post-title">
+							<h3><a href="<?php echo $postUrl ?>" title="<?php echo $_post->getTitle(); ?>"><?php echo $_post->getTitle(); ?></a></h3>
+						</div>
+						<?php } ?>
+						<?php if($show_author){ ?>
+						<div class="post-author">
+							<?php $author = $helper->getPostAuthor($_post) ?>
+							<?php echo __('Posted by: ') ?>
+							<a href="<?php echo $helper->getAuthorUrl($author); ?>" title=""><?php echo $author->getFirstName() . ' ' . $author->getLastName() ?></a>
+						</div>
+						<?php } ?>
+						<?php if($show_createdtime || $show_updatedtime){ ?>
+						<div class="post-date">
+							<?php if($show_createdtime){ ?>
+							<?php $createdTime = $helper->getFormatDate($_post->getCreationTime(), $dateFormat); ?>
+							<span><?php echo __('Created on %1', $createdTime); ?></span>
+							<?php } ?>
+							<?php if($show_updatedtime){ ?>
+							<?php $updateTime = $helper->getFormatDate($_post->getUpdateTime(), $dateFormat); ?>
+							<span><?php echo __('Updated on %1', $updateTime); ?></span>
+							<?php } ?>
+						</div>
+						<?php } ?>
+						<?php if($show_commentcount){ ?>
+						<div class="post-comment">
+							<?php echo __('%1 comments', $_post->getCommentCount()); ?>
+						</div>
+						<?php } ?>
+						<?php if($show_categories){ ?>
+						<div class="post-categories">
+							<?php echo __('Pubslished In: ') ?>
+							<?php
+							$categories = $_post->getData('categories');
+							$count = count($categories);
+							?>
+							<?php foreach ($categories as $k => $v) { ?>
+							<a href="<?php echo $helper->getCategoryUrl($v['identifier'])  ?>" title="<?php echo $v['name'] ?>"><?php echo $v['name'] ?></a>
+							<?php if(isset($categories[$k+1])) echo __(', '); ?>
+							<?php } ?>
+						</div>
+						<?php } ?>
+						<?php if($show_hits){ ?>
+						<div class="post-hits"><span><?php echo __("Read");?></span> <strong><?php echo (int)$_post->getHits(); ?></strong> <?php echo __("Times"); ?></div>
+						<?php } ?>
+						<?php if($enableNetworks){ ?>
+						<div class="post-social">
+							<ul>
+								<?php if(isset($networks['facebook'])){ ?>
+								<li><div class="fb-like" data-href="<?php echo $postUrl ?>" data-layout="button" data-action="like" data-show-faces="true" data-share="true"></div></li>
+								<?php } ?>
+								<?php if(isset($networks['twitter'])){ ?>
+								<li><div>
+									<a href="http://twitter.com/share" class="twitter-share-button"
+									data-url="<?php echo $postUrl ?>"
+									data-via="twitterapi"
+									data-text="Checking out this page about Tweet Buttons"
+									data-related="anywhere:The Javascript API"
+									data-count="vertical"><i class="blog-icon twitter"></i></a>
+								</div></li>
+								<?php } ?>
+								<?php if(isset($networks['googleplus'])){ ?>
+								<li><div class="g-plusone" data-annotation="none" data-width="300" data-href="<?php echo $postUrl ?>"></div></li>
+								<?php } ?>
+								<?php if(isset($networks['linkedin'])){ ?>
+								<li><script type="IN/Share" data-url="<?php echo $postUrl ?>"></script></li>
+								<?php } ?>
+								<?php if(isset($networks['pinterest'])){ ?>
+								<li><a data-pin-do="buttonPin" href="https://www.pinterest.com/pin/create/button/?url=<?php echo $postUrl ?>&media=<?php echo $imageHelper->resizeImage($_post->getThumbnail(), $image_width, $image_height); ?>&description=<?php echo $_post->getTitle(); ?>"></a></li>
+								<?php } ?>
+							</ul>
+						</div>
+						<?php } ?>
+						<?php if($show_tags){ ?>
+						<?php $tags = $_post->getTag(); ?>
+						<?php if(!empty($tags)){ ?>
+						<div class="post-tag">
+							<span><?php echo __('Tags:'); ?></span>
+							<?php foreach ($tags as $k => $v) { ?>
+							<a href="<?php echo $helper->getTagUrl($v['alias']) ?>"><?php echo $v['name'] ?></a>
+							<?php if(isset($tags[$k+1])) echo __(', '); ?>
+							<?php } ?>
+						</div>
+						<?php } ?>
+						<?php } ?>
+						<?php if($show_shortdescription){ ?>
+						<div class="post-summary">
+							<?php $shortContent = $_post->getShortContent(); ?>
+							<?php echo $helper->subString($shortContent, (int)$shortdescription_count); ?>
+							<?php if($show_readmorelink){ ?>
+							<a href="<?php echo $postUrl ?>" title="<?php echo $_post->getTitle(); ?>"><?php echo __('Read more') ?></a>
+							<?php } ?>	
+						</div>
+						<?php } ?>
+					</div>
+				</div>
+				<?php } ?>
+
+			</li>
+			<?php } ?>
+		</ul>
+		<?php } ?>
+
+
+		<?php if($layout_type =='owl_carousel'){ ?>
+		<script>
+			require(['jquery'],function($){
+                $(document).ready(function(){
+				require([
+					'jquery',
+					<?php if($this->helper("Ves\All\Helper\Data")->getConfig("enable_owlcarousel")): ?>
+					"Ves_All/lib/owl.carousel/owl.carousel.min",
+					<?php endif; ?>
+					], function(){
+						jQuery(document).ready(function() {
+							var owl = jQuery('#<?php echo $blockId ?>');
+							owl.owlCarousel({
+								rtl: <?php echo $rtl?"true":"false" ?>,
+								loop:<?php echo $loop?"true":"false" ?>,
+								lazyLoad:<?php echo $lazyload?"true":"false" ?>,
+								nav:<?php echo $nav?"true":"false" ?>,
+								dots:<?php echo $dots?"true":"false" ?>,
+								navText: [ "<?php echo $nav_prev ?>", "<?php echo $nav_next ?>" ],
+								<?php if($autoplay){ ?>
+									autoplay:true,
+									autoplayTimeout: <?php echo $autoplay_timeout ?>,
+									<?php if($autoplay_hoverpause){?>
+										autoplayHoverPause: true,
+									<?php }else{?>
+										autoplayHoverPause: false,
+									<?php } ?>
+								<?php } ?>
+									responsive:{
+										0 : { items: <?php echo $mobile_items ?>},
+										480 : {items: <?php echo $tablet_small_items ?>},
+										640 : {items: <?php echo $tablet_items ?>},
+										768 : {items: <?php echo $portrait_items ?>},
+										980 : {items: <?php echo $large_items ?>},
+										1200 : {items: <?php echo $large_max_items ?>},
+									},
+									onInitialized: function(){
+										<?php if($item_height==0){ ?>
+											var tmpH = 0;
+											jQuery("#<?php echo $blockId ?> .post-block").each(function(index){
+												var h = jQuery(this).height();
+												if(h>tmpH){
+													tmpH = h;
+												}
+											});
+											jQuery("#<?php echo $blockId ?> .post-block").css("height",tmpH+"px");
+											<?php } ?>
+										}
+									});
+
+						});
+					});
+				});
+				});
+			</script>
+			<?php } ?>
+
+			<?php if($enableNetworks){ ?>
+			<?php if(isset($networks['linkedin'])){ ?>
+			<script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
+			<?php } ?>
+			<?php /*if(isset($networks['twitter'])){ ?>
+			<script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
+			<?php }*/ ?>
+			<?php if(isset($networks['googleplus'])){ ?>
+			<script src="https://apis.google.com/js/platform.js" async defer></script>
+			<?php } ?>
+			<?php if(isset($networks['facebook'])){ ?>
+			<div id="fb-root"></div>
+			<script>(function(d, s, id) {
+				var js, fjs = d.getElementsByTagName(s)[0];
+				if (d.getElementById(id)) return;
+				js = d.createElement(s); js.id = id;
+				js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1415255422062295";
+				fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));</script>
+			<?php } ?>
+			<?php if(isset($networks['pinterest'])){ ?>
+			<script type="text/javascript" async defer src="//assets.pinterest.com/js/pinit.js"></script>
+			<?php } ?>
+			<?php } ?>
+		</div>
+	</div>

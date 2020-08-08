@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement(EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+ * @package   Ced_EbayMultiAccount
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright Copyright CEDCOMMERCE(http://cedcommerce.com/)
+ * @license   http://cedcommerce.com/license-agreement.txt
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job name="ced_ebaymultiaccount_order" instance="Ced\EbayMultiAccount\Cron\FetchOrders" method="execute">
+            <schedule>*/15 * * * *</schedule>
+        </job>
+        <job name="ced_ebaymultiaccount_inventory_update" instance="Ced\EbayMultiAccount\Cron\UpdateInventory" method="execute">
+            <schedule>*/10 * * * *</schedule>
+        </job>
+        <job name="ced_ebaymultiaccount_bulk_file_creation" instance="Ced\EbayMultiAccount\Cron\CreateScheduledFile" method="execute">
+            <schedule>*/10 * * * *</schedule>
+        </job>
+        <job name="ced_ebaymultiaccount_bulk_file_upload" instance="Ced\EbayMultiAccount\Cron\UploadCreatedFile" method="execute">
+            <schedule>*/10 * * * *</schedule>
+        </job>
+        <job name="ced_ebaymultiaccount_bulk_upload_syncing" instance="Ced\EbayMultiAccount\Cron\SyncUploadedJob" method="execute">
+            <schedule>*/10 * * * *</schedule>
+        </job>
+        <job name="ced_ebaymultiaccount_process_bulk_report_file" instance="Ced\EbayMultiAccount\Cron\ProcessReportFile" method="execute">
+            <schedule>*/10 * * * *</schedule>
+        </job>
+        <job name="ced_ebaymultiaccount_shipment_cron" instance="Ced\EbayMultiAccount\Helper\ShipmentHelper" method="execute">
+            <schedule>0 */6 * * *</schedule>
+        </job>
+    </group>
+</config>

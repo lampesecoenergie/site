@@ -1,0 +1,130 @@
+<div class="pie-container">
+    <div class="pie">
+        <div class="title">
+            <?php echo __("Warmer Speed");?>
+        </div>
+        <?php if ($block->canShow()): ?>
+            <canvas id="current_speed" width="200" height="200">
+            </canvas>
+        <?php else:?>
+            <?php echo __("Not available for WIN OS");?>
+        <?php endif;?>
+    </div>
+    <div class="pie">
+        <div class="title">
+            <?php echo __("Current CPU Load");?>
+        </div>
+        <?php if ($block->canShow()): ?>
+            <canvas id="current_load" width="200" height="200">
+            </canvas>
+        <?php else:?>
+            <?php echo __("Not available for WIN OS");?>
+        <?php endif;?>
+    </div>
+    <div class="pie">
+        <div class="title">
+            <?php echo __("Warmer Progress");?>
+        </div>
+        <canvas id="warmer_stat" width="200" height="200">
+        </canvas>
+    </div>
+</div>
+<div style="clear:both"></div>
+<script type="text/javascript">
+    require([
+        "prototype"
+    ], function() {
+        var drawWarmerPie = function() {
+            var canvas = $("warmer_stat");
+            if (!canvas) {
+                return;
+            }
+            var context = canvas.getContext("2d");
+
+            var x = canvas.width / 2;
+            var y = canvas.height / 2;
+            var radius = 75;
+            var startAngle = 2 * Math.PI;
+            var endAngle = <?php echo $this->getWarmerAngle();?> * Math.PI;
+            var counterClockwise = false;
+
+            context.beginPath();
+
+            context.arc(x, y, radius, 1 * Math.PI, 4 * Math.PI, false);
+            context.strokeStyle = '#d1e1f9';
+
+            context.lineWidth = 40;
+
+            context.font = "14px Arial";
+            context.fillStyle = '#0a70ff';
+            context.textAlign = "center";
+            context.fillText("<?php echo $this->getWarmerStat()?>", canvas.width/2, canvas.height/2 + 27);
+            context.stroke();
+
+            context.font = "40px Arial";
+            context.textAlign = "center";
+            context.fillText("<?php echo $this->getWarmerProgress()?>%", canvas.width/2, canvas.height/2 + 10);
+            context.stroke();
+
+            // line color
+            context.beginPath();
+            context.arc(x, y, radius, startAngle, endAngle, counterClockwise);
+            context.strokeStyle = '#0a70ff';
+            context.stroke();
+        };
+        var drawSpeedPie = function() {
+            var canvas = $("current_speed");
+            if (!canvas) {
+                return;
+            }
+            var context = canvas.getContext("2d");
+
+            context.beginPath();
+            context.font = "40px Arial";
+            context.fillStyle = '#0a70ff';
+            context.textAlign = "center";
+            context.fillText("<?php echo $this->getCurrentSpeed()?>", canvas.width/2, canvas.height/2 + 10);
+            context.stroke();
+
+            context.font = "25px Arial";
+            context.fillText("<?php echo __("Pages/Hour")?>", canvas.width/2, canvas.height/2 + 30);
+            context.stroke();
+        };
+        var drawCpuLoadPie = function() {
+            var canvas = $("current_load");
+            if (!canvas) {
+                return;
+            }
+            var context = canvas.getContext("2d");
+
+            var x = canvas.width / 2;
+            var y = canvas.height / 2;
+            var radius = 75;
+            var startAngle = 2 * Math.PI;
+            var endAngle = <?php echo $this->getCpuLoadAngle();?> * Math.PI;
+            var counterClockwise = false;
+
+            context.beginPath();
+
+            context.arc(x, y, radius, 1 * Math.PI, 4 * Math.PI, false);
+            context.strokeStyle = '#d1e1f9';
+
+            context.lineWidth = 40;
+
+            context.font = "40px Arial";
+            context.fillStyle = '#0a70ff';
+            context.textAlign = "center";
+            context.fillText("<?php echo $this->getCpuLoad()?>%", canvas.width/2, canvas.height/2 + 10);
+            context.stroke();
+
+            // line color
+            context.beginPath();
+            context.arc(x, y, radius, startAngle, endAngle, counterClockwise);
+            context.strokeStyle = '#0a70ff';
+            context.stroke();
+        };
+        drawWarmerPie();
+        drawSpeedPie();
+        drawCpuLoadPie();
+    });
+</script>

@@ -1,0 +1,248 @@
+.post-social ul{
+	margin: 0;
+	padding: 0;
+}
+.post-social ul li{
+	display: inline-block
+}
+.ves-blog ul li,
+.ves-block ul li{
+    list-style: none;
+}
+.blog-icon.twitter {
+    background-image: url("../images/twitter.png");
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    background-color: white;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-color: transparent;
+}
+.ves-blog ul,
+.ves-block ul
+{
+    margin: 0;
+    padding: 0
+}
+.ves-blog .block-title {
+    margin: 0 0 20px;
+}
+.ves-blog .block-title strong {
+    font-size: 18px;
+    font-weight: 300;
+}
+.ves-blog .blog-list .post-item{
+	float: left;
+	padding: 20px 0 40px;
+	background: #FFF;
+	width: 100%;
+	margin-bottom: 20px;
+	border-bottom: 1px solid #ddd;
+}
+.blog-masonry {
+    float: left;
+    width: 100%;
+}
+.ves-blog .blog-masonry .post-item{
+	float: left;
+	border-radius: 8px;
+	background: #D8D6D2;
+	margin: 0 1% 20px 1%;
+}
+
+.ves-blog .blog-masonry .post-item {
+    background: #eee;
+    border-radius: 8px;
+    display: inline-block;
+    left: auto !important;
+    margin: 0 1% 30px;
+    overflow: hidden;
+    float: left;
+    position: relative !important;
+    top: auto !important;
+}
+.ves-blog .blog-masonry .post-meta {
+    padding: 0 15px 20px;
+}
+
+.blog-posts iframe,
+.ves-block iframe,
+.ves-blog .blog-masonry iframe,
+.ves-blog .blog-grid iframe{
+	height: auto;
+}
+
+.blog-posts iframe,
+.ves-block iframe,
+.ves-blog iframe,
+.ves-blog video{
+	max-width: 100%;
+}
+
+.tagcloud {
+    text-align:center;
+    padding: 0;
+    margin: 0;
+}
+.tagcloud li {
+    display: inline;
+    padding: 2px;
+    margin-left: 10px;
+}
+
+.tag-count-1 {
+    font-size: 1em !important;
+}
+
+.tag-count-2 {
+    font-size: 1.2em !important;
+}
+
+.tag-count-3 {
+    font-size: 1.4em !important;
+}
+
+.tag-count-4 {
+    font-size: 1.6em !important;
+}
+
+.tag-count-5 {
+    font-size: 1.8em !important;
+}
+
+.tag-count-6 {
+    font-size: 2em !important;
+}
+
+.tag-count-7 {
+    font-size: 2em !important;
+}
+
+.tag-count-8 {
+    font-size: 2em !important;
+}
+
+.tag-count-9 {
+    font-size: 2em !important;
+}
+
+.tag-count-10 {
+    font-size: 2em !important;
+}
+
+.comments-list ul li{
+    list-style: none;
+    padding: 15px;
+    float: left;
+    width: 100%
+}
+.comments-list ul li .avatar{
+    float: left;
+    margin: 0 15px 10px 0;
+}
+.comments-list ul li .avatar img{
+    border-radius: 50%
+}
+.comments-list ul{
+    padding: 0;
+    margin: 0
+}
+.comments-list ul li span.comment-date {
+    color: #aaa;
+    font-size: 0.8em;
+    font-weight: 400;
+}
+
+.comments-list ul li span.comment-author {
+    white-space: nowrap;
+    font-weight: bold;
+    color: #000;
+}
+
+.comments-list li.odd {
+    background: #F5F5F5;
+}
+.comments-list .comment-content{
+    margin-left: 75px;
+}
+
+.blog-comments .pages{
+    float: left;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+}
+.blog-comments .comment-form{
+    float: left;
+    width: 100%;
+    border-top: 1px solid #CCC;
+    margin-top: 20px;
+    padding-top: 20px;
+}
+
+.blog-comments .comment-notes{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.blog-comments .comment-form ul{
+    padding: 0;
+    margin: 0
+}
+.blog-comments .comment-form ul li{
+    list-style: none
+}
+.blog-comments label{
+    font-weight: normal;
+}
+.blog-comments .required em{
+    float: right;
+    color: red;
+}
+
+.blog-comments .input-text{
+    border: 1px solid #CCC;
+    border-radius: 2px;
+    width: 50%;
+    padding: 5px;
+}
+
+.blog-comments textarea.input-text{
+    width: 100%;
+    height: 150px;
+}
+.blog-comments{
+    float: left;
+    border-top: 1px solid #e5e5e5;
+    margin-top: 20px;
+    width: 100%;
+}
+.posts-related{
+    float: left;
+    border-top: 1px solid #e5e5e5;
+    margin-top: 20px;
+    width: 100%;
+}
+.post-content{
+    float: left;
+    margin-bottom: 20px;
+}
+.ves-post.post-item {
+    margin-bottom: 30px;
+}
+.blog-toolbar{
+    margin-bottom: 10px;
+}
+
+.blog-recentcomments .block-content li {
+    border-bottom: 1px solid #eee;
+    color: #888;
+    padding: 15px 0;
+}
+.blog-recentcomments .block-content a {
+    color: #3d3d3d;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+}

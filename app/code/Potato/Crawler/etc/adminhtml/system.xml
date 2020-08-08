@@ -1,0 +1,147 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="potato" translate="label" sortOrder="310">
+            <label>POTATOCOMMERCE</label>
+        </tab>
+        <section id="po_crawler" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1"
+                 showInStore="1">
+            <label>Cache Warmer</label>
+            <tab>potato</tab>
+            <resource>Potato_Crawler::po_crawler</resource>
+            <group id="statistic" translate="label,comment" type="text" sortOrder="10" showInDefault="1">
+                <label>Statistic</label>
+                <frontend_model>Potato\Crawler\Block\Adminhtml\System\Config\Statistic</frontend_model>
+            </group>
+            <group id="general" translate="label,comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>General</label>
+                <field id="is_enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enable Extension</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="acceptable_cpu_load" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Acceptable CPU Load, %</label>
+                    <comment>To prevent high CPU load, the crawling process will be paused if CPU load is greater than this value.</comment>
+                </field>
+                <!--field id="cronjob" translate="label comment" type="text" sortOrder="25" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Cache Warming Schedule</label>
+                </field-->
+            </group>
+            <group id="priority" translate="label,comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Crawler Priorities</label>
+                <field id="head" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Here you can enable/disable crawling for the entities.\nDrag and drop to change the priorities - the higher an option, the higher its priority.</label>
+                    <frontend_model>Potato\Crawler\Block\Adminhtml\System\Config\Notice</frontend_model>
+                </field>
+                <field id="store_priority" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Store Priority</label>
+                </field>
+                <field id="page_group_priority" translate="label comment" type="multiselect" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Run Crawler For Page Type(s)</label>
+                    <frontend_model>Potato\Crawler\Block\Adminhtml\System\Config\Priority</frontend_model>
+                    <source_model>Potato\Crawler\Model\Source\PageGroup</source_model>
+                </field>
+                <field id="currency_priority" translate="label comment" type="multiselect" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Run Crawler For Currency(-ies)</label>
+                    <frontend_model>Potato\Crawler\Block\Adminhtml\System\Config\Priority</frontend_model>
+                    <source_model>Potato\Crawler\Model\Source\Currency</source_model>
+                </field>
+                <field id="customer_group" translate="label comment" type="multiselect" sortOrder="45" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Run Crawler For Customer Group(s)</label>
+                    <frontend_model>Potato\Crawler\Block\Adminhtml\System\Config\Priority</frontend_model>
+                    <source_model>Potato\Crawler\Model\Source\CustomerGroup</source_model>
+                </field>
+                <field id="protocol" translate="label comment" type="multiselect" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Run Crawler For Protocol(s)</label>
+                    <frontend_model>Potato\Crawler\Block\Adminhtml\System\Config\Priority</frontend_model>
+                    <source_model>Potato\Crawler\Model\Source\Protocol</source_model>
+                </field>
+            </group>
+            <group id="advanced" translate="label,comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Advanced</label>
+                <field id="useragent" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>User Agents Used for Crawling Pages</label>
+                    <frontend_model>Potato\Crawler\Block\Adminhtml\System\Config\Useragent</frontend_model>
+                    <backend_model>Potato\Crawler\Model\Config\Backend\ArraySerialized</backend_model>
+                    <comment><![CDATA[<a href="http://www.useragentstring.com/pages/useragentstring.php">List of User Agent</a>]]></comment>
+                </field>
+                <field id="source" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Source of Page URLs</label>
+                    <source_model>Potato\Crawler\Model\Source\UrlSource</source_model>
+                </field>
+                <field id="source_path" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Sitemap (Url|Path)</label>
+                    <comment>web url to file or absolute path</comment>
+                    <depends>
+                        <field id="source">2</field>
+                    </depends>
+                </field>
+                <field id="short_product_url" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Use Only Short Product URLs</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>"No" means that both short and long product URLs will be used by the crawler.</comment>
+                </field>
+                <field id="debug" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Enable Crawler Logging</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable the option to log Cache Warmer process in the "var/log/po_crawler.log" file</comment>
+                </field>
+                <field id="queue" translate="label" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <frontend_model>Potato\Crawler\Block\Adminhtml\System\Config\Queue</frontend_model>
+                    <comment>Cache Warmer uses cron to add pages to the queue automatically. You can add pages to the queue now by this button if necessary.</comment>
+                </field>
+            </group>
+            <group id="info" translate="label,comment" type="text" sortOrder="40" showInDefault="1">
+                <label>Additional Information</label>
+                <field id="nproc" translate="label comment" type="label" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="0">
+                    <frontend_model>Potato\Crawler\Block\Adminhtml\System\Config\Info</frontend_model>
+                    <label>Cores</label>
+                </field>
+                <field id="current" translate="label comment" type="label" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="0">
+                    <frontend_model>Potato\Crawler\Block\Adminhtml\System\Config\Info</frontend_model>
+                    <label>Current Load Avr</label>
+                </field>
+                <field id="thread" translate="label comment" type="label" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="0">
+                    <frontend_model>Potato\Crawler\Block\Adminhtml\System\Config\Info</frontend_model>
+                    <label>Calculated Thread Usage</label>
+                </field>
+                <field id="critical" translate="label comment" type="label" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="0">
+                    <frontend_model>Potato\Crawler\Block\Adminhtml\System\Config\Info</frontend_model>
+                    <label>Calculated Huge Load Avr</label>
+                </field>
+                <field id="acceptable" translate="label comment" type="label" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="0">
+                    <frontend_model>Potato\Crawler\Block\Adminhtml\System\Config\Info</frontend_model>
+                    <label>Calculated Acceptable Load Avr</label>
+                </field>
+                <field id="warmer_activity" translate="label comment" type="label" sortOrder="60" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="0">
+                    <frontend_model>Potato\Crawler\Block\Adminhtml\System\Config\Info</frontend_model>
+                    <label>Warmer Last Activity</label>
+                </field>
+                <field id="warmer_pid" translate="label comment" type="label" sortOrder="70" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="0">
+                    <frontend_model>Potato\Crawler\Block\Adminhtml\System\Config\Info</frontend_model>
+                    <label>Last Warmer PID</label>
+                </field>
+                <field id="warmer_restart" translate="label" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Warmer Force Stop/Start</label>
+                    <frontend_model>Potato\Crawler\Block\Adminhtml\System\Config\Restart</frontend_model>
+                </field>
+                <field id="queue_activity" translate="label comment" type="label" sortOrder="90" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="0">
+                    <frontend_model>Potato\Crawler\Block\Adminhtml\System\Config\Info</frontend_model>
+                    <label>Queue Last Activity</label>
+                </field>
+                <field id="queue_pid" translate="label comment" type="label" sortOrder="100" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="0">
+                    <frontend_model>Potato\Crawler\Block\Adminhtml\System\Config\Info</frontend_model>
+                    <label>Last Queue PID</label>
+                </field>
+                <field id="queue_restart" translate="label" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Queue Force Stop/Start</label>
+                    <frontend_model>Potato\Crawler\Block\Adminhtml\System\Config\Restart</frontend_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

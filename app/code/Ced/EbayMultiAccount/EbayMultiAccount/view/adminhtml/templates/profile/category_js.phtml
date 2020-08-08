@@ -1,0 +1,395 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+ * @package   Ced_EbayMultiAccount
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright Copyright CEDCOMMERCE (http://cedcommerce.com/)
+ * @license   http://cedcommerce.com/license-agreement.txt
+ */
+
+$rootLevel = $block->getlevel( 1 );
+$level_1 = $block->getLevel( 2 );
+$level_2 = $block->getLevel( 3 );
+$level_3 = $block->getLevel( 4 );
+$level_4 = $block->getLevel( 5 );
+$level_5 = $block->getLevel( 6 );
+
+$profileId = '';
+$savedRootLevel = $savedLevel1 = $savedLevel2 = $savedLevel3 = $savedLevel4 = $savedLevel5 ="";
+if($this->_profile && $this->_profile->getId()){
+    $categoryJson = $this->_profile->getData('profile_category');
+    $category = json_decode($categoryJson);
+    $savedRootLevel = isset($category[0]) ? $category[0] : "";
+    $savedLevel1 = isset($category[1]) ? $category[1] : "";
+    $savedLevel2 = isset($category[2]) ? $category[2] : "";
+    $savedLevel3 = isset($category[3]) ? $category[3] : "";
+    $savedLevel4 = isset($category[4]) ? $category[4] : "";
+    $savedLevel5 = isset($category[5]) ? $category[5] : "";
+    $profileId = $this->_profile->getId();
+}
+?>
+<script>
+    require([
+        "jquery",
+    ], function($) {
+        var rootLevel=<?php echo json_encode($rootLevel);?>;
+        var level_1=<?php echo json_encode($level_1);?>;
+        var level_2=<?php echo json_encode($level_2);?>;
+        var level_3=<?php echo json_encode($level_3);?>;
+        var level_4=<?php echo json_encode($level_4);?>;
+        var level_5=<?php echo json_encode($level_5);?>;
+        var savedRootLevel="<?php echo $savedRootLevel; ?>";
+        var savedLevel1="<?php echo $savedLevel1; ?>";
+        var savedLevel2="<?php echo $savedLevel2; ?>";
+        var savedLevel3="<?php echo $savedLevel3; ?>";
+        var savedLevel4="<?php echo $savedLevel4; ?>";
+        var savedLevel5="<?php echo $savedLevel5; ?>";
+        var leaf = true;
+        if(savedRootLevel == "") {
+            $('[name="level_0"]').prepend('<option value="" selected= selected>Please select root-category</option>');
+            $('[name="level_1"]').prepend('<option value="">Please select level 1 category</option>');
+            $('[name="level_1"]').attr('disabled', 'disabled');
+            $('[name="level_2"]').prepend('<option value="">Please select level 2 category</option>');
+            $('[name="level_2"]').attr('disabled', 'disabled');
+            $('[name="level_3"]').prepend('<option value="">Please select level 3 category</option>');
+            $('[name="level_3"]').attr('disabled', 'disabled');
+            $('[name="level_4"]').prepend('<option value="">Please select level 4 category</option>');
+            $('[name="level_4"]').attr('disabled', 'disabled');
+            $('[name="level_5"]').prepend('<option value="">Please select level 5 category</option>');
+            $('[name="level_5"]').attr('disabled', 'disabled');
+        } else {
+            if (savedLevel1 == "") {
+                $('.field-level_1').hide();
+                $('[name="level_1"]').removeClass('required-entry _required');
+            }
+            if (savedLevel2 == "") {
+                $('.field-level_2').hide();
+                $('[name="level_2"]').removeClass('required-entry _required');
+            }
+            if (savedLevel3 == "") {
+                $('.field-level_3').hide();
+                $('[name="level_3"]').removeClass('required-entry _required');
+            }
+            if (savedLevel4 == "") {
+                $('.field-level_4').hide();
+                $('[name="level_4"]').removeClass('required-entry _required');
+            }
+            if (savedLevel5 == "") {
+                $('.field-level_5').hide();
+                $('[name="level_5"]').removeClass('required-entry _required');
+            }
+        }
+        $('[name="level_0"]').change(function(){
+            leaf = true;
+            $('.field-level_1').show();
+            $('.field-level_2').show();
+            $('.field-level_3').show();
+            $('.field-level_4').show();
+            $('.field-level_5').show();
+            $('[name="level_1"]').empty();
+            $('[name="level_2"]').empty();
+            $('[name="level_3"]').empty();
+            $('[name="level_4"]').empty();
+            $('[name="level_5"]').empty();
+            $('[name="level_1"]').removeAttr('disabled');
+            $('[name="level_1"]').append('<option value="">Please select level 1 category</option>');
+            $('[name="level_2"]').prepend('<option value="">Please select level 2 category</option>');
+            $('[name="level_2"]').attr('disabled', 'disabled');
+            $('[name="level_3"]').prepend('<option value="">Please select level 3 category</option>');
+            $('[name="level_3"]').attr('disabled', 'disabled');
+            $('[name="level_4"]').prepend('<option value="">Please select level 4 category</option>');
+            $('[name="level_4"]').attr('disabled', 'disabled');
+            $('[name="level_5"]').prepend('<option value="">Please select level 5 category</option>');
+            $('[name="level_5"]').attr('disabled', 'disabled');
+            var cat_id=$('[name="level_0"]').val();
+            for (var key in level_1) {
+                for (var subkey in level_1[key]){
+                    if((subkey == 'CategoryParentID') && (level_1[key][subkey] == cat_id)){
+                        leaf = false;
+                        $('[name="level_1"]').append('<option value='+level_1[key]['CategoryID']+'>'+level_1[key]['CategoryName']+'</option>');
+                    }
+                }
+            }
+            if (leaf) {
+                var id = $('#level_0').val();
+                $('[name="level_1"]').empty();
+                $('[name="level_1"]').removeClass('required-entry _required');
+                $('[name="level_1"]').append('<option value="">category have no leaf category</option>');
+                getAttributes(id);
+            }
+        });
+        $('[name="level_1"]').change(function() {
+            leaf = true;
+            $('.field-level_2').show();
+            $('.field-level_3').show();
+            $('.field-level_4').show();
+            $('.field-level_5').show();
+            $('[name="level_2"]').empty();
+            $('[name="level_3"]').empty();
+            $('[name="level_4"]').empty();
+            $('[name="level_5"]').empty();
+            $('[name="level_2"]').removeAttr('disabled');
+            $('[name="level_2"]').append('<option value="">Please select level 2 category</option>');
+            $('[name="level_3"]').prepend('<option value="">Please select level 3 category</option>');
+            $('[name="level_3"]').attr('disabled', 'disabled');
+            $('[name="level_4"]').prepend('<option value="">Please select level 4 category</option>');
+            $('[name="level_4"]').attr('disabled', 'disabled');
+            $('[name="level_5"]').prepend('<option value="">Please select level 5 category</option>');
+            $('[name="level_5"]').attr('disabled', 'disabled');
+            var cat_id=$('[name="level_1"]').val();
+            for (var key in level_2) {
+                for (var subkey in level_2[key]){
+                    if((subkey == 'CategoryParentID') && (level_2[key]['CategoryParentID'] == cat_id)) {
+                        leaf = false;
+                        $('[name="level_2"]').append('<option value='+level_2[key]['CategoryID']+'>'+level_2[key]['CategoryName']+'</option>');
+                    }
+                }
+            }
+            if (leaf) {
+                var id = $('#level_1').val();
+                $('[name="level_2"]').empty();
+                $('[name="level_2"]').removeClass('required-entry _required');
+                $('[name="level_2"]').append('<option value="">category have no leaf category</option>');
+                getAttributes(id);
+            }
+        });
+        $('[name="level_2"]').change(function(){
+            leaf = true;
+            $('.field-level_3').show();
+            $('.field-level_4').show();
+            $('.field-level_5').show();
+            $('[name="level_3"]').empty();
+            $('[name="level_4"]').empty();
+            $('[name="level_5"]').empty();
+            $('[name="level_3"]').removeAttr('disabled');
+            $('[name="level_3"]').append('<option value="">Please select level 3 category</option>');
+            $('[name="level_4"]').prepend('<option value="">Please select level 4 category</option>');
+            $('[name="level_4"]').attr('disabled', 'disabled');
+            $('[name="level_5"]').prepend('<option value="">Please select level 5 category</option>');
+            $('[name="level_5"]').attr('disabled', 'disabled');
+            var cat_id=$('[name="level_2"]').val();
+            for (var key in level_3) {
+                for (var subkey in level_3[key]){
+                    if((subkey == 'CategoryParentID') && (level_3[key][subkey] == cat_id)){
+                        leaf = false;
+                        $('[name="level_3"]').append('<option value='+level_3[key]['CategoryID']+'>'+level_3[key]['CategoryName']+'</option>');
+                    }
+                }
+            }
+            if (leaf) {
+                var id = $('#level_2').val();
+                $('[name="level_3"]').empty();
+                $('[name="level_3"]').removeClass('required-entry _required');
+                $('[name="level_3"]').append('<option value="">category have no leaf category</option>');
+                getAttributes(id);
+            }
+        });
+        $('[name="level_3"]').change(function(){
+            leaf = true;
+            $('.field-level_4').show();
+            $('.field-level_5').show();
+            $('[name="level_4"]').empty();
+            $('[name="level_5"]').empty();
+            $('[name="level_4"]').removeAttr('disabled');
+            $('[name="level_4"]').append('<option value="">Please select level 4 category</option>');
+            $('[name="level_5"]').prepend('<option value="">Please select level 5 category</option>');
+            $('[name="level_5"]').attr('disabled', 'disabled');
+            var cat_id=$('[name="level_3"]').val();
+            for (var key in level_4) {
+                for (var subkey in level_4[key]){
+                    if((subkey == 'CategoryParentID') && (level_4[key][subkey] == cat_id)){
+                        leaf = false;
+                        $('[name="level_4"]').append('<option value='+level_4[key]['CategoryID']+'>'+level_4[key]['CategoryName']+'</option>');
+                    }
+                }
+            }
+            if (leaf) {
+                var id = $('#level_3').val();
+                $('[name="level_4"]').empty();
+                $('[name="level_4"]').removeClass('required-entry _required');
+                $('[name="level_4"]').append('<option value="">category have no leaf category</option>');
+                getAttributes(id);
+            }
+        });
+        $('[name="level_4"]').change(function(){
+            leaf = true;
+            $('.field-level_5').show();
+            $('[name="level_5"]').empty();
+            $('[name="level_5"]').removeAttr('disabled');
+            $('[name="level_5"]').append('<option value="">Please select level 5 category</option>');
+            var cat_id=$('[name="level_4"]').val();
+            for (var key in level_5) {
+                for (var subkey in level_5[key]){
+                    if((subkey == 'CategoryParentID') && (level_5[key][subkey] == cat_id)){
+                        leaf = false;
+                        $('[name="level_5"]').append('<option value='+level_5[key]['CategoryID']+'>'+level_5[key]['CategoryName']+'</option>');
+                    }
+                }
+            }
+            if (leaf) {
+                var id = $('#level_4').val();
+                $('[name="level_5"]').empty();
+                $('[name="level_5"]').removeClass('required-entry _required');
+                $('[name="level_5"]').append('<option value="">category have no leaf category</option>');
+                getAttributes(id);
+            }
+        });
+        $('[name="level_5"]').change(function(){
+            var id = $('#level_5').val();
+            getAttributes(id);
+        });
+
+
+        // FOR SETTING SAVED VALUES AFTER SAVING THEM IN LEVEL 0
+        if(savedRootLevel)
+        {
+            $('[name="level_0"]').empty();
+            for (var key in rootLevel) {
+                for (var subkey in rootLevel[key]) {
+                    if(subkey == 'CategoryParentID') {
+                        if(savedRootLevel == rootLevel[key]['CategoryID']) {
+                            $('[name="level_0"]').append('<option  selected="selected" value='+rootLevel[key]['CategoryID']+'>'+rootLevel[key]['CategoryName']+'</option>');
+                        } else {
+                            $('[name="level_0"]').append('<option value='+rootLevel[key]['CategoryID']+'>'+rootLevel[key]['CategoryName']+'</option>');
+                        }
+                    }
+                }
+            }
+        }
+
+        // FOR SETTING SAVED VALUES AFTER SAVING THEM IN LEVEL 2
+        if (savedLevel1) {
+            $('[name="level_1"]').empty();
+            var cat_id=$('[name="level_0"]').val();
+            for (var key in level_1) {
+                for (var subkey in level_1[key]) {
+                    if(subkey == 'CategoryParentID'){
+                        if(level_1[key][subkey] == cat_id) {
+                            if(savedLevel1 == level_1[key]['CategoryID']) {
+                                $('[name="level_1"]').append('<option  selected="selected" value='+level_1[key]['CategoryID']+'>'+level_1[key]['CategoryName']+'</option>');
+                            } else {
+                                $('[name="level_1"]').append('<option value='+level_1[key]['CategoryID']+'>'+level_1[key]['CategoryName']+'</option>');
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+
+        // FOR SETTING SAVED VALUES AFTER SAVING THEM IN LEVEL 3
+        if (savedLevel2) {
+            $('[name="level_2"]').empty();
+            var cat_id=$('[name="level_1"]').val();
+            for (var key in level_2) {
+                for (var subkey in level_2[key]) {
+                    if(subkey == 'CategoryParentID'){
+                        if(level_2[key][subkey] == cat_id) {
+                            if(savedLevel2 == level_2[key]['CategoryID']) {
+                                $('[name="level_2"]').append('<option  selected="selected" value='+level_2[key]['CategoryID']+'>'+level_2[key]['CategoryName']+'</option>');
+                            } else {
+                                $('[name="level_2"]').append('<option value='+level_2[key]['CategoryID']+'>'+level_2[key]['CategoryName']+'</option>');
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+
+        // FOR SETTING SAVED VALUES AFTER SAVING THEM IN LEVEL 4
+        if (savedLevel3) {
+            $('[name="level_3"]').empty();
+            var cat_id=$('[name="level_2"]').val();
+            for (var key in level_3) {
+                for (var subkey in level_3[key]) {
+                    if(subkey == 'CategoryParentID'){
+                        if(level_3[key][subkey] == cat_id) {
+                            if(savedLevel3 == level_3[key]['CategoryID']) {
+                                $('[name="level_3"]').append('<option  selected="selected" value='+level_3[key]['CategoryID']+'>'+level_3[key]['CategoryName']+'</option>');
+                            } else {
+                                $('[name="level_3"]').append('<option value='+level_3[key]['CategoryID']+'>'+level_3[key]['CategoryName']+'</option>');
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+
+        // FOR SETTING SAVED VALUES AFTER SAVING THEM IN LEVEL 5
+        if (savedLevel4) {
+            $('[name="level_4"]').empty();
+            var cat_id=$('[name="level_3"]').val();
+            for (var key in level_4) {
+                for (var subkey in level_4[key]) {
+                    if(subkey == 'CategoryParentID'){
+                        if(level_4[key][subkey] == cat_id) {
+                            if(savedLevel4 == level_4[key]['CategoryID']) {
+                                $('[name="level_4"]').append('<option  selected="selected" value='+level_4[key]['CategoryID']+'>'+level_4[key]['CategoryName']+'</option>');
+                            } else {
+                                $('[name="level_4"]').append('<option value='+level_4[key]['CategoryID']+'>'+level_4[key]['CategoryName']+'</option>');
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+
+        // FOR SETTING SAVED VALUES AFTER SAVING THEM IN LEVEL 6
+        if (savedLevel5) {
+            $('[name="level_5"]').empty();
+            var cat_id=$('[name="level_4"]').val();
+            for (var key in level_5) {
+                for (var subkey in level_5[key]) {
+                    if(subkey == 'CategoryParentID'){
+                        if(level_5[key][subkey] == cat_id) {
+                            if(savedLevel5 == level_5[key]['CategoryID']) {
+                                $('[name="level_5"]').append('<option  selected="selected" value='+level_5[key]['CategoryID']+'>'+level_5[key]['CategoryName']+'</option>');
+                            } else {
+                                $('[name="level_5"]').append('<option value='+level_5[key]['CategoryID']+'>'+level_5[key]['CategoryName']+'</option>');
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+        var catData = [$('#level_0').val(),$('#level_1').val(),$('#level_2').val(),$('#level_3').val(),$('#level_4').val(),$('#level_5').val()];
+
+        function getAttributes(id) {
+            if($('account_id'))
+                var accountId = document.getElementById('account_id').value;
+            var parameters = {'profile_id':'<?php echo $profileId ?>', 'account_id': accountId, 'catId': id, 'items':JSON.stringify(catData)}
+            var rurl ='<?php echo $this->getUrl('ebaymultiaccount/profile/UpdateCategoryAttributes',array('_nosid'=>true))?>';
+            $.ajax({
+                url: rurl,
+                type: 'POST',
+                data: parameters,
+                dataType: 'html',
+                showLoader: true,
+                success: function(response) {
+                    $('#attribute-ebaymultiaccountAttributes-container').html(response);
+                },
+                error: function() {
+                    $('#attribute-ebaymultiaccountAttributes-container').html();
+                }
+            });
+        }
+    });
+</script>
+<style type="text/css">
+    #groupVendorPpcode_massaction-form {
+        display:none;
+    }
+</style>

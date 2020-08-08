@@ -1,0 +1,37 @@
+<!--
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_CustomerAttributes
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2018-2019 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+-->
+<div class="admin__field-control"
+         css="'_with-tooltip': $data.tooltip">
+    <div class="choice field" outereach="options">
+    <!-- ko if: value -->
+        <input 
+            ko-checked="$parent.value"
+            ko-disabled="$parent.disabled"
+            attr="
+                id: ++ko.uid, 
+                value: value,
+                type: 'checkbox'"/>
+
+        <label class="admin__field-label" text="label" attr="for: ko.uid"/>
+    <!-- /ko -->
+    </div>
+    
+    <label class="admin__field-error" if="error" attr="for: uid" text="error"/>
+
+</div>

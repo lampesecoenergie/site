@@ -1,0 +1,31 @@
+#po_crawler_priority .grid table td {
+    padding: 5px;
+    vertical-align: middle;
+    cursor: move;
+    width:100%;
+    text-align: center;
+    min-width: 65px;
+}
+#po_crawler_priority .grid table td:first-child {
+    text-align: left;
+    padding: 1.3rem 2.5rem 1.3rem 1em;
+}
+#po_crawler_priority .grid table span {
+    text-transform: uppercase;
+}
+
+#po_crawler_priority .grid table {
+    width: 280px;
+}
+.pie-container{
+    display:block;
+}
+.pie{
+    float:left;
+    width:33%;
+    text-align: center;
+}
+.pie .title{
+    text-align: center;
+    font-size: 22px;
+}

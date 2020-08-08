@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <expeditorinet>
+            <export>
+                <file_extension>txt</file_extension>
+                <file_charset>ISO-8859-1</file_charset>
+                <field_delimiter>semicolumn</field_delimiter>
+                <field_enclosure>double_quotes</field_enclosure>
+                <endofline_character>lf</endofline_character>
+                <signature_required>0</signature_required>
+            </export>
+
+            <import>
+                <field_delimiter>semicolumn</field_delimiter>
+                <field_enclosure>double_quotes</field_enclosure>
+                <default_tracking_title>Colissimo</default_tracking_title>
+                <send_email>1</send_email>
+                <include_comment>0</include_comment>
+                <carrier_code>custom</carrier_code>
+            </import>
+
+            <pickup_point_codes>
+                <A2P/>
+                <ACP/>
+                <BDP/>
+                <BPR/>
+                <CDI/>
+                <CIT/>
+                <CMT/>
+                <MRL/>
+            </pickup_point_codes>
+        </expeditorinet>
+    </default>
+</config>

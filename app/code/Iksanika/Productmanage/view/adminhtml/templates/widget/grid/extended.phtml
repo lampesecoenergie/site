@@ -1,0 +1,927 @@
+<?php
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+/**
+ * Template for \Magento\Backend\Block\Widget\Grid
+ *
+ *  getId()
+ *  getCollection()
+ *  getColumns()
+ *  getPagerVisibility()
+ *  getVarNamePage()
+ */
+$numColumns = sizeof($block->getColumns());
+
+/**
+ * @var \Magento\Backend\Block\Widget\Grid\Extended $block
+ */
+?>
+<?php 
+
+    function checkColumn($product, $column)
+    {
+        $colDataWithCategories = false;
+        $colDataWithRelated = false;
+        $colDataWithCrossSell = false;
+        $colDataWithUpSell = false;
+        $colDataWithAssociatedGroupped = false;
+        $colDataWithAssociatedConfigurable = false;
+        
+        $colData = $column;
+        if(isset($colData['index']))
+        {
+            if($colData['index'] == 'category_ids')
+                $colDataWithCategories = true;
+            if($colData['index'] == 'related_ids')
+                $colDataWithRelated = true;
+            if($colData['index'] == 'cross_sell_ids')
+                $colDataWithCrossSell = true;
+            if($colData['index'] == 'up_sell_ids')
+                $colDataWithUpSell = true;
+            if($colData['index'] == 'associated_groupped_ids')
+                $colDataWithAssociatedGroupped = true;
+            if($colData['index'] == 'associated_configurable_ids')
+                $colDataWithAssociatedConfigurable = true;
+        }
+        
+        if($colDataWithCategories)
+        {
+            $ids = implode(', ', $product->getCategoryIds());
+            $product->setData('category_ids', $ids);
+        }
+        if($colDataWithRelated)
+        {
+            $ids = implode(', ', $product->getRelatedProductIds());
+            $product->setData('related_ids', $ids);
+        }
+        if($colDataWithCrossSell)
+        {
+            $ids = implode(', ', $product->getCrossSellProductIds());
+            $product->setData('cross_sell_ids', $ids);
+        }
+        if($colDataWithUpSell)
+        {
+            $ids = implode(', ', $product->getUpSellProductIds());
+            $product->setData('up_sell_ids', $ids);
+        }
+        if($colDataWithAssociatedGroupped)
+        {
+            $ids = array();
+            if($product->getTypeId() == 'grouped')
+            {
+                $childrenList = $product->getTypeInstance(true)->getAssociatedProducts($product);
+                foreach($childrenList as $childProduct)
+                    $ids[] = $childProduct->getId();
+            }
+            $ids = implode(', ', $ids);
+            $product->setData('associated_groupped_ids', $ids);
+        }
+        if($colDataWithAssociatedConfigurable)
+        {
+            $ids = array();
+            if($product->getTypeId() == 'configurable')
+                $ids = $product->getTypeInstance()->getUsedProductIds($product); // $ids = $product->getTypeInstance()->getUsedProductIds();
+            $ids = implode(', ', $ids);
+            $product->setData('associated_configurable_ids', $ids);
+        }
+        return $product;
+    }
+    
+
+    $colDataWithCategories = false;
+    $colDataWithRelated = false;
+    $colDataWithCrossSell = false;
+    $colDataWithUpSell = false;
+    $colDataWithAssociatedGroupped = false;
+    $colDataWithAssociatedConfigurable = false;
+    $numColumns = sizeof($this->getColumns()); 
+    
+//    $includeProducts = Mage::helper('productupdater/profile')->getCurrentProfile()->columns_associatedShow; //$_scopeConfig->getValue('iksanika_productmanage/columns/associatedShow');
+//    $includeProducts = (int)$this->_scopeConfig->getValue('iksanika_productmanage/columns/associatedShow');
+    $_scopeConfig = $this->_helper->getScopeConfig();
+    $includeProducts = (int)$this->_helper->getScopeConfig()->getValue('iksanika_productmanage/columns/associatedShow');
+    
+    $imagesWidth = $_scopeConfig->getValue('iksanika_productmanage/images/width');
+    $imagesHeight = $_scopeConfig->getValue('iksanika_productmanage/images/height');
+    
+?>
+<?php if ($block->getCollection()): ?>
+    <?php if ($block->canDisplayContainer()): ?>
+
+    <div id="<?php echo $block->getId() ?>" data-grid-id="<?php echo $block->getId() ?>">
+    <?php else: ?>
+        <?php echo $block->getLayout()->getMessagesBlock()->getGroupedHtml() ?>
+    <?php endif; ?>
+    <?php $massActionAvailable = $block->getMassactionBlock() && $block->getMassactionBlock()->isAvailable() ?>
+    <?php if ($block->getPagerVisibility() || $block->getExportTypes() || $block->getFilterVisibility() || $massActionAvailable): ?>
+        <div class="admin__data-grid-header admin__data-grid-toolbar">
+            <div class="admin__data-grid-header-row">
+                <?php if ($massActionAvailable): ?>
+                    <?php // echo $block->getMainButtonsHtml() ? '<div class="admin__filter-actions">' . $block->getMainButtonsHtml() . '</div>' : ''; ?>
+                    <?php 
+                        if( $block->getMainButtonsHtml()) { 
+                    ?>
+                    <div class="admin__filter-actions iks-inline-group iks-search">
+                    <input type="text" value="<?php echo $this->getQuery(); ?>" id="advancedGridSearchQry" placeholder="Search terms" class="iks-in-text" onkeypress="if(keyWasPressed(event, 13)) { productGridJsObject.doFilter(); }">
+                    <?php echo $block->getMainButtonsHtml() ?>
+                    </div>
+                    <?php
+                    }?>
+                <?php endif; ?>
+            <?php if ($block->getExportTypes()): ?>
+                <div class="admin__data-grid-export">
+                    <label
+                        class="admin__control-support-text"
+                        for="<?php echo $block->getId() ?>_export"><?php echo __('Export to:') ?></label>
+                    <select name="<?php echo $block->getId() ?>_export" id="<?php echo $block->getId() ?>_export"
+                            class="admin__control-select">
+                        <?php foreach ($block->getExportTypes() as $_type): ?>
+                            <option value="<?php echo $_type->getUrl() ?>"><?php echo $_type->getLabel() ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                    <?php echo $block->getExportButtonHtml() ?>
+                </div>
+            <?php endif; ?>
+            </div>
+
+            <div class="admin__data-grid-header-row <?php echo $massActionAvailable ? '_massaction' : '';?>">
+                <div style="width: 35px;float: left;">
+                    <div><button role="action-toggle-editor" class="iks-btn iks-options iks-board-settings-toggle iks-extension-board-tooltip " <?php //iks-checked?> data-collapsed-selector=".iks-checked" data-title="Settings" data-title-collapsed="Settings" type="button"></button></div>
+                </div>
+                <?php if ($massActionAvailable): ?>
+                    <?php echo $block->getMassactionBlockHtml() ?>
+                <?php else: ?>
+                    <?php echo $block->getMainButtonsHtml() ? '<div class="admin__filter-actions">' . $block->getMainButtonsHtml() . '</div>' : ''; ?>
+                <?php endif; ?>
+                <?php $countRecords = $block->getCollection()->getSize(); ?>
+                <div class="admin__control-support-text">
+                        <span id="<?php echo $block->getHtmlId() ?>-total-count" <?php echo $block->getUiId('total-count') ?>>
+                            <?php echo $countRecords ?>
+                        </span>
+                    <?php echo __('records found') ?>
+                    <span id="<?php echo $block->getHtmlId() ?>_massaction-count"
+                          class="mass-select-info _empty"><strong data-role="counter">0</strong> <span><?php echo __('selected') ?></span></span>
+                </div>
+
+            <?php if ($block->getPagerVisibility()): ?>
+                <div class="admin__data-grid-pager-wrap">
+                    <select name="<?php echo $block->getVarNameLimit() ?>"
+                            id="<?php echo $block->getHtmlId()?>_page-limit"
+                            onchange="<?php echo $block->getJsObjectName() ?>.loadByElement(this)"
+                            class="admin__control-select">
+                        <option value="20"<?php if ($block->getCollection()->getPageSize() == 20): ?>
+                            selected="selected"<?php endif; ?>>20
+                        </option>
+                        <option value="30"<?php if ($block->getCollection()->getPageSize() == 30): ?>
+                            selected="selected"<?php endif; ?>>30
+                        </option>
+                        <option value="50"<?php if ($block->getCollection()->getPageSize() == 50): ?>
+                            selected="selected"<?php endif; ?>>50
+                        </option>
+                        <option value="100"<?php if ($block->getCollection()->getPageSize() == 100): ?>
+                            selected="selected"<?php endif; ?>>100
+                        </option>
+                        <option value="200"<?php if ($block->getCollection()->getPageSize() == 200): ?>
+                            selected="selected"<?php endif; ?>>200
+                        </option>
+                    </select>
+                    <label for="<?php echo $block->getHtmlId()?><?php echo $block->getHtmlId()?>_page-limit"
+                        class="admin__control-support-text"><?php echo __('per page') ?></label>
+
+                    <div class="admin__data-grid-pager">
+                        <?php $_curPage = $block->getCollection()->getCurPage() ?>
+                        <?php $_lastPage = $block->getCollection()->getLastPageNumber() ?>
+                        <?php if ($_curPage > 1): ?>
+                            <button class="action-previous"
+                                    type="button"
+                                    onclick="<?php echo $block->getJsObjectName() ?>.setPage('<?php echo($_curPage - 1) ?>');return false;">
+                                <span><?php echo __('Previous page') ?></span>
+                            </button>
+                        <?php else: ?>
+                            <button type="button" class="action-previous disabled"><span><?php echo __('Previous page') ?></span></button>
+                        <?php endif; ?>
+                        <input type="text"
+                               id="<?php echo $block->getHtmlId()?>_page-current"
+                               name="<?php echo $block->getVarNamePage() ?>"
+                               value="<?php echo $_curPage ?>"
+                               class="admin__control-text"
+                               onkeypress="<?php echo $block->getJsObjectName() ?>.inputPage(event, '<?php echo $_lastPage ?>')" <?php echo $block->getUiId('current-page') ?> />
+                        <label class="admin__control-support-text" for="<?php echo $block->getHtmlId()?>_page-current">
+                            <?php echo __('of %1', '<span>' . $block->getCollection()->getLastPageNumber() . '</span>') ?>
+                        </label>
+                        <?php if ($_curPage < $_lastPage): ?>
+                            <button type="button"
+                                    title="<?php echo __('Next page') ?>"
+                                    class="action-next"
+                                    onclick="<?php echo $block->getJsObjectName() ?>.setPage('<?php echo($_curPage + 1) ?>');return false;">
+                                <span><?php echo __('Next page') ?></span>
+                            </button>
+                        <?php else: ?>
+                        <button type="button" class="action-next disabled"><span><?php echo __('Next page') ?></span></button>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            <?php endif ?>
+            </div>
+        </div>
+    <?php endif; ?>
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+    <div class="settigsArea" style="display: none;">
+        <div style="height: 6px;">
+            <div class="current-indicator"></div>
+        </div>
+        <div class="iksProductUpdaterSettings "> <!--  style="height: 350px;"  -->
+
+            
+            <div class="settingsBlock">
+                
+                
+                <div class="section-config active accordion">
+                    <fieldset class="config collapseable" id="productupdater_columns">
+                        <table cellspacing="0" class="form-list">
+                            <colgroup class="label"></colgroup>
+                            <colgroup class="value"></colgroup>
+                            <colgroup class="scope-label"></colgroup>
+                            <colgroup class=""></colgroup>
+                            <tbody>
+                                <tr id="row_productupdater_columns_showcolumns">
+                                    <td class="label">
+                                        <label for="productupdater_columns_showcolumns"> <?php echo __('Show Columns')?></label>
+                                    </td>
+                                    <td class="value">
+                                        <select id="productupdater_columns_showcolumns" name="settings[columns][showcolumns]" class=" select multiselect admin__control-multiselect" size="10" multiple="multiple">
+                                            <?php
+//                                                $attributes = new Iksanika_Productmanage_Model_System_Config_Source_Columns_Show();
+                                                $attributes = $this->_objectManager->create('\Iksanika\Productmanage\Model\System\Config\Source\Columns\Show');
+                                                $columnSettings = $this->_helper->getColumnSettings();
+                                                foreach($attributes->toOptionArray() as $attribute)
+                                                {
+                                                    echo '<option value="'.$attribute['value'].'" '.((isset($columnSettings[$attribute['value']]) && $columnSettings[$attribute['value']]) ? 'selected="selected"': '').'>'.$attribute['label'].'</option>';
+                                                }
+                                            ?>
+                                        </select>
+                                    </td>
+                                    <td class="scope-label"></td>
+                                    <td class=""></td>
+                                </tr>
+                                <tr id="row_productupdater_columns_associatedShow">
+                                    <td class="label">
+                                        <label for="productupdater_columns_associatedShow"> <?php echo __('Show Associated Products')?></label>
+                                    </td>
+                                    <td class="value">
+                                        <select id="productupdater_columns_associatedShow" name="settings[columns][associatedShow]" class=" select admin__control-select">
+                                            <option value="1" <?php echo ($_scopeConfig->getValue('iksanika_productmanage/columns/associatedShow') ? 'selected="selected"' : '')?>>Yes</option>
+                                            <option value="0"  <?php echo (!$_scopeConfig->getValue('iksanika_productmanage/columns/associatedShow') ? 'selected="selected"' : '')?>>No</option>
+                                        </select>
+                                        <p class="note">
+                                            <span>(<?php echo __('If Yes/No - associated products for Configurable/Groupped products will be shown/hidden right under Configurable/Groupped product row')?>)</span>
+                                        </p>
+                                    </td>
+                                    <td class="scope-label"></td>
+                                    <td class=""></td>
+                                </tr>
+                                <tr id="row_productupdater_columns_redirectAdvancedProductManager">
+                                    <td class="label">
+                                        <label for="productupdater_columns_redirectAdvancedProductManager"> <?php echo __('Redirect to Products Manager (Advanced)')?></label>
+                                    </td>
+                                    <td class="value">
+                                        <select id="productupdater_columns_redirectAdvancedProductManager" name="settings[columns][redirectAdvancedProductManager]" class=" select admin__control-select">
+                                            <option value="1" <?php echo ($_scopeConfig->getValue('iksanika_productmanage/columns/redirectAdvancedProductManager') ? 'selected="selected"' : '')?>>Yes</option>
+                                            <option value="0"  <?php echo (!$_scopeConfig->getValue('iksanika_productmanage/columns/redirectAdvancedProductManager') ? 'selected="selected"' : '')?>>No</option>
+                                        </select>
+                                        <p class="note">
+                                            <span>(<?php echo __('Yes - redirect to \'Manage Products (Advanced)\', No - to standard \'Manage Products\' - from individual Product Edit page')?>)</span>
+                                        </p>
+                                    </td>
+                                    <td class="scope-label"></td>
+                                    <td class=""></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </fieldset>
+                </div>
+            </div>
+
+            
+            
+            
+            
+            
+            
+            
+            <div class="settingsBlock">
+                <div class="section-config active accordion">
+                    <fieldset class="config collapseable" id="productupdater_images">
+                        <table cellspacing="0" class="form-list">
+                            <colgroup class="label"></colgroup>
+                            <colgroup class="value"></colgroup>
+                            <colgroup class="scope-label"></colgroup>
+                            <colgroup class=""></colgroup>
+                            <tbody>
+                                <tr id="row_productupdater_images_width">
+                                    <td class="label">
+                                        <label for="productupdater_images_width"> <?php echo __('Image Width')?></label>
+                                    </td>
+                                    <td class="value">
+                                        <input id="productupdater_images_width" name="settings[images][width]" value="<?php echo $_scopeConfig->getValue('iksanika_productmanage/images/width')?>" class=" input-text admin__control-text" type="text">
+                                    </td>
+                                    <td class="scope-label"></td>
+                                    <td class=""></td>
+                                </tr>
+                                <tr id="row_productupdater_images_height">
+                                    <td class="label">
+                                        <label for="productupdater_images_height"> <?php echo __('Image Height')?></label>
+                                    </td>
+                                    <td class="value">
+                                        <input id="productupdater_images_height" name="settings[images][height]" value="<?php echo $_scopeConfig->getValue('iksanika_productmanage/images/height')?>" class=" input-text admin__control-text" type="text">
+                                    </td>
+                                    <td class="scope-label"></td>
+                                    <td class=""></td>
+                                </tr>
+                                <tr id="row_productupdater_images_scale">
+                                    <td class="label">
+                                        <label for="productupdater_images_scale"> <?php echo __('Image Scale')?></label>
+                                    </td>
+                                    <td class="value">
+                                        <select id="productupdater_images_scale" name="settings[images][scale]" class=" select admin__control-select">
+                                            <option value="1" <?php echo ($_scopeConfig->getValue('iksanika_productmanage/images/scale') ? 'selected="selected"' : '')?>>Yes</option>
+                                            <option value="0" <?php echo (!$_scopeConfig->getValue('iksanika_productmanage/images/scale') ? 'selected="selected"' : '')?>>No</option>
+                                        </select>
+                                        <p class="note"><span>(<?php echo __('If Yes - images will be resized into Width+Height space, if No - proportionaly to defined value of Width or Height')?>)</span></p>
+                                    </td>
+                                    <td class="scope-label"></td>
+                                    <td class=""></td>
+                                </tr>
+                                <tr id="row_productupdater_images_showurl">
+                                    <td class="label">
+                                        <label for="productupdater_images_showurl"> <?php echo __('Show Image Url')?></label>
+                                    </td>
+                                    <td class="value">
+                                        <select id="productupdater_images_showurl" name="settings[images][showurl]" class=" select admin__control-select">
+                                            <option value="1" <?php echo ($_scopeConfig->getValue('iksanika_productmanage/images/showurl') ? 'selected="selected"' : '')?>>Yes</option>
+                                            <option value="0"  <?php echo (!$_scopeConfig->getValue('iksanika_productmanage/images/showurl') ? 'selected="selected"' : '')?>>No</option>
+                                        </select>
+                                        <p class="note">
+                                            <span>(<?php echo __('When product image is hidden for that row')?>)</span>
+                                        </p>
+                                    </td>
+                                    <td class="scope-label"></td>
+                                    <td class=""></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </fieldset>
+                </div>
+            </div>
+            
+            <div style="clear: both;margin: 0 auto;width: 100%;text-align: center;padding-top:25px;">
+                <?php echo $this->getSaveConfigButtonHtml();?>&nbsp;&nbsp;&nbsp;<a href="<?php echo $this->getUrl('adminhtml/system_config/edit', array('section'=> 'iksanika_productmanage'));?>" target="_blank"><?php echo __('See all extension settings')?> ..</a>
+            </div>
+            
+            
+            <script type="text/javascript">
+                        
+                    function doSaveConfig()
+                    {
+                        var postData  = 'form_key=' + FORM_KEY;
+                        
+                        $j.each($j('.iksProductUpdaterSettings input'), function($key, $element) {
+                            postData += '&'+$element.getAttribute('name')+'='+$j('#'+$element.getAttribute('id')).val();
+//                            console.debug(postData);
+                        });
+
+
+                        $j.each($j('.iksProductUpdaterSettings select'), function($key, $element) {
+                            //setup variables names
+                            postData += '&'+$element.getAttribute('name')+'=';
+                            $itemsList = $j('#'+$element.getAttribute('id')).find(':selected');
+                            if($itemsList.length > 1)
+                            {
+                                //setup value name
+                                $value = '';
+                                $idx = 0;
+                                $j.each($itemsList, function($k, $v) 
+                                {
+                                    $value += ($idx++ !=0 ? ',' : '')+ $v.getAttribute('value');
+                                });
+                                postData += $value;
+                            }else
+                            {
+                                postData += ($itemsList.length == 1) ? $j('#'+$element.getAttribute('id')).val() : '';
+                            }
+                        });
+
+
+//                        $j.each($j('.iksProductUpdaterSettings select'), function($key, $element) {
+//                            postData += '&'+$element.getAttribute('name')+'='+$element.getAttribute('value');
+//                        });
+                        
+//                        $$('#' + this.tableId + ' .headings th').each(function(th){
+//                            var el = th.down('a');
+                            //                var el = th;
+                            
+                            
+//                            if (el)
+//                                postData += '&fields[]=' + el.getAttribute('name');
+                            //                    postData += '&fields[]=' + el.getAttribute('colname');
+//                        });
+//                        console.debug(postData);
+//                        console.debug(this.saveRepositionUrl);
+                        
+                        // save columns order
+                        new Ajax.Request('<?php echo $this->getUrl('*/*/saveSettingsSection', array('_current' => true))?>', {
+                            method: 'post',
+                            postBody : postData,
+                            onSuccess: function(transport) {
+//                                alert('onSuccess');
+                                $j('.iks-btn').removeClass('iks-checked');
+                                $j('.settigsArea').hide();
+//                                adjustAsideMenu();
+                                
+                                <?php /* required for new version (profiling version)
+                                var response = transport.responseText.evalJSON();
+                                var profile = response.profile;
+//                                console.debug('Profile Data from response: ' + profile.profileId + ' = ' +profile.profileName);
+                                
+                                $j('.i-role-board-menu-item[data-call=\'item'+profile.profileId+'\'] .i-role-item-name').empty();
+                                $j('.i-role-board-menu-item[data-call=\'item'+profile.profileId+'\'] .i-role-item-name').append(profile.profileName);
+                                */ ?>
+                                
+                                <?php echo $this->getJsObjectName()?>.resetFilter();
+                                
+                            }.bind(this),
+                            onFailure: function()
+                            {
+                                alert('Request failed. Please retry.');
+                            }
+                        });
+                    }
+                
+            </script>
+            
+            
+        </div>
+<!--
+        <div class="" style="height: 1px;background-color: #FFFFFF;"></div>
+        <div class="headerLine" style="height: 2px;background-color: #FFFFFF;"></div>
+-->
+    </div>
+            
+
+            
+            
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+    <div class="admin__data-grid-wrap">
+        <table class="data-grid" id="<?php echo $block->getId() ?>_table">
+            <?php
+            /* This part is commented to remove all <col> tags from the code. */
+            /* foreach ($block->getColumns() as $_column): ?>
+            <col <?php echo $_column->getHtmlProperty() ?> />
+            <?php endforeach; */
+            ?>
+            <?php if ($block->getHeadersVisibility() || $block->getFilterVisibility()): ?>
+                <thead>
+                <?php if ($block->getHeadersVisibility()): ?>
+                    <tr>
+                        
+                        <?php /* advanced admin products manage injection */ ?>
+                        <?php /*
+                        <?php if($includeProducts) :?>
+                        <th>&nbsp;</th>
+                        <?php endif; ?>
+                        */ ?>
+                        
+                        <?php foreach ($block->getColumns() as $_column): ?>
+                            <?php if ($_column->getHeaderHtml() == '&nbsp;'):?>
+                                <th class="data-grid-th" data-column="<?php echo $_column->getId() ?>"
+                                    <?php echo $_column->getHeaderHtmlProperty() ?>>
+
+
+                                    <?php /*&nbsp; */ ?>
+
+    <div class="mass-select-wrap">
+        <select id="<?php echo $block->getMassactionBlock()->getHtmlId() ?>-mass-select" data-menu="grid-mass-select">
+            <optgroup label="<?php /* @escapeNotVerified */ echo __('Mass Actions')?>">
+                <option disabled selected></option>
+                <?php if ($block->getMassactionBlock()->getUseSelectAll()):?>
+                    <option value="selectAll">
+                        <?php /* @escapeNotVerified */ echo __('Select All') ?>
+                    </option>
+                    <option value="unselectAll">
+                        <?php /* @escapeNotVerified */ echo __('Unselect All') ?>
+                    </option>
+                <?php endif; ?>
+                <option value="selectVisible">
+                    <?php /* @escapeNotVerified */ echo __('Select Visible') ?>
+                </option>
+                <option value="unselectVisible">
+                    <?php /* @escapeNotVerified */ echo __('Unselect Visible') ?>
+                </option>
+            </optgroup>
+        </select>
+        <label for="<?php echo $block->getMassactionBlock()->getHtmlId() ?>-mass-select"></label>
+    </div>
+
+<script>
+    require(['jquery'], function($){
+        'use strict';
+        $('#<?php echo $block->getMassactionBlock()->getHtmlId() ?>-mass-select').change(function () {
+            var massAction = $('option:selected', this).val();
+            switch (massAction) {
+                <?php if ($block->getMassactionBlock()->getUseSelectAll()):?>
+                case 'selectAll':
+                    return <?php /* @escapeNotVerified */ echo $block->getMassactionBlock()->getJsObjectName() ?>.selectAll();
+                    break
+                case 'unselectAll':
+                    return <?php /* @escapeNotVerified */ echo $block->getMassactionBlock()->getJsObjectName() ?>.unselectAll();
+                    break
+                <?php endif; ?>
+                case 'selectVisible':
+                    return <?php /* @escapeNotVerified */ echo $block->getMassactionBlock()->getJsObjectName() ?>.selectVisible();
+                    break
+                case 'unselectVisible':
+                    return <?php /* @escapeNotVerified */ echo $block->getMassactionBlock()->getJsObjectName() ?>.unselectVisible();
+                    break
+            }
+            this.blur();
+        });
+
+    });
+    <?php if (!$block->canDisplayContainer()): ?>
+        <?php /* @escapeNotVerified */ echo $block->getMassactionBlock()->getJsObjectName() ?>.setGridIds('<?php /* @escapeNotVerified */ echo $block->getMassactionBlock()->getGridIdsJson() ?>');
+    <?php endif; ?>
+</script>
+
+
+
+                                </th>
+                            <?php else: ?>
+                                <?php echo $_column->getHeaderHtml()?>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </tr>
+                <?php endif; ?>
+                <?php if ($block->getFilterVisibility()): ?>
+                    <tr class="data-grid-filters" data-role="filter-form">
+                        
+                        
+                        <?php /* advanced product manage injection */ ?>
+                        <?php /* if($includeProducts) :?>
+                        <th>
+                            <div class="text cellexpander parbase">
+                                <a href="#" class="triggerAll icon-plus-sign">&nbsp;</a>
+                                <a href="#" class="triggerAll icon-minus-sign">&nbsp;</a>
+                            </div>
+                        </th>
+                        <?php endif; */?>
+                        
+                        
+                        <?php $i = 0;
+                        foreach ($block->getColumns() as $_column): ?>
+                            <td data-column="<?php echo $_column->getId() ?>" <?php echo $_column->getHeaderHtmlProperty() ?>>
+                                <?php echo $_column->getFilterHtml() ?>
+                            </td>
+                        <?php endforeach; ?>
+                    </tr>
+                <?php endif ?>
+                </thead>
+            <?php endif; ?>
+            <?php if ($block->getCountTotals()): ?>
+                <tfoot>
+                <tr class="totals">
+                    <?php foreach ($block->getColumns() as $_column): ?>
+                        <th class="<?php echo $_column->getCssProperty() ?>">
+                            <?php echo($_column->hasTotalsLabel()) ? $_column->getTotalsLabel() : $_column->getRowField($_column->getGrid()->getTotals()) ?>
+                        </th>
+                    <?php endforeach; ?>
+                </tr>
+                </tfoot>
+            <?php endif; ?>
+
+            <tbody id="gridBody">
+            <?php if (($block->getCollection()->getSize() > 0) && (!$block->getIsCollapsed())): ?>
+                <?php foreach ($block->getCollection() as $_index => $_item): ?>
+                    <tr title="<?php echo $block->getRowUrl($_item) ?>"<?php if ($_class = $block->getRowClass($_item)): ?>
+                        class="<?php echo $_class; ?>"<?php endif; ?>  id="product<?php echo $_item->getData('entity_id');?>">
+                        
+                    <?php /* advanced admin products manager injection */ ?>
+                    <?php /* if($includeProducts) :?>
+                    <td class="a-center">
+                        <div class="text cellexpander parbase"><?php //$_scopeConfig->getValue('iksanika_productmanage/columns/associatedShow')?>
+                            <?php if(($_item->getTypeId() == 'configurable' || $_item->getTypeId() == 'grouped')) : ?><a href="#" class="trigger <?php if(Mage::helper('iksanika_productmanage/profile')->getCurrentProfile()->columns_associatedShow):?>icon-minus-sign<?php else:?>icon-plus-sign<?php endif;?>">&nbsp;</a><?php else: ?>&nbsp;<?php endif; ?>
+                        </div>
+                    </td>
+                    <?php endif; */ ?>
+                    
+                        <?php $i = 0;foreach ($block->getColumns() as $_column): ?>
+                        
+                        <?php
+                            $_item = checkColumn($_item, $_column);
+
+                            $showColumnContent = false;
+                            if(($_column->getIndex() != 'associated_groupped_ids' && $_item->getTypeId() == 'configurable') || 
+                                ($_column->getIndex() != 'associated_configurable_ids'  && $_item->getTypeId() == 'grouped'))
+                            {
+                                $showColumnContent = true;
+                            }elseif($_column->getIndex() != 'associated_groupped_ids' && $_column->getIndex() != 'associated_configurable_ids')
+                            {
+                                $showColumnContent = true;
+                            }
+
+//                        $style = ($_column->getIndex() == 'name') ? 'style="min-width: 250px;"' : '';
+//                        $style = ($_column->getIndex() == 'sku') ? 'style="min-width: 180px;"' : $style;
+                    
+                            
+                            
+                            
+                            if ($block->shouldRenderCell($_item, $_column)):
+                                $_rowspan = $block->getRowspan($_item, $_column);
+                                $isImg = (get_class($_column->getRenderer()) ==   'Iksanika\Productmanage\Block\Widget\Grid\Column\Renderer\Image') ? true : false;
+                                
+                                ?>
+                            <td <?php echo($_rowspan ? 'rowspan="' . $_rowspan . '" ' : '') ?>
+                                class="<?php echo $_column->getCssProperty() ?>
+                                        <?php echo $_column->getId() == 'massaction' ? 'data-grid-checkbox-cell': ''?> <?php echo $isImg ? 'td-gridImage' : ''; ?>" style="<?php echo $isImg ? 'width: '.$imagesWidth.'px; height: '.$imagesHeight.'px;' : ''; ?>">
+                                <?php echo(($_html = $_column->getRowField($_item)) != '' ? $_html : '&nbsp;') ?>
+                                </td><?php
+                                if ($block->shouldRenderEmptyCell($_item, $_column)):
+                                    ?>
+                                    <td colspan="<?php echo $block->getEmptyCellColspan($_item) ?>"
+                                        class="last"><?php echo $block->getEmptyCellLabel() ?></td><?php
+                                endif;
+                            endif;
+                        endforeach; ?>
+                    </tr>
+
+                    
+                <?php /* if ($includeProducts) : ?>
+                
+                <?php if($_item->getTypeId() == 'configurable' || $_item->getTypeId() == 'grouped') : ?>
+                <?php 
+                    if($_item->getTypeId() == 'configurable')
+                        $childrenList = $_item->getTypeInstance()->getUsedProductIds();
+                    if($_item->getTypeId() == 'grouped')
+                        $childrenList = $_item->getTypeInstance(true)->getAssociatedProducts($_item);
+                ?>
+                <?php 
+                    $countChildrenList = count($childrenList);
+                    foreach ($childrenList as $keyChildProduct => $childProduct):
+                        
+                        if($_item->getTypeId() == 'configurable')
+                            $childProduct = Mage::getModel('catalog/product')->load($childProduct);
+                ?>
+                <tr title="<?php echo $this->getRowUrl($childProduct) ?>"<?php if ($_class = $this->getRowClass($childProduct)): ?> class="<?php echo $_class; ?> associatedProduct"<?php endif;?> id="product<?php echo $childProduct->getData('entity_id');?>" class="<?php if($countChildrenList-1 == $keyChildProduct): ?>lastAssociatedProduct<?php else: ?>associatedProduct<?php endif; ?> product<?php echo $_item->getId();?>Products productProducts">
+                    
+                    <?php if($includeProducts) :?>
+                    <td class="a-center">
+                        <div class="text cellexpander parbase">
+                            &nbsp;
+                        </div>
+                    </td>
+                    <?php endif;?>
+                
+                    <?php $i=0;foreach ($this->getColumns() as $_column): ?>
+                        <?php 
+                            $childProduct = checkColumn($childProduct, $_column);
+                            
+                            $showColumnContent = false;
+                            if(($_column->getIndex() != 'associated_groupped_ids' && $childProduct->getTypeId() == 'configurable') || 
+                                ($_column->getIndex() != 'associated_configurable_ids'  && $childProduct->getTypeId() == 'grouped'))
+                            {
+                                $showColumnContent = true;
+                            }elseif($_column->getIndex() != 'associated_groupped_ids' && $_column->getIndex() != 'associated_configurable_ids')
+                            {
+                                $showColumnContent = true;
+                            }
+                            
+                            if($_column->getIndex() == 'qty')
+                            {
+                                $childProductStock = $childProduct->getStockItem();
+                                $childProduct->setData('qty', $childProductStock->getData('qty'));
+                            }
+                        ?>
+                        <td class="<?php echo $_column->getCssProperty() ?> <?php echo ++$i==$numColumns?'last':'' ?>"><?php if($showColumnContent) : ?><?php echo (($_html = $_column->getRowField($childProduct)) != '' ? $_html : '&nbsp;') ?><?php endif;?></td>
+                    <?php endforeach; ?>
+	        </tr>
+                <?php endforeach; ?>                
+                <?php endif; ?>
+                
+                <?php endif; */ ?>
+                
+                
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <?php if ($_multipleRows = $block->getMultipleRows($_item)): ?>
+                        <?php foreach ($_multipleRows as $_i): ?>
+                            <tr>
+                                <?php $i = 0;
+                                foreach ($block->getMultipleRowColumns($_i) as $_column): ?>
+                                    <td class="<?php echo $_column->getCssProperty() ?>
+                                        <?php echo $_column->getId() == 'massaction' ? 'data-grid-checkbox-cell': ''?>">
+                                        <?php echo(($_html = $_column->getRowField($_i)) != '' ? $_html : '&nbsp;') ?>
+                                    </td>
+                                <?php endforeach; ?>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+
+                    <?php if ($block->shouldRenderSubTotal($_item)): ?>
+                        <tr class="subtotals">
+                            <?php $i = 0;
+                            foreach ($block->getSubTotalColumns() as $_column): ?>
+                                <td class="<?php echo $_column->getCssProperty() ?>
+                                           <?php echo $_column->getId() == 'massaction' ? 'data-grid-checkbox-cell': ''?>">
+                                    <?php echo($_column->hasSubtotalsLabel() ? $_column->getSubtotalsLabel() :
+                                        $_column->getRowField($block->getSubTotalItem($_item))
+                                    );
+                                    ?>
+                                </td>
+                            <?php endforeach; ?>
+                        </tr>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            <?php elseif ($block->getEmptyText()): ?>
+                <tr class="data-grid-tr-no-data">
+                    <td class="<?php echo $block->getEmptyTextClass() ?>"
+                        colspan="<?php echo $numColumns ?>"><?php echo $block->getEmptyText() ?></td>
+                </tr>
+            <?php endif; ?>
+            </tbody>
+        </table>
+
+    </div>
+    <?php if ($block->canDisplayContainer()): ?>
+</div>
+<script>
+    var deps = ['Iksanika_Productmanage/catalog/productmanage_grid', 'Iksanika_Productmanage/catalog/productmanage', 'Iksanika_Productmanage/catalog/egsupplemental'];
+
+    <?php if (strpos($block->getRowClickCallback(), 'order.') !== false): ?>
+    deps.push('Magento_Sales/order/create/form')
+    <?php endif; ?>
+
+    require(deps, function(){
+        <?php //TODO: getJsObjectName and getRowClickCallback has unexpected behavior. Should be removed ?>
+
+        //<![CDATA[
+    <?php echo $block->getJsObjectName() ?> = new varienGrid('<?php echo $block->getId() ?>', '<?php echo $block->getGridUrl() ?>', '<?php echo $block->getVarNamePage() ?>', '<?php echo $block->getVarNameSort() ?>', '<?php echo $block->getVarNameDir() ?>', '<?php echo $block->getVarNameFilter() ?>');
+    <?php echo $block->getJsObjectName() ?>.useAjax = '<?php echo $block->getUseAjax() ?>';
+    <?php if ($block->getRowClickCallback()): ?>
+    <?php echo $block->getJsObjectName() ?>.rowClickCallback = <?php echo $block->getRowClickCallback() ?>;
+    <?php endif; ?>
+    <?php if ($block->getCheckboxCheckCallback()): ?>
+    <?php echo $block->getJsObjectName() ?>.checkboxCheckCallback = <?php echo $block->getCheckboxCheckCallback() ?>;
+    <?php endif; ?>
+    <?php if ($block->getRowInitCallback()): ?>
+    <?php echo $block->getJsObjectName() ?>.initRowCallback = <?php echo $block->getRowInitCallback() ?>;
+    <?php echo $block->getJsObjectName() ?>.initGridRows();
+    <?php endif; ?>
+    <?php if ($block->getMassactionBlock() && $block->getMassactionBlock()->isAvailable()): ?>
+    <?php echo $block->getMassactionBlock()->getJavaScript() ?>
+    <?php endif ?>
+    <?php echo $block->getAdditionalJavaScript(); ?>
+    //]]>
+
+});
+</script>
+<?php endif; ?>
+
+
+<script>
+require([
+    'jquery'
+], function (jQuery) {
+        $j = jQuery;
+        $j('.iks-options').click(function(){
+            if($j('.iks-options').hasClass('iks-checked'))
+            {
+                $j('.iks-options').removeClass('iks-checked');
+                $j('.settigsArea').hide();
+            }else
+            {
+                $j('.iks-options').addClass('iks-checked');
+                $j('.settigsArea').show();
+            }
+    //                            adjustAsideMenu();
+        });
+        
+        function selectProductRow(trItemPointer)
+        {
+console.debug(trItemPointer);
+            $j("#gridBody tr#"+trItemPointer+" input:checkbox[name='product']").prop('checked', true);
+            <?php if($this->getMassactionBlock()->isAvailable()): ?>
+                <?php echo $this->getMassactionBlock()->getJsObjectName() ?>.setCheckbox($j("#gridBody tr#"+trItemPointer+" input:checkbox")[0]); // .massaction-checkbox 
+            <?php endif ?>
+        }
+
+        $j("#gridBody tr td").on("input", function() 
+        {
+            selectProductRow($j(this).parent().attr('id'));
+        });
+
+        $j("#gridBody tr td").on("textarea", function() 
+        {
+            selectProductRow($j(this).parent().attr('id'));
+        });
+
+        $j("#gridBody tr td").on("select", function() 
+        {
+            selectProductRow($j(this).parent().attr('id'));
+        });
+        
+        $j('.trigger').click(function()
+        {
+            
+            if($j('#'+$j(this).parent().parent().parent().attr('id')+'Products').css('display') == 'none')
+            {
+                $j(this).parent().parent().parent().addClass('orderExpanded');
+                
+                $j(this).find('i').removeClass('icon-plus-sign');
+                $j(this).find('i').addClass('icon-minus-sign');
+                $j('#'+$j(this).parent().parent().parent().attr('id')+'Products').show();
+                console.debug($j(this).parent().parent().parent().attr('id')+' show');
+            }else
+            {
+                $j(this).parent().parent().parent().removeClass('orderExpanded');
+                
+                $j(this).find('i').removeClass('icon-minus-sign');
+                $j(this).find('i').addClass('icon-plus-sign');
+                $j('#'+$j(this).parent().parent().parent().attr('id')+'Products').hide();
+                console.debug($j(this).parent().parent().parent().attr('id')+' hide');
+            }
+            return false;
+        });
+
+        $j('.triggerAll').click(function()
+        {
+            if($j(this).find('i').hasClass('icon-plus-sign'))
+            {
+                $j('.trigger').parent().parent().parent().addClass('orderExpanded');
+                
+                $j('.trigger').find('i').removeClass('icon-plus-sign');
+                $j('.trigger').find('i').addClass('icon-minus-sign');
+                $j('.orderProducts').show();
+            }
+            if($j(this).find('i').hasClass('icon-minus-sign'))
+            {
+                $j('.trigger').parent().parent().parent().removeClass('orderExpanded');
+                
+                $j('.trigger').find('i').removeClass('icon-minus-sign');
+                $j('.trigger').find('i').addClass('icon-plus-sign');
+                $j('.orderProducts').hide();
+            }
+            return false;
+        });
+        
+});
+</script>
+
+
+<?php endif ?>

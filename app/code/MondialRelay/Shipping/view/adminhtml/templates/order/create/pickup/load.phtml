@@ -1,0 +1,23 @@
+<?php /** @var $block MondialRelay\Shipping\Block\Adminhtml\Order\Create\Pickup\Load */ ?>
+<?php if ($block->canShow()): ?>
+    <?php $collection = $block->getList() ?>
+    <div class="admin__page-section-title">
+        <span class="title"><?php echo __('Pickup location') ?></span>
+    </div>
+    <?php if ($collection->getSize()): ?>
+        <ul class="admin__order-shipment-methods-options-list">
+            <?php /** @var \MondialRelay\Shipping\Model\Pickup $pickup */ ?>
+            <?php foreach ($collection as $pickup): ?>
+            <li class="admin__field-option">
+                <input type="radio" name="mondialrelay[pickup]" id="sc-pickup-<?php echo $pickup->getNum(); ?>" <?php if($pickup->getNum() == $block->getCurrent()): ?>checked<?php endif; ?> class="admin__control-radio required-entry" value="<?php echo $pickup->getNum(); ?>-<?php echo $pickup->getPays() ?>-<?php echo $pickup->getCode() ?>" onclick="order.setMondialRelayPickup(this.value)">
+                <label for="sc-pickup-<?php echo $pickup->getNum(); ?>" class="admin__field-label">
+                    <span class="<?php echo strtolower($pickup->getCode()) ?>"><?php echo $pickup->getCode() ?></span> <strong><?php echo $pickup->getLgadr1() ?></strong>
+                    <?php echo $pickup->getLgadr3() ?> - <?php echo $pickup->getCp() ?> <?php echo $pickup->getVille() ?>
+                </label>
+            </li>
+            <?php endforeach; ?>
+        </ul>
+    <?php else: ?>
+        <p><?php echo __('Enter a valid shipping address to find pickup locations') ?></p>
+    <?php endif; ?>
+<?php endif; ?>

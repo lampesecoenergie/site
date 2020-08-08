@@ -1,0 +1,38 @@
+<?php
+/** @var \Mirasvit\Feed\Block\Adminhtml\Feed\Edit\Tab\Report $block */
+?>
+<?php
+$grid = $block->getGridHtml();
+?>
+
+<fieldset class="fieldset admin__fieldset">
+    <legend class="admin__legend legend">
+        <span><?= $block->getHeaderText() ?></span>
+    </legend>
+
+    <table class="admin__table-secondary">
+        <tbody>
+            <?php foreach ($block->getErrors() as $error): ?>
+                <tr>
+                    <th><?= $error['count'] . ' Error' . ($error['count'] > 1 ? 's' : '') ?></th>
+                    <td>
+                        <div class="admin__field">
+                            <div class="admin__field-control _with-tooltip">
+                                <span>
+                                    <?= $error['message'] ?>:
+                                    <b><?= $error[\Mirasvit\Feed\Api\Data\ValidationInterface::ATTRIBUTE] ?></b>
+                                </span>
+                                <div class="admin__field-tooltip" style="margin-top:auto">
+                                    <a class="admin__field-tooltip-action action-help" target="_blank" tabindex="1"></a>
+                                    <div class="admin__field-tooltip-content"><?= $error['hint'] ?></div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            <?php endforeach ?>
+        </tbody>
+    </table>
+</fieldset>
+
+<?= $grid ?>

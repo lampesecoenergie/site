@@ -1,0 +1,32 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<input class="admin__control-text" type="text"
+       style="max-width: 70%"
+    data-bind="
+        event: {change: userChanges},
+        value: value,
+        hasFocus: focused,
+        valueUpdate: valueUpdate,
+        attr: {
+            name: inputName,
+            placeholder: placeholder,
+            'aria-describedby': noticeId,
+            id: uid,
+            disabled: disabled,
+            maxlength: 255,
+            style: 'display: none'
+    }"/>
+<span style="max-width: 30%">
+    <button type="button"
+            title="Validate credentials"
+            class="action-default scalable action-primary scalable primary"
+            data-bind="event: {click: validate}"
+    >
+        <span>Validate</span>
+    </button>
+</span>
+

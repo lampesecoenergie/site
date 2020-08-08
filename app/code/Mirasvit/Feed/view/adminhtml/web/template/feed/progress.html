@@ -1,0 +1,62 @@
+<div data-role="feed-progress" data-bind="afterRender: afterRender">
+    <!-- ko if: state().steps -->
+    <div data-role="steps-wizard-main" class="steps-wizard">
+        <ul class="nav-bar">
+            <!-- ko foreach: { data: _.toArray(state().steps), as: 'item'} -->
+            <li data-bind="css: {active: item.status == 'processing'}">
+                <a href="#" data-bind="text: item.name"></a>
+            </li>
+            <!-- /ko -->
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+    <!-- /ko -->
+
+    <!-- ko if: state().current -->
+    <div class="progress-bar-text-description">
+        <div class="progress-bar-text-description-title" data-bind="text: state().current.name"></div>
+        <div class="progress-bar-text-description-eta" data-bind="text: state().current.eta"></div>
+    </div>
+    <div class="progress">
+        <div class="progress-bar" data-bind="style: {width: state().current.percent}">
+            <div class="progress-bar-text-progress" data-bind="text: state().current.position"></div>
+        </div>
+    </div>
+    <!-- /ko -->
+
+    <!-- ko if: state().completed -->
+    <div class="message message-success">
+        <p><b>Feed file was generated.</b></p>
+        <table>
+            <tr>
+                <th>Feed Access Url</th>
+                <td><a data-bind="text: state().completed.url, attr: {href: state().completed.url}" target="_blank"></a></td>
+            </tr>
+            <tr>
+                <th>Generation Time</th>
+                <td data-bind="text: state().completed.time"></td>
+            </tr>
+            <tr>
+                <th>Count</th>
+                <td data-bind="text: state().completed.count"></td>
+            </tr>
+            <!-- ko if: state().completed.valid != state().completed.count -->
+            <tr>
+                <th>Valid</th>
+                <td data-bind="text: state().completed.valid"></td>
+            </tr>
+            <!-- /ko -->
+        </table>
+    </div>
+    <!-- /ko -->
+
+    <!-- ko if: state().error -->
+    <div class="message message-error" data-bind="html: state().error"></div>
+    <!-- /ko -->
+
+    <!-- ko if: !state().current && !state().completed && !state().error -->
+    <div class="spinner">
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <!-- /ko -->
+</div>

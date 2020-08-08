@@ -1,0 +1,314 @@
+#gls_popup_title {
+    background: url(../images/title-repeat.png) round;
+    color: #ffffff;
+    line-height: 58px;
+    height: 58px;
+    padding-left: 110px;
+    margin: 10px -15px 0 -15px;
+    border-radius: 10px;
+    position: relative;
+    font-size: large;
+    font-weight: bold;
+}
+
+#gls_popup_title::before {
+    content: "";
+    width: 85px;
+    height: 43px;
+    position: absolute;
+    top: 8px;
+    left: 15px;
+    background: url(../images/picto-layer.png);
+}
+
+#header_address_gls input {
+    padding: 0 10px;
+    height: 23px;
+    background-color: #fff;
+    border: solid 1px #d2d2d2;
+    vertical-align: middle;
+    box-sizing: content-box;
+}
+
+#cp_address_search {
+    width: 50px;
+    text-align: center;
+}
+
+#address_address_search {
+    width: 200px;
+}
+
+#city_address_search {
+    width: 150px;
+}
+
+#header_address_gls {
+    margin-top: 10px;
+}
+
+#header_address_gls span {
+    margin-right: 5px;
+}
+
+.content {
+    margin: 10px -15px 0 -15px;
+}
+
+#header_phone_gls input {
+    padding: 0 10px;
+    height: 23px;
+    background-color: #fff;
+    border: solid 1px #d2d2d2;
+    vertical-align: middle;
+    box-sizing: content-box;
+}
+
+#number_phone_gls {
+    width: 100px;
+}
+
+#gls_left {
+    width: 550px;
+    height: 400px;
+    float: left;
+}
+
+#gls_map {
+    height: 100%;
+}
+
+#gls_right {
+    float: right;
+    height: 400px;
+    width: 210px;
+    overflow: hidden;
+    overflow-y: scroll;
+    padding-left: 10px;
+}
+
+.gls_relay_latitude,
+.gls_relay_longitude,
+.gls_relay_hours,
+.gls_relay_id,
+.gls_relay_index {
+    display: none;
+}
+
+.gls_relay_name {
+    font-weight: bold;
+    font-size: 14px;
+    color: #06187c;
+    display: block;
+}
+
+.gls_relay_address {
+    display: block;
+}
+
+.gls_relay_address,
+.gls_relay_zipcode,
+.gls_relay_city {
+    color: #6a6a6a;
+}
+
+.gls_relay {
+    padding: 15px;
+    border-bottom: 1px solid #d6d8e9;
+    line-height: normal;
+}
+
+.gls_relay_schedule {
+    display: none;
+}
+
+.gls_list_show_relay_schedule {
+    color: #06187c;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.store_name {
+    font-weight: bold;
+    font-size: 14px;
+    color: #06187c;
+    display: block;
+}
+
+.store_address {
+    color: grey;
+    font-size: 14px;
+}
+
+.store_schedule table td {
+    padding: 0 2px 0 0;
+    font-size: 14px;
+}
+
+#gls_error_webservice {
+    color: red;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.gls_relay_button_list {
+    border-radius: 15px;
+    color: #fff;
+    margin: 15px 0 0 0;
+    background-color: #06187c;
+    text-transform: uppercase;
+    box-shadow: unset !important;
+}
+
+#gls_loader_relay {
+    height: 15px;
+}
+
+[id^="label_method_fds"][id$="gls"]::before {
+    content: url(../images/picto_fds.png);
+    float: left;
+    padding-right: 30px;
+}
+
+[id^="label_method_tohome"][id$="gls"]::before {
+    content: url(../images/picto_tohome.png);
+    float: left;
+    padding-right: 30px;
+}
+
+[id^="label_method_relay"][id$="gls"]::before {
+    content: url(../images/picto_relay.png);
+    float: left;
+    padding-right: 30px;
+}
+
+[id^="label_method_express"][id$="gls"]::before {
+    content: url(../images/picto_express.png);
+    float: left;
+    padding-right: 30px;
+}
+
+#gls_chosen_relay {
+    display: block;
+    margin: 15px 0 0 115px;
+    border-left: 3px solid #d4d4d4;
+    padding: 0 0 0 10px;
+    line-height: normal;
+    color: #777777;
+}
+
+#gls_change_my_relay {
+    color: #06187c;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.gls_relay_popup_choose {
+    text-decoration: underline;
+    color: #06187c;
+    cursor: pointer;
+}
+
+.gls_path_marker {
+    display: none;
+}
+
+.address_search_field {
+    display: inline;
+}
+
+#address_search_button {
+    margin: 5px;
+}
+
+@media all and (max-width:500px){
+    #gls_popup_title {
+        vertical-align: middle;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        font-size: smaller;
+        line-height: normal;
+        height: 43px;
+    }
+}
+
+@media all and (min-width:500px) and (max-width: 650px) {
+    #gls_popup_title {
+        font-size: smaller;
+    }
+}
+
+@media all and (min-width: 650px) and (max-width: 900px) {
+    #gls_popup_title {
+        font-size: medium;
+    }
+}
+
+@media all and (max-width: 900px) {
+
+    [id^="label_method_fds"][id$="gls"]::before {
+        content: url(../images/picto_fds.png);
+        float: left;
+        width: 100%;
+        height: 100%;
+        margin-bottom: 10px;
+    }
+
+    [id^="label_method_tohome"][id$="gls"]::before {
+        content: url(../images/picto_tohome.png);
+        float: left;
+        width: 100%;
+        height: 100%;
+        margin-bottom: 10px;
+    }
+
+    [id^="label_method_relay"][id$="gls"]::before {
+        content: url(../images/picto_relay.png);
+        float: left;
+        width: 100%;
+        height: 100%;
+        margin-bottom: 10px;
+    }
+
+    [id^="label_method_express"][id$="gls"]::before {
+        content: url(../images/picto_express.png);
+        float: left;
+        width: 100%;
+        height: 100%;
+        margin-bottom: 10px;
+    }
+
+    #gls_chosen_relay {
+        margin: 15px 0 0 0;
+    }
+}
+
+@media all and (max-width: 1100px) {
+    #gls_right {
+        float: left;
+        width: 100%;
+        height: auto;
+        overflow: visible;
+        padding-left: inherit;
+        padding-top: 10px;
+    }
+
+    #gls_left {
+        width: 100%;
+        height: 400px;
+    }
+
+    .address_search_field {
+        display: block;
+    }
+
+    .address_search_field label {
+        width: 150px;
+        display: inline-block;
+    }
+
+    #city_address_search {
+        width: 200px;
+    }
+}
+

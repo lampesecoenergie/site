@@ -1,0 +1,24 @@
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<a
+        class="action-menu-item"
+        if="$col.isSingle($row()._rowIndex)"
+        repeat="foreach: $col.getVisibleActions($row()._rowIndex), item: '$action'"
+        click="$col.getActionHandler($action())"
+        text="$action().label"
+        attr="href: $action().href, 'class': $action().class, 'title':$action().label"/>
+
+<div if="$col.isMultiple($row()._rowIndex)" collapsible>
+    <ul attr="'style': 'width:'+ ($col.getVisibleActions($row()._rowIndex).length * 30) + 'px'">
+        <li class="cedcommerce actions-li" repeat="foreach: $col.getVisibleActions($row()._rowIndex), item: '$action'">
+            <a click="$col.getActionHandler($action())"
+               text="$action().label"
+               attr="href: $action().href, 'data-action': 'item-' + $action().index, 'class': $action().class, 'title':$action().label, 'download':$action().download, 'disabled':$action().disabled"
+            />
+        </li>
+    </ul>
+</div>

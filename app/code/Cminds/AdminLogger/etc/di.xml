@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="CmindsAdminLoggerActionHistoryGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Cminds\AdminLogger\Model\ResourceModel\AdminLogger\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">CmindsAdminLoggerActionHistoryGridFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="CmindsAdminLoggerActionHistoryGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Cminds\AdminLogger\Model\ResourceModel\AdminLogger\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">cminds_adminlogger_action_history</argument>
+            <argument name="eventPrefix" xsi:type="string">cminds_adminlogger_actionhistory_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">adminlogger_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Cminds\AdminLogger\Model\ResourceModel\AdminLogger</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="cminds_adminlogger_actionhistory_listing_data_source" xsi:type="string">Cminds\AdminLogger\Model\ResourceModel\AdminLogger\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\User\Model\User">
+        <plugin name="cminds_adminlogger_password_reset_request" type="Cminds\AdminLogger\Plugin\PasswordResetPlugin" />
+    </type>
+    <type name="Magento\Config\Model\Config">
+        <plugin name="cminds_adminlogger_config_before_save" type="Cminds\AdminLogger\Plugin\ConfigBeforeSavePlugin" />
+        <plugin name="cminds_adminlogger_config_after_save" type="Cminds\AdminLogger\Plugin\ConfigAfterSavePlugin" />
+    </type>
+    <type name="Magento\Sales\Model\Order">
+        <plugin name="cminds_adminlogger_order_comment_after_save" type="Cminds\AdminLogger\Plugin\CommentAfterSavePlugin" />
+    </type>
+</config>

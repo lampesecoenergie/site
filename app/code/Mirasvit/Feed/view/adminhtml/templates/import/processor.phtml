@@ -1,0 +1,22 @@
+<?php
+/**
+ * @var $block \Magento\Backend\Block\Template
+ */
+?>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui\/js\/core\/app": {
+                "components": {
+                    "import_processor": {
+                        "component": "Mirasvit_Feed\/js\/import\/processor",
+                        "config": {
+                            "formId": "<?= $block->getFormId() ?>"
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+</script>

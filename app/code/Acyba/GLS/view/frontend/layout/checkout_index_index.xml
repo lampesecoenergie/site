@@ -1,0 +1,12 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Acyba_GLS::css/checkout.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Acyba\GLS\Block\Checkout" name="checkout" template="Acyba_GLS::checkout.phtml" after="-"/>
+            <block class="Acyba\GLS\Block\Selector" name="selector" template="Acyba_GLS::selector.phtml" after="-"/>
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <adminlogger>
+            <general>
+                <enable>1</enable>
+                <log_login>1</log_login>
+                <log_visited>1</log_visited>
+                <prune_delay>14</prune_delay>
+            </general>
+            <advanced>
+                <object_id_params>id,order_id,page_id</object_id_params>
+                <fields_to_exclude>form_key,created,updated,formated,required,product_has_weight,use_config_gift_message_available,id</fields_to_exclude>
+                <routes_to_exclude>mui_index_render,mui_bookmark_save,mui/bookmark_save,adminlogger_main_index,adminlogger_main_grid</routes_to_exclude>
+                <classes_to_exclude>Indexer Indexer, AdminLogger</classes_to_exclude>
+            </advanced>
+        </adminlogger>
+    </default>
+</config>

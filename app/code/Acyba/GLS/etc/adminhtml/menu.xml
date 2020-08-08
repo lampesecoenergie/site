@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+	<menu>
+		<add id="Acyba_GLS::gls_menu"
+			 title="GLS Import - Export"
+			 module="Acyba_GLS"
+			 sortOrder="9999"
+			 resource="Acyba_GLS::importExport_acyba_gls"
+			 translate="title"
+		/>
+		<add id="Acyba_GLS::gls_export"
+			 title="Export orders"
+			 module="Acyba_GLS"
+			 sortOrder="1"
+			 resource="Acyba_GLS::importExport_acyba_gls"
+			 parent="Acyba_GLS::gls_menu"
+			 action="gls/export"
+			 translate="title"
+		/>
+		<add id="Acyba_GLS::gls_import"
+			 title="Import tracking numbers"
+			 module="Acyba_GLS"
+			 sortOrder="2"
+			 resource="Acyba_GLS::importExport_acyba_gls"
+			 parent="Acyba_GLS::gls_menu"
+			 action="gls/import"
+			 translate="title"
+		/>
+	</menu>
+</config>

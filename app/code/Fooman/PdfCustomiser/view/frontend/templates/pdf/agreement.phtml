@@ -1,0 +1,13 @@
+<?php
+/**
+ * @var \Fooman\PdfCustomiser\Block\Agreement $block
+ *
+ * Note on the use of @noEscape throughout this template
+ * html output is allowed by design to allow users to customise their pdfs
+ * Before pdf rendering all output is run filtered by @see \Magento\Framework\Filter\Input\MaliciousCode
+ */
+?>
+<?php $agreement = $block->getAgreement() ?>
+
+<h1><?= $block->escapeHtml($agreement->getName()) ?></h1>
+<?= /* @noEscape */ $agreement->getContent() ?>

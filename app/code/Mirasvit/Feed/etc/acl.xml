@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magento_Catalog::catalog">
+                    <resource id="Mirasvit_Feed::feed" title="Advanced Product Feeds" sortOrder="10">
+                        <resource id="Mirasvit_Feed::feed_feed" title="Feeds" sortOrder="10"/>
+                        <resource id="Mirasvit_Feed::feed_template" title="Templates" sortOrder="20"/>
+                        <resource id="Mirasvit_Feed::feed_rule" title="Filters" sortOrder="20"/>
+                        <resource id="Mirasvit_Feed::feed_dynamic_category" title="Category Mapping" sortOrder="20"/>
+                        <resource id="Mirasvit_Feed::feed_dynamic_attribute" title="Dynamic Attributes" sortOrder="30"/>
+                        <resource id="Mirasvit_Feed::feed_dynamic_variable" title="Dynamic Variables" sortOrder="30"/>
+                        <resource id="Mirasvit_Feed::feed_report" title="Reports" sortOrder="40"/>
+                        <resource id="Mirasvit_Feed::feed_import" title="Import/Export Data" sortOrder="50"/>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

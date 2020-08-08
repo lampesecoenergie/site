@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Venustheme
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Venustheme.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.venustheme.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category   Venustheme
+ * @package    Ves_Blog
+ * @copyright  Copyright (c) 2014 Venustheme (http://www.venustheme.com/)
+ * @license    http://www.venustheme.com/LICENSE-1.0.html
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="jquery/fileUploader/css/jquery.fileupload-ui.css"/>
+    </head>
+    <update handle="vesblog_admin_default"/>
+    <update handle="editor"/>
+    <body>
+        <referenceContainer name="content">
+            <block class="Ves\Blog\Block\Adminhtml\Post\Edit" name="blog_post_edit"/>
+        </referenceContainer>
+        <referenceContainer name="left">
+            <block class="Ves\Blog\Block\Adminhtml\Post\Edit\Tabs" name="blog_post_edit_tabs">
+                <!--<block class="Ves\Blog\Block\Adminhtml\Post\Edit\Tab\Main" name="blog_post_edit_tab_main"/>
+                <block class="Ves\Blog\Block\Adminhtml\Post\Edit\Tab\Content" name="blog_post_edit_tab_content"/>
+                <block class="Ves\Blog\Block\Adminhtml\Post\Edit\Tab\Design" name="blog_post_edit_tab_design"/>
+                <block class="Ves\Blog\Block\Adminhtml\Post\Edit\Tab\Meta" name="blog_post_edit_tab_meta"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">main_section</argument>
+                    <argument name="block" xsi:type="string">blog_post_edit_tab_main</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">content_section</argument>
+                    <argument name="block" xsi:type="string">blog_post_edit_tab_content</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">design_section</argument>
+                    <argument name="block" xsi:type="string">blog_post_edit_tab_design</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">meta_section</argument>
+                    <argument name="block" xsi:type="string">blog_post_edit_tab_meta</argument>
+                </action>-->
+            </block>
+        </referenceContainer>
+    </body>
+</page>

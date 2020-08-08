@@ -1,0 +1,139 @@
+<?php /** @var $block \Potato\Compressor\Block\Lazyload */ ?>
+<script type="text/javascript">
+(function () {
+    var lazyload = {
+        isOnScroll: <?php echo Zend_Json::encode($block->isOnScrollLoad());?>,
+        excludeBySelectors: <?php echo Zend_Json::encode($block->getExcludeImagesByCSSSelector());?>,
+        run: function(){
+            if (this.isOnScroll) {
+                if ("IntersectionObserver" in window) {
+                    this.observerOnIntersectionObserver();
+                } else {
+                    this.observeOnScroll();
+                }
+                return;
+            }
+            this.observeOnLoad();
+        },
+        observerOnIntersectionObserver: function(){
+            var me = this;
+            var initFn = function () {
+                me._skipExcluded();
+                var observer =  new IntersectionObserver(function(entryList, observer){
+                    entryList.forEach(function(entry){
+                        if (entry.isIntersecting) {
+                            me._loadImgList([entry.target]);
+                        }
+                    });
+                    if (me._getLazyLoadImgList().length === 0) {
+                        observer.disconnect();
+                    }
+                });
+                me._getLazyLoadImgList().forEach(function(el){
+                    observer.observe(el);
+                });
+            };
+            document.addEventListener('DOMContentLoaded', initFn);
+            if (document.readyState !== 'loading') {
+                initFn();
+            }
+        },
+        observeOnScroll: function() {
+            var me = this;
+            var initFn = function() {
+                me._skipExcluded();
+
+                var interval = null;
+                var fn = function(){
+                    me._runScrollListener();
+                    if (me._getLazyLoadImgList().length === 0) {
+                        window.removeEventListener('scroll', fn);
+                        clearInterval(interval);
+                    }
+                };
+                interval = setInterval(fn, 250);
+                window.addEventListener('scroll', fn);
+                me._runScrollListener();
+            };
+            document.addEventListener('DOMContentLoaded', initFn);
+            if (document.readyState !== 'loading') {
+                initFn();
+            }
+        },
+        observeOnLoad: function() {
+            var me = this;
+            document.addEventListener('DOMContentLoaded', function(e){
+                var imgList = Array.prototype.slice.call(document.getElementsByTagName('img'), 0);
+                me._loadImgList(imgList);
+            });
+            if (document.readyState !== 'loading') {
+                var imgList = Array.prototype.slice.call(document.getElementsByTagName('img'), 0);
+                me._loadImgList(imgList);
+            }
+        },
+        _runScrollListener: function(){
+            var imgListToLoad = [];
+            this._getLazyLoadImgList().forEach(function(el){
+                var elPosition = el.getBoundingClientRect();
+                if (el.offsetHeight === 0 || el.offsetWidth === 0) {
+                    return;
+                }
+                if(elPosition.top < window.innerHeight && elPosition.bottom >= 0) {
+                    imgListToLoad.push(el);
+                }
+            });
+            this._loadImgList(imgListToLoad);
+        },
+        _getLazyLoadImgList: function(){
+            return Array.prototype.filter.call(
+                document.getElementsByTagName('img'),
+                function(el){
+                    return el.hasAttribute('data-po-cmp-src');
+                }
+            );
+        },
+        _loadImgList: function(imgList){
+            imgList.forEach(function(el){
+                var fn = function(el){
+                    var src = el.getAttribute('data-po-cmp-src');
+                    el.removeAttribute('data-po-cmp-src');
+                    if (null === src) {
+                        return;
+                    }
+                    el.src = src;
+                };
+                if (window.getComputedStyle(el).visibility === "hidden") {
+                    if (el.hasAttribute('data-po-cmp-interval')) {
+                        return;
+                    }
+                    el.setAttribute('data-po-cmp-interval', '');
+                    var interval = setInterval(function(){
+                        if (window.getComputedStyle(el).visibility !== "hidden") {
+                            fn(el);
+                            clearInterval(interval);
+                        }
+                    }, 500);
+                } else {
+                    fn(el);
+                }
+            });
+        },
+        _skipExcluded: function(){
+            var me = this;
+            this.excludeBySelectors.forEach(function(selector){
+                if (selector.trim().length === 0) {
+                    return;
+                }
+                try {
+                    var excludeList = Array.from(document.querySelectorAll(selector));
+                } catch (e) {
+                    console.error(e);
+                    return;
+                }
+                me._loadImgList(excludeList);
+            });
+        }
+    };
+    lazyload.run();
+})();
+</script>

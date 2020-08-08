@@ -1,0 +1,14 @@
+<?= $block->escapeHtml(__($block->escapeUrl($block->getData('message')))) ?> Failure may occur due to:
+<ul>
+    <?php foreach ($block->getData('reasons') as $reason) { ?>
+    <li>
+        <?= $block->escapeHtml(__($reason)) ?>
+    </li>
+    <?php   } ?>
+</ul>
+
+For further help,
+<a href="<?= $block->escapeUrl($block->getData('support_url'))?>" target="_blank">
+    connect to support.
+</a>
+

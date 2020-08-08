@@ -1,0 +1,282 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement(EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+ * @package   Ced_EbayMultiAccount
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright Copyright CEDCOMMERCE(http://cedcommerce.com/)
+ * @license   http://cedcommerce.com/license-agreement.txt
+ */
+
+
+/*Ced\EbayMultiAccount\Block\Adminhtml\Order\ShipEbayMultiAccountOrder $block*/
+
+$orderData = $block->getModel();
+$ebaymultiaccounthelper = $block->getHelper('\EbayMultiAccount');
+$datahelper = $block->getHelper('\Data');
+$mageOrderId = $this->getRequest()->getParam('order_id');
+$orderObj = $block->getOrder();
+$shipInfo = json_decode($orderData->getShipmentData(), true);
+$dataInfo = json_decode($orderData->getOrderData(), true);
+$id = $orderData->getId();
+if ($orderData->getStatus() == 'shipped') { ?>
+    <div class="admin__page-section-content">
+        <div class="admin__page-section-item">
+            <div class="admin__page-section-item-title">
+                <span class="title">eBay Order Details</span>
+            </div>
+            <div class="admin__page-section-item-content">
+                <table class="admin__table-secondary">
+                    <tbody>
+                    <tr>
+                        <th>Order Placed on eBay</th>
+                        <td><?php echo date('l, F jS Y', strtotime($orderData->getOrderPlaceDate())); ?></td>
+                    </tr>
+                    <tr>
+                        <th>Shipping Carrier</th>
+                        <td><?php echo $shipInfo["carrier"] ?></td>
+                    </tr>
+                    <tr>
+                        <th>Tracking Number</th>
+                        <td><?php echo $shipInfo["tracking"] ?></td>
+                    </tr>
+                    <tr>
+                        <th>eBay Delivery Date</th>
+                        <td><?php echo date('l, F jS Y', $shipInfo["ship_todate"]) ?></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="admin__page-section-title">
+        <span class="title">Shipment Order Items</span>
+    </div>
+    <div class="admin__table-wrapper">
+        <table class="data-table admin__table-primary edit-order-table" id="_prod_table">
+            <thead>
+            <tr class="headings">
+                <th>Product sku</th>
+                <th>Quantity ordered</th>
+                <th>Quantity to Ship</th>
+                <th>Quantity to Cancel</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($shipInfo['items'] as $valdata) { ?>
+                <tr>
+                <td><strong><?php echo $valdata['sku'] ?></strong></td>
+                <td><strong><?php echo $valdata['req_qty'] ?></strong></td>
+                <td><strong><?php echo $valdata['ship_qty'] ?></strong></td>
+                <td><strong><?php echo $valdata['cancel_quantity'] ?></strong></td>
+                </tr><?php } ?>
+            </tbody>
+        </table>
+    </div>
+    <h3>Order Shipped Successfully</h3>
+<?php } else if ($orderData->getStatus() == 'acknowledge') { ?>
+    <p>
+        <input type="hidden" id="ebaymultiaccountorderid" value="<?php echo $orderData->getEbayMultiAccountOrderId() ?>" readonly>
+        <input type="hidden" id="incrementid" value="<?php echo $block->getOrder()->getIncrementId() ?>">
+        <input type="hidden" id="form_key" value="<?php echo $block->getFormKey(); ?>">
+        <input type="hidden" id="magento_orderid" value="<?php echo $mageOrderId ?>">
+    </p>
+
+    <div class="admin__page-section-content">
+        <div class="admin__page-section-item">
+            <div class="admin__page-section-item-title">
+                <span class="title">eBay Order Information</span>
+            </div>
+            <div class="admin__page-section-item-content">
+                <table class="admin__table-secondary">
+                    <tbody>
+                    <tr>
+                        <th>Order Placed on eBay</th>
+                        <td><?php echo date('l, F jS Y', strtotime($orderData->getOrderPlaceDate())); ?></td>
+                    </tr>
+                    <tr>
+                        <th>Shipping Carrier</th>
+                        <td>
+                            <?php echo $this->getEbayMultiAccountShipCarrier(); ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Tracking Number</th>
+                        <td><input class="admin__control-text" type="text" id="tracking" value=""></td>
+                    </tr>
+                    <tr>
+                        <th>eBay Delivery Date</th>
+                        <td><input class="admin__control-text input-text required-entry" type="text" id="ship_date"
+                                   name="ship_date"/></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="admin__page-section-title">
+        <span class="title">Shipment Order Items</span>
+    </div>
+    <div class="admin__table-wrapper">
+        <table class="data-table admin__table-primary edit-order-table" id="_prod_table">
+            <thead>
+            <tr class="headings">
+                <th>Product sku</th>
+                <th>Quantity ordered</th>
+                <th>Quantity to Ship</th>
+                <th>Quantity to Cancel</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+            $k = 0;
+            if (isset($dataInfo['TransactionArray']['Transaction'][0])) {
+                $checkData = $dataInfo['TransactionArray']['Transaction'];
+            } else {
+                $checkData = $dataInfo['TransactionArray'];
+            }
+            foreach ($checkData as $valdata) {
+                $sku = isset($valdata['Item']['SKU']) ? $valdata['Item']['SKU'] : $valdata['Item']['ItemID'];
+                $cancel_qty = 0;
+                $avail_qty = $valdata['QuantityPurchased'];
+                if ($avail_qty > 0) { ?>
+                    <tr>
+                    <td><input type="hidden" id="sku_<?php echo $k; ?>" value="<?php echo $sku ?>">
+                        <strong><?php echo $sku ?></strong>
+                    </td>
+                    <td><input type="hidden" id="qty_<?php echo $k; ?>" value="<?php echo $avail_qty ?>">
+                        <strong><?php echo $avail_qty ?></strong>
+                    </td>
+                    <td><input type="text" id="ship_<?php echo $k; ?>" class="admin__control-text"
+                               value="<?php echo $avail_qty; ?>">
+                    </td>
+                    <td><input class="admin__control-text" type="text" id="can_<?php echo $k; ?>"
+                               value="<?php echo $cancel_qty; ?>">
+                    </td>
+                    </tr><?php }
+                $k++;
+            }
+            ?>
+            </tbody>
+        </table>
+    </div>
+    <br/>
+    <button class="primary" id="button1" onclick="CallShipment();">Submit
+        Shipment
+    </button><br/>
+
+    <script>
+        require([
+            "jquery",
+            "mage/calendar"
+        ], function ($) {
+            $('#ship_date').calendar({
+                showsTime: false,
+                hideIfNoPrevNext: true,
+                buttonText: "<?php echo __('Select Date') ?>",
+                dateFormat: "yy-mm-dd",
+                minDate: new Date()
+            });
+        });
+    </script>
+    <script>
+
+        function CallShipment() {
+            var key = document.getElementById('form_key').value;
+            var incrementid = document.getElementById('incrementid').value;
+            var magento_orderid = document.getElementById('magento_orderid').value;
+            var ebaymultiaccountorderid = document.getElementById('ebaymultiaccountorderid').value;
+            var carrier = document.getElementById('carrier').value;
+            var tracking = document.getElementById('tracking').value;
+            var ship_todate = document.getElementById('ship_date').value;
+
+            var outterArray = [];
+            var lengthval = <?php echo $k; ?>;
+            var ebaymultiaccountid = <?php echo $id; ?>;
+
+            for (var i = 0; i < lengthval; i++) {
+                if (document.getElementById('sku_' + i)) {
+                    product_sku = document.getElementById('sku_' + i).value;
+                    requested_quantity = document.getElementById('qty_' + i).value;
+                    cancel_quantity = document.getElementById('can_' + i).value;
+                    ship_quantity = document.getElementById('ship_' + i).value;
+
+                    if ((cancel_quantity != requested_quantity) && (requested_quantity != ship_quantity)) {
+                        alert("please either ship complete ship or cancel this order");
+                    }
+                    if ((cancel_quantity == requested_quantity) && (requested_quantity == ship_quantity)) {
+                        alert("please either ship complete ship or cancel this order");
+                    }
+
+                    if (ship_quantity < 1) {
+                        var check = false;
+                    } else {
+                        var check = true;
+                    }
+                    var product_data = {
+                        sku: product_sku, req_qty: requested_quantity, ship_qty: ship_quantity,
+                        cancel_quantity: cancel_quantity
+                    };
+
+                    outterArray.push(product_data);
+                }
+            }
+            if (check) {
+                if (carrier == "") {
+                    alert("Please enter Shipping carrier");
+                    return;
+                }
+                if (tracking == "") {
+                    alert("Please Enter Tracking Number");
+                    return;
+                }
+                if (ship_todate == "") {
+                    alert("Please enter delivery date");
+                    return;
+                }
+            }
+
+            new Ajax.Request("<?php echo $this->getUrl('ebaymultiaccount/order/ship') ?>", {
+                method: 'Post',
+                parameters: {
+                    "id": ebaymultiaccountid,
+                    "ebaymultiaccountorderid": ebaymultiaccountorderid,
+                    "items": JSON.stringify(outterArray),
+                    "carrier": carrier,
+                    "incrementid": incrementid,
+                    "magento_orderid": magento_orderid,
+                    "tracking": tracking,
+                    "ship_todate": ship_todate
+                },
+
+                onComplete: function (transport) {
+                    if (transport.responseText == "Success") {
+                        try {
+                            window.location.href = "";
+                        }
+                        catch (err) {
+                            alert(transport.responseText);
+                        }
+                    } else {
+                        alert(transport.responseText);
+                    }
+                }
+            });
+
+        }
+
+    </script>
+<?php } ?>
+<style>
+    #item > tr > td > input, select {
+        width: 100% !important;
+    }
+</style>

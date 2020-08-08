@@ -1,0 +1,510 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Venustheme
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Venustheme.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.venustheme.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category   Venustheme
+ * @package    Ves_Blog
+ * @copyright  Copyright (c) 2014 Venustheme (http://www.venustheme.com/)
+ * @license    http://www.venustheme.com/LICENSE-1.0.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Config/etc/system_file.xsd">
+	<system>
+		<tab id="venustheme" translate="label" sortOrder="400">
+			<label>Venustheme Extensions</label>
+		</tab>
+		<section id="vesblog" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+			<class>separator-top</class>
+			<label>Blog</label>
+			<tab>venustheme</tab>
+			<resource>Ves_Blog::config_blog</resource>
+			<group id="general_settings" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>General Settings</label>
+				<field id="enable" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enabled</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="url_prefix" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Blog Url Prefix</label>
+					<validate>validate-identifier</validate>
+					<comment><![CDATA[Must NOT contain any slashes. For example: http://domain.com/blog]]></comment>
+				</field>
+				<field id="url_suffix" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Blog Url Suffix</label>
+					<comment><![CDATA[Add Your extension at end of Link, for example: http://domain.com/your_route/POST_IDENTIFIER.URLSUFFIX]]></comment>
+				</field>
+				<field id="categories_urls" translate="label comment" type="select" sortOrder="32" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Use Categories Identifier in Posts URLs</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="dateformat" translate="label comment" type="select" sortOrder="34" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Date Format</label>
+					<source_model>Ves\Blog\Model\Config\Source\DateFormat</source_model>
+					<comment><![CDATA[Full: Tuesday, April 12, 1952 AD or 3:30:42pm PST<br/>LONG: January 12, 1952 or 3:30:32pm<br/>MEDIUM: Jan 12, 1952<br/>SHORT: 12/13/52 or 3:30pm]]></comment>
+				</field>
+				<field id="twitter_username" translate="label comment" type="text" sortOrder="36" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Twitter Username</label>
+				</field>
+				<field id="networks_heading" translate="label comment" type="text" sortOrder="37" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Social Buttons</label>
+					<frontend_model>Ves\Blog\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="enable_networks" translate="label comment" type="select" sortOrder="38" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enabled</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="networks" translate="label comment" type="multiselect" sortOrder="39" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Networks</label>
+					<source_model>Ves\Blog\Model\Config\Source\Networks</source_model>
+					<depends><field id="enable_networks">1</field></depends>
+				</field>
+				<field id="rssfeed_heading" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>RSS Feed</label>
+					<frontend_model>Ves\Blog\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="rssposts_show" type="text" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="320">
+					<label>RSS Items to Show</label>
+					<comment>Number of item to display in the RSS feed. Empty to show all</comment>
+					<validate>validate-number</validate>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="latestpagerss" type="select" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="330">
+					<label>Latest Posts Page</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="categoryrss" type="select" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="340">
+					<label>Category Page</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="tagrss" type="select" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="350">
+					<label>Tag Page</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="authorrss" type="select" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="360">
+					<label>Author Page</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="commentrss" type="select" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="370">
+					<label>Comment</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+			</group>
+			<group id="blog_latest_page" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Latest Posts Page</label>
+				<field id="seo_config_heading" translate="label comment" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>SEO - Search Engine Optimization</label>
+					<frontend_model>Ves\Blog\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="page_title" type="text" sortOrder="110" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Page Title</label>
+				</field>
+				<field id="meta_description" type="textarea" sortOrder="120" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Meta Description</label>
+				</field>
+				<field id="meta_keywords" type="textarea" sortOrder="130" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Meta Keywords</label>
+				</field>
+			</group>
+			<group id="category_page" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Category Page</label>
+				<field id="show_breadcrumbs" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Breadcrumbs</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_toolbartop" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Toolbar Top</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_toolbarbottom" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Toolbar Bottom</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="post_heading" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Post</label>
+					<frontend_model>Ves\Blog\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="show_image" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Image</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="image_width" translate="label comment" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Image Width</label>
+					<validate>validate-number</validate>
+					<depends><field id="show_image">1</field></depends>
+				</field>
+				<field id="image_height" translate="label comment" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Image Height</label>
+					<validate>validate-number</validate>
+					<depends><field id="show_image">1</field></depends>
+				</field>
+				<field id="show_title" translate="label comment" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Title</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_shortdescription" translate="label comment" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Short Description</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="shortdescription_count" translate="label comment" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Short Description Character Count</label>
+					<comment><![CDATA[Number of characters in a post to be displayed before it is truncated and the Read More link is added. 0 for unlimited.]]></comment>
+					<validate>validate-number</validate>
+					<depends><field id="show_shortdescription">1</field></depends>
+				</field>
+				<field id="show_readmorelink" translate="label comment" type="select" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Readmore Link</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<depends><field id="show_shortdescription">1</field></depends>
+				</field>
+				<field id="show_categories" translate="label comment" type="select" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Categories</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_author" translate="label comment" type="select" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Author</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_commentcount" translate="label comment" type="select" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Comment Count</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_updatedtime" translate="label comment" type="select" sortOrder="160" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Updated Time</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_createdtime" translate="label comment" type="select" sortOrder="170" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Created Time</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_hits" translate="label comment" type="select" sortOrder="180" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Hits</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_tags" translate="label comment" type="select" sortOrder="190" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Tags</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+			</group>
+			<group id="post_page" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Post Page</label>
+				<field id="show_breadcrumbs" translate="label comment" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Breadcrumbs</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="post_heading" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Post</label>
+					<frontend_model>Ves\Blog\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="show_image" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Image</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="image_width" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Image Width</label>
+					<validate>validate-number</validate>
+					<depends><field id="show_image">1</field></depends>
+				</field>
+				<field id="image_height" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Image Height</label>
+					<validate>validate-number</validate>
+					<depends><field id="show_image">1</field></depends>
+				</field>
+				<field id="show_title" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Title</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_description" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Description</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_categories" translate="label comment" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Categories</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_author" translate="label comment" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Author</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_commentcount" translate="label comment" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Comment Count</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_updatedtime" translate="label comment" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Updated Time</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_createdtime" translate="label comment" type="select" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Created Time</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_socialblock" translate="label comment" type="select" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Social Block</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_hits" translate="label comment" type="select" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Hits</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_tags" translate="label comment" type="select" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Tags</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="comment_heading" translate="label comment" type="text" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Coment Block</label>
+					<frontend_model>Ves\Blog\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="comment_type" translate="label comment" type="select" sortOrder="170" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Type</label>
+					<source_model>Ves\Blog\Model\Config\Source\CommentType</source_model>
+				</field>
+				<field id="auto_public" translate="label comment" type="select" sortOrder="180" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Auto Publish Comment</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<depends><field id="comment_type">default</field></depends>
+				</field>
+				<field id="numbercomment_perpage" translate="label comment" type="text" sortOrder="190" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Number Comments per Page</label>
+					<validate>validate-number</validate>
+					<depends><field id="comment_type" separator="," >default,facebook</field></depends>
+				</field>
+				<field id="show_captcha" translate="label comment" type="select" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enable ReCAPTCHA</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment><![CDATA[Enable Recaptch in service<br/>http://www.google.com/recaptcha]]></comment>
+					<depends><field id="comment_type">default</field></depends>
+				</field>
+				<field id="captcha_publickey" translate="label comment" type="text" sortOrder="210" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>ReCAPTCHA Site Key</label>
+					<depends><field id="comment_type">default</field></depends>
+				</field>
+				<field id="captcha_privatekey" translate="label comment" type="text" sortOrder="220" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>ReCAPTCHA Secret Key</label>
+					<depends><field id="comment_type">default</field></depends>
+				</field>
+				
+				<field id="recipient_email" translate="label" type="text" sortOrder="222" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Send Emails To</label>
+					<validate>validate-email</validate>
+					<depends><field id="comment_type">default</field></depends>
+				</field>
+				<field id="sender_email_identity" translate="label" type="select" sortOrder="224" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Email Sender</label>
+					<source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+					<depends><field id="comment_type">default</field></depends>
+				</field>
+				<field id="email_template" translate="label comment" type="select" sortOrder="226" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Email Template</label>
+					<comment>Email template chosen based on theme fallback when "Default" option is selected.</comment>
+					<source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+					<depends><field id="comment_type">default</field></depends>
+				</field>
+				<field id="disqus_shortname" translate="label comment" type="text" sortOrder="230" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Disqus Short name</label>
+					<depends><field id="comment_type">disqus</field></depends>
+				</field>
+				<field id="facebookcomment_width" translate="label comment" type="text" sortOrder="240" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Facebook Width</label>
+					<depends><field id="comment_type">facebook</field></depends>
+				</field>
+				<field id="related_posts_heading" translate="label comment" type="text" sortOrder="250" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Related Posts Block</label>
+					<frontend_model>Ves\Blog\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="related_carousel_layout" type="select" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="260" >
+					<label>Carousel Layout</label>
+					<source_model>Ves\Blog\Model\Config\Source\Relatedlayout</source_model>
+				</field>
+				<field id="mobile_items" type="text" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="270">
+					<label>Number Columns On Page (Phones)</label>
+					<comment >Show number items when screen size bellow 480px</comment>
+					<validate>validate-number</validate>
+					<depends><field id="related_carousel_layout">owl_carousel</field></depends>
+				</field>
+				<field id="tablet_small_items" type="text" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="280">
+					<label>Number Columns On Page (Phones to Small tablets)</label>
+					<comment >Show number items when screen size between 641px and 480px</comment>
+					<validate>validate-number</validate>
+					<depends><field id="related_carousel_layout">owl_carousel</field></depends>
+				</field>
+				<field id="tablet_items" type="text" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="290">
+					<label>Number Columns On Page (Phones to tablets)</label>
+					<comment >Show number items when screen size between 768px and 641px</comment>
+					<validate>validate-number</validate>
+					<depends><field id="related_carousel_layout">owl_carousel</field></depends>
+				</field>
+				<field id="portrait_items" type="text" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="300">
+					<label>Number Columns On Page (Portrait tablets)</label>
+					<comment >Show number items when screen size between 979px and 769px</comment>
+					<validate>validate-number</validate>
+					<depends><field id="related_carousel_layout">owl_carousel</field></depends>
+				</field>
+				<field id="default_items" type="text" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="310">
+					<label>Number Columns On Page (Default)</label>
+					<comment >Show number items when screen size between 1199px and 980px</comment>
+					<validate>validate-number</validate>
+					<depends><field id="related_carousel_layout">owl_carousel</field></depends>
+				</field>
+				<field id="large_items" type="text" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="320">
+					<label>Number Columns On Page (Large display)</label>
+					<comment >Show number items when screen size 1200px and up</comment>
+					<validate>validate-number</validate>
+					<depends><field id="related_carousel_layout">owl_carousel</field></depends>
+				</field>
+				<field id="autoplay" type="select" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="330">
+					<label>Autoplay</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<depends><field id="related_carousel_layout">owl_carousel</field></depends>
+				</field>
+				<field id="autoplay_timeout" type="text" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="340">
+					<label>Autoplay Timeout</label>
+					<comment>Autoplay interval timeout.</comment>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<depends><field id="related_carousel_layout">owl_carousel</field></depends>
+				</field>
+				<field id="dots" type="select" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="350">
+					<label>Show dots navigations</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<depends><field id="related_carousel_layout">owl_carousel</field></depends>
+				</field>
+				<field id="nav" type="select" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="360">
+					<label>Show next/prev buttons.</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<depends><field id="related_carousel_layout">owl_carousel</field></depends>
+				</field>
+			</group>
+			<group id="blog_page" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Author Page, Latest Posts Page, Tag Page, Search Page</label>
+				<field id="layout_type" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Template</label>
+					<source_model>Ves\Blog\Model\Config\Source\Layout</source_model>
+				</field>
+				<field id="page_layout" translate="label comment" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Page Layout</label>
+					<source_model>Ves\Blog\Model\Config\Source\PageLayout</source_model>
+				</field>
+				<field id="orderby" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Order By</label>
+					<source_model>Ves\Blog\Model\Config\Source\Orderby</source_model>
+				</field>
+				<field id="show_breadcrumbs" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Breadcrumbs</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="item_per_page" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Number Post Per Page</label>
+					<comment>Empty to show all item</comment>
+					<validate>validate-number</validate>
+				</field>
+				<field id="show_toolbartop" translate="label comment" type="select" sortOrder="41" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Toolbar Top</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_toolbarbottom" translate="label comment" type="select" sortOrder="43" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Toolbar Bottom</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="grid_config_heading" translate="label comment" type="text" sortOrder="45" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Grid Layout</label>
+					<frontend_model>Ves\Blog\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="lg_column_item" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Number Column on Large Desktop</label>
+					<comment><![CDATA[Large devices Desktops (≥1200px). Use in grid layout and masonry layout]]></comment>
+					<source_model>Ves\Blog\Model\Config\Source\Gridcolumns</source_model>
+				</field>
+				<field id="md_column_item" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Number Column on Desktop</label>
+					<comment><![CDATA[Medium devices Desktops (≥992px)]]></comment>
+					<source_model>Ves\Blog\Model\Config\Source\Gridcolumns</source_model>
+				</field>
+				<field id="sm_column_item" translate="label comment" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Number Column on Tablets</label>
+					<source_model>Ves\Blog\Model\Config\Source\Gridcolumns</source_model>
+					<comment><![CDATA[Small devices Tablets (≥768px)]]></comment>
+				</field>
+				<field id="xs_column_item" translate="label comment" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Number Column on Phones</label>
+					<source_model>Ves\Blog\Model\Config\Source\Gridcolumns</source_model>
+					<comment><![CDATA[Extra small devices Phones (<768px)]]></comment>
+				</field>
+				<field id="post_heading" translate="label comment" type="text" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Post</label>
+					<frontend_model>Ves\Blog\Block\Adminhtml\System\Config\Form\Field\Heading</frontend_model>
+				</field>
+				<field id="show_image" translate="label comment" type="select" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Image</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="image_width" translate="label comment" type="text" sortOrder="160" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Image Width</label>
+					<validate>validate-number</validate>
+					<depends><field id="show_image">1</field></depends>
+				</field>
+				<field id="image_height" translate="label comment" type="text" sortOrder="170" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Image Height</label>
+					<validate>validate-number</validate>
+					<depends><field id="show_image">1</field></depends>
+				</field>
+				<field id="show_title" translate="label comment" type="select" sortOrder="180" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Title</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_shortdescription" translate="label comment" type="select" sortOrder="190" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Short Description</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="shortdescription_count" translate="label comment" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Short Description Character Count</label>
+					<comment><![CDATA[Number of characters in a post to be displayed before it is truncated and the Read More link is added. 0 for unlimited.]]></comment>
+					<validate>validate-number</validate>
+					<depends><field id="show_shortdescription">1</field></depends>
+				</field>
+				<field id="show_readmorelink" translate="label comment" type="select" sortOrder="210" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Readmore Link</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<depends><field id="show_shortdescription">1</field></depends>
+				</field>
+				<field id="show_categories" translate="label comment" type="select" sortOrder="220" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Categories</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_author" translate="label comment" type="select" sortOrder="230" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Author</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_commentcount" translate="label comment" type="select" sortOrder="240" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Comment Count</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_updatedtime" translate="label comment" type="select" sortOrder="250" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Updated Time</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_createdtime" translate="label comment" type="select" sortOrder="260" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Created Time</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_hits" translate="label comment" type="select" sortOrder="270" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Hits</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_tags" translate="label comment" type="select" sortOrder="280" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Show Tags</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+			</group>
+		</section>
+	</system>
+</config>

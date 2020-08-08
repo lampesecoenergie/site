@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <sales_pdf>
+            <all>
+                <!--Page Settings-->
+                <allpagesize>A4</allpagesize>
+                <allpageorientation>P</allpageorientation>
+                <allmargintop>15</allmargintop>
+                <allmarginbottom>25</allmarginbottom>
+                <allmarginsides>20</allmarginsides>
+                <page>
+                    <nobginadmin>0</nobginadmin>
+                </page>
+
+                <!--Font and Barcode Settings-->
+                <allfont>helvetica</allfont>
+                <allfontsize>12</allfontsize>
+                <allbarcode>C39E+</allbarcode>
+
+                <!--Logo Settings-->
+                <alllogoplacement>auto-right</alllogoplacement>
+
+                <!--Miscellanous-->
+                <openinbrowser>1</openinbrowser>
+                <allqtyasint>1</allqtyasint>
+            </all>
+        </sales_pdf>
+    </default>
+</config>
+

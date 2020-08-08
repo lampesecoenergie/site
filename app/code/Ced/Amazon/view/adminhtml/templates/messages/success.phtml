@@ -1,0 +1,14 @@
+<?= $block->escapeHtml(__($block->escapeUrl($block->getData('message')))) ?>
+
+<ul>
+    <?php foreach ($block->getData('reasons') as $reason) { ?>
+        <li>
+            <?= $reason ?>
+        </li>
+    <?php } ?>
+</ul>
+
+For further queries,
+<a href="<?= $block->escapeUrl($block->getData('support_url')) ?>" target="_blank">
+    connect to support.
+</a>

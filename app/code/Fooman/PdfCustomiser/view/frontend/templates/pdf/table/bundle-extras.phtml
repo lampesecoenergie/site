@@ -1,0 +1,31 @@
+<?php
+/**
+ * @var \Fooman\PdfCustomiser\Block\Table\BundleExtras $block
+ */
+
+$orderItem = $block->getOrderItem();
+$item = $block->getItem();
+$parentQty = $item->getQty() ? $item->getQty() : $item->getQtyOrdered();
+$productOptions = $orderItem->getProductOptions();
+?>
+
+<?php if (isset($productOptions['bundle_options'])) : ?>
+    <?php $bundleOptions = $productOptions['bundle_options']; ?>
+    <?php uasort(
+        $bundleOptions,
+        function ($a, $b) {
+            return $a['option_id'] > $b['option_id'];
+        }
+    ); ?>
+    <?php foreach ($bundleOptions as $bundleOption) : ?>
+        <br/><?= $block->escapeHtml($bundleOption['label']) ?> <br/>
+        <?php foreach ($bundleOption['value'] as $value) : ?>
+            <b>&nbsp;&nbsp;&nbsp;&nbsp;<?= $block->escapeHtml(__('Title:')) ?> </b>
+            <?= $block->escapeHtml($value['title']) ?><br/>
+            <b>&nbsp;&nbsp;&nbsp;&nbsp; <?= $block->escapeHtml(__('Total Qty:')) ?>  </b>
+            <?= ($parentQty * $value['qty']) ?> <br/>
+            <b>&nbsp;&nbsp;&nbsp;&nbsp; <?= $block->escapeHtml(__('Value:')) ?> </b>
+            <?= /* @noEscape */ $block->getFormattedPrice($value['price']) ?> <br/>
+        <?php endforeach; ?>
+    <?php endforeach; ?>
+<?php endif; ?>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mondial Relay Shipping Module
+ *
+ * @author    Magentix
+ * @copyright Copyright © 2017 Magentix. All rights reserved.
+ * @license   https://www.magentix.fr/en/licence.html Magentix Software Licence
+ * @link      https://mondialrelay.magentix.fr/
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="sales_model_service_quote_submit_before">
+        <observer name="add_mondialrelay_data_to_order_address" instance="MondialRelay\Shipping\Observer\AddDataToOrderAddressObserver" />
+    </event>
+    <event name="sales_convert_order_to_quote">
+        <observer name="add_mondialrelay_data_to_quote_address" instance="MondialRelay\Shipping\Observer\AddDataToQuoteAddressObserver" />
+    </event>
+</config>

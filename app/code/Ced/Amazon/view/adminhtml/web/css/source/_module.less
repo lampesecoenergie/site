@@ -1,0 +1,15 @@
+@amazon-icons-admin__font-name-path: '@{baseDir}Ced_Amazon/fonts/amazon';
+@amazon-icons-admin__font-name : 'CedAmazon';
+.lib-font-face(
+  @family-name:@amazon-icons-admin__font-name,
+  @font-path: @amazon-icons-admin__font-name-path,
+  @font-weight: normal,
+  @font-style: normal
+);
+.admin__menu .item-amazon.parent.level-0 > a:before {
+  font-family: @amazon-icons-admin__font-name;
+  content: "\e900";
+  display: block;
+  font-size: 3rem;
+  height: 3rem;
+}

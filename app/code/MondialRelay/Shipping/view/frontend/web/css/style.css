@@ -1,0 +1,96 @@
+/* PopUp */
+.mgx-popup-container{height:100%;position:fixed !important;position:absolute;top:0;left:0;bottom:0;width:100%;background:#000;opacity:0.5;filter:alpha(opacity=50);z-index:10000}
+.mgx-popup-inner{width:920px;height:595px;margin-left:-460px;overflow-y:auto;position:fixed;z-index:16000003;left:50%;top:50%;border:1px solid #4A545C;text-align:left;background:url(../images/bg-popup.png);font:12px/1.55 Arial, Helvetica, sans-serif}
+.mgx-popup-inner label,
+.mgx-popup-inner h2{font:12px/1.55 Arial, Helvetica, sans-serif;text-transform:none}
+.mgx-load{width:300px;height:125px;margin-left:-151px;margin-top:-63px;font-size:24px;z-index:10000;color:#666;background:#fff url(../images/bg-error.gif) repeat-x bottom;text-align:center;top:50%;left:50%;position:absolute;border:1px solid #d4d4d4;-moz-box-shadow:0 0 6px #ccc;-webkit-box-shadow:0 0 6px #ccc;box-shadow:0 0 6px #ccc}
+.mgx-load-inner{display:block;margin:auto;background:url(../images/loader.gif) no-repeat center 20px;padding-top:75px}
+.mgx-message{position:absolute;display:block;background:#fff url(../images/bg-error.gif) repeat-x bottom;color:#333;font-weight:bold;text-align:center;margin:0 0 0 -180px;width:350px;left:50%;top:0;border:1px solid #d4d4d4;border-top:0;-moz-box-shadow:0 0 6px #ccc;-webkit-box-shadow:0 0 6px #ccc;box-shadow:0 0 6px #ccc;z-index:10000}
+.mgx-message .warning{display:block;text-align:center;background:url(../images/warning.gif) no-repeat center 20px;padding:80px 20px 20px 20px;cursor:pointer}
+
+/* Header */
+.mondialrelay-header{background:url(../images/bg-header.png) repeat-x;height:80px;padding-left:9px}
+.mondialrelay-header h1{font-family:Arial, Helvetica, sans-serif;font-size:30px;line-height:70px;margin:0;padding:0;color:#fff;background:url(../images/mondialrelay.png) no-repeat right;font-weight:normal}
+
+/* Content */
+.mondialrelay-content{padding:9px}
+
+/* Actions */
+.mondialrelay-actions{position:absolute;bottom:9px;left:9px;right:9px}
+.mondialrelay-actions button{border:0;cursor:pointer;font-size:14px;font-weight:bold;padding:0}
+.mondialrelay-actions button span{line-height:38px;padding:0 20px;display:block}
+button.mondialrelay-next,
+button.mondialrelay-next:hover,
+button.mondialrelay-next:active,
+button.mondialrelay-next:visited{float:right;color:#fff}
+button.mondialrelay-next span{background:#b70b4a}
+button.mondialrelay-debug,
+button.mondialrelay-previous,
+button.mondialrelay-previous:hover,
+button.mondialrelay-previous:active,
+button.mondialrelay-previous:visited{float:left;background:#fff;color:#333}
+button.mondialrelay-previous span{background:#bbb}
+button.mondialrelay-debug{margin-left:10px}
+button.mondialrelay-debug span{background:#c00;color:#fff}
+
+.mondialrelay-address{background:#fff;border:1px solid #ccc;padding:5px;margin-bottom:10px;float:left;width:890px}
+.mondialrelay-address .mondialrelay-actions{float:right;position:static;bottom:0;left:0;right:0}
+.mondialrelay-address label .mondialrelay-required{color:#c00}
+.mondialrelay-address p{float:left;margin:5px 15px 0 0;font-size:14px}
+.mondialrelay-address input,
+.mondialrelay-address select{height:28px;line-height:28px;padding:0 5px;font-size:16px;border:1px solid #ccc}
+.mondialrelay-address .mondialrelay-street{width:210px}
+.mondialrelay-address .mondialrelay-postcode{width:70px}
+.mondialrelay-address .mondialrelay-city{width:120px}
+.mondialrelay-address .mondialrelay-country{width:140px}
+.mondialrelay-address .mondialrelay-error{background:#FFEFEF;border:1px solid #c00}
+.mondialrelay-address .mondialrelay-pickup-code input{display:none}
+.mondialrelay-address .mondialrelay-pickup-code label{height:26px;line-height:26px;padding:0 10px;font-size:16px;border:1px solid #ccc;display:inline-block;cursor:pointer}
+.mondialrelay-address .mondialrelay-pickup-code label.active{background:#b70b4a;border:1px solid #b70b4a;color:#fff}
+
+.mondialrelay-list label{float:none}
+.mondialrelay-list ul{float:left;height:384px;width:388px;background:#fff;border:1px solid #ccc;overflow-y:scroll;overflow-x:hidden;margin:0;padding:0}
+.mondialrelay-list li{border-bottom:1px solid #ccc;padding:0;float:left;list-style:none;margin:0;width:100%}
+.mondialrelay-list li:last-child{border:0}
+.mondialrelay-list li.last{border:0}
+.mondialrelay-list li.hover{background:#EDF7FD}
+.mondialrelay-list li.active{background:#ffeff5}
+.mondialrelay-list li input{float:left;margin:16px 0 0 5px}
+.mondialrelay-list li label{float:left;display:block;width:342px;cursor:pointer;padding:14px 0 14px 5px}
+.mondialrelay-list li label a{background:#B70B4A;color:#fff;text-decoration:none;padding:2px 5px}
+.mondialrelay-list .mondialrelay-map{width:500px;height:384px;float:right;border:1px solid #ccc}
+.mondialrelay-list p{background:#fff;border:1px solid #ccc;color:#c00;font-size:14px;padding:5px 0;text-align:center;float:left;width:100%}
+
+.mondialrelay-info{text-align:left;font-weight:normal;padding:10px;margin:0;list-style: none}
+.mondialrelay-info li{margin:0 0 10px 0}
+.mondialrelay-info h2{display:block;margin:0 0 5px 0;background:#69757B;padding:0 5px;color:#fff;font-weight:bold;font-size:12px}
+.mondialrelay-info .mondialrelay-schedule span{display:inline-block;width:80px}
+.mondialrelay-info .mondialrelay-actions{float:none;position:static;bottom:0;left:0;right:0;margin:0;text-align:center}
+.mondialrelay-info .mondialrelay-actions .mondialrelay-previous{float:none}
+.mondialrelay-info td,.mondialrelay-info th{padding:2px 4px;border:1px solid #ccc}
+.mondialrelay-info td.valid{background:#cdffb9}
+
+/* Selected Address */
+#mondialrelay-pickup-selected{display:none}
+
+/* Mobile */
+@media only screen and (max-width:920px){
+    .mgx-popup-inner{width:100%;margin-left:0;left:0;height:565px}
+    .mgx-message{width:314px;margin:0 0 0 -158px}
+    .mondialrelay-header{display:none}
+    .mondialrelay-list .mondialrelay-map{display:none}
+    .mondialrelay-list ul{float:none;height:330px}
+    .mondialrelay-list ul,.mondialrelay-list li{width:100%}
+    .mondialrelay-list li label{width:90%}
+    .mondialrelay-address{width:100%;padding:0}
+    .mondialrelay-address p{float:none;padding:0 5px}
+    .mondialrelay-address label{display:inline-block;width:100px}
+    .mondialrelay-address .mondialrelay-pickup-code label{width:auto}
+    .mondialrelay-address .mondialrelay-actions{margin:10px 0 10px 109px;float:none}
+    .mondialrelay-address .mondialrelay-actions button{float:none}
+    .mondialrelay-address .mondialrelay-postcode,
+    .mondialrelay-address .mondialrelay-country{width:60%}
+    .mondialrelay-mobile input[type=text]{width:100px}
+    .mondialrelay-shipping input[type=text],.mondialrelay-shipping select{width:60%}
+    .mondialrelay-message{width:90%;margin-left:5%;left:0}
+}

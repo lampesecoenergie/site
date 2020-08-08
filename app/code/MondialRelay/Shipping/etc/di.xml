@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mondial Relay Shipping Module
+ *
+ * @author    Magentix
+ * @copyright Copyright © 2018 Magentix. All rights reserved.
+ * @license   https://www.magentix.fr/en/licence.html Magentix Software Licence
+ * @link      https://mondialrelay.magentix.fr/
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="MondialRelay\Shipping\Api\PickupRepositoryInterface" type="MondialRelay\Shipping\Model\PickupRepository" />
+    <preference for="MondialRelay\Shipping\Api\Data\PickupSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+    <preference for="MondialRelay\Shipping\Api\GuestPickupRepositoryInterface" type="MondialRelay\Shipping\Model\GuestPickupRepository" />
+    <type name="Magento\Backend\Block\Widget\Button\Toolbar">
+        <plugin name="mondialrelay_shipping_return_action" type="MondialRelay\Shipping\Plugin\ReturnLabelAction" sortOrder="100" />
+    </type>
+    <type name="Magento\Shipping\Controller\Adminhtml\Order\Shipment\Save">
+        <plugin name="mondialrelay_shipping_shipment_save" type="MondialRelay\Shipping\Plugin\Create" sortOrder="110" disabled="false" />
+    </type>
+    <type name="Magento\Quote\Model\Quote\Config">
+        <plugin name="mondialrelay_shipping_catalog_attributes" type="MondialRelay\Shipping\Plugin\CatalogAttributes" sortOrder="120" disabled="false" />
+    </type>
+</config>

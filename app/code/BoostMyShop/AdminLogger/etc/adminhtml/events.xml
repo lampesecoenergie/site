@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+
+    <event name="backend_auth_user_login_success">
+        <observer name="adminlogger_backend_auth_user_login_success" instance="BoostMyShop\AdminLogger\Observer\UserLoginSuccessObserver" />
+    </event>
+
+    <event name="backend_auth_user_login_failed">
+        <observer name="adminlogger_backend_auth_user_login_failed" instance="BoostMyShop\AdminLogger\Observer\UserLoginFailObserver" />
+    </event>
+
+    <event name="model_save_after">
+        <observer name="adminlogger_model_save_after" instance="BoostMyShop\AdminLogger\Observer\ModelSaveAfterObserver" />
+    </event>
+
+    <event name="model_delete_after">
+        <observer name="adminlogger_model_delete_after" instance="BoostMyShop\AdminLogger\Observer\ModelDeleteAfterObserver" />
+    </event>
+
+    <event name="controller_action_postdispatch">
+        <observer name="adminlogger_controller_action_postdispatch" instance="BoostMyShop\AdminLogger\Observer\ControllerPostDispatchObserver" />
+    </event>
+
+
+</config>

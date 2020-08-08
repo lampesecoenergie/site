@@ -1,0 +1,29 @@
+<?php /** @var $block \Potato\Compressor\Block\FastInit */ ?>
+<script type="text/javascript">
+(function(){
+    var dataAttribute = <?php echo Zend_Json::encode($block->getDataAttribute());?>;
+    var applyFn = function(component, config, el){
+        require([component], function (fn) {
+            if (typeof fn === 'object') {
+                fn = fn[component].bind(fn);
+            }
+            if (typeof fn == 'function') {
+                fn(config, el);
+            }
+        });
+    };
+    var nodes = Array.from(document.querySelectorAll('script[' + dataAttribute + '=""]'));
+    nodes.forEach(function(node){
+        var data = node.textContent;
+        node.parentNode.removeChild(node);
+        var json = JSON.parse(data);
+        for(var selector in json) {
+            for(var component in json[selector]) {
+                var config = json[selector][component];
+                var el = document.querySelector(selector);
+                applyFn(component, config, el);
+            }
+        }
+    });
+})();
+</script>

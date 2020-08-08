@@ -1,0 +1,26 @@
+.amazon_profile_form_amazon_profile_form_profile_products_profile_products_container_grid_insertListing .admin__data-grid-header-row .action-select {
+    width: 77% !important;
+}
+
+.amazon_profile_form_amazon_profile_form_profile_products_profile_products_container_grid_insertListing .selectmenu {
+    height: auto !important;
+    padding: 0 !important;
+}
+
+.amazon_profile_form_amazon_profile_form_profile_products_profile_products_container_grid_insertListing .action-multicheck-wrap {
+    width: 3.5rem !important;
+}
+
+.amazon_profile_form_amazon_profile_form_profile_products_profile_products_container_grid_insertListing .action-previous,
+.amazon_profile_form_amazon_profile_form_profile_products_profile_products_container_grid_insertListing .action-next  {
+    width: 1.4rem !important;
+}
+
+.amazon_profile_form_amazon_profile_form_profile_products_profile_products_container_grid_insertListing .admin__data-grid-filters-wrap .admin__form-field {
+    padding-left: 5rem !important;
+    padding-right: 5rem !important;
+}
+
+.amazon_profile_form_amazon_profile_form_profile_products_profile_products_container_grid_insertListing .action-multicheck-wrap .action-multicheck-toggle {
+    height: 1.4rem !important;
+}

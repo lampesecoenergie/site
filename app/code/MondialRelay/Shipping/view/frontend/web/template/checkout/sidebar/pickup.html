@@ -1,0 +1,26 @@
+<!-- ko if: (address()) -->
+<div class="ship-to">
+    <div class="shipping-information-title">
+        <span data-bind="i18n: 'Pick-Up location:'"></span>
+        <button class="action action-edit" data-bind="click: updatePickupAddress">
+            <span data-bind="i18n: 'edit'"></span>
+        </button>
+    </div>
+    <div class="shipping-information-content">
+        <strong data-bind="text: address().lgadr1"></strong> <br />
+        <span data-bind="text: address().lgadr3"></span><br />
+        <span data-bind="text: address().cp"></span>
+        <span data-bind="text: address().ville"></span>
+    </div>
+</div>
+<!-- /ko -->
+<!-- ko if: (getShippingMethodTitle()) -->
+<div class="ship-via">
+    <div class="shipping-information-title">
+        <span data-bind="i18n: 'Shipping Method:'"></span>
+    </div>
+    <div class="shipping-information-content">
+        <span class="value" data-bind="text: getShippingMethodTitle()"></span>
+    </div>
+</div>
+<!-- /ko -->

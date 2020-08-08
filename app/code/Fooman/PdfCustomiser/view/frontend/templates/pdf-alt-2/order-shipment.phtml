@@ -1,0 +1,151 @@
+<?php
+/**
+ * @var \Fooman\PdfCustomiser\Block\OrderShipment $block
+ *
+ * Note on the use of @noEscape throughout this template
+ * html output is allowed by design to allow users to customise their pdfs
+ * Before pdf rendering all output is run filtered by @see \Magento\Framework\Filter\Input\MaliciousCode
+ */
+?>
+<?php $order = $block->getOrder() ?>
+<?php $design = $block->getDesign() ?>
+
+<table width="100%" border="0" cellpadding="8" cellspacing="0">
+    <tr>
+        <?php if ($block->isLogoOnRight()) : ?>
+            <td valign="top"
+                colspan="2"
+                width="50%"
+                height="30mm"></td>
+            <td colspan="2" valign="top">&nbsp;<?= /* @noEscape */ $block->getLogoBlock() ?></td>
+        <?php else : ?>
+            <td width="50%"
+                colspan="2"
+                valign="top">&nbsp;<?= /* @noEscape */ $block->getLogoBlock() ?></td>
+            <td valign="top"
+                colspan="2"
+                height="30mm"></td>
+        <?php endif; ?>
+    </tr>
+    <tr>
+        <td colspan="2"
+            valign="top"
+            style="text-decoration:underline; font-size:<?= /* @noEscape */$block->getFontsize('small') ?>"
+        ><?= /* @noEscape */ $block->escapeHtml($block->getOwnerAddress()) ?></td>
+        <td valign="top" width="35%"><?= $block->escapeHtml(__('Shipment #')) ?>:<br/>
+            <?= $block->escapeHtml(__('Ship Date')) ?>:
+            <?php if ($block->showOrderIncrementId()) : ?>
+                <br/><?= $block->escapeHtml(__('Order #'))?>:
+            <?php endif; ?>
+        </td>
+        <td valign="top" width="15%"><?= $block->escapeHtml($order->getIncrementId()) ?><br/>
+            <?= /* @noEscape */ $block->getFormattedDate($order->getCreatedAt()) ?>
+            <?php if ($block->showOrderIncrementId()) : ?>
+                <br/><?= $block->escapeHtml($order->getIncrementId())?>
+            <?php endif; ?>
+        </td>
+    </tr>
+    <tr>
+        <?php if ($block->shouldDisplayBothAddresses()) : ?>
+
+        <td valign="top"
+            colspan="2"
+        ><?= /* @noEscape */ $block->getBillingAddress() ?></td>
+        <td valign="top"
+            colspan="2"
+        ><?php if (!$order->getIsVirtual()) :
+            ?><span style="font-weight: bold"><?= $block->escapeHtml(__('Ship to:')) ?></span><br/><?= /* @noEscape */ $block->getShippingAddress() ?><?php
+         endif; ?></td>
+        <?php elseif ($block->shouldDisplayShippingAddress()) : ?>
+            <td valign="top"
+                colspan="4"></td>
+        </tr>
+        <tr>
+            <td valign="top"
+                colspan="4"
+            ><?= $block->escapeHtml(__('Ship to:')) ?><br/><?= /* @noEscape */ $block->getShippingAddress() ?></td>
+        <?php elseif ($block->shouldDisplayBillingAddress()) : ?>
+        <td valign="top"
+            colspan="4"></td>
+        </tr>
+        <tr>
+            <td valign="top"
+                colspan="4"
+            ><?= /* @noEscape */ $block->getBillingAddress() ?></td>
+        <?php endif; ?>
+    </tr>
+    <tr>
+        <td colspan="4">&nbsp;</td>
+    </tr>
+    <tr>
+        <td valign="top"
+            width="25%"
+            style="font-weight:bold;"
+        ><strong><?= $block->escapeHtml(__('Customer')) ?></strong></td>
+        <td valign="top"
+            <?php if ($order->getIsVirtual()) : ?>
+            colspan="2"
+            <?php endif; ?>
+            style="font-weight:bold;"
+        ><strong><?= $block->escapeHtml(__('Payment Method')) ?></strong></td>
+        <?php if (!$order->getIsVirtual()) : ?>
+            <td valign="top"
+                width="35%"
+                style="font-weight:bold;"
+            ><strong><?= $block->escapeHtml(__('Shipping Method')) ?></strong></td>
+        <?php endif; ?>
+        <td valign="top"
+            width="15%"
+            style="font-weight:bold;"
+        ><strong><?= $block->escapeHtml(__('Order Date')) ?></strong></td>
+    </tr>
+    <tr>
+        <td valign="top"
+            width="25%"
+        ><?= $block->escapeHtml($order->getCustomerEmail()) ?>
+            <?php if ($order->getCustomerId()) : ?>
+            <br/><?= $block->escapeHtml($order->getCustomerId()) ?>
+            <?php endif; ?></td>
+        <td valign="top"
+            <?php if ($order->getIsVirtual()) : ?>
+                colspan="2"
+            <?php endif; ?>
+        ><?= /* @noEscape */ $block->getPaymentBlock() ?></td>
+        <?php if (!$order->getIsVirtual()) : ?>
+            <td valign="top"
+                width="35%"
+            ><?= /* @noEscape */ $block->getShippingBlock() ?></td>
+        <?php endif; ?>
+        <td valign="top"
+            width="15%"
+        ><?= /* @noEscape */ $block->getFormattedDate($order->getCreatedAt()) ?></td>
+    </tr>
+    <tr>
+        <td height="10mm" colspan="4">&nbsp;</td>
+    </tr>
+    <tr>
+        <td valign="top"
+            colspan="4"
+            style="font-weight:bold;font-size:<?= /* @noEscape */ $block->getFontsize('large') ?>"
+        ><?= $block->escapeHtml($block->getTitle()) ?></td>
+    </tr>
+    <?php $customText = $block->getCustomText() ?>
+    <?php if ($customText) : ?>
+        <tr>
+            <td colspan="4"><?= /* @noEscape */ $customText ?></td>
+        </tr>
+    <?php endif; ?>
+    <tr>
+        <td colspan="4">&nbsp;</td>
+    </tr>
+</table>
+
+
+
+<?= /* @noEscape */ $block->getItemsBlock($design->getItemStyling()) ?>
+
+<?= /* @noEscape */ $block->getGiftmessageBlock()?>
+
+<?= /* @noEscape */ $block->getCommentsBlock() ?>
+
+

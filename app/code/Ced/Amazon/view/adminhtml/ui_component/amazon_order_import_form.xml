@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Amazon
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">amazon_order_import_form.amazon_order_import_form_data_source</item>
+            <item name="deps" xsi:type="string">amazon_order_import_form.amazon_order_import_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Order Import</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="array">
+                <item name="name" xsi:type="string">back</item>
+                <item name="label" xsi:type="string" translate="true">Back</item>
+                <item name="class" xsi:type="string">back</item>
+                <item name="url" xsi:type="string">amazon/order/index</item>
+            </item>
+            <item name="save" xsi:type="array">
+                <item name="name" xsi:type="string">add</item>
+                <item name="label" xsi:type="string" translate="true">Import</item>
+                <item name="class" xsi:type="string">primary</item>
+            </item>
+        </item>
+		<item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">amazon_order_import_form</item>
+            <item name="type" xsi:type="string">tabs</item>
+        </item>
+    </argument>
+    <dataSource name="amazon_order_import_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Ced\Amazon\Ui\DataProvider\Order\Search</argument>
+            <argument name="name" xsi:type="string">amazon_order_import_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="amazon/order/import"/>
+                    <!--<item name="validate_url" xsi:type="url" path="amazon/profile/validate"/>-->
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+
+    <fieldset name="order_parameters">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Parameters</item>
+                <item name="collapsible" xsi:type="boolean">false</item>
+            </item>
+        </argument>
+        <field name="account_id">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Ced\Amazon\Model\Source\Account</item>
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/element/multiselect</item>
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">amazon_order_import_form_data_source</item>
+                    <item name="label" xsi:type="string" translate="true">Account</item>
+                    <item name="additionalInfo" xsi:type="string">
+                        Select accounts to import order from Amazon.
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="order_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">amazon_order_import_form_data_source</item>
+                    <item name="label" xsi:type="string" translate="true">Order Id</item>
+                    <item name="additionalInfo" xsi:type="string">
+                        <![CDATA[
+                        Provide a amazon order id to import order from Amazon.<br> Example: <b>"113-3138479-4345024"</b>
+                        ]]>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="buyer_email">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">amazon_order_import_form_data_source</item>
+                    <item name="label" xsi:type="string" translate="true">Buyer Email</item>
+                    <item name="additionalInfo" xsi:type="string">
+                        <![CDATA[
+                        Insert customer email to import order from Amazon.<br>
+                         Example: <b>"abc@customer.com"</b>
+                        ]]>
+                    </item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-email" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="status">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Ced\Amazon\Model\Source\Order\Status</item>
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/element/multiselect</item>
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">amazon_order_import_form_data_source</item>
+                    <item name="label" xsi:type="string" translate="true">Status</item>
+                    <item name="additionalInfo" xsi:type="string">
+                        <![CDATA[
+                        Select a order status to import order from Amazon. <br/>
+                        Example: <b>"Unshipped,PartiallyShipped"</b>. <br/>
+                        Default set to "Unshipped,PartiallyShipped".
+                    ]]>
+                    </item>
+                    <item name="default" xsi:type="string">Unshipped,PartiallyShipped</item>
+                </item>
+            </argument>
+        </field>
+        <field name="created_after">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/element/date</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">amazon_order_import_form_data_source</item>
+                    <item name="label" xsi:type="string" translate="true">Created After</item>
+                    <item name="additionalInfo" xsi:type="string">
+                        <![CDATA[Select the created after date in <b>yyyy-MM-dd</b> format to import order from amazon.<br/> Example: <b>"2018-03-01"</b>, Default <b>10 days</b> from today.]]>
+                    </item>
+                    <item name="options" xsi:type="array">
+                        <item name="dateFormat" xsi:type="string">y-MM-dd</item>
+                        <item name="showsTime" xsi:type="boolean">false</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="limit">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">number</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">amazon_order_import_form_data_source</item>
+                    <item name="label" xsi:type="string" translate="true">Limit</item>
+                    <item name="default" xsi:type="string">10</item>
+                    <item name="additionalInfo" xsi:type="string">
+                        <![CDATA[
+                        Insert the number of orders to import from Amazon. Example: <b>"5"</b> <br>
+                        Note: only maximum of 10 allowed per import request.
+                        ]]>
+                    </item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+</form>

@@ -1,0 +1,53 @@
+<?php
+    $contacts_config = $this->helper('Smartwave\Porto\Helper\Data')->getConfig('porto_settings/contacts');
+    $_infoblock = $contacts_config['infoblock'];
+    $_customblock = $contacts_config['customblock'];
+    
+    if($_customblock) {
+        $block = $this->getLayout()->createBlock('Magento\Cms\Block\Block');
+        if($block) {
+            $block->setBlockId($_customblock);
+        }
+        if($block){
+            echo '<div class="row"><div class="col-md-12">'.$block->toHtml().'</div></div>';
+        }
+    }
+?>
+<div class="row">
+    <div class="col-md-8"><?php echo $this->getChildHtml('contactForm')?></div>
+    <!--<div class="col-md-4 contact-info">
+        <div class="contacts-title"><?php echo __('Contact') ?> <b><?php echo __('Details') ?></b></div>
+        <?php //echo $_infoblock; ?>
+    </div>-->
+	
+	<div class="col-md-4 contact-info">
+        <div class="contacts-title">Contact <b>Details</b></div>
+        <div class="row">
+<div class="col-md-12">
+    <i class="porto-icon-phone"></i>
+    <p>0555701427 </p>
+    <!--<p>0201 203 2032</p>-->
+</div>
+</div>
+<!--<div class="row">
+<div class="col-md-12">
+    <i class="porto-icon-mobile"></i>
+    <p>201-123-3922</p>
+    <p>302-123-3928</p>
+</div>
+</div>-->
+<div class="row">
+<div class="col-md-12">
+    <i class="porto-icon-mail-alt"></i>
+    <p>sales@lampesecoenergie.com</p>
+    <!--<p>porto@portotemplate.com</p>-->
+</div>
+</div>
+<!--<div class="row">
+<div class="col-md-12">
+    <i class="porto-icon-skype"></i>
+    <p>porto_skype</p>
+    <p>proto_template</p>
+</div>
+</div>-->    </div>
+</div>

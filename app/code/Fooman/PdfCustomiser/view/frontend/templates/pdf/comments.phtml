@@ -1,0 +1,18 @@
+<?php
+/**
+ * @var \Fooman\PdfCustomiser\Block\Comments $block
+ */
+?>
+<br/>
+<strong><?= $block->escapeHtml(__('Comments')) ?></strong><br/>
+<table border="0" cellpadding="2" cellspacing="0">
+<?php foreach ($block->getComments() as $comment) : ?>
+    <tr>
+        <td><?= /* @noEscape */ $comment['date'] ?><?php if ($comment['label']) :
+            ?> | <?= /* @noEscape */ $block->escapeComment($comment['label']) ?><?php
+            endif; ?></td>
+        <td><?= /* @noEscape */ $block->escapeComment($comment['comment']) ?></td>
+    </tr>
+<?php endforeach; ?>
+</table>
+<br/>

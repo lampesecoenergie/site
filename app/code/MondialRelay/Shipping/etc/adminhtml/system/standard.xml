@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mondial Relay Shipping Module
+ *
+ * @author    Magentix
+ * @copyright Copyright © 2018 Magentix. All rights reserved.
+ * @license   https://www.magentix.fr/en/licence.html Magentix Software Licence
+ * @link      https://mondialrelay.magentix.fr/
+ */
+-->
+<include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
+    <group id="standard" translate="label" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+        <label>Standard</label>
+        <fieldset_css>mondialrelay-configuration</fieldset_css>
+        <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Enabled</label>
+            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+        </field>
+        <field id="name" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Name</label>
+        </field>
+        <field id="max_weight" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Maximum Weight</label>
+            <comment>Defines the maximum weight for shipment (in kgs)</comment>
+            <validate>required-entry validate-number validate-digits-range digits-range-0-30</validate>
+            <depends>
+                <field id="*/*/limitation/weight_limitation">1</field>
+            </depends>
+        </field>
+        <field id="max_size" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Maximum Size</label>
+            <comment>Defines the maximum size for package (L + W + H in cm)</comment>
+            <validate>required-entry validate-number validate-digits-range digits-range-0-150</validate>
+            <depends>
+                <field id="*/*/limitation/size_limitation">1</field>
+            </depends>
+        </field>
+        <field id="price" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Price</label>
+            <frontend_model>MondialRelay\Shipping\Block\Adminhtml\System\Config\Form\Field\Price</frontend_model>
+            <backend_model>MondialRelay\Shipping\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+            <attribute type="method">standard</attribute>
+            <comment><![CDATA[*In Kgs<br />**Subtotal incl. tax with discount]]></comment>
+        </field>
+        <field id="fee" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Fee</label>
+            <frontend_model>MondialRelay\Shipping\Block\Adminhtml\System\Config\Form\Field\Fee</frontend_model>
+            <backend_model>MondialRelay\Shipping\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+            <attribute type="method">standard</attribute>
+            <comment><![CDATA[*Fees for specific postcodes: amount to add to basic price.]]></comment>
+        </field>
+        <field id="specificcountry" translate="label" type="multiselect" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Ship to Specific Countries</label>
+            <source_model>MondialRelay\Shipping\Model\Config\Source\Country\Standard</source_model>
+            <can_be_empty>1</can_be_empty>
+        </field>
+        <field id="insurance" translate="label" type="select" sortOrder="8" showInDefault="1" showInWebsite="0" showInStore="0">
+            <label>Default Insurance</label>
+            <source_model>MondialRelay\Shipping\Model\Config\Source\Insurance</source_model>
+        </field>
+        <field id="sort_order" translate="label" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Sort Order</label>
+        </field>
+    </group>
+</include>

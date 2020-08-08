@@ -1,0 +1,22 @@
+{
+    "name": "potato/module-crawler",
+    "description": "N/A",
+    "type": "magento2-module",
+    "version": "1.0.5",
+    "license": [
+        "proprietary"
+    ],
+    "require": {
+        "php": "~7.0.0|~7.1.0|~7.2.0",
+        "magento/framework": "*",
+        "magento/magento-composer-installer": "*"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Potato\\Crawler\\": ""
+        }
+    }
+}

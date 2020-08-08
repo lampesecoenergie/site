@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement(EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+ * @package   Ced_EbayMultiAccount
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright Copyright CEDCOMMERCE(http://cedcommerce.com/)
+ * @license   http://cedcommerce.com/license-agreement.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<default>
+        <system>
+            <license>
+                <use_https>0</use_https>
+                <license_url>ebaymultiaccount/main/license</license_url>
+                <activate_url>cedcommerce.com/licensing/validate/</activate_url>
+                <validate_url>cedcommerce.com/licensing/validate/auto</validate_url>
+            </license>
+        </system>
+        <cedcore>
+            <feeds_group>
+                <feeds>INFO,PROMO,UPDATE_RELEASE,NEW_RELEASE,INSTALLED_UPDATE</feeds>
+            </feeds_group>
+        </cedcore>
+		<ebaymultiaccount_config>
+			<ebaymultiaccount_setting>
+				<environment>sandbox</environment>
+				<location>0</location>
+				<dev_acc>0</dev_acc>
+				<storeid>1</storeid>
+			</ebaymultiaccount_setting>
+			<product_upload>
+				<chunk_size>5</chunk_size>
+			</product_upload>
+			<ebaymultiaccount_order>
+				<global_setting>
+					<order_on_out_of_stock>0</order_on_out_of_stock>
+					<from_order>15</from_order>
+				</global_setting>
+			</ebaymultiaccount_order>
+		</ebaymultiaccount_config>
+		<carriers>
+			<shipbyebaymultiaccount>
+				<active>1</active>
+				<sallowspecific>0</sallowspecific>
+				<name>eBay Shipping Method(Default)</name>
+				<title>eBay Shipping Method</title>
+				<model>Ced\EbayMultiAccount\Model\Carrier\Shipbyebaymultiaccount</model>
+			</shipbyebaymultiaccount>
+		</carriers> 
+		<payment>
+			<paybyebaymultiaccount>
+				<active>1</active>
+				<model>Ced\EbayMultiAccount\Model\Payment\Paybyebaymultiaccount</model>
+				<order_status>Processing</order_status>
+				<title>eBay Payment Method(Default)</title>
+				<payment_action>sale</payment_action>
+				<allowspecific>0</allowspecific>
+			</paybyebaymultiaccount>
+    </payment>
+  </default> 
+</config>

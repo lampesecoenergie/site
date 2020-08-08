@@ -1,0 +1,156 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_CustomerAttributes
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2018-2019 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Define provider class that was used in node dataSource/class -->
+    <virtualType name="CustomerAttributeGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="filterPool" xsi:type="object" shared="false">CustomerAttributeGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <!-- collection resolves to standard collection class and filerPool defines new element: -->
+    <!-- This is used for filtering and searching. Used default values for this -->
+    <virtualType name="CustomerAttributeGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <!-- Register data source. In this case node name must match the one used in <dataSource /> node 
+    in listing xml and it resolves not to collection but to GridCollection class.-->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="customer_attribute_listing_data_source" xsi:type="string">Bss\CustomerAttributes\Model\ResourceModel\Attribute\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Bss\CustomerAttributes\Model\ResourceModel\Attribute\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">customer_eav_attribute</argument>
+            <argument name="resourceModel" xsi:type="string">Magento\Customer\Model\ResourceModel\Attribute</argument>
+        </arguments>
+    </type>
+    <preference for="Magento\Email\Model\BackendTemplate" type="Bss\CustomerAttributes\Model\Email\BackendTemplate" />
+    <type name="Magento\Customer\Model\EmailNotification">
+        <plugin name="bss_email_new_account" type="Bss\CustomerAttributes\Model\EmailNotification" sortOrder="10"/>
+    </type>
+    <type name="Magento\Eav\Model\Attribute\Data\File">
+        <plugin name="bss_validateFile" type="Bss\CustomerAttributes\Model\Metadata\Form\File" sortOrder="10"/>
+    </type>
+    <type name="Magento\Framework\Console\CommandList">
+       <arguments>
+           <argument name="commands" xsi:type="array">
+               <item name="bss_set_required_value_customer" xsi:type="object">Bss\CustomerAttributes\Console\Customer\SetRequiredAttributeValue</item>
+           </argument>
+       </arguments>
+   </type>
+    <type name="Magento\Eav\Model\Attribute\Data\Text">
+        <plugin name="bss_customer_attributes_plugin_validate_form_text_231" type="Bss\CustomerAttributes\Plugin\Model\Metadata\Form\ValidateTextValue" sortOrder="10"/>
+    </type>
+    <type name="Magento\Eav\Model\Attribute\Data\Date">
+        <plugin name="bss_customer_attributes_plugin_eav_validate_form_date" type="Bss\CustomerAttributes\Plugin\Model\Metadata\Form\ValidateValue" sortOrder="10"/>
+    </type>
+    <type name="Magento\Eav\Model\Attribute\Data\Textarea">
+        <plugin name="bss_customer_attributes_plugin_eav_validate_form_textarea" type="Bss\CustomerAttributes\Plugin\Model\Metadata\Form\ValidateValue" sortOrder="10"/>
+    </type>
+    <type name="Magento\Eav\Model\Attribute\Data\Boolean">
+        <plugin name="bss_customer_attributes_plugin_eav_validate_form_boolean" type="Bss\CustomerAttributes\Plugin\Model\Metadata\Form\ValidateValue" sortOrder="10"/>
+    </type>
+    <type name="Magento\Eav\Model\Attribute\Data\Multiselect">
+        <plugin name="bss_customer_attributes_plugin_eav_validate_form_multi" type="Bss\CustomerAttributes\Plugin\Model\Metadata\Form\ValidateValue" sortOrder="10"/>
+    </type>
+    <type name="Magento\Eav\Model\Attribute\Data\Select">
+        <plugin name="bss_customer_attributes_plugin_eav_validate_form_select" type="Bss\CustomerAttributes\Plugin\Model\Metadata\Form\ValidateValue" sortOrder="10"/>
+    </type>
+    <type name="Magento\Customer\Model\AttributeMetadataResolver">
+        <plugin name="bss_customer_attributes_plugin_hide_disable_attribute" type="Bss\CustomerAttributes\Plugin\Model\AttributeMetadataResolver" sortOrder="10"/>
+    </type>
+    <preference for="Magento\Customer\Model\Metadata\Form\File" type="Bss\CustomerAttributes\Plugin\Model\Metadata\Form\File" />
+
+    <!-- BSS B2BIntegration integration -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="customer_attribute_listing_data_source" xsi:type="string">Bss\CustomerAttributes\Model\ResourceModel\Attribute\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Bss\CustomerAttributes\Model\ResourceModel\Attribute\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">customer_eav_attribute</argument>
+            <argument name="resourceModel" xsi:type="string">Magento\Customer\Model\ResourceModel\Attribute</argument>
+        </arguments>
+    </type>
+
+    <type name="Bss\CustomerAttributes\Model\Metadata\Form\Radio">
+        <plugin name="bss_b2b_customer_attributes_plugin_validate_form_radio" type="Bss\CustomerAttributes\Plugin\Integration\Model\Metadata\Form\ValidateValue"/>
+    </type>
+    <type name="Bss\CustomerAttributes\Model\Metadata\Form\CheckBoxs">
+        <plugin name="bss_b2b_customer_attributes_plugin_validate_form_checkboxs" type="Bss\CustomerAttributes\Plugin\Integration\Model\Metadata\Form\ValidateValue"/>
+    </type>
+    <type name="Magento\Customer\Model\Metadata\Form\Date">
+        <plugin name="bss_b2b_customer_attributes_plugin_validate_form_date" type="Bss\CustomerAttributes\Plugin\Integration\Model\Metadata\Form\ValidateValue"/>
+    </type>
+    <type name="Magento\Customer\Model\Metadata\Form\Text">
+        <plugin name="bss_b2b_customer_attributes_plugin_validate_form_text" type="Bss\CustomerAttributes\Plugin\Integration\Model\Metadata\Form\ValidateValue"/>
+    </type>
+    <type name="Magento\Customer\Model\Metadata\Form\Textarea">
+        <plugin name="bss_b2b_customer_attributes_plugin_validate_form_textarea" type="Bss\CustomerAttributes\Plugin\Integration\Model\Metadata\Form\ValidateValue"/>
+    </type>
+    <type name="Magento\Customer\Model\Metadata\Form\Boolean">
+        <plugin name="bss_b2b_customer_attributes_plugin_validate_form_boolean" type="Bss\CustomerAttributes\Plugin\Integration\Model\Metadata\Form\ValidateValue"/>
+    </type>
+    <type name="Magento\Customer\Model\Metadata\Form\Multiselect">
+        <plugin name="bss_b2b_customer_attributes_plugin_validate_form_multi" type="Bss\CustomerAttributes\Plugin\Integration\Model\Metadata\Form\ValidateValue"/>
+    </type>
+    <type name="Magento\Customer\Model\Metadata\Form\Select">
+        <plugin name="bss_b2b_customer_attributes_plugin_validate_form_select" type="Bss\CustomerAttributes\Plugin\Integration\Model\Metadata\Form\ValidateValue"/>
+    </type>
+    <type name="Magento\Customer\Model\Metadata\Form\File">
+        <plugin name="bss_b2b_customer_attributes_plugin_validate_form_file" type="Bss\CustomerAttributes\Plugin\Integration\Model\Metadata\Form\ValidateValue"/>
+    </type>
+    <type name="Magento\Eav\Model\Attribute\Data\Date">
+        <plugin name="bss_b2b_customer_attributes_plugin_eav_validate_form_date" type="Bss\CustomerAttributes\Plugin\Integration\Model\Metadata\Form\ValidateValue"/>
+    </type>
+    <type name="Magento\Eav\Model\Attribute\Data\Text">
+        <plugin name="bss_b2b_customer_attributes_plugin_eav_validate_form_text" type="Bss\CustomerAttributes\Plugin\Integration\Model\Metadata\Form\ValidateValue"/>
+    </type>
+    <type name="Magento\Eav\Model\Attribute\Data\Textarea">
+        <plugin name="bss_b2b_customer_attributes_plugin_eav_validate_form_textarea" type="Bss\CustomerAttributes\Plugin\Integration\Model\Metadata\Form\ValidateValue"/>
+    </type>
+    <type name="Magento\Eav\Model\Attribute\Data\Boolean">
+        <plugin name="bss_b2b_customer_attributes_plugin_eav_validate_form_boolean" type="Bss\CustomerAttributes\Plugin\Integration\Model\Metadata\Form\ValidateValue"/>
+    </type>
+    <type name="Magento\Eav\Model\Attribute\Data\Multiselect">
+        <plugin name="bss_b2b_customer_attributes_plugin_eav_validate_form_multi" type="Bss\CustomerAttributes\Plugin\Integration\Model\Metadata\Form\ValidateValue"/>
+    </type>
+    <type name="Magento\Eav\Model\Attribute\Data\Select">
+        <plugin name="bss_b2b_customer_attributes_plugin_eav_validate_form_select" type="Bss\CustomerAttributes\Plugin\Integration\Model\Metadata\Form\ValidateValue"/>
+    </type>
+    <type name="Magento\Eav\Model\Attribute\Data\File">
+        <plugin name="bss_b2b_customer_attributes_plugin_eav_validate_form_file" type="Bss\CustomerAttributes\Plugin\Integration\Model\Metadata\Form\ValidateValue"/>
+    </type>
+    <type name="Magento\Eav\Model\Entity\Attribute\Backend\AbstractBackend">
+        <plugin name="bss_b2b_skip_validate" type="Bss\CustomerAttributes\Plugin\Integration\Model\Attribute\Backend\ValidateValue"/>
+    </type>
+
+</config>

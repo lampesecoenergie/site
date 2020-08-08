@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Amazon
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">amazon_account_form.amazon_account_form_data_source</item>
+        </item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="array">
+                <item name="name" xsi:type="string">back</item>
+                <item name="label" xsi:type="string" translate="true">Back</item>
+                <item name="class" xsi:type="string">back</item>
+                <item name="url" xsi:type="string">amazon/account/index</item>
+            </item>
+            <item name="save" xsi:type="array">
+                <item name="name" xsi:type="string">save</item>
+                <item name="label" xsi:type="string" translate="true">Save</item>
+                <item name="class" xsi:type="string">primary</item>
+            </item>
+            <item name="save_and_continue" xsi:type="string">Ced\Amazon\Block\Adminhtml\Account\Button\SaveAndContinue
+            </item>
+            <item name="delete" xsi:type="string">Ced\Amazon\Block\Adminhtml\Account\Button\Delete</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Account Information</item>
+        <item name="config" xsi:type="array">
+            <item name="namespace" xsi:type="string">amazon_account_form</item>
+            <item name="deps" xsi:type="string">amazon_account_form.amazon_account_form_data_source</item>
+            <item name="dataScope" xsi:type="string">data</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <dataSource name="amazon_account_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Ced\Amazon\Ui\DataProvider\Account\Form\DataProvider</argument>
+            <argument name="name" xsi:type="string">amazon_account_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="amazon/account/save"/>
+                    <item name="validate_url" xsi:type="url" path="amazon/account/validate"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <fieldset name="general">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="collapsible" xsi:type="boolean">false</item>
+                <item name="label" xsi:type="string" translate="true">Account Information</item>
+            </item>
+        </argument>
+
+        <field name="id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">amazon_account_form_data_source</item>
+                    <item name="label" xsi:type="string" translate="true">Id</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="active">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="dataType" xsi:type="string">boolean</item>
+                    <item name="formElement" xsi:type="string">checkbox</item>
+                    <item name="source" xsi:type="string">amazon_account_form_data_source</item>
+                    <item name="prefer" xsi:type="string">toggle</item>
+                    <item name="label" xsi:type="string" translate="true">Active</item>
+                    <item name="valueMap" xsi:type="array">
+                        <item name="true" xsi:type="string">1</item>
+                        <item name="false" xsi:type="string">0</item>
+                    </item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="default" xsi:type="string">1</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">amazon_account_form_data_source</item>
+                    <item name="label" xsi:type="string" translate="true">Account Name</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="status">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Ced\Amazon\Model\Source\Account\Status</item>
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">select</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">amazon_account_form_data_source</item>
+                    <item name="label" xsi:type="string" translate="true">Status</item>
+                    <item name="default" xsi:type="string" translate="true">ADDED</item>
+                    <item name="disabled" xsi:type="boolean">true</item>
+                </item>
+            </argument>
+        </field>
+
+    </fieldset>
+    <fieldset name="api">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="label" xsi:type="string" translate="true">Api</item>
+            </item>
+        </argument>
+
+        <field name="cedcommerce">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Ced_Amazon/js/account/cedcommerce</item>
+                    <item name="dataType" xsi:type="string">boolean</item>
+                    <item name="formElement" xsi:type="string">checkbox</item>
+                    <item name="source" xsi:type="string">category</item>
+                    <item name="prefer" xsi:type="string">toggle</item>
+                    <item name="label" xsi:type="string" translate="true">Authorize via Cedcommerce</item>
+                    <item name="valueMap" xsi:type="array">
+                        <item name="true" xsi:type="string">1</item>
+                        <item name="false" xsi:type="string">0</item>
+                    </item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="default" xsi:type="string">0</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="seller_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">amazon_account_form_data_source</item>
+                    <item name="label" xsi:type="string" translate="true">Seller Id/Merchant Token</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="aws_auth_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">amazon_account_form_data_source</item>
+                    <item name="label" xsi:type="string" translate="true">Aws Auth Id/MWS Auth Token</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">false</item>
+                    </item>
+                    <item name="additionalInfo" xsi:type="string"><![CDATA[
+                        To generate the auth id for <b>Cedcommerce</b>,
+                         you need to authorize our Developer Account on Amazon Seller Central.<br/>
+                         <ul>
+                         <li>For Europe Region: Please click <a href="https://sellercentral-europe.amazon.com/gp/mws/registration/register.html?signInPageDisplayed=1&devAuth=1&developerName=Cedcommerce+Inc&devMWSAccountId=233623308975&" target="_blank">here</a>.</li>
+                         <li>For North America Region: Please click <a href="https://sellercentral.amazon.com/gp/mws/registration/register.html?signInPageDisplayed=1&devAuth=1&developerName=Cedcommerce+Inc&devMWSAccountId=337320726556&" target="_blank">here</a>.</li>
+                         <li>For Australia Region: Please click <a href="https://sellercentral.amazon.com.au/gp/mws/registration/register.html?signInPageDisplayed=1&devAuth=1&developerName=Cedcommerce+Inc&devMWSAccountId=048563819005&" target="_blank">here</a>.</li>
+                         <li>For India Region: Please click <a href="https://sellercentral.amazon.in/gp/mws/registration/register.html?signInPageDisplayed=1&devAuth=1&developerName=Cedcommerce+Inc&devMWSAccountId=163411718947&" target="_blank">here</a>.</li>
+                         </ul>
+                         For any further assistance contact Cedcommerce.
+                        ]]>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="aws_access_key_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">amazon_account_form_data_source</item>
+                    <item name="label" xsi:type="string" translate="true">Aws Access Key Id</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="secret_key">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" translate="true" xsi:type="string">Secret Key/MWS Credentials</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="marketplace">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Ced\Amazon\Model\Source\Marketplace</item>
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">select</item>
+                    <item name="formElement" xsi:type="string">multiselect</item>
+                    <item name="source" xsi:type="string">amazon_account_form_data_source</item>
+                    <item name="label" xsi:type="string" translate="true">Marketplaces</item>
+                </item>
+            </argument>
+        </field>
+
+        <container name="amazon_account_validate_url">
+            <htmlContent name="html_content">
+                <argument name="block" xsi:type="object">Ced\Amazon\Block\Adminhtml\Account\ValidateUrl</argument>
+            </htmlContent>
+        </container>
+
+        <field name="credentials_validate">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Ced_Amazon/js/account/validate</item>
+                    <item name="elementTmpl" xsi:type="string">Ced_Amazon/form/element/validate-button</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">amazon_app_form_data_source</item>
+                    <item name="label" xsi:type="string" translate="true">Validate</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                </item>
+            </argument>
+        </field>
+
+    </fieldset>
+
+    <fieldset name="order">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="label" xsi:type="string" translate="true">Order</item>
+            </item>
+        </argument>
+        <field name="multi_store">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="sortOrder" xsi:type="number">1</item>
+                    <item name="dataType" xsi:type="string">boolean</item>
+                    <item name="formElement" xsi:type="string">checkbox</item>
+                    <item name="source" xsi:type="string">amazon_account_form_data_source</item>
+                    <item name="prefer" xsi:type="string">toggle</item>
+                    <item name="label" xsi:type="string" translate="true">Multi Store</item>
+                    <item name="valueMap" xsi:type="array">
+                        <item name="true" xsi:type="string">1</item>
+                        <item name="false" xsi:type="string">0</item>
+                    </item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="default" xsi:type="string">0</item>
+                    <item name="component" xsi:type="string">Ced_Amazon/js/account/stores</item>
+                </item>
+            </argument>
+        </field>
+        <container name="multi_store_values_container" sortOrder="10">
+            <dynamicRows name="multi_store_values" sortOrder="1" component="Magento_Ui/js/dynamic-rows/dynamic-rows" template="ui/dynamic-rows/templates/default">
+                <settings>
+                    <dndConfig>
+                        <param name="enabled" xsi:type="boolean">false</param>
+                    </dndConfig>
+                    <deleteValue>true</deleteValue>
+                    <addButton>true</addButton>
+                    <addButtonLabel>Add Store</addButtonLabel>
+                    <scopeLabel>[GLOBAL]</scopeLabel>
+                    <label translate="true">Stores</label>
+                    <visible>true</visible>
+                    <componentType>dynamicRows</componentType>
+                    <additionalClasses>
+                        <class name="admin__field-large">true</class>
+                    </additionalClasses>
+                </settings>
+                <container name="record" component="Magento_Ui/js/dynamic-rows/record">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="isTemplate" xsi:type="boolean">true</item>
+                            <item name="is_collection" xsi:type="boolean">true</item>
+                            <item name="componentType" xsi:type="string">container</item>
+                        </item>
+                    </argument>
+                    <field name="marketplace" component="Magento_Ui/js/form/element/select" formElement="select">
+                        <settings>
+                            <dataType>text</dataType>
+                            <label translate="true">Marketplace</label>
+                            <disabled>false</disabled>
+                            <visible>true</visible>
+                            <dataScope>marketplace</dataScope>
+                        </settings>
+                        <formElements>
+                            <select>
+                                <settings>
+                                    <options class="Ced\Amazon\Model\Source\Marketplace"/>
+                                </settings>
+                            </select>
+                        </formElements>
+                    </field>
+                    <field name="store_id" component="Magento_Ui/js/form/element/select" formElement="select">
+                        <settings>
+                            <dataType>text</dataType>
+                            <label translate="true">Store</label>
+                            <disabled>false</disabled>
+                            <dataScope>store_id</dataScope>
+                        </settings>
+                        <formElements>
+                            <select>
+                                <settings>
+                                    <options class="Magento\Store\Ui\Component\Listing\Column\Store\Options"/>
+                                </settings>
+                            </select>
+                        </formElements>
+                    </field>
+                    <field name="group_id" component="Magento_Ui/js/form/element/select" formElement="select">
+                        <settings>
+                            <dataType>text</dataType>
+                            <label translate="true">Customer Group</label>
+                            <disabled>false</disabled>
+                            <dataScope>group_id</dataScope>
+                        </settings>
+                        <formElements>
+                            <select>
+                                <settings>
+                                    <options class="Magento\Customer\Model\ResourceModel\Group\Collection"/>
+                                </settings>
+                            </select>
+                        </formElements>
+                    </field>
+                    <actionDelete template="Magento_Backend/dynamic-rows/cells/action-delete">
+                        <settings>
+                            <componentType>actionDelete</componentType>
+                            <dataType>text</dataType>
+                            <label>Actions</label>
+                            <additionalClasses>
+                                <class name="data-grid-actions-cell">true</class>
+                            </additionalClasses>
+                        </settings>
+                    </actionDelete>
+                </container>
+            </dynamicRows>
+        </container>
+        <field name="store_id">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Store\Ui\Component\Listing\Column\Store\Options</item>
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">amazon_account_form_data_source</item>
+                    <item name="label" xsi:type="string" translate="true">Default Store</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="additionalInfo" xsi:type="string">
+                        Default magento store for order import. Also used as default store in product profiles.
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="channel">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Ced\Amazon\Model\Source\Order\Channel</item>
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">amazon_account_form_data_source</item>
+                    <item name="label" xsi:type="string" translate="true">Channel</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="default" xsi:type="string">All</item>
+                    <item name="additionalInfo" xsi:type="string">
+                        <![CDATA[Channel of order to be imported in Magento 2 Store. <ul><li>Use <b>Amazon Fulfilled Network (AFN)</b> to import <b>FBA</b> orders.</li> <li>Use <b>Merchant Fulfilled Network (MFN)</b> to import merchant fulfilled orders (<b>Non - FBA</b>).</li> <li>You can select <b>Default (All)</b> for all order import.</li></ul> ]]>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="shipping_method">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Ced\Amazon\Model\Source\Shipment\Method</item>
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">amazon_account_form_data_source</item>
+                    <item name="label" xsi:type="string" translate="true">Shipping Method</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="disabled" xsi:type="boolean">true</item>
+                    <item name="default" xsi:type="string">shipbyamazon_shipbyamazon</item>
+                    <item name="additionalInfo" xsi:type="string">
+                        <![CDATA[Shipping method to be auto assigned to <b>Amazon</b> imported orders.]]>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="payment_method">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Payment\Model\Config\Source\Allmethods</item>
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">amazon_account_form_data_source</item>
+                    <item name="label" xsi:type="string" translate="true">Payment Method</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="disabled" xsi:type="boolean">true</item>
+                    <item name="default" xsi:type="string">paybyamazon</item>
+                    <item name="additionalInfo" xsi:type="string">
+                        <![CDATA[Payment method to be auto assigned to <b>Amazon</b> imported orders.]]>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+    </fieldset>
+
+    <fieldset name="developer">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="label" xsi:type="string" translate="true">Developer</item>
+            </item>
+        </argument>
+        <field name="mode">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="array">
+                    <item name="live" xsi:type="array">
+                        <item name="value" xsi:type="string">live</item>
+                        <item name="label" xsi:type="string" translate="true">Live</item>
+                    </item>
+                    <item name="mock" xsi:type="array">
+                        <item name="value" xsi:type="string">mock</item>
+                        <item name="label" xsi:type="string" translate="true">Mock</item>
+                    </item>
+                </item>
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">amazon_account_form_data_source</item>
+                    <item name="label" xsi:type="string" translate="true">Account Mode</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="additionalInfo" xsi:type="string">
+                        <![CDATA[<ul><li><b>Mock Mode</b>: mocks the live api calls, used for integration testing and development. Do not use in production as live credentials will not be validated or used.</li> <li><b>Live</b> : live api calls are used for integration of products and orders.</li></ul>]]>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="notes">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" translate="true" xsi:type="string">Notes</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="max_text_length" xsi:type="string">2000</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+</form>

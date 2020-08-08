@@ -1,0 +1,40 @@
+div#narrow-by-list {
+    /*display: none;*/
+}
+
+
+
+.sub-cat-tile{  }
+.sub-cat-tile .block-promo{ display: flex; flex-direction: column; }
+.sub-cat-tile .block-promo:hover{ text-decoration: none !important; }
+.sub-cat-tile .block-promo p{ font-weight: bold; background-color: rgba(114, 190, 88, 0.5); padding: 10px 15px; color: #333333; letter-spacing: 0.5px; font-size: 13px; text-align: center; }
+
+
+
+/*---- Left Sidebar ----*/
+.main-sidebar-catalog .main-menu{ position: relative; margin-bottom: 12px; padding-left: 10px; }
+.main-sidebar-catalog .main-menu:before{ position: absolute; left: 0px; top: 3px; font-family: 'porto-icons'; content: "\f821"; font-size: 12px; }
+
+
+.main-sidebar-catalog .main-menu a.parent-catagory{ margin-top: 3px; display: inline-block; }
+.main-sidebar-catalog .main-menu button{ position: absolute; right: 0px; padding: 0px 5px !important; line-height: 18px !important; height: 20px !important; width: 20px; border-radius: 0px !important; }
+
+.main-sidebar-catalog{ padding-top: 6px; }
+.main-sidebar-catalog ol li a:hover{ text-decoration: none !important; }
+
+
+ul.child-level-2 { padding-left: 0px !important; margin-top: 10px !important; }
+ul.child-level-2 .lavel-2-li{ position: relative; padding-left: 10px; list-style: none; }
+ul.child-level-2 .lavel-2-li:before{ position: absolute; left: 0px; top: 3px; font-family: 'porto-icons'; content: "\f805"; font-size: 12px; }
+
+ul.child-level-2 li.lavel-2-li a{ margin-top: 3px !important; display: inline-block !important; }
+
+ul.child-level-3{ padding-left: 0px !important; margin-top: 8px !important; }
+ul.child-level-3 .lavel-3-li{ position: relative; padding-left: 10px; list-style: none; }
+ul.child-level-3 .lavel-3-li:before{ position: absolute; left: 0px; top: 3px; font-family: 'porto-icons'; content: "\f805"; font-size: 12px; }
+
+
+.footer-bottom{  }
+.footer-bottom .logo img{ width: 100px; }
+.footer-bottom .custom-block { width: 750px; text-align: center; margin-left: auto !important; margin-right: auto !important; }
+.footer-bottom address{ float: right !important; margin-right: 0px !important; padding-right: 0px !important; text-align: right !important; }

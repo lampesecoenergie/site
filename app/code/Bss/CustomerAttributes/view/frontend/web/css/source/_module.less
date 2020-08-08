@@ -1,0 +1,65 @@
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_CustomOrderNumber
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2017-2018 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+
+& when (@media-common = true) {
+    .checkout-index-index {
+        .field[name*=bss_customer_attributes] {
+            margin: 0 0 20px;
+            &._required {
+                label {
+                    &:after {
+                        content: '*';
+                        color: #e02b27;
+                        font-size: 1.2rem;
+                        margin: 0 0 0 5px;
+                    }
+                }
+            }
+        }
+    }
+
+    .bss-onestepcheckout {
+        .step-title {
+            &.customer-attributes-title {
+                &:before {
+                    content: ''!important;
+                    background-color: transparent!important;
+                }
+            }
+        }
+
+        #co-payment-form {
+            .step-title {
+                &.customer-attributes-title {
+                    border-bottom: 1px solid #cccccc;
+                    margin-bottom: 20px;
+                    &:before {
+                        content: none;
+                    }
+                }
+            }
+        }
+    }
+
+    .customer-account-create {
+        .field {
+            &.hidden {
+                display: none!important;
+            }
+        }
+    }
+}

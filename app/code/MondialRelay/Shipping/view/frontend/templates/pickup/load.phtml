@@ -1,0 +1,109 @@
+<?php /** @var $block MondialRelay\Shipping\Block\Frontend\Pickup\Load */ ?>
+<div class="mondialrelay-header"><h1><?php echo __('Pickup location') ?></h1></div>
+<div class="mondialrelay-content">
+    <form class="mondialrelay-address" id="mr-address" method="post" action="#">
+        <p>
+            <label for="input-postcode"><?php echo __('Postcode') ?> <span class="mondialrelay-required">*</span> :</label>
+            <input id="input-postcode" name="postcode" type="text" value="<?php echo $block->getPostcode() ?>" class="mondialrelay-postcode required" />
+        </p>
+        <?php $countries = $block->getCountries() ?>
+        <?php if(count($countries) > 1): ?>
+            <p>
+                <label for="select-country"><?php echo __('Country') ?> <span class="mondialrelay-required">*</span> :</label>
+                <select name="country_id" id="select-country" class="mondialrelay-country">
+                    <?php foreach($countries as $country): ?>
+                        <?php if ($country['value']): ?>
+                            <option value="<?php echo $country['value'] ?>" <?php if($block->getCountryId() == $country['value']): ?> selected="selected"<?php endif; ?>><?php echo $country['label'] ?></option>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </select>
+            </p>
+        <?php else: ?>
+            <input type="hidden" name="country_id" value="<?php echo $block->getCountryId() ?>" />
+        <?php endif; ?>
+        <?php $codes = $block->getCodes(); ?>
+        <?php if(count($codes) > 1): ?>
+            <p id="mr-address-code">
+                <label><?php echo __('Type') ?> <span class="mondialrelay-required">*</span> :</label>
+                <?php foreach ($codes as $code => $label): ?>
+                    <span class="mondialrelay-pickup-code mondialrelay-pickup-code-<?php echo $code ?>">
+                        <input type="radio" name="code" value="<?php echo $code ?>" id="select-code-<?php echo $code ?>" <?php if ($block->getCode() == $code): ?>checked<?php endif; ?>/> <label for="select-code-<?php echo $code ?>"<?php if ($block->getCode() == $code): ?> class="active"<?php endif; ?>><?php echo $label ?></label>
+                    </span>
+                <?php endforeach; ?>
+            </p>
+        <?php else: ?>
+            <input type="hidden" name="code" value="<?php echo $block->getCode() ?>" />
+        <?php endif; ?>
+        <div class="mondialrelay-actions">
+            <button type="submit" class="mondialrelay-next"><span><?php echo __('Search') ?></span></button>
+        </div>
+    </form>
+    <form class="mondialrelay-list" id="mr-pickup" method="post" action="#">
+        <?php $collection = $block->getList() ?>
+        <?php if ($collection->getSize()): ?>
+            <ul id="mr-list">
+                <?php /** @var \MondialRelay\Shipping\Model\Pickup $pickup */ ?>
+                <?php foreach ($collection as $pickup): ?>
+                    <li>
+                        <input type="radio" value="<?php echo $pickup->getNum(); ?>-<?php echo $pickup->getPays() ?>-<?php echo $pickup->getCode() ?>" name="pickup" id="mr-pickup-<?php echo $pickup->getNum(); ?>" />
+                        <label for="mr-pickup-<?php echo $pickup->getNum(); ?>">
+                            <strong><?php echo $pickup->getLgadr1() ?></strong><br />
+                            <?php echo $pickup->getLgadr3() ?> - <?php echo $pickup->getCp() ?> <?php echo $pickup->getVille() ?>
+                            <br /><a class="mondialrelay-show-info" href="#"><?php echo __('Opening hours') ?></a>
+                        </label>
+                        <div style="display:none">
+                            <ul class="mondialrelay-info">
+                                <li>
+                                    <h2><?php echo __('Address:') ?></h2>
+                                    <strong><?php echo $pickup->getLgadr1() ?></strong><br />
+                                    <?php echo $block->getFullStreet($pickup, '<br />') ?><br />
+                                    <?php echo $pickup->getCp() ?> <?php echo $pickup->getVille() ?>
+                                    <?php if($pickup->getLocalisation1()): ?><br /><em>(<?php echo $pickup->getLocalisation1() ?>)</em><?php endif; ?>
+                                </li>
+                                <li class="mondialrelay-schedule">
+                                    <h2><?php echo __('Opening:') ?></h2>
+                                    <span><?php echo __('Monday') ?> :</span> <?php echo $pickup->getHorairesLundi() ?: __('Closed') ?><br />
+                                    <span><?php echo __('Tuesday') ?> :</span> <?php echo $pickup->getHorairesMardi() ?: __('Closed') ?><br />
+                                    <span><?php echo __('Wednesday') ?> :</span> <?php echo $pickup->getHorairesMercredi() ?: __('Closed') ?><br />
+                                    <span><?php echo __('Thursday') ?> :</span> <?php echo $pickup->getHorairesJeudi() ?: __('Closed') ?><br />
+                                    <span><?php echo __('Friday') ?> :</span> <?php echo $pickup->getHorairesVendredi() ?: __('Closed') ?><br />
+                                    <span><?php echo __('Saturday') ?> :</span> <?php echo $pickup->getHorairesSamedi() ?: __('Closed') ?><br />
+                                    <span><?php echo __('Sunday') ?> :</span> <?php echo $pickup->getHorairesDimanche() ?: __('Closed') ?>
+                                </li>
+                                <li class="mondialrelay-actions">
+                                    <button type="button" class="mondialrelay-previous"><span><?php echo __('Close') ?></span></button>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+            <div id="mr-map" class="mondialrelay-map"></div>
+            <div class="mondialrelay-actions">
+                <button type="button" class="mondialrelay-previous" id="mr-previous"><span><?php echo __('Back') ?></span></button>
+                <?php if ($block->isDebug()): ?>
+                    <button type="button" class="mondialrelay-debug" id="mr-debug"><span><?php echo __('Debug') ?></span></button>
+                <?php endif; ?>
+                <button type="submit" class="mondialrelay-next"><span><?php echo __('Next') ?></span></button>
+            </div>
+        <?php else: ?>
+            <?php if ($block->isEmpty()): ?>
+                <p><?php echo __('Enter your address above to find pickup locations') ?></p>
+            <?php else: ?>
+                <p><?php echo __('No pickup was found near the specified address') ?></p>
+            <?php endif; ?>
+            <div class="mondialrelay-actions">
+                <button type="button" class="mondialrelay-previous" id="mr-previous"><span><?php echo __('Back') ?></span></button>
+                <?php if ($block->isDebug()): ?>
+                    <button type="button" class="mondialrelay-debug" id="mr-debug"><span><?php echo __('Debug') ?></span></button>
+                <?php endif; ?>
+            </div>
+        <?php endif; ?>
+        <?php echo $block->getChildHtml('mondialrelay_pickup_load_debug') ?>
+    </form>
+</div>
+<script>
+    require(["MondialRelay_Shipping/js/view/shipping/pickup", "MondialRelay_Shipping/js/lib/maps/<?php echo $block->getMapType() ?>"], function(pickup, maps) {
+        pickup.prototype.pickupInit(<?php echo $block->getJson() ?>, maps);
+    });
+</script>

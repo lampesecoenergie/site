@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+<!--
+/**
+  * CedCommerce
+  *
+  * NOTICE OF LICENSE
+  *
+  * This source file is subject to the End User License Agreement (EULA)
+  * that is bundled with this package in the file LICENSE.txt.
+  * It is also available through the world-wide-web at this URL:
+  * http://cedcommerce.com/license-agreement.txt
+  *
+  * @category    Ced
+  * @package     Ced_Amazon
+  * @author      CedCommerce Core Team <connect@cedcommerce.com>
+  * @copyright   Copyright CEDCOMMERCE (http://cedcommerce.com/)
+  * @license     http://cedcommerce.com/license-agreement.txt
+  */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!--File Logger-->
+    <type name="Ced\Amazon\Helper\File\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Ced\Amazon\Helper\File\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">Amazon</argument>
+            <argument name="handlers"  xsi:type="array">
+                <item name="system" xsi:type="object">Ced\Amazon\Helper\File\Handler</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\View\Asset\Minification">
+        <plugin name="amazon-js-exclude" type="Ced\Amazon\Plugin\Js\ExcludeMinify" />
+    </type>
+
+    <!--Service Contracts-->
+    <preference for="Ced\Amazon\Api\ProfileRepositoryInterface"
+                type="Ced\Amazon\Repository\Profile" />
+    <preference for="Ced\Amazon\Api\Data\ProfileInterface"
+                type="Ced\Amazon\Model\Profile" />
+    <preference for="Ced\Amazon\Api\Data\ProfileSearchResultsInterface"
+                type="Ced\Amazon\Repository\Profile\SearchResults" />
+
+    <preference for="Ced\Amazon\Api\AccountRepositoryInterface"
+                type="Ced\Amazon\Repository\Account" />
+    <preference for="Ced\Amazon\Api\Data\AccountInterface"
+                type="Ced\Amazon\Model\Account" />
+    <preference for="Ced\Amazon\Api\Data\AccountSearchResultsInterface"
+                type="Ced\Amazon\Repository\Account\SearchResults" />
+
+    <preference for="Ced\Amazon\Api\FeedRepositoryInterface"
+                type="Ced\Amazon\Repository\Feed" />
+    <preference for="Ced\Amazon\Api\Data\FeedSearchResultsInterface"
+                type="Ced\Amazon\Repository\Feed\SearchResults" />
+    <preference for="Ced\Amazon\Api\Data\FeedInterface"
+                type="Ced\Amazon\Model\Feed" />
+
+    <preference for="Ced\Amazon\Api\QueueRepositoryInterface"
+                type="Ced\Amazon\Repository\Queue" />
+    <preference for="Ced\Amazon\Api\Data\QueueSearchResultsInterface"
+                type="Ced\Amazon\Repository\Queue\SearchResults" />
+    <preference for="Ced\Amazon\Api\Data\QueueInterface"
+                type="Ced\Amazon\Model\Queue" />
+    <preference for="Ced\Amazon\Api\Data\Queue\DataInterface"
+                type="Ced\Amazon\Model\Queue\Data" />
+
+    <preference for="Ced\Amazon\Api\ReportRepositoryInterface"
+                type="Ced\Amazon\Repository\Report" />
+    <preference for="Ced\Amazon\Api\Data\ReportSearchResultsInterface"
+                type="Ced\Amazon\Repository\Report\SearchResults" />
+    <preference for="Ced\Amazon\Api\Data\ReportInterface"
+                type="Ced\Amazon\Model\Report" />
+
+    <preference for="Ced\Amazon\Api\OrderRepositoryInterface"
+                type="Ced\Amazon\Repository\Order" />
+    <preference for="Ced\Amazon\Api\Data\OrderSearchResultsInterface"
+                type="Ced\Amazon\Repository\Order\SearchResults" />
+    <preference for="Ced\Amazon\Api\Data\OrderInterface"
+                type="Ced\Amazon\Model\Order" />
+    <preference for="Ced\Amazon\Api\Order\ItemRepositoryInterface"
+                type="Ced\Amazon\Repository\Order\Item" />
+    <preference for="Ced\Amazon\Api\Data\Order\ItemInterface"
+                type="Ced\Amazon\Model\Order\Item" />
+    <preference for="Ced\Amazon\Api\Data\Order\Import\ParamsInterface"
+                type="Ced\Amazon\Model\Order\Import\Params" />
+    <preference for="Ced\Amazon\Api\Data\Order\Import\ResultInterface"
+                type="Ced\Amazon\Model\Order\Import\Result" />
+
+    <!--  SPI  -->
+    <preference for="Ced\Amazon\Api\Service\ConfigServiceInterface"
+                type="Ced\Amazon\Service\Config" />
+    <preference for="Ced\Amazon\Api\Service\ProductServiceInterface"
+                type="Ced\Amazon\Service\Product" />
+    <preference for="Ced\Amazon\Api\Service\OrderServiceInterface"
+                type="Ced\Amazon\Service\Order" />
+    <preference for="Ced\Amazon\Api\Service\QuoteServiceInterface"
+                type="Ced\Amazon\Service\Quote" />
+    <preference for="Ced\Amazon\Api\Service\CustomerServiceInterface"
+                type="Ced\Amazon\Service\Customer" />
+
+    <!--Console-->
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="ced_integrator_console_queue_process" xsi:type="object">\Ced\Amazon\Console\Queue\Process</item>
+                <item name="ced_integrator_console_queue_list" xsi:type="object">\Ced\Amazon\Console\Queue\ShowList</item>
+                <item name="ced_integrator_console_queue_flush" xsi:type="object">\Ced\Amazon\Console\Queue\Flush</item>
+                <item name="ced_integrator_console_queue_sync" xsi:type="object">\Ced\Amazon\Console\Queue\Synchronize</item>
+                <item name="ced_integrator_console_queue_truncate" xsi:type="object">\Ced\Amazon\Console\Queue\Truncate</item>
+                <item name="ced_integrator_console_queue_status" xsi:type="object">\Ced\Amazon\Console\Queue\Status</item>
+                <item name="ced_integrator_console_feed_list" xsi:type="object">\Ced\Amazon\Console\Feed\ShowList</item>
+                <item name="ced_integrator_console_feed_flush" xsi:type="object">\Ced\Amazon\Console\Feed\Flush</item>
+                <item name="ced_integrator_console_feed_sync" xsi:type="object">\Ced\Amazon\Console\Feed\Sync</item>
+                <item name="ced_integrator_console_product_price" xsi:type="object">\Ced\Amazon\Console\Product\Price</item>
+                <item name="ced_integrator_console_product_inventory" xsi:type="object">\Ced\Amazon\Console\Product\Inventory</item>
+                <item name="ced_integrator_console_order_import" xsi:type="object">\Ced\Amazon\Console\Order\Import</item>
+                <item name="ced_integrator_console_order_create" xsi:type="object">\Ced\Amazon\Console\Order\Create</item>
+                <item name="ced_integrator_console_order_sync" xsi:type="object">\Ced\Amazon\Console\Order\Sync</item>
+                <item name="ced_integrator_console_order_import_by_report" xsi:type="object">\Ced\Amazon\Console\Order\ImportByReport</item>
+                <item name="ced_integrator_console_order_shipment_sync" xsi:type="object">\Ced\Amazon\Console\Order\Shipment\Sync</item>
+                <item name="ced_integrator_console_cron_job_truncate" xsi:type="object">\Ced\Amazon\Console\Cron\Truncate</item>
+                <item name="ced_integrator_console_cron_install" xsi:type="object">\Ced\Amazon\Console\Cron\Install</item>
+                <item name="ced_integrator_console_cron_remove" xsi:type="object">\Ced\Amazon\Console\Cron\Remove</item>
+                <item name="ced_integrator_migrate_listing" xsi:type="object">\Ced\Amazon\Console\Migrate\Listing</item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- Move to admin and api only  -->
+    <type name="Magento\Sales\Api\OrderRepositoryInterface">
+        <plugin name="get_amazon_order_id" type="Ced\Amazon\Plugin\Order\Get"/>
+    </type>
+    <type name="Magento\Quote\Api\Data\CartInterface">
+        <plugin name="get_amazon_item_by_product" type="Ced\Amazon\Plugin\Order\Quote"/>
+    </type>
+
+    <type name="Ced\Amazon\Model\Cache">
+        <arguments>
+            <argument name="cache" xsi:type="object">Ced\Amazon\Model\Cache\Type</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Quote\Model\Quote\Item\ToOrderItem">
+        <plugin name="cedapi_quote_to_order_item" type="Ced\Amazon\Plugin\Quote\QuoteToOrderItem"/>
+    </type>
+
+    <type name="Ced\Amazon\Service\Stock\Resolver">
+        <arguments>
+            <argument name="resolverList" xsi:type="array">
+                <item name="msi" xsi:type="object">Ced\Amazon\Service\Stock\Msi</item>
+                <item name="reservation" xsi:type="object">Ced\Amazon\Service\Stock\Reservation</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

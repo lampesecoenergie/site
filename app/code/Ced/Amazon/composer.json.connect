@@ -1,0 +1,25 @@
+{
+  "name": "ced/amazon-integration",
+  "description": "Amazon Magento2 integration",
+  "require": {
+    "ext-curl": "*",
+    "psr/log": ">=1.0",
+    "psr/container":"*",
+    "ced/integrator":"*",
+    "cedcommerce/validator": ">=2.0.0"
+  },
+  "type": "magento2-module",
+  "version": "0.0.4",
+  "license": [
+    "EULA"
+  ],
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Ced\\Amazon\\": "",
+      "Amazon\\Sdk\\": "Lib/amazon-sdk/src/"
+    }
+  }
+}

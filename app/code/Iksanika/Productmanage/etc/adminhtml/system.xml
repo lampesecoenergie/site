@@ -1,0 +1,151 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Config/etc/system_file.xsd">
+    <system>
+        <tab id="iksanika" translate="label" sortOrder="1">
+            <label>Iksanika</label>
+        </tab>
+        <section id="iksanika_productmanage" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Product Manager (Advanced)</label>
+            <tab>iksanika</tab>
+            <resource>Iksanika_Productmanage::config_productmanage</resource>
+            <group id="columns" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Grid Settings</label>
+                <field id="showcolumns" translate="label comment" type="multiselect" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Columns</label>
+                    <comment>(If Yes - show column with basic image, if No - hide column with basic image)</comment>
+                    <source_model>Iksanika\Productmanage\Model\System\Config\Source\Columns\Show</source_model>
+                </field>
+                <field id="sort" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Sort Column</label>
+                    <comment>The selected column must be also selected above if it's not already there</comment>
+                    <source_model>Iksanika\Productmanage\Model\System\Config\Source\Columns\Show</source_model>
+                </field>
+                <field id="dir" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Sort Column Direction</label>
+                    <source_model>Iksanika\Productmanage\Model\System\Config\Source\Sort\Direction</source_model>
+                </field>
+                <field id="limit" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Page Size</label>
+                </field>
+                <field id="page" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Initial Page Number</label>
+                </field>
+                <field id="associatedShow" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Associated Products</label>
+                    <comment>If Yes/No - associated products for Configurable/Groupped products will be shown/hidden right under Configurable/Groupped product row</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="redirectAdvancedProductManager" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Redirect to Products Manager (Advanced)</label>
+                    <comment>Yes - redirect to 'Manage Products (Advanced)', No - to standard 'Manage Products' - from individual Product Edit page</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="images" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Image Settings in Products Grid</label>
+                <field id="width" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Image Width</label>
+                </field>
+                <field id="height" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Image Height</label>
+                </field>
+                <field id="scale" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Image Scale</label>
+                    <comment>(If Yes - images will be resized into Width+Height space, if No - proportionaly to defined value of Width or Height)</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="showurl" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Image Url</label>
+                    <comment>(When product image is hidden for that row)</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="stockmanage" translate="label" type="text" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Image Settings in Products Grid</label>
+                <field id="autoStockStatus" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Stock quantity based status availability</label>
+                    <comment>If you select 'Yes' - extension will automatically update is_in_stock (Stock Status) based on Qty value (if more than 0 - will set Stock Status into available, if 0 - then will set Stock Status into 'No available'). If 'No' - you will need edit Stock Status availability individually for each product.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="productrelator" translate="label" type="text" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Product Relator Settings</label>
+                <field id="enablerelated" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Related</label>
+                    <comment>This shows/hides "relate-to" mass actions.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="enablecrosssell" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Cross-sell</label>
+                    <comment>This shows/hides "cross-sell" mass actions.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="enableupsell" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Up-sell</label>
+                    <comment>This shows/hides "up-sell" mass actions.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                
+            </group>
+            <group id="massactions" translate="label" type="text" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Mass Actions Settings</label>
+                <field id="enableaddcategory" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Add Category Action</label>
+                    <comment>This shows/hides "Add Category" mass action.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="enableremovecategory" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Remove Category Action</label>
+                    <comment>This shows/hides "Remove Category" mass action.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="categorynames" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Category Names/IDs</label>
+                    <comment>This shows/hides "relate-to" mass actions.</comment>
+                    <source_model>Iksanika\Productmanage\Model\System\Config\Source\CategoryId</source_model>
+                </field>
+            </group>
+            <!--group id="images" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Image Settings in Product Grid</label>
+                <field id="image_base" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show: Basic Image</label>
+                    <comment>(If Yes - show column with basic image, if No - hide column with basic image)</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="image_small" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show: Small Image</label>
+                    <comment>(If Yes - show column with small image, if No - hide column with small image)</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="image_thumbnail" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show: Thumbnail Image</label>
+                    <comment>(If Yes - show column with thumbnail image, if No - hide column with thumbnail image)</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="width" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Image Width</label>
+                </field>
+                <field id="height" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Image Height</label>
+                </field>
+                <field id="scale" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Image Scale</label>
+                    <comment>(If Yes - images will be resized into Width+Height space, if No - proportionaly to defined value of Width or Height)</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="showurl" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Image Url</label>
+                    <comment>(When product image is hidden for that row)</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group-->
+        </section>
+    </system>
+</config>

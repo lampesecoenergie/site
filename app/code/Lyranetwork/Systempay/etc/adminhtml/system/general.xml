@@ -1,0 +1,308 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Systempay V2-Payment Module version 2.3.2 for Magento 2.x. Support contact : supportvad@lyra-network.com.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is licensed under the Open Software License version 3.0
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://opensource.org/licenses/osl-3.0.php
+ *
+ * @category  Payment
+ * @package   Systempay
+ * @author    Lyra Network (http://www.lyra-network.com/)
+ * @copyright 2014-2018 Lyra Network and contributors
+ * @license   https://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+
+<include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
+    <group id="systempay_general" translate="label" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+        <label><![CDATA[GENERAL CONFIGURATION]]></label>
+        <frontend_model>Magento\Config\Block\System\Config\Form\Fieldset</frontend_model>
+        <attribute type="expanded">1</attribute>
+
+        <group id="systempay_module_information" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label><![CDATA[MODULE INFORMATION]]></label>
+            <attribute type="expanded">1</attribute>
+            <frontend_model>Magento\Config\Block\System\Config\Form\Fieldset</frontend_model>
+
+            <field id="developed_by" translate="label" type="label" sortOrder="111" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label><![CDATA[Developed by]]></label>
+                <frontend_model>Lyranetwork\Systempay\Block\Adminhtml\System\Config\Form\Field\Label</frontend_model>
+                <comment><![CDATA[<a href="http://www.lyra-network.com" target="_blank">Lyra Network</a>]]></comment>
+                <config_path>systempay/general/developed_by</config_path>
+            </field>
+
+            <field id="contact_email" translate="label" type="label" sortOrder="112" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label><![CDATA[Contact us]]></label>
+                <frontend_model>Lyranetwork\Systempay\Block\Adminhtml\System\Config\Form\Field\Label</frontend_model>
+                <comment><![CDATA[<a href="mailto:supportvad@lyra-network.com">supportvad@lyra-network.com</a>]]></comment>
+                <config_path>systempay/general/contact_email</config_path>
+            </field>
+
+            <field id="module_version" translate="label" type="label" sortOrder="113" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label><![CDATA[Module version]]></label>
+                <frontend_model>Lyranetwork\Systempay\Block\Adminhtml\System\Config\Form\Field\Label</frontend_model>
+                <config_path>systempay/general/module_version</config_path>
+            </field>
+
+            <field id="platform_version" translate="label" type="label" sortOrder="114" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label><![CDATA[Gateway version]]></label>
+                <frontend_model>Lyranetwork\Systempay\Block\Adminhtml\System\Config\Form\Field\Label</frontend_model>
+                <config_path>systempay/general/platform_version</config_path>
+            </field>
+
+            <field id="reset_module" translate="label button_label comment" sortOrder="115" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label><![CDATA[Reset the module]]></label>
+                <comment><![CDATA[Click this button to reset the module settings.]]></comment>
+                <button_label>Reset</button_label>
+                <button_url><![CDATA[systempay/system_config/reset]]></button_url>
+                <frontend_model>Lyranetwork\Systempay\Block\Adminhtml\System\Config\Form\Field\InitButton</frontend_model>
+            </field>
+
+            <field id="enable_logs" translate="label" type="select" sortOrder="116" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label><![CDATA[Logs]]></label>
+                <comment><![CDATA[Enable / disable module logs.]]></comment>
+                <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                <config_path>systempay/general/enable_logs</config_path>
+            </field>
+        </group>
+
+        <group id="systempay_platform_access" translate="label" type="text" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label><![CDATA[PAYMENT GATEWAY ACCESS]]></label>
+            <attribute type="expanded">1</attribute>
+            <frontend_model>Magento\Config\Block\System\Config\Form\Fieldset</frontend_model>
+
+            <field id="site_id" translate="label comment" type="text" sortOrder="121" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label><![CDATA[Store identifier]]></label>
+                <comment><![CDATA[The identifier provided by Systempay.]]></comment>
+                <config_path>systempay/general/site_id</config_path>
+            </field>
+
+            <field id="key_test" translate="label comment" type="text" sortOrder="122" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label><![CDATA[Certificate in test mode]]></label>
+                <comment><![CDATA[Certificate provided by Systempay for test mode (available in Systempay Back Office).]]></comment>
+                <frontend_model>Lyranetwork\Systempay\Block\Adminhtml\System\Config\Form\Field\KeyTest</frontend_model>
+                <config_path>systempay/general/key_test</config_path>
+            </field>
+
+            <field id="key_prod" translate="label comment" type="text" sortOrder="123" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label><![CDATA[Certificate in production mode]]></label>
+                <comment><![CDATA[Certificate provided by Systempay (available in Systempay Back Office after enabling production mode).]]></comment>
+                <config_path>systempay/general/key_prod</config_path>
+            </field>
+
+            <field id="ctx_mode" translate="label comment" type="select" sortOrder="124" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label><![CDATA[Mode]]></label>
+                <comment><![CDATA[The context mode of this module.]]></comment>
+                <frontend_model>Lyranetwork\Systempay\Block\Adminhtml\System\Config\Form\Field\CtxMode</frontend_model>
+                <source_model>Lyranetwork\Systempay\Model\System\Config\Source\CtxMode</source_model>
+                <config_path>systempay/general/ctx_mode</config_path>
+            </field>
+
+            <field id="sign_algo" translate="label comment" type="select" sortOrder="125" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label><![CDATA[Signature algorithm]]></label>
+                <comment><![CDATA[Algorithm used to compute the payment form signature. Selected algorithm must be the same as one configured in the Systempay Back Office.<br /><b>The HMAC-SHA-256 algorithm should not be activated if it is not yet available in the Systempay Back Office, the feature will be available soon.</b>]]></comment>
+                <frontend_model>Lyranetwork\Systempay\Block\Adminhtml\System\Config\Form\Field\SignAlgo</frontend_model>
+                <source_model>Lyranetwork\Systempay\Model\System\Config\Source\SignAlgo</source_model>
+                <config_path>systempay/general/sign_algo</config_path>
+            </field>
+
+            <field id="notify_url" translate="label comment" type="label" sortOrder="126" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label><![CDATA[Instant Payment Notification URL]]></label>
+                <frontend_model>Lyranetwork\Systempay\Block\Adminhtml\System\Config\Form\Field\NotifyUrl</frontend_model>
+                <comment><![CDATA[URL to copy into your Systempay Back Office > Settings > Notification rules.<br />In multistore mode, notification URL is the same for all the stores.]]></comment>
+                <config_path>systempay/general/notify_url</config_path>
+            </field>
+
+            <field id="platform_url" translate="label comment" type="text" sortOrder="127" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label><![CDATA[Payment page URL]]></label>
+                <comment><![CDATA[Link to the payment page.]]></comment>
+                <config_path>systempay/general/platform_url</config_path>
+            </field>
+        </group>
+
+        <group id="systempay_payment_page" translate="label" type="text" sortOrder="13" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label><![CDATA[PAYMENT PAGE]]></label>
+            <attribute type="expanded">0</attribute>
+            <frontend_model>Magento\Config\Block\System\Config\Form\Fieldset</frontend_model>
+
+            <field id="language" translate="label comment" type="select" sortOrder="131" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label><![CDATA[Default Language]]></label>
+                <comment><![CDATA[Default language on the payment page.]]></comment>
+                <source_model>Lyranetwork\Systempay\Model\System\Config\Source\Language</source_model>
+                <config_path>systempay/general/language</config_path>
+            </field>
+
+            <field id="available_languages" translate="label comment" type="multiselect" sortOrder="132" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label><![CDATA[Available languages]]></label>
+                <comment><![CDATA[Languages available on the payment page. If you do not select any, all the supported languages will be available.]]></comment>
+                <frontend_model>Lyranetwork\Systempay\Block\Adminhtml\System\Config\Form\Field\Multiselect</frontend_model>
+                <source_model>Lyranetwork\Systempay\Model\System\Config\Source\Language</source_model>
+                <backend_model>Lyranetwork\Systempay\Model\System\Config\Backend\AvailableLanguages</backend_model>
+                <config_path>systempay/general/available_languages</config_path>
+            </field>
+
+            <field id="capture_delay" translate="label comment" type="text" sortOrder="133" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label><![CDATA[Capture delay]]></label>
+                <comment><![CDATA[The number of days before the bank capture (adjustable in your Systempay Back Office).]]></comment>
+                <config_path>systempay/general/capture_delay</config_path>
+            </field>
+
+            <field id="validation_mode" translate="label comment" type="select" sortOrder="134" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label><![CDATA[Validation mode]]></label>
+                <comment><![CDATA[If manual is selected, you will have to confirm payments manually in your Systempay Back Office.]]></comment>
+                <source_model>Lyranetwork\Systempay\Model\System\Config\Source\ValidationMode</source_model>
+                <config_path>systempay/general/validation_mode</config_path>
+            </field>
+        </group>
+
+        <group id="systempay_payment_page_customize" translate="label" type="text" sortOrder="14" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label><![CDATA[PAYMENT PAGE CUSTOMIZE]]></label>
+            <attribute type="expanded">0</attribute>
+            <frontend_model>Magento\Config\Block\System\Config\Form\Fieldset</frontend_model>
+
+            <field id="theme_config" translate="label comment" type="text" sortOrder="141" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label><![CDATA[Theme configuration]]></label>
+                <comment><![CDATA[The theme configuration to customize the payment page.]]></comment>
+                <backend_model>Lyranetwork\Systempay\Model\System\Config\Backend\ThemeConfig</backend_model>
+                <config_path>systempay/general/theme_config</config_path>
+            </field>
+
+            <field id="shop_name" translate="label comment" type="text" sortOrder="142" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label><![CDATA[Shop name]]></label>
+                <comment><![CDATA[Shop name to display on the payment page. Leave blank to use gateway configuration.]]></comment>
+                <config_path>systempay/general/shop_name</config_path>
+            </field>
+
+            <field id="shop_url" translate="label comment" type="text" sortOrder="143" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label><![CDATA[Shop URL]]></label>
+                <comment><![CDATA[Shop URL to display on the payment page. Leave blank to use gateway configuration.]]></comment>
+                <backend_model>Lyranetwork\Systempay\Model\System\Config\Backend\ShopUrl</backend_model>
+                <config_path>systempay/general/shop_url</config_path>
+            </field>
+        </group>
+
+        <group id="systempay_selective_3ds" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label><![CDATA[SELECTIVE 3DS]]></label>
+            <attribute type="expanded">0</attribute>
+            <frontend_model>Magento\Config\Block\System\Config\Form\Fieldset</frontend_model>
+
+            <field id="threeds_min_amount" translate="label comment" type="text" sortOrder="151" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label><![CDATA[Disable 3DS]]></label>
+                <comment><![CDATA[Amount below which 3DS will be disabled. Needs subscription to selective 3DS option. For more information, refer to the module documentation.]]></comment>
+                <config_path>systempay/general/threeds_min_amount</config_path>
+            </field>
+        </group>
+
+        <group id="systempay_return_options" translate="label" type="text" sortOrder="16" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label><![CDATA[RETURN TO SHOP]]></label>
+            <attribute type="expanded">0</attribute>
+            <frontend_model>Magento\Config\Block\System\Config\Form\Fieldset</frontend_model>
+
+            <field id="redirect_enabled" translate="label comment" type="select" sortOrder="161" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label><![CDATA[Automatic redirection]]></label>
+                <comment><![CDATA[If enabled, the buyer is automatically redirected to your site at the end of the payment.]]></comment>
+                <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                <config_path>systempay/general/redirect_enabled</config_path>
+            </field>
+
+            <field id="redirect_success_timeout" translate="label comment" type="text" sortOrder="162" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label><![CDATA[Redirection timeout on success]]></label>
+                <comment><![CDATA[Time in seconds (0-300) before the buyer is automatically redirected to your website after a successful payment.]]></comment>
+                <config_path>systempay/general/redirect_success_timeout</config_path>
+                <depends>
+                    <field id="redirect_enabled">1</field>
+                </depends>
+            </field>
+
+            <field id="redirect_success_message" translate="label comment" type="text" sortOrder="163" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label><![CDATA[Redirection message on success]]></label>
+                <comment><![CDATA[Message displayed on the payment page prior to redirection after a successful payment.]]></comment>
+                <config_path>systempay/general/redirect_success_message</config_path>
+                <depends>
+                    <field id="redirect_enabled">1</field>
+                </depends>
+            </field>
+
+            <field id="redirect_error_timeout" translate="label comment" type="text" sortOrder="164" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label><![CDATA[Redirection timeout on failure]]></label>
+                <comment><![CDATA[Time in seconds (0-300) before the buyer is automatically redirected to your website after a declined payment.]]></comment>
+                <config_path>systempay/general/redirect_error_timeout</config_path>
+                <depends>
+                    <field id="redirect_enabled">1</field>
+                </depends>
+            </field>
+
+            <field id="redirect_error_message" translate="label comment" type="text" sortOrder="165" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label><![CDATA[Redirection message on failure]]></label>
+                <comment><![CDATA[Message displayed on the payment page prior to redirection after a declined payment.]]></comment>
+                <config_path>systempay/general/redirect_error_message</config_path>
+                <depends>
+                    <field id="redirect_enabled">1</field>
+                </depends>
+            </field>
+
+            <field id="return_mode" translate="label comment" type="select" sortOrder="166" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label><![CDATA[Return mode]]></label>
+                <comment><![CDATA[Method that will be used for transmitting the payment result from the payment page to your shop.]]></comment>
+                <source_model>Lyranetwork\Systempay\Model\System\Config\Source\ReturnMode</source_model>
+                <config_path>systempay/general/return_mode</config_path>
+            </field>
+
+            <field id="registered_order_status" translate="label comment" type="select" sortOrder="167" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label><![CDATA[Registered orders status]]></label>
+                <comment><![CDATA[Status of orders when payment is successfull.]]></comment>
+                <source_model>Magento\Sales\Model\Config\Source\Order\Status\Newprocessing</source_model>
+                <config_path>systempay/general/registered_order_status</config_path>
+            </field>
+
+            <field id="capture_auto" translate="label comment" type="select" sortOrder="168" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label><![CDATA[Invoice creation]]></label>
+                <comment><![CDATA[Automatically create invoice when payment is successfull.]]></comment>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                <config_path>systempay/general/capture_auto</config_path>
+                <depends>
+                    <field id="registered_order_status">processing</field>
+                </depends>
+            </field>
+        </group>
+
+        <group id="systempay_additional_options" translate="label comment" type="text" sortOrder="17" showInDefault="1" showInWebsite="0" showInStore="1">
+            <label><![CDATA[ADDITIONAL OPTIONS]]></label>
+            <attribute type="expanded">0</attribute>
+            <frontend_model>Magento\Config\Block\System\Config\Form\Fieldset</frontend_model>
+
+            <field id="common_category" translate="label comment" type="select" sortOrder="171" showInDefault="1" showInWebsite="0" showInStore="1">
+                <label><![CDATA[Category mapping]]></label>
+                <comment><![CDATA[Use the same category for all products.]]></comment>
+                <source_model>Lyranetwork\Systempay\Model\System\Config\Source\Category</source_model>
+                <config_path>systempay/general/common_category</config_path>
+            </field>
+
+            <field id="category_mapping" translate="label comment" sortOrder="172" showInDefault="1" showInWebsite="0" showInStore="1">
+                <comment><![CDATA[Match each product category with a Systempay category.<br /><b>Entries marked with * are newly added and must be configured.</b>]]></comment>
+                <frontend_model>Lyranetwork\Systempay\Block\Adminhtml\System\Config\Form\Field\CategoryMapping</frontend_model>
+                <backend_model>Lyranetwork\Systempay\Model\System\Config\Backend\CategoryMapping</backend_model>
+                <config_path>systempay/general/category_mapping</config_path>
+                <depends>
+                    <field id="common_category">CUSTOM_MAPPING</field>
+                </depends>
+            </field>
+
+            <!-- <field id="ship_options" translate="label comment" sortOrder="173" showInDefault="1" showInWebsite="0" showInStore="1">
+                <label><![CDATA[FacilyPay Oney shipping options]]></label>
+                <comment><![CDATA[Define the FacilyPay Oney information about all shipping methods.<br /><b>FacilyPay Oney label: </b>The label of the shipping method (use 55 alphanumeric characters, accentuated characters and these special characters: space, slash, hyphen, apostrophe).<br /><b>Type: </b>The delivery type of shipping method.<br /><b>Speed: </b>Select whether the delivery is STANDARD or EXPRESS.<br /><b>Entries marked with * are newly added and must be configured.</b>]]></comment>
+                <frontend_model>Lyranetwork\Systempay\Block\Adminhtml\System\Config\Form\Field\ShipOptions</frontend_model>
+                <backend_model>Lyranetwork\Systempay\Model\System\Config\Backend\ShipOptions</backend_model>
+                <config_path>systempay/general/ship_options</config_path>
+                <depends>
+                    <field id="oney_contract">1</field>
+                </depends>
+            </field> -->
+        </group>
+    </group>
+</include>

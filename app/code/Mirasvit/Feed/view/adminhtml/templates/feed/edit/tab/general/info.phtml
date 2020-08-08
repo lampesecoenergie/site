@@ -1,0 +1,32 @@
+<?php
+/** @var \Mirasvit\Feed\Model\Feed $feed */
+$feed = $this->getFeed();
+?>
+
+<table class="admin__table-secondary">
+    <tr>
+        <th><?php echo __('Feed Access Url') ?></th>
+        <td><a href="<?php echo $feed->getUrl() ?>" target="_blank"><?php echo $feed->getUrl() ?></a></td>
+    </tr>
+    <?php if ($feed->getGeneratedCnt()): ?>
+        <tr>
+            <th><?php echo __('Count') ?></th>
+            <td><?= $feed->getGeneratedCnt() ?></td>
+        </tr>
+    <?php endif ?>
+    <tr>
+        <th><?php echo __('Last Generated') ?></th>
+        <td>
+            <?php echo $block->formatDate(
+                $feed->getGeneratedAt(),
+                \IntlDateFormatter::MEDIUM,
+                true
+            );
+            ?>
+        </td>
+    </tr>
+    <tr>
+        <th><?php echo __('Generation Time') ?></th>
+        <td><?php echo gmdate('H:i:s', $feed->getGeneratedTime()) ?></td>
+    </tr>
+</table>

@@ -1,0 +1,178 @@
+<?php
+$element = $block->getElement();
+$_htmlId = 'cdiscountAttributeOptions' ?>
+<?php $_htmlClass = 'cdiscountAttributeOptionsClass' ?>
+<?php $_htmlName = 'cdiscount_attribute_options' ?>
+<?php $_currentProfile = $block->getMappedOptions(); ?>
+<?php $_readonly = false ?>
+<div class="field" id="attribute-<?php /* @escapeNotVerified */
+echo $_htmlId ?>-container" data-attribute-code="<?php /* @escapeNotVerified */
+echo $_htmlId ?>"
+>
+    <div class="control">
+        <table class="admin__control-table tiers_table" id="tiers_table">
+            <thead>
+            <tr>
+                <th class="col-customer-group"><?php /* @escapeNotVerified */
+                    echo __('Magento Option') ?></th>
+                <th class="col-qty required"><?php /* @escapeNotVerified */
+                    echo __('Cdiscount Options') ?>
+                <th class="col-delete"><?php /* @escapeNotVerified */
+                    echo __('Action') ?></th>
+            </tr>
+            </thead>
+            <tbody id="<?php /* @escapeNotVerified */
+            echo $_htmlId ?>_container"></tbody>
+            <tfoot>
+            <!--            <tr>-->
+            <td colspan="4" class="col-actions-add"><?php echo $block->getAddButtonHtml() ?></td>
+            <!--            </tr>-->
+            </tfoot>
+            <script>
+                require([
+                    'Magento_Ui/js/modal/modal',
+                    'Magento_Ui/js/modal/confirm',
+                    'mage/template',
+                    "prototype",
+                    "mage/adminhtml/form"
+                ], function (modal, alert, mageTemplate) {
+                    var requiredAttributeRowTemplate = '<tr class="attribute_option_row" row_id="<%- data.index %>">'
+                        + '<input data-form-part="cdiscount_profile_edit" type="hidden" name="<?php echo $_htmlName ?>[<%- data.index %>]" id="cdiscount_attribute_option_row_<%- data.index %>_cdiscount_option_name" />'
+                        + '<td> <select  data-form-part="cdiscount_profile_edit" class="<?php echo $_htmlClass ?> admin__control-select required-entry" name="<?php echo $_htmlName ?>[<%- data.index %>][magento_attribute_option]" id="cdiscount_attribute_option_row_<%- data.index %>_magento_attribute_option">'
+                        <?php foreach ($block->magentoOptions() as $_groupId=>$_groupName):?>
+                        + "<option value='<?php echo $_groupName['value'] ?>' ><?php echo __($_groupName['label']) ?></option>"
+                        <?php endforeach ?>
+                        + '</select>'
+                        + ' </td>'
+                        + '<td><select data-form-part="cdiscount_profile_edit" style="margin-left: 10px;" onchange="return cdiscountAttributeOptionControl.setCdiscountOptionValues(this, <%- data.index %>);" class="<?php echo $_htmlClass ?> custgroup admin__control-select required-entry" name="<?php echo $_htmlName ?>[<%- data.index %>]" id="cdiscount_attribute_option_row_<%- data.index %>_cdiscount_option">'
+                        <?php
+                        foreach ($block->cdiscountOptions() as $options){?>
+                        + '<option value="<?=  $block->escapeHtml($options)?>"><?= $block->escapeHtml(__($options)) ?></option>'
+                        <?php }?>
+                        + '</select></td>'
+                        + '<td class="col-delete">'
+                        + '<input data-form-part="cdiscount_profile_edit" type="hidden" name="<?php /* @escapeNotVerified */ echo $_htmlName ?>[<%- data.index %>][delete]" class="delete" value="" id="cdiscount_attribute_option_row_<%- data.index %>_delete" />'
+                        + '<button title="<?php /* @escapeNotVerified */ echo $block->escapeHtml(__('Delete Tier')); ?>" type="button" class="action- scalable delete icon-btn delete-product-option" id="cdiscount_attribute_option_row_<%- data.index %>_delete_button" onclick="return cdiscountAttributeOptionControl.deleteItem(event);">'
+                        + '<span></span></button></td>'
+                        + '</tr>';
+                    var cdiscountAttributeOptionControl = {
+                        template: mageTemplate(requiredAttributeRowTemplate),
+                        itemsCount: 0,
+                        addItem: function () {
+                            console.log('chng');
+                            <?php if ($_readonly): ?>
+                            if (arguments.length < 2) {
+                                console.log('ret');
+                                return;
+                            }
+                            <?php endif; ?>
+                            var data = {
+                                cdiscount_attribute_option_code: '',
+                                magento_attr_option_code: '',
+                                index: this.itemsCount++
+                            };
+                            if (arguments.length >= 2) {
+                                data.cdiscount_attribute_option_code = arguments[0];
+                                data.magento_attr_option_code = arguments[1];
+                            }
+                            console.log(data);
+                            Element.insert($('<?php /* @escapeNotVerified */ echo $_htmlId ?>_container'), {
+                                bottom: this.template({
+                                    data: data
+                                })
+                            });
+                            $('cdiscount_attribute_option_row_' + data.index + '_cdiscount_option').value = data.cdiscount_attribute_option_code;
+                            $('cdiscount_attribute_option_row_' + data.index + '_magento_attribute_option').value = data.magento_attr_option_code;
+
+                            <?php if ($_readonly): ?>
+                            $('<?php /* @escapeNotVerified */ echo $_htmlId ?>_container').select('input', 'select').each(this.disableElement);
+                            $('<?php /* @escapeNotVerified */ echo $_htmlId ?>_container').up('table').select('button').each(this.disableElement);
+                            <?php else: ?>
+                            $('<?php /* @escapeNotVerified */ echo $_htmlId ?>_container').select('input', 'select').each(function (el) {
+                                Event.observe(el, 'change', el.setHasChanges.bind(el));
+                            });
+                            <?php endif; ?>
+                        },
+                        disableElement: function (el) {
+                            el.disabled = true;
+                            el.addClassName('disabled');
+                        },
+                        deleteItem: function (event) {
+                            var tr = Event.findElement(event, 'tr');
+                            tr.remove();
+                            if (tr) {
+                                Element.select(tr, '.delete').each(function (elem) {
+                                    elem.value = '1'
+                                });
+                                Element.select(tr, ['input', 'select']).each(function (elem) {
+                                    elem.hide()
+                                });
+                                Element.hide(tr);
+                                Element.addClassName(tr, 'no-display template');
+                            }
+                            return false;
+                        },
+                        setCdiscountOptionValues: function (e, index) {
+                            if (e.hasOwnProperty('selectedIndex')) {
+                                var attribute = e.options[e.selectedIndex];
+                                var cdiscount_attribute_option =  $('cdiscount_attribute_option_row_'+index+'_cdiscount_option');
+                                if (cdiscount_attribute_option.selectedIndex >= 0) {
+                                    var cdiscountAttribute =  cdiscount_attribute_option[cdiscount_attribute_option.selectedIndex].text;
+                                    $('cdiscount_attribute_option_row_' + index + '_cdiscount_option_name').value = cdiscountAttribute;
+                                }
+
+                            }
+                        }
+                    };
+
+                    <?php if($block->getMappedAttributeEdit() && (count($block->getMappedAttributeEdit()) > 0 )):
+                    foreach ($block->getMappedAttributeEdit() as $optionKey => $options):?>
+                    cdiscountAttributeOptionControl.addItem(
+                        '<?= isset($options) ? $options:'' ?>',
+                        '<?= isset($optionKey) ? $optionKey : ''?>'
+                    );
+                    <?php endforeach; ?>
+                    <?php endif; ?>
+                    <?php if ($_readonly): ?>
+
+                    $('<?php /* @escapeNotVerified */ echo $_htmlId ?>_container').up('table').select('button')
+                        .each(cdiscountAttributeOptionControl.disableElement);
+                    <?php endif; ?>
+
+                    window.cdiscountAttributeOptionControl = cdiscountAttributeOptionControl;
+                });
+            </script>
+            <style>
+                .delete-product-option :before {
+                    -webkit-font-smoothing: antialiased;
+                    font-size: 1.8rem;
+                    line-height: inherit;
+                    color: #9e9e9e;
+                    content: '\e630';
+                    font-family: 'Admin Icons';
+                    margin: -2px 0 0;
+                    vertical-align: middle;
+                    display: inline-block;
+                    font-weight: normal;
+                    overflow: hidden;
+                    speak: none;
+                    text-align: center;
+                }
+                .delete-product-option {
+                    margin-right: 5px;
+                    background: none;
+                    border: none;
+                }
+
+                .default-text, .default-select {
+                    width: 140px !important;
+                }
+
+                .cdiscountAttributeOptionsClass, .configAttributeClass {
+                    max-width: 230px;
+                    margin-left: 5px;
+                }
+            </style>
+        </table>
+    </div>
+</div>

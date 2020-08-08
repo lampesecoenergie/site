@@ -1,0 +1,48 @@
+<?php
+$_helper = $this->helper('Acyba\GLS\Helper\Tools');
+$glsGoogleMapsUrl = $_helper->getGoogleMapsUrl();
+$glsAjaxLoadRelaysUrl = $block->getAjaxLoadRelaysUrl();
+$glsAjaxSetInformationRelayUrl = $block->getAjaxSetInformationRelayUrl();
+
+if (empty($glsGoogleMapsUrl)) {
+    $_helper->glsLog("Error : no Google Maps API Key defined", 'err');
+} else {
+    ?>
+    <script src="<?php echo $glsGoogleMapsUrl; ?>"></script>
+<?php } ?>
+
+<script type="text/javascript">
+    require(['jquery', 'gls'], function ($, gls) {
+        if(typeof google !== 'undefined'){
+            gls.glsLoadMap();
+
+            gls.glsSetAjaxSetRelayInformationUrl('<?php echo $glsAjaxSetInformationRelayUrl; ?>');
+
+            $('#address_search_button').click(function () {
+                    gls.glsLoadRelayList('<?php echo $glsAjaxLoadRelaysUrl; ?>');
+                }
+            );
+        } else console.error('Google is not defined. Please check if an API key is set in the configuration (Stores->Configuration->Sales->GLS Advanced Shipping)');
+    });
+</script>
+
+<div id="layer_gls_wrapper" style="display:none;">
+    <div>
+        <p id="gls_popup_title"><?php echo __('CHOOSE YOUR MONDIAL RELAY PARCELSHOP'); ?></p>
+        <div class="content">
+            <div id="gls_header">
+                <div id="header_address_gls">
+                    <div class="address_search_field"><label for="cp_address_search"><?php echo __('Your postcode'); ?> </label><input type="text" id="cp_address_search" value=""></div>
+                    <div class="address_search_field"><label for="address_address_search"><?php echo __('Your address'); ?> </label><input type="text" id="address_address_search" value=""></div>
+                    <div class="address_search_field"><label for="city_address_search"><?php echo __('Your city'); ?> </label><input type="text" id="city_address_search" value=""></div>
+                    <button id="address_search_button"><?php echo __('Search');?></button>
+                    <img id="gls_loader_relay" src="<?php echo $this->getViewFileUrl('Acyba_GLS::images/loading.gif'); ?>" alt="Loading..." style="display: none">
+                </div>
+            </div>
+            <div id="gls_left">
+                <div id="gls_map"></div>
+            </div>
+            <div id="gls_right"></div>
+        </div>
+    </div>
+</div>

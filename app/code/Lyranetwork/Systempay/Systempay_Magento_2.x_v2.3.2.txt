@@ -1,0 +1,1 @@
+SHA256(Systempay_Magento_2.x_v2.3.2.zip)= 819a4c34b7e4d40a45b4ce0cd53802bb048d68e336c904b0b5b017f49e1f8667

@@ -1,0 +1,40 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Ced_Cdiscount::Cdiscount" title="Cdiscount" sortOrder="50">
+                    <resource id="Ced_Cdiscount::configuration" title="Configuration">
+                        <resource id="Ced_Cdiscount::cdiscount_configuration" title="Cdiscount Configuration" />
+                    </resource>
+                    <resource id="Ced_Cdiscount::product" title="Products">
+                        <resource id="Ced_Cdiscount::cdiscount_profile" title="Profile Manager" />
+                        <resource id="Ced_Cdiscount::cdiscount_product" title="Product Listing" />
+                    </resource>
+                    <resource id="Ced_Cdiscount::cdiscount_orders" title="Orders">
+                        <resource id="Ced_Cdiscount::cdiscount_order_listing" title="Orders Listing" />
+                        <resource id="Ced_Cdiscount::cdiscount_failed_order" title="Failed Orders" />
+                    </resource>
+                    <resource id="Ced_Cdiscount::developer" title="Developer">
+                        <resource id="Ced_Cdiscount::cdiscount_feeds" title="Feeds" />
+                        <resource id="Ced_Cdiscount::cdiscount_cron" title="Cron Logs" />
+                        <resource id="Ced_Cdiscount::cdiscount_model_logs" title="Activity Logs" />
+                        <resource id="Ced_Cdiscount::cdiscount_category" title="Categories" />
+                        <resource id="Ced_Cdiscount::cdiscount_attribute" title="Attributes" />
+                    </resource>
+                    <resource id="Ced_Cdiscount::extras" title="Extras">
+                        <resource id="Ced_Cdiscount::cdiscount_support" title="Support" />
+                    </resource>
+                </resource>
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Ced_Cdiscount::system_config" title="Cdiscount Api Config" />
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+
+        </resources>
+    </acl>
+</config>

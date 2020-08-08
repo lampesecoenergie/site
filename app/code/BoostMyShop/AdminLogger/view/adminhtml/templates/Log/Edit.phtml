@@ -1,0 +1,10 @@
+<div class="page-main-actions">
+    <div data-mage-init='{"floatingHeader": {}}' class="page-actions"  data-ui-id="page-actions-toolbar-content-header" >
+        <button id="back" title="Back" type="button" class="action-default scalable back" onclick="setLocation('<?php echo $this->getBackUrl(); ?>')"  data-ui-id="adminhtml-order-edit-back-button" >
+            <span><?php echo __('Back'); ?></span>
+        </button>
+    </div>
+</div>
+
+<p><?php echo __('ID : %1', $this->getLog()->getId()); ?></p>
+<p><?php echo __('Date : %1', $this->getLog()->getal_created_at()); ?></p>

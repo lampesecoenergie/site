@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @category  Mageants BannerSlider
+ * @package   Mageants_BannerSlider
+ * @copyright Copyright (c) 2017 Mageants
+ * @author    Mageants Team <support@Mageants.com>
+ */
+-->
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/layout_generic.xsd">
+    <container name="root" label="Root">
+        <block class="Mageants\BannerSlider\Block\Adminhtml\Sliders\Edit\Tab\Slides" name="bannerslider.sliders.edit.tab.slides"/>
+        <block class="Magento\Backend\Block\Widget\Grid\Serializer" name="slides_grid_serializer">
+            <arguments>
+                <argument name="grid_block" xsi:type="string">bannerslider.sliders.edit.tab.slides</argument>
+                <argument name="callback" xsi:type="string">getSelectedSlides</argument>
+                <argument name="input_element_name" xsi:type="string">slides</argument>
+                <argument name="reload_param_name" xsi:type="string">slider_slides</argument>
+            </arguments>
+        </block>
+    </container>
+</layout>

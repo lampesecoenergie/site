@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement(EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+ * @package   Ced_Amazon
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright Copyright CEDCOMMERCE(http://cedcommerce.com/)
+ * @license   http://cedcommerce.com/license-agreement.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<default>
+		<amazon>
+			<settings>
+				<enable>1</enable>
+			</settings>
+			<product>
+				<chunk_settings>
+					<queue_size>100</queue_size>
+					<feed_size>100</feed_size>
+					<price_queue_size>500</price_queue_size>
+					<price_feed_size>5000</price_feed_size>
+					<inventory_queue_size>500</inventory_queue_size>
+					<inventory_feed_size>5000</inventory_feed_size>
+					<status_queue_size>500</status_queue_size>
+					<status_feed_size>5000</status_feed_size>
+				</chunk_settings>
+				<price>
+					<type>default</type>
+					<allow_sale_price>0</allow_sale_price>
+				</price>
+				<inventory>
+					<fulfilment_latency>1</fulfilment_latency>
+					<fulfilment_channel>MFN</fulfilment_channel>
+					<advanced_threshold_status>0</advanced_threshold_status>
+					<override_inventory>0</override_inventory>
+				</inventory>
+			</product>
+			<order>
+				<status>Unshipped,PartiallyShipped</status>
+				<time>-1 days</time>
+				<increment_id_rules>prefix</increment_id_rules>
+				<auto_acknowledgement>0</auto_acknowledgement>
+				<auto_invoice>0</auto_invoice>
+				<auto_acknowledgement>0</auto_acknowledgement>
+				<auto_cancellation>0</auto_cancellation>
+				<po_id_as_increment_id>0</po_id_as_increment_id>
+				<order_id_prefix>AMZN</order_id_prefix>
+				<order_notification>0</order_notification>
+				<order_notify_email_enable>0</order_notify_email_enable>
+				<guest>0</guest>
+				<enable_default_customer>0</enable_default_customer>
+				<import_taxes_for_us_selected_regions>0</import_taxes_for_us_selected_regions>
+				<import_shipping_taxes>1</import_shipping_taxes>
+				<create_region>0</create_region>
+				<use_geocode>0</use_geocode>
+				<use_dash>1</use_dash>
+				<backorder>1</backorder>
+				<tracking_number_required>0</tracking_number_required>
+				<create_unavailable_product>0</create_unavailable_product>
+			</order>
+			<developer>
+				<throttle>1</throttle>
+				<debug_mode>1</debug_mode>
+				<logging_level>200</logging_level>
+				<shipment_async>1</shipment_async>
+			</developer>
+		</amazon>
+		<carriers>
+			<shipbyamazon>
+				<active>1</active>
+				<sallowspecific>0</sallowspecific>
+				<title>Amazon MWS Shipping (Default)</title>
+				<title>Amazon MWS Shipping (Default)</title>
+				<model>Ced\Amazon\Model\Carrier\Shipbyamazon</model>
+			</shipbyamazon>
+		</carriers> 
+		<payment>
+			<paybyamazon>
+				<active>1</active>
+				<model>Ced\Amazon\Model\Payment\Paybyamazon</model>
+				<order_status>pending</order_status>
+				<title>Amazon MWS Payment (Default)</title>
+				<allowspecific>0</allowspecific>
+			</paybyamazon>
+    </payment>
+  </default> 
+</config>

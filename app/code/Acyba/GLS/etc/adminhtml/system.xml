@@ -1,0 +1,170 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="carriers" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+            <tab>sales</tab>
+            <resource>Acyba_GLS::config_acyba_gls</resource>
+            <group id="gls" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20" translate="label">
+                <label>GLS, your transport partner</label>
+                <field id="gls_informations" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="1" translate="label" type="label">
+                    <label>Informations</label>
+                    <frontend_model>Acyba\GLS\Block\System\Config\Informations</frontend_model>
+                </field>
+                <field id="title" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="2" translate="label" type="text">
+                    <label>Title</label>
+                </field>
+                <field id="active" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="3" translate="label" type="select">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="gls_usernamews" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="4" translate="label" type="text">
+                    <label>GLS webservice login</label>
+                </field>
+                <field id="gls_passws" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="5" translate="label" type="password">
+                    <label>GLS webservice password</label>
+                </field>
+                <field id="max_package_weight" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="6" translate="label" type="text">
+                    <label>Maximum package weight (please consider about GLS maximum weight)</label>
+                    <validate>validate-number validate-zero-or-greater</validate>
+                </field>
+                <field id="gls_livraisontohome" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="7" translate="label" type="select">
+                    <label>GLS Chez Vous</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="gls_configtohome" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="8" translate="label" type="textarea">
+                    <label>GLS Chez Vous setup</label>
+                    <depends>
+                        <field id="carriers/gls/gls_livraisontohome">1</field>
+                    </depends>
+                    <frontend_model>Acyba\GLS\Block\System\Config\Help</frontend_model>
+                </field>
+                <field id="gls_ordertohome" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="9" translate="label" type="text">
+                    <label>GLS Chez Vous order</label>
+                    <depends>
+                        <field id="carriers/gls/gls_livraisontohome">1</field>
+                    </depends>
+                </field>
+                <field id="gls_livraisonfds" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="select">
+                    <label>GLS Chez Vous +</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="gls_configfds" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="11" translate="label" type="textarea">
+                    <label>GLS Chez Vous + setup</label>
+                    <depends>
+                        <field id="carriers/gls/gls_livraisonfds">1</field>
+                    </depends>
+                    <frontend_model>Acyba\GLS\Block\System\Config\Help</frontend_model>
+                </field>
+                <field id="gls_orderfds" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="12" translate="label" type="text">
+                    <label>GLS Chez Vous + order</label>
+                    <depends>
+                        <field id="carriers/gls/gls_livraisonfds">1</field>
+                    </depends>
+                </field>
+                <field id="gls_livraisonrelay" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="13" translate="label" type="select">
+                    <label>GLS Point Relais</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="gls_google_maps_api_key" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="14" translate="label" type="text">
+                    <label>Google Maps API Key</label>
+                    <depends>
+                        <field id="carriers/gls/gls_livraisonrelay">1</field>
+                    </depends>
+                </field>
+                <field id="gls_livraisonrelayapikeymessage" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="15" translate="label comment" type="label">
+                    <label>WARNING</label>
+                    <depends>
+                        <field id="carriers/gls/gls_livraisonrelay">1</field>
+                        <field id="carriers/gls/gls_google_maps_api_key">0</field>
+                    </depends>
+                    <frontend_model>Acyba\GLS\Block\System\Config\Relay</frontend_model>
+                </field>
+                <field id="gls_configrelay" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="16" translate="label" type="textarea">
+                    <label>GLS Point Relais setup</label>
+                    <depends>
+                        <field id="carriers/gls/gls_livraisonrelay">1</field>
+                    </depends>
+                    <frontend_model>Acyba\GLS\Block\System\Config\Help</frontend_model>
+                </field>
+                <field id="gls_orderrelay" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="17" translate="label" type="text">
+                    <label>GLS Point Relais order</label>
+                    <depends>
+                        <field id="carriers/gls/gls_livraisonrelay">1</field>
+                    </depends>
+                </field>
+                <field id="gls_onlyxlrelay" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="18" translate="label" type="select">
+                    <label>Only XL shop search</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="carriers/gls/gls_livraisonrelay">1</field>
+                    </depends>
+                </field>
+                <field id="gls_livraisonexpress" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="19" translate="label" type="select">
+                    <label>GLS Avant 13H</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="gls_configexpress" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20" translate="label" type="textarea">
+                    <label>GLS Avant 13H setup</label>
+                    <depends>
+                        <field id="carriers/gls/gls_livraisonexpress">1</field>
+                    </depends>
+                    <frontend_model>Acyba\GLS\Block\System\Config\Help</frontend_model>
+                </field>
+                <field id="gls_orderexpress" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="21" translate="label" type="text">
+                    <label>GLS Avant 13H order</label>
+                    <depends>
+                        <field id="carriers/gls/gls_livraisonexpress">1</field>
+                    </depends>
+                </field>
+                <field id="gls_tracking_view_url" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="22" translate="label" type="text">
+                    <label>Tracking URL</label>
+                    <depends>
+                        <field id="carriers/gls/gls_livraisonrelay">1</field>
+                    </depends>
+                </field>
+                <field id="gls_debug" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="23" translate="label comment" type="select">
+                    <label>Debug</label>
+                    <comment>Display debug on cart on a delivery estimate</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="gls_sort_order" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="24" translate="label" type="text">
+                    <label>GLS module order</label>
+                </field>
+            </group>
+        </section>
+        <section id="gls_section" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="330" translate="label">
+            <label>GLS Advanced Setup</label>
+            <tab>sales</tab>
+            <resource>Acyba_GLS::config_acyba_gls</resource>
+            <group id="gls_general" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="1" translate="label">
+                <label>General Configuration</label>
+                <field id="gls_agency_code" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="2" translate="label" type="text">
+                    <label>Agency code</label>
+                </field>
+            </group>
+            <group id="gls_import_export" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="2" translate="label">
+                <label>Import / Export Configuration</label>
+                <field id="gls_active" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="1" translate="label" type="select">
+                    <label>Active</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="gls_frequence" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="2" translate="label" type="text">
+                    <label>Frequency</label>
+                </field>
+                <field id="gls_cron_expression" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="3" translate="label" type="label">
+                    <label>Cron expression</label>
+                </field>
+                <field id="gls_import_folder" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="4" translate="label" type="text">
+                    <label>Import folder</label>
+                </field>
+                <field id="gls_export_folder" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="6" translate="label" type="text">
+                    <label>Export folder</label>
+                </field>
+                <field id="gls_export_order_status" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="7" translate="label" type="select">
+                    <label>Status of orders to export</label>
+                    <source_model>Acyba\GLS\Model\Config\Source\OrderStatus</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

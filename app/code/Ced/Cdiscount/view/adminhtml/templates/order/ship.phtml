@@ -1,0 +1,535 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement(EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+ * @package   Ced_Cdiscount
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright Copyright CEDCOMMERCE(http://cedcommerce.com/)
+ * @license   http://cedcommerce.com/license-agreement.txt
+ */
+/*Ced\Cdiscount\Block\Adminhtml\Order\Ship $block*/
+
+try {
+    $orderHelper = $block->getHelper('\Order');
+    $magentoOrder = $block->getOrder();
+    $magentoOrderId = $magentoOrder->getId();
+
+    $cdiscountOrder = $block->getModel();
+    $cdiscountOrderItemsData = $orderHelper->processOrderItems($cdiscountOrder);
+
+    $shipments = json_decode($cdiscountOrder->getShipments(), true);
+//print_r($cdiscountOrder->getShipments());die;
+    $shipments = (isset($shipments) and is_array($shipments)) ? $shipments : [];
+    /*if ($_SERVER['REMOTE_ADDR'] == '103.97.184.162') {
+        print_r($shipments);die;
+    }*/
+
+    $cancellations = json_decode($cdiscountOrder->getCancellations(), true);
+    $cancellations = (isset($cancellations) and is_array($cancellations)) ? $cancellations : [];
+
+    $cdiscountOrderData = json_decode($cdiscountOrder->getOrderData(), true);
+//$cdiscountOrderItemsData = json_decode($cdiscountOrder->getOrderItems(), true); // update
+    $id = $cdiscountOrder->getId();
+} catch (\Exception $exception) {
+    print_r($exception->getMessage());die;
+}
+
+
+?>
+<p>
+    <input type="hidden" id="formKey" value="<?php echo $block->getFormKey(); ?>">
+    <input type="hidden" id="CdiscountOrderID" value="<?php echo $cdiscountOrder->getCdiscountOrderId() ?>" readonly>
+    <input type="hidden" id="IncrementId" value="<?php echo $magentoOrder->getIncrementId() ?>">
+    <input type="hidden" id="OrderId" value="<?php echo $magentoOrder->getId() ?>">
+</p>
+<?php if (!empty($cdiscountOrderItemsData) && empty($shipments)) {?>
+    <div class="admin__page-section-content">
+        <div class="admin__page-section-item">
+            <div class="admin__page-section-item-title">
+                <span class="title">Cdiscount Order Information</span>
+            </div>
+            <div class="admin__page-section-item-content">
+                <table class="admin__table-secondary">
+                    <tbody>
+                    <tr>
+                        <th>Cdiscount Order Id</th>
+                        <td><?php echo $cdiscountOrder->getCdiscountOrderId(); ?></td>
+                    </tr>
+                    <tr>
+                        <th>Order Placed on Cdiscount</th>
+                        <td><?php echo date('l, F jS Y', strtotime($cdiscountOrder->getOrderPlaceDate())); ?></td>
+                    </tr>
+                    <tr>
+                        <th>Shipping Provider</th>
+                        <td>
+                            <select class="admin__control-select" id="CarrierCode">
+                                <option value="">Select a carrier</option>
+                                <?php
+                                foreach ($orderHelper->getShipmentProviders() as $code) {
+                                    echo "<option value='{$code}'>{$code}</option>";
+                                }
+                                ?>
+                            </select>
+                        </td>
+                    </tr>
+                    <!--<tr>
+                        <th>DeliveryType</th>
+                        <td>
+                            <select class="admin__control-select" id="DeliveryType">
+                                <option value="">Select a Delivery Type</option>
+                                <option value="dropship">Drop Shipping</option>
+                                <option value="pickup">Pickup</option>
+                                <option value="send_to_warehouse">Send To Warehouse</option>
+                            </select>
+                        </td>
+                    </tr>-->
+                    <tr>
+                        <th>Tracking Number</th>
+                        <td><input class="admin__control-text" type="text" id="TrackingNumber" value=""></td>
+                    </tr>
+                    <tr>
+                        <th>TrackingUrl</th>
+                        <td>
+                            <input class="admin__control-text input-text required-entry"
+                                   id="TrackingUrl"
+                                   name="TrackingUrl"/>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="admin__page-section-title">
+        <span class="title">Shipment Order Items</span>
+    </div>
+    <div class="admin__table-wrapper">
+        <table class="data-table admin__table-primary edit-order-table" id="_prod_table">
+            <thead>
+            <tr class="headings">
+                <th>Product sku</th>
+                <th>Quantity ordered</th>
+                <th>Quantity to Ship</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+            foreach ($cdiscountOrderItemsData as $k => $item) {
+                $cancelQty = 0;
+                $availQty = 1;
+                if ($availQty > 0) { ?>
+                    <tr>
+                    <td>
+                        <input type="hidden" id="sku_<?php echo $k; ?>" value="<?php echo $item->getSku() ?>">
+                        <input type="hidden" id="order_item_id_<?php echo $k; ?>"
+                               value="<?php echo $item->getRowId() ?>">
+                        <strong><?php echo $item->getSku() ?></strong>
+                    </td>
+                    <td><input type="hidden" id="qty_<?php echo $k; ?>" value="<?php echo $availQty ?>">
+                        <strong><?php echo $availQty ?></strong>
+                    </td>
+                    <td>
+                        <select disabled="disabled" id="ship_<?php echo $k; ?>" class="admin__control-select">
+                            <option value="0">0</option>
+                            <option value="<?php echo $availQty; ?>" selected="selected"><?php echo $availQty; ?></option>
+                        </select>
+                    </td>
+                    </tr><?php }
+                $k++;
+            } ?>
+            </tbody>
+        </table>
+        <div style="float: right; margin-right:30px">
+            <button class="primary" id="submitShipment">Ship Order</button>
+        </div>
+        <div style="float: right; margin-right:30px">
+            <button class="secondary" id="cancelShipment">Cancel Order</button>
+        </div>
+    </div>
+
+<?php } ?>
+
+<div data-mage-init='{"accordion":{"openedState": "active", "collapsible": true, "active": false, "multipleCollapsible": false}}'>
+
+    <div class="admin__page-section-title" data-role="collapsible">
+        <span class="title" data-role="trigger" style="cursor: pointer">Shipments</span>
+    </div>
+    <div data-role="content">
+        <?php foreach ($shipments as $key => $shipment):?>
+            <div class="admin__table-wrapper fulfillments">
+                <table class="data-table admin__table-primary edit-order-table">
+                    <tr>
+                        <th>#<?php echo $key+1 ?></th>
+                        <td class="border-gray-td first-td"></td>
+                    </tr>
+                    <tr>
+                        <th>OrderId</th>
+                        <td  class="border-gray-td"><?php echo isset($shipment['OrderId']) ? $shipment['OrderId'] : ''; ?></td>
+                    </tr>
+                    <tr>
+                        <th>Status</th>
+                        <td class="border-gray-td"><?php echo isset($shipment['Response']['Status']) ? $shipment['Response']['Status'] : ''; ?></td>
+                    </tr>
+                    <tr>
+                        <th>Cdiscount Order Id</th>
+                        <td class="border-gray-td"><?php echo isset($shipment['CdiscountOrderID']) ? $shipment['CdiscountOrderID'] : ''; ?></td>
+                    </tr>
+
+                    <tr>
+                        <th>ShippingProvider</th>
+                        <td  class="border-gray-td"><?php echo isset($shipment['ShippingProvider']) ? $shipment['ShippingProvider'] : ''; ?></td>
+                    </tr>
+                    <tr>
+                        <th>TrackingNumber</th>
+                        <td  class="border-gray-td"><?php echo isset($shipment['TrackingNumber']) ? $shipment['TrackingNumber'] : ''; ?></td>
+                    </tr>
+
+                    <tr>
+                        <th>TrackingUrl</th>
+                        <td  class="border-gray-td"><?php echo isset($shipment['TrackingUrl']) ? $shipment['TrackingUrl'] : ''; ?></td>
+                    </tr>
+                    <tr>
+                        <th>Order Items</th>
+                        <td  class="border-gray-td last-td">
+                            <table class="data-table admin__table-primary edit-order-table">
+                                <thead>
+                                <tr class="headings">
+                                    <th>Product Sku</th>
+                                    <th>Quantity</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php if (isset($shipment['OrderItemIds']) and is_array($shipment['OrderItemIds'])) {
+
+
+                                    foreach ($shipment['OrderItemIds'] as $item) { ?>
+                                        <tr>
+                                        <td><strong><?php echo isset($item['SKU']) ? $item['SKU'] : '' ?></strong></td>
+                                        <td><strong><?php echo isset($item['Quantity']) ? $item['Quantity'] : '' ?></strong></td>
+                                        </tr><?php }
+                                }
+                                ?>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+        <?php endforeach;?>
+    </div>
+    <div class="admin__page-section-title" data-role="collapsible">
+        <span class="title" data-role="trigger" style="cursor: pointer">Cancellations</span>
+    </div>
+    <div data-role="content">
+        <?php foreach ($cancellations as $key => $cancellation):?>
+            <div class="admin__table-wrapper fulfillments">
+                <table class="data-table admin__table-primary edit-order-table">
+                    <tr>
+                        <th>#<?php echo $key+1 ?></th>
+                        <td class="border-gray-td first-td"></td>
+                    </tr>
+                    <tr>
+                        <th>Status</th>
+                        <td class="border-gray-td"><?php if(isset($cancellation['Status'])){echo $cancellation['Status'];} ?></td>
+                    </tr>
+
+                    <tr>
+                        <th>Cancelled Items</th>
+                        <td  class="border-gray-td last-td">
+                            <table class="data-table admin__table-primary edit-order-table">
+                                <thead>
+                                <tr class="headings">
+                                    <th>Order Item Id</th>
+                                    <th>Product Sku</th>
+                                    <th>Quantity Cancelled</th>
+                                    <th>Reason</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+
+                                if (isset($cancellation['OrderItemIds']) and is_array($cancellation['OrderItemIds'])) {
+                                    foreach ($cancellation['OrderItemIds'] as $item) { ?>
+                                        <tr>
+                                        <td><strong><?php echo isset($item['OrderItemId']) ? $item['OrderItemId'] : '' ?></strong></td>
+                                        <td><strong><?php echo isset($item['SKU']) ? $item['SKU'] : '' ?></strong></td>
+                                        <td><strong><?php echo isset($item['QuantityCancelled']) ? $item['QuantityCancelled'] : '' ?></strong></td>
+                                        <td><strong><?php echo isset($item['Reason']) ? $item['Reason'] : '' ?></strong></td>
+                                        </tr><?php }
+                                }
+                                ?>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+        <?php endforeach;?>
+    </div>
+</div>
+
+<script>
+    require([
+        "jquery",
+        'Magento_Ui/js/modal/confirm',
+        "mage/calendar"
+    ], function ($, alert) {
+        $('#FulfillmentDate').calendar({
+            showsTime: true,
+            hideIfNoPrevNext: true,
+            buttonText: "<?php echo __('Select Date') ?>",
+            dateFormat: "yyyy-MM-dd",
+            timeFormat: "HH:mm:ss", //yyyy-MM-dd HH:mm:ss // 2009-02-10T09:22:33+00:00
+            minDate: new Date()
+        });
+
+        $('#submitShipment').on('click', function () {
+            ship();
+        });
+
+        $('#cancelShipment').on('click', function () {
+            alert({
+                title: 'Are You Sure To Cancel The Order',
+                content: 'Cancel Order',
+                actions: {
+                    confirm: function(){
+                        cancel()
+                    },
+                    cancel: function(){
+                        return false;
+                    }
+                }
+            });
+        });
+
+        function cancel() {
+            var data = {};
+
+            var itemsCount = <?php echo count($cdiscountOrderItemsData); ?>;
+            var magentoOrderId = document.getElementById('OrderId').value;
+            var cdiscountOrderId = document.getElementById('CdiscountOrderID').value;
+            var sku = '';
+            var quantity = 0;
+
+            for (var i = 0; i < itemsCount; i++) {
+                if (document.getElementById('sku_' + i)) {
+                    var quantity = document.getElementById('qty_' + i).value;
+                    var sku = document.getElementById('sku_' + i).value;
+
+
+                }
+            }
+
+            data['cancellations'] = [
+                {
+                    "OrderId": magentoOrderId,
+                    "CdiscountOrderId": cdiscountOrderId,
+                    "Quantity": quantity,
+                    "SKU": sku
+                }
+            ];
+            /*var value = alert({
+                title: 'Are You Sure To Cancel The Order'
+                content: 'Cancel Order'
+            });*/
+            //if (value === true) {
+            $.ajax({
+                url: "<?php echo $this->getUrl('cdiscount/order/ship', ['form_key' => $block->getFormKey()]) ?>",
+                type: 'POST',
+                data: data,
+
+                showLoader: true, // enable loader
+
+
+                success: function (response) {
+                    if (response.success === true) {
+                        try {
+                            window.location.href = "";
+                        }
+                        catch (err) {
+                            alert({
+                                title: 'Order cancellation failed.',
+                                content: response.message
+                            });
+                        }
+                    } else {
+                        var message = parseMessage(response.message); console.log(message);
+                        alert({
+                            title: 'Order cancellation failed.',
+                            content: message
+                        });
+                    }
+                },
+                error: function () {
+                    alert({
+                        title: 'Order cancellation failed.',
+                        content: 'Api is down.'
+                    });
+                }
+            });
+            //}
+        }
+
+        function ship() {
+            var key = document.getElementById('formKey').value;
+
+            var incrementId = document.getElementById('IncrementId').value;
+            var magentoOrderId = document.getElementById('OrderId').value;
+            var cdiscountOrderId = document.getElementById('CdiscountOrderID').value;
+            var carrierCode = document.getElementById('CarrierCode').value;
+            var trackingNumber = document.getElementById('TrackingNumber').value;
+            var trackingUrl = document.getElementById('TrackingUrl').value;
+            var shippedItems = [];
+            var itemsCount = <?php echo count($cdiscountOrderItemsData); ?>;
+
+            for (var i = 0; i < itemsCount; i++) {
+                if (document.getElementById('sku_' + i)) {
+                    var cdiscountOrderItemCode = document.getElementById('order_item_id_' + i).value;
+                    var sku = document.getElementById('sku_' + i).value;
+                    var quantity = document.getElementById('qty_' + i).value;
+                    var quantityShipped = document.getElementById('ship_' + i).value;
+
+                    var check = true;
+                    if (quantityShipped < 1) {
+                        check = false;
+                    }
+
+                    var shippedItem = {
+                        'SKU': sku,
+                        'OrderItemId': cdiscountOrderItemCode,
+                        'Quantity': quantityShipped
+                    };
+
+
+                    if (quantityShipped > 0) {
+                        shippedItems.push(shippedItem);
+                    }
+
+                }
+            }
+            if (check) {
+                if (carrierCode === "" ) {
+                    alert({
+                        title: 'Invalid shipment data',
+                        content: "Please enter shipping provider."
+                    });
+                    return false;
+                }
+                if (trackingNumber === "") {
+                    alert({
+                        title: 'Invalid shipment data',
+                        content: "Please enter tracking number."
+                    });
+                    return false;
+                }
+            }
+
+            var data = {};
+            if (shippedItems.length > 0) {
+                data['shipments'] = [
+                    {
+                        "OrderId": magentoOrderId,
+                        "IncrementId": incrementId,
+                        "CdiscountOrderID": cdiscountOrderId,
+                        //"DeliveryType": deliveryType,
+                        "ShippingProvider": carrierCode,
+                        "TrackingNumber": trackingNumber,
+                        "TrackingUrl": trackingUrl,
+                        "OrderItemIds": shippedItems
+                    }
+                ];
+            }
+
+            $.ajax({
+                url: "<?php echo $this->getUrl('cdiscount/order/ship', ['form_key' => $block->getFormKey()]) ?>",
+                type: 'POST',
+                data: data,
+
+                showLoader: true, // enable loader
+
+
+                success: function (response) {
+                    if (response.success === true) {
+                        try {
+                            window.location.href = "";
+                        }
+                        catch (err) {
+                            alert({
+                                title: 'Order shipment failed.',
+                                content: response.message
+                            });
+                        }
+                    } else {
+                        var message = parseMessage(response.message); console.log(message);
+                        alert({
+                            title: 'Order shipment failed.',
+                            content: message
+                        });
+                    }
+                },
+                error: function () {
+                    alert({
+                        title: 'Order shipment failed.',
+                        content: 'Api is down.'
+                    });
+                }
+            });
+        }
+
+    });
+
+    function parseMessage(m) {
+        var message = "";
+        if (m !== "") {
+            if (typeof m === 'object') {
+                message += "<ul>";
+
+                jQuery.each(m, function (index, value) {
+                    message += "<li>"+parseMessage(value)+"</li>";
+                });
+                message += "</ul>";
+            } else {
+                message = m;
+            }
+        }
+
+        return message;
+    }
+</script>
+
+<style>
+    input.admin__control-text, .admin__control-select {
+        width: 100% !important;
+    }
+    .border-gray-td {
+        border-left: 1px solid #80808059;
+        border-top: 1px solid #80808059;
+    }
+
+    .border-gray-td.last-td {
+        border-bottom: 1px solid #80808059 !important;
+    }
+
+    .border-gray-td.first-td {
+        border-left: none;
+        border-top: none;
+        border-bottom: none;
+    }
+
+    .fulfillments {
+        background-color: #80808014;
+        padding-left: 10px;
+        border: 1px solid #80808059;
+        margin-bottom: 20px;
+    }
+</style>

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Venustheme
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Venustheme.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.venustheme.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category   Venustheme
+ * @package    Ves_Blog
+ * @copyright  Copyright (c) 2014 Venustheme (http://www.venustheme.com/)
+ * @license    http://www.venustheme.com/LICENSE-1.0.html
+ */
+-->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+	<widget id="ves_blog_posts" class="Ves\Blog\Block\Widget\Posts">
+		<label translate="true">Ves Blog: Latest Posts</label>
+		<description translate="true">Show Latest Blog Posts as List layout or Carousel layout</description>
+		<parameters>
+			<parameter name="widget_title" xsi:type="text" visible="true">
+				<label translate="true">Title</label>
+			</parameter>
+			<parameter name="cmsblock" xsi:type="select" visible="true" source_model="Ves\Blog\Model\Config\Source\Staticblock">
+				<label translate="true">Select Static Block</label>
+			</parameter>
+			<parameter name="pretext_html" xsi:type="conditions" visible="true" class="Ves\Blog\Block\Adminhtml\Widget\Form\Field\WysiwygEditor">
+				<label translate="true">Pretext HTML</label>
+			</parameter>
+			<parameter name="addition_class" xsi:type="text" visible="true">
+				<label translate="true">Addtion Class</label>
+			</parameter>
+			<parameter name="layout_type" xsi:type="select" visible="true" source_model="Ves\Blog\Model\Config\Source\LayoutType">
+				<label translate="true">Layout Type</label>
+			</parameter>
+			<parameter name="categories" xsi:type="multiselect" visible="true" source_model="Ves\Blog\Model\Config\Source\Categories">
+				<label translate="true">Categories</label>
+			</parameter>
+			<parameter name="orderby" xsi:type="select" visible="true" source_model="Ves\Blog\Model\Config\Source\WidgetOrderBy">
+				<label translate="true">Order By</label>
+			</parameter>
+			<parameter name="number_post" xsi:type="text" visible="true">
+				<label translate="true">Number Post</label>
+				<value>6</value>
+			</parameter>
+			<parameter name="block_template" xsi:type="text" visible="true">
+				<label translate="true">Module Template</label>
+				<description translate="true"><![CDATA[Input custom module template file path. For example: <b>widget/posts.phtml</b>. Empty for default]]></description>
+			</parameter>
+			<parameter name="owlsettings_heading" xsi:type="conditions" visible="true" class="Ves\Blog\Block\Adminhtml\System\Config\Form\Field\WidgetHeading">
+				<label translate="true">OWL Carousel Settings</label>
+			</parameter>
+			<parameter name="item_height" xsi:type="text" visible="true">
+				<label translate="true">Item Height</label>
+				<description translate="true"><![CDATA[Unit: pixel. Empty to set auto height]]></description>
+				<value>400px</value>
+			</parameter>
+			<parameter name="number_item_percolumn" xsi:type="text" visible="true">
+				<label translate="true">Number of Item per Column</label>
+				<description translate="true"><![CDATA[Multiple Row]]></description>
+				<value>1</value>
+			</parameter>
+			<parameter name="large_max_items" xsi:type="text"  visible="true">
+				<label translate="true">Number Columns On Page (Large display)</label>
+				<description translate="true"><![CDATA[Show number items when screen size 1200px and up]]></description>
+				<value>5</value>
+			</parameter>
+			<parameter name="large_items" xsi:type="text"  visible="true">
+				<label translate="true">Number Columns On Page</label>
+				<description translate="true"><![CDATA[Show number items when screen size between 1199px and 980px]]></description>
+				<value>4</value>
+			</parameter>
+			<parameter name="portrait_items" xsi:type="text"  visible="true">
+				<label translate="true">Number Columns On Page (Portrait tablets)</label>
+				<description translate="true"><![CDATA[Show number items when screen size between 979px and 769px]]></description>
+				<value>4</value>
+			</parameter>
+			<parameter name="tablet_items" xsi:type="text"  visible="true">
+				<label translate="true">Number Columns On Page (Phones to tablets)</label>
+				<description translate="true"><![CDATA[Show number items when screen size between 768px and 641px]]></description>
+				<value>3</value>
+			</parameter>
+			<parameter name="tablet_small_items" xsi:type="text"  visible="true">
+				<label translate="true">Number Columns On Page (Phones to Small tablets)</label>
+				<description translate="true"><![CDATA[Show number items when screen size between 640px and 480px]]></description>
+				<value>3</value>
+			</parameter>
+			<parameter name="mobile_items" xsi:type="text"  visible="true">
+				<label translate="true">Number Columns On Page (Phones)</label>
+				<description translate="true"><![CDATA[Show number items when screen size bellow 480px]]></description>
+				<value>1</value>
+			</parameter>
+			<parameter name="rtl" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+				<label translate="true">Right to Left</label>
+			</parameter>
+			<parameter name="autoplay" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+				<label translate="true">Autoplay</label>
+			</parameter>
+			<parameter name="autoplay_timeout" xsi:type="text" visible="true" >
+				<label translate="true">Autoplay Timeout</label>
+				<depends><parameter name="autoplay" value="1" /></depends>
+				<value>3000</value>
+			</parameter>
+			<parameter name="autoplay_hoverpause" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+				<label translate="true">Autoplay HoverPause</label>
+				<depends><parameter name="autoplay" value="1" /></depends>
+			</parameter>
+			<parameter name="dots" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+				<label translate="true">Show dots navigations</label>
+			</parameter>
+			<parameter name="nav" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+				<label translate="true">Show next/prev buttons.</label>
+			</parameter>
+			<parameter name="nav_prev" xsi:type="text" visible="true">
+				<label translate="true">Nav Prev Text</label>
+				<depends><parameter name="nav" value="1" /></depends>
+				<value>Prev</value>
+			</parameter>
+			<parameter name="nav_next" xsi:type="text" visible="true">
+				<label translate="true">Nav Next Text</label>
+				<depends><parameter name="nav" value="1" /></depends>
+				<value>Next</value>
+			</parameter>
+			<parameter name="loop" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+				<label translate="true">Loop</label>
+				<description translate="true"><![CDATA[Infinity loop. Duplicate last and first items to get loop illusion.]]></description>
+			</parameter>
+			<parameter name="lazyload" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+				<label translate="true">Lazy Load</label>
+			</parameter>
+			<parameter name="posts_heading" xsi:type="conditions" visible="true" class="Ves\Blog\Block\Adminhtml\System\Config\Form\Field\WidgetHeading">
+				<label translate="true">Post Settings</label>
+			</parameter>
+			<parameter name="show_image" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+				<label translate="true">Show Image</label>
+			</parameter>
+			<parameter name="image_width" xsi:type="text" visible="true">
+				<label translate="true">Image Width</label>
+				<value>400px</value>
+			</parameter>
+			<parameter name="image_height" xsi:type="text" visible="true">
+				<label translate="true">Image Height</label>
+				<value>200px</value>
+			</parameter>
+			<parameter name="show_title" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+				<label translate="true">Show Title</label>
+			</parameter>
+			<parameter name="show_shortdescription" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+				<label translate="true">Show Short Description</label>
+			</parameter>
+			<parameter name="shortdescription_count" xsi:type="text" visible="true">
+				<label translate="true">Short Description Character Count</label>
+				<depends><parameter name="show_shortdescription" value="1" /></depends>
+				<value>100</value>
+			</parameter>
+			<parameter name="show_readmorelink" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+				<label translate="true">Show Readmore Link</label>
+				<depends><parameter name="show_shortdescription" value="1" /></depends>
+			</parameter>
+			<parameter name="show_categories" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+				<label translate="true">Show Categories</label>
+			</parameter>
+			<parameter name="show_author" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+				<label translate="true">Show Author</label>
+			</parameter>
+			<parameter name="show_commentcount" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+				<label translate="true">Show Comment Count</label>
+			</parameter>
+			<parameter name="show_updatedtime" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+				<label translate="true">Show Updated Time</label>
+			</parameter>
+			<parameter name="show_createdtime" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+				<label translate="true">Show Created Time</label>
+			</parameter>
+			<parameter name="show_hits" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+				<label translate="true">Show Hits</label>
+			</parameter>
+			<parameter name="show_tags" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+				<label translate="true">Show Tags</label>
+			</parameter>
+			<parameter name="show_socialnetwork" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+				<label translate="true">Show Social Network</label>
+			</parameter>
+		</parameters>
+	</widget>
+</widgets>

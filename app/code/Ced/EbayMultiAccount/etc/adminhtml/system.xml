@@ -1,0 +1,374 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement(EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_EbayMultiAccount
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CEDCOMMERCE(http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="cedcommerce" translate="label" sortOrder="1">
+            <label>Cedcommerce</label>
+        </tab>
+        <section id="cedcore" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="0">
+            <tab>cedcommerce</tab>
+            <label>Installed Extensions</label>
+            <resource>Ced_EbayMultiAccount::EbayMultiAccount</resource>
+            <group id="installed_extensions" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Installed Extensions</label>
+                <frontend_model>Ced\EbayMultiAccount\Block\Extensions</frontend_model>
+            </group>
+        </section>
+        <!-- section start for General Tab in Cedcommerce section -->
+        <section id="ced_general" translate="label" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label> General Setting</label>
+            <tab>cedcommerce</tab>
+            <resource>Ced_EbayMultiAccount::EbayMultiAccount</resource>
+            <group id="feed_group" translate="label" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Notifications</label>
+                <field id="feeds" translate="label" type="multiselect" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>I'd like to be informed by CedCommerce about:</label>
+                    <source_model>Ced\EbayMultiAccount\Model\Config\Type</source_model>
+                </field>
+            </group>
+            <group id="extensions_groups" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>CedCommerce Extensions Store</label>
+                <field id="extensions" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <frontend_model>Ced\EbayMultiAccount\Block\Cedcommerce\Store</frontend_model>
+                </field>
+            </group>
+        </section>
+        <!-- section start for General Tab in Cedcommerce section -->
+
+        <!-- section start for eBay Configuration Tab in Cedcommerce section -->
+        <section id="ebaymultiaccount_config" translate="label" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>eBay MultiAccount Configuration</label>
+            <tab>cedcommerce</tab>
+            <resource>Ced_EbayMultiAccount::EbayMultiAccount</resource>
+            <group id="ebaymultiaccount_setting" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0"
+                   showInStore="0">
+                <label>eBay Merchant/Developer Settings</label>
+                <field id="dev_acc" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Use Developer Account</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <tooltip>Do You have A Developer Account?</tooltip>
+                    <validate>required-entry</validate>
+                </field>
+                <field id="get_dev_details" translate="button_label" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <button_label>Get Developer Details</button_label>
+                    <frontend_model>Ced\EbayMultiAccount\Block\Adminhtml\Config\GetDevDetails</frontend_model>
+                    <depends>
+                        <field id="dev_acc">1</field>
+                    </depends>
+                </field>
+                <field id="app_id" translate="label comment" type="text" sortOrder="4" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>eBay App ID (Client ID)</label>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="dev_acc">1</field>
+                    </depends>
+                </field>
+                <field id="cert_id" translate="label comment" type="text" sortOrder="6" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>eBay Cert ID (Client Secret)</label>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="dev_acc">1</field>
+                    </depends>
+                </field>
+                <field id="dev_id" translate="label comment" type="text" sortOrder="8" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>eBay Dev ID</label>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="dev_acc">1</field>
+                    </depends>
+                </field>
+                <field id="ru_name" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>eBay Redirect URL name</label>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="dev_acc">1</field>
+                    </depends>
+                </field>
+                <field id="primary_account" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Primary Account</label>
+                    <source_model>Ced\EbayMultiAccount\Model\Source\Accounts</source_model>
+                    <tooltip>Selected Account will used for profile creation. If you need to create profile for another account please select that particular account or leave it black. If this field will blank then account will be ask at the time of profile creation.</tooltip>
+                </field>
+            </group>
+            <group id="product_upload" translate="label" type="text" sortOrder="50"  showInDefault="1" showInWebsite="1"
+                   showInStore="0">
+                <label>eBay Product Upload Setting</label>
+                <field id="max_qty" translate="label comment" type="text" sortOrder="1"  showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Max Quantity Purchased</label>
+                    <comment><![CDATA[Max Quantity can be Purchased by user]]></comment>
+                </field>
+                <field id="item_country" translate="label comment" type="select" sortOrder="6"
+                       showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Country</label>
+                    <comment><![CDATA[Please select the item location country]]></comment>
+                    <tooltip>Please select the item location country</tooltip>
+                    <validate>required-entry</validate>
+                    <source_model>Ced\EbayMultiAccount\Model\Config\Country</source_model>
+                </field>
+                <field id="item_currency" translate="label comment" type="select" sortOrder="6"
+                       showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Currency</label>
+                    <comment><![CDATA[Please select the item Currency]]></comment>
+                    <tooltip>Please select the item Currency</tooltip>
+                    <validate>required-entry</validate>
+                    <source_model>Ced\EbayMultiAccount\Model\Config\Currency</source_model>
+                </field>
+                <field id="item_location" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Item Location</label>
+                    <comment><![CDATA[For Product Location]]></comment>
+                </field>
+                <field id="postal_code" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="0"
+                       showInStore="0">
+                    <label>Postal Code</label>
+                    <validate>required-entry</validate>
+                    <comment><![CDATA[For Product Location]]></comment>
+                </field>
+                <field id="end_listing_reason" translate="label" type="select" sortOrder="4" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Reason For End Listing</label>
+                    <source_model>Ced\EbayMultiAccount\Model\Config\EndReason</source_model>
+                    <tooltip>Select If you want to end any product's listing</tooltip>
+                    <comment><![CDATA[select reason in case of end listing on eBay]]></comment>
+                </field>
+                <field id="product_price" translate="label" type="select" sortOrder="5"  showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Product Price</label>
+                    <source_model>Ced\EbayMultiAccount\Model\Config\Selprice</source_model>
+                    <comment><![CDATA[Select to send different product price to <b>ebay.com</b>]]></comment>
+                </field>
+                <field id="fix_price" translate="label" type="text" sortOrder="10"  showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Modify by Fix Price</label>
+                    <validate>required-entry validate-number</validate>
+                    <depends>
+                        <field id="product_price" separator=",">plus_fixed,min_fixed</field>
+                    </depends>
+                </field>
+                <field id="percentage_price" translate="label" type="text" sortOrder="10"  showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Modify by Percenctage Price</label>
+                    <validate>required-entry validate-number</validate>
+                    <comment><![CDATA[Numeric value Required for <b>Add/subtract % on Magento price</b> 5 for Example: Magento price +/- 5% of Magento price.<b>]]></comment>
+                    <depends>
+                        <field id="product_price" separator=",">plus_per,min_per</field>
+                    </depends>
+                </field>
+                <field id="different_price" translate="label" type="text" sortOrder="10"  showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Map Price Attribute</label>
+                    <validate>required-entry</validate>
+                    <comment><![CDATA[<b>Attribute Code Required in case of <b>Custom Fixed Price</b>]]></comment>
+                    <depends>
+                        <field id="product_price">differ</field>
+                    </depends>
+                </field>
+                <field id="import_field_mapping" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Import Field Mapping</label>
+                    <frontend_model>Ced\EbayMultiAccount\Block\Adminhtml\Config\Field\ImportFieldMapping</frontend_model>
+                    <backend_model>Ced\EbayMultiAccount\Model\Source\ImportMappingSerialized</backend_model>
+                    <comment> <![CDATA[This mapping is used to import item Ids from Ebay.]]></comment>
+                </field>
+                <field id="convert_curreny" translate="label comment" type="select" sortOrder="25"
+                       showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Convert Currency</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment> <![CDATA[Auto Convert Current based on location of account.]]></comment>
+                </field>
+            </group>
+            <group id="ebaymultiaccount_order" translate="label" type="text" sortOrder="55" showInDefault="1" showInWebsite="1"
+                   showInStore="0">
+                <label>eBay Order Setting</label>
+                <group id="global_setting" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Global Setting</label>
+                    <field id="enable_order_notify" translate="label" type="select" sortOrder="1" showInDefault="1">
+                        <label>Allow Order Notification</label>
+                        <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    </field>
+                    <field id="order_notify_email" translate="label" type="text" sortOrder="3" showInDefault="1">
+                        <label>Order Notification Email</label>
+                        <depends>
+                            <field id="enable_order_notify">1</field>
+                        </depends>
+                    </field>
+                    <field id="order_on_out_of_stock" translate="label comment" type="select" sortOrder="5"
+                           showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Order Fetch For Out Of Stock Product</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="from_order" translate="label comment" type="text" sortOrder="15" showInDefault="1"
+                           showInWebsite="0" showInStore="0">
+                        <label>Fetch Orders No. Of. Days from Today</label>
+                    </field>
+                    <field id="ship_method" translate="label comment" type="select" sortOrder="20"
+                           showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Shipping Method of eBay Orders</label>
+                        <source_model>Ced\EbayMultiAccount\Model\Config\ShippingMethods</source_model>
+                    </field>
+                    <field id="order_id_prefix" translate="label" type="text" sortOrder="30" showInDefault="1">
+                        <label>eBay Order Id Prefix</label>
+                        <comment>Prefix for eBay Order Increment ID</comment>
+                    </field>
+                    <!-- <field id="carrier_mapping" translate="label" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Carrier Mapping</label>
+                        <frontend_model>Ced\EbayMultiAccount\Block\Adminhtml\Config\Field\CarrierMapping</frontend_model>
+                        <backend_model>Ced\EbayMultiAccount\Model\Config\CarrierArraySerialized</backend_model>
+                        <comment> <![CDATA[Map Shipping Carrier for <b>Auto Shipment</b>]]></comment>
+                    </field> -->
+                    <field id="create_product" translate="label comment" type="select" sortOrder="32"
+                           showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Create New Product (if Not Exist)</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <comment> <![CDATA[Create New Product if SKU not found in Magento Store]]></comment>
+                    </field>
+                </group>
+                <group id="ebaymultiaccount_customer" translate="label" type="text" sortOrder="4" showInDefault="1">
+                    <label>Create Customer Setting</label>
+                    <field id="real_customer" translate="label comment" type="select" sortOrder="25"
+                           showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Create Real Customer</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="customer_name" translate="label" type="text" sortOrder="35" showInDefault="1">
+                        <label>Customer First Name</label>
+                        <validate>required-entry</validate>
+                        <depends>
+                            <field id="real_customer">0</field>
+                        </depends>
+                    </field>
+                    <field id="customer_lastname" translate="label" type="text" sortOrder="36" showInDefault="1">
+                        <label>Customer Last Name</label>
+                        <validate>required-entry</validate>
+                        <depends>
+                            <field id="real_customer">0</field>
+                        </depends>
+                    </field>
+                    <field id="customer_group" translate="label" type="select" sortOrder="37" showInDefault="1">
+                        <label>Customer Group</label>
+                        <validate>required-entry</validate>
+                        <source_model>Magento\Customer\Model\ResourceModel\Group\Collection</source_model>
+                        <depends>
+                            <field id="real_customer">0</field>
+                        </depends>
+                    </field>
+                    <field id="customer_email" translate="label" type="text" sortOrder="38" showInDefault="1">
+                        <label>Customer Email</label>
+                        <validate>required-entry</validate>
+                        <depends>
+                            <field id="real_customer">0</field>
+                        </depends>
+                    </field>
+                    <field id="customer_password" translate="label" type="text" sortOrder="39" showInDefault="1">
+                        <label>Customer Password</label>
+                        <validate>required-entry</validate>
+                        <depends>
+                            <field id="real_customer">0</field>
+                        </depends>
+                    </field>
+                </group>
+            </group>
+            <group id="ebaymultiaccount_cron" translate="label" type="text" sortOrder="40" showInDefault="1">
+                <label>eBay Cron Settings</label>
+                <field id="order_cron" translate="label" type="select" sortOrder="10" showInDefault="1">
+                    <label>Order Cron</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="order_cron_schedule" translate="label" type="select" sortOrder="20" showInDefault="1">
+                    <label>Order Cron Time</label>
+                    <source_model>Ced\EbayMultiAccount\Model\Config\Cron</source_model>
+                    <comment>Order Fetch Cron Time</comment>
+                    <depends>
+                        <field id="order_cron">1</field>
+                    </depends>
+                </field>
+                <field id="inventory_cron" translate="label" type="select" sortOrder="22" showInDefault="1">
+                    <label>Inventory Cron</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="inventory_cron_schedule" translate="label" type="select" sortOrder="25" showInDefault="1">
+                    <label>Inventory Cron Time</label>
+                    <source_model>Ced\EbayMultiAccount\Model\Config\Cron</source_model>
+                    <comment>Inventory Update Cron Time</comment>
+                    <depends>
+                        <field id="inventory_cron">1</field>
+                    </depends>
+                </field>
+                <field id="ebaymultiaccount_file_creation_flag" translate="label" type="select" sortOrder="30" showInDefault="1">
+                    <label>File Creation Cron</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+
+                <field id="ebaymultiaccount_file_upload_flag" translate="label" type="select" sortOrder="30" showInDefault="1">
+                    <label>File Upload Cron</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+
+                <field id="ebaymultiaccount_sync_job_flag" translate="label" type="select" sortOrder="30" showInDefault="1">
+                    <label>Job Syncing</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+
+                <field id="ebaymultiaccount_process_report_file_flag" translate="label" type="select" sortOrder="30" showInDefault="1">
+                    <label>Report File Processing Cron</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+            </group>
+        </section>
+        <!-- section end for eBay Cofiguration Tab in Cedcommerce Tab -->
+
+        <!-- section start for Shipping Methods Tab in Sales Tab -->
+        <section id="carriers">
+            <group id="shipbyebaymultiaccount" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>eBay Payment Method(Default)</label>
+                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="title" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Title</label>
+                </field>
+            </group>
+        </section>
+        <!-- section end for Shipping Methods Tab in Sales Tab -->
+
+        <!-- section start for Payment Methods Tab in Sales Tab -->
+        <section id="payment">
+            <group id="paybyebaymultiaccount" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>EbayMultiAccount</label>
+                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="title" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Title</label>
+                </field>
+                <field id="order_status" translate="label" type="select" sortOrder="3" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>New order status</label>
+                    <source_model>Magento\Sales\Model\Config\Source\Order\Status</source_model>
+                </field>
+            </group>
+        </section>
+        <!-- section end for Payment Methods Tab in Sales Tab -->
+    </system>
+</config>

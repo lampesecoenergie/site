@@ -1,0 +1,209 @@
+<?php
+/**
+ * @var \Fooman\PdfCustomiser\Block\Order $block
+ *
+ * Note on the use of @noEscape throughout this template
+ * html output is allowed by design to allow users to customise their pdfs
+ * Before pdf rendering all output is run filtered by @see \Magento\Framework\Filter\Input\MaliciousCode
+ */
+
+?>
+<?php
+$order = $block->getOrder();
+$design = $block->getDesign();
+$primColour = $design->getPrimaryColour();
+$secColour = $design->getSecondaryColour();
+$rgb = $design->hexToRGBArray($primColour);
+
+$title = trim($block->escapeHtml($block->getTitle()));
+$title = str_replace(' ', '<br/>', $title);
+
+$cellContent =
+    '<table>
+        <tr>
+            <td style="font-size: 65px; line-height:150%; color:' . $secColour . ';"><br/><br/>' . $title . '</td>
+        </tr>
+    </table>';
+
+if ($block->isLogoOnRight()) {
+    $cellParams = [
+        70, 50, 25, 0, $cellContent, 0, 1, 1, false, 'C'
+    ];
+} else {
+    $cellParams = [
+        70, 50, 115, 0, $cellContent, 0, 1, 1, false, 'C'
+    ];
+}
+?>
+
+<tcpdf method="SetFillColor" <?= /* @noEscape */ $block->getEncodedParams([$rgb[0], $rgb[1], $rgb[2]]) ?>/>
+<tcpdf method="writeHTMLCell" <?= /* @noEscape */ $block->getEncodedParams($cellParams) ?>/>
+<tcpdf method="SetY" <?= /* @noEscape */ $block->getEncodedParams([10]) ?> />
+
+<table width="100%" border="0" cellpadding="6" cellspacing="0">
+    <tr>
+        <?php if ($block->isLogoOnRight()) : ?>
+            <td valign="top"
+                    height="45mm"
+                    style=""></td>
+            <td valign="top"><?= /* @noEscape */ $block->getLogoBlock() ?>
+                <br/><br/><?= /* @noEscape */ $block->getIconsBlock() ?></td>
+        <?php else : ?>
+            <td valign="top"><?= /* @noEscape */ $block->getLogoBlock() ?>
+                <br/><br/><?= /* @noEscape */ $block->getIconsBlock() ?></td>
+            <td valign="top"
+                    height="45mm"
+                    style=""></td >
+        <?php endif; ?>
+    </tr>
+    <tr>
+        <td valign="top" width="50%"><?= $block->escapeHtml(__('Order #')) ?>:
+            <?= $block->escapeHtml($order->getIncrementId()) ?><br/>
+            <?= $block->escapeHtml(__('Order Date')) ?>:
+            <?= /* @noEscape */ $block->getFormattedDate($order->getCreatedAt()) ?><br/>
+        </td>
+    </tr>
+    <?php if ($block->shouldDisplayBothAddresses()) : ?>
+    <tr style="line-height: 0.7cm;">
+        <td valign="top" width="50%" style="font-weight:bold;  <?= /* @noEscape */ $design->getStyle('row-inv', false, false)?>"
+        ><strong><?= $block->escapeHtml(__('Billing Address')) ?></strong></td>
+        <td valign="top" style="font-weight:bold;  <?= /* @noEscape */ $design->getStyle('row-inv', false, false)?>"><?php if (!$order->getIsVirtual()) :
+            ?><strong><?= $block->escapeHtml(__('Shipping Address')) ?></strong><?php
+            endif; ?></td>
+    </tr>
+    <tr>
+        <td valign="top" width="50%"><?= /* @noEscape */ $block->getBillingAddress() ?></td>
+        <td valign="top"><?php if (!$order->getIsVirtual()) :
+            ?><?= /* @noEscape */ $block->getShippingAddress() ?><?php
+                         endif; ?></td>
+    <?php elseif ($block->shouldDisplayShippingAddress()) : ?>
+    <tr>
+        <td valign="top" colspan="2"><?= /* @noEscape */ $block->getShippingAddress() ?></td>
+    <?php elseif ($block->shouldDisplayBillingAddress()) : ?>
+    <tr>
+        <td valign="top" colspan="2"><?= /* @noEscape */ $block->getBillingAddress() ?></td>
+    <?php endif; ?>
+    </tr>
+    <?php if ($order->getIsVirtual()) : ?>
+        <tr style="line-height: 0.7cm;">
+            <td valign="top" colspan="2" style="font-weight:bold;  <?= /* @noEscape */ $design->getStyle('row-inv', false, false)?>"
+            ><strong><?= $block->escapeHtml(__('Payment Method')) ?></strong></td>
+        </tr>
+        <tr>
+            <td valign="top" colspan="2"><?= /* @noEscape */ $block->getPaymentBlock() ?></td>
+        </tr>
+    <?php else : ?>
+        <tr style="line-height: 0.7cm;">
+            <td valign="top" width="50%" style="font-weight:bold; <?= /* @noEscape */ $design->getStyle('row-inv', false, false)?>"
+            ><strong><?= $block->escapeHtml(__('Payment Method')) ?></strong></td>
+            <td valign="top" style="font-weight:bold;  <?= /* @noEscape */ $design->getStyle('row-inv', false, false)?>"
+            ><strong><?= $block->escapeHtml(__('Shipping Method')) ?></strong></td>
+        </tr>
+        <tr>
+            <td valign="top" width="50%"><?= /* @noEscape */ $block->getPaymentBlock() ?></td>
+            <td valign="top"><?= /* @noEscape */ $block->getShippingBlock() ?></td>
+        </tr>
+    <?php endif; ?>
+    <tr>
+        <td colspan="2">&nbsp;</td>
+    </tr>
+</table>
+
+<?= /* @noEscape */ $block->getItemsBlock($design->getItemStyling()) ?>
+
+<!-- TOTALS -->
+<?php /** @var $totalsBlock \Fooman\PdfCustomiser\Block\Totals */ ?>
+<?php $totalsBlock = $block->getTotalsBlockObject() ?>
+<?php $totals = $totalsBlock->getAllTotalLinesForDisplay() ?>
+<?php $customText = $block->getCustomText() ?>
+<?php $cellStyle = 'font-size: ' .$block->getFontsize('bigger'). '; line-height: 133%; '?>
+<?php if ($totals) : ?>
+    <?php $nrTotals = count($totals) ?>
+    <?php $counterTotals = 1 ?>
+    <table nobr="true" width="100%" border="0" cellpadding="10" cellspacing="0">
+        <?php foreach ($totals as $totalDisplayLine) : ?>
+            <?php $isFirst = $counterTotals === 1; ?>
+            <?php $isLast = $counterTotals === $nrTotals; ?>
+            <?php $totalDisplayLine['label'] = str_replace([' ()',':'], '', $totalDisplayLine['label']); ?>
+            <?php if ($totalsBlock->shouldDisplayBothCurrencies()) : ?>
+                <?php if ($totalDisplayLine['source_field'] === 'grand_total') : ?>
+                    <tr style="">
+                        <?php if ($isFirst) : ?>
+                            <td width="36%"
+                                rowspan="<?= (int) $nrTotals ?>"
+                                style="<?= /* @noEscape */ $cellStyle . $design->getCellStyle(true, true, true, false)?>"
+                            ><?= /* @noEscape */ $customText ?></td>
+                        <?php endif; ?>
+                        <td style="<?= /* @noEscape */ $cellStyle . $design->getInvertedCellStyle($isFirst, $isLast, true, false)?>"
+                            align="right"
+                            width="32%"><strong><?= /* @noEscape */ $totalDisplayLine['label'] ?></strong></td>
+                        <td style="<?= /* @noEscape */ $cellStyle . $design->getInvertedCellStyle($isFirst, $isLast, false, false)?>"
+                            align="right"
+                            width="16%"><strong><?= /* @noEscape */ $totalDisplayLine['amount'] ?></strong></td>
+                        <td style="<?= /* @noEscape */ $cellStyle . $design->getInvertedCellStyle($isFirst, $isLast, false, true)?>"
+                            align="right"
+                            width="16%"><strong><?= /* @noEscape */ $totalDisplayLine['base_amount'] ?></strong></td>
+                    </tr>
+                <?php else : ?>
+                    <tr style="">
+                        <?php if ($isFirst) : ?>
+                            <td width="36%"
+                                rowspan="<?= (int) $nrTotals ?>"
+                                style="<?= /* @noEscape */ $cellStyle .$design->getCellStyle(true, true, true, false)?>"
+                            ><?= /* @noEscape */ $customText ?></td>
+                        <?php endif; ?>
+                        <td style="<?= /* @noEscape */ $cellStyle . $design->getInvertedCellStyle($isFirst, $isLast, true, false)?>"
+                            align="right"
+                            width="32%"><?= /* @noEscape */ $totalDisplayLine['label'] ?></td>
+                        <td style="<?= /* @noEscape */ $cellStyle . $design->getInvertedCellStyle($isFirst, $isLast, false, false)?>"
+                            align="right"
+                            width="16%"><?= /* @noEscape */ $totalDisplayLine['amount'] ?></td>
+                        <td style="<?= /* @noEscape */ $cellStyle . $design->getInvertedCellStyle($isFirst, $isLast, false, true)?>"
+                            align="right"
+                            width="16%"><?= /* @noEscape */ $totalDisplayLine['base_amount'] ?></td>
+                    </tr>
+                <?php endif; ?>
+            <?php else : ?>
+                <?php if ($totalDisplayLine['source_field'] === 'grand_total') : ?>
+                    <tr style="">
+                        <?php if ($isFirst) : ?>
+                            <td width="50%"
+                                rowspan="<?= (int) $nrTotals ?>"
+                                style="<?= /* @noEscape */ $cellStyle . $design->getCellStyle(true, true, true, false)?>"
+                            ><?= /* @noEscape */ $customText ?></td>
+                        <?php endif; ?>
+                        <td style="<?= /* @noEscape */ $cellStyle . $design->getInvertedCellStyle($isFirst, $isLast, true, false)?>"
+                            align="right"
+                            width="34%"><strong><?= /* @noEscape */ $totalDisplayLine['label'] ?></strong></td>
+                        <td style="<?= /* @noEscape */ $cellStyle . $design->getInvertedCellStyle($isFirst, $isLast, false, true)?>"
+                            align="right"
+                            width="16%"><strong><?= /* @noEscape */ $totalDisplayLine['amount'] ?></strong></td>
+                    </tr>
+                <?php else : ?>
+                    <tr style="">
+                        <?php if ($isFirst) : ?>
+                            <td width="50%"
+                                rowspan="<?= (int) $nrTotals ?>"
+                                style="<?=/* @noEscape */  $cellStyle . $design->getCellStyle(true, true, true, false)?>"
+                            ><?= /* @noEscape */ $customText ?></td>
+                        <?php endif; ?>
+                        <td style="<?= /* @noEscape */ $cellStyle . $design->getInvertedCellStyle($isFirst, $isLast, true, false)?>"
+                            align="right"
+                            width="34%"><?= /* @noEscape */ $totalDisplayLine['label'] ?></td>
+                        <td style="<?= /* @noEscape */ $cellStyle . $design->getInvertedCellStyle($isFirst, $isLast, false, true)?>"
+                            align="right"
+                            width="16%"><?= /* @noEscape */ $totalDisplayLine['amount'] ?></td>
+                    </tr>
+                <?php endif; ?>
+            <?php endif; ?>
+            <?php $counterTotals++ ?>
+        <?php endforeach; ?>
+    </table>
+<?php endif; ?>
+<!-- END TOTALS -->
+
+<?= /* @noEscape */ $block->getGiftmessageBlock() ?>
+
+<?= /* @noEscape */ $block->getTaxTableBlock() ?>
+
+<?= /* @noEscape */ $block->getCommentsBlock() ?>

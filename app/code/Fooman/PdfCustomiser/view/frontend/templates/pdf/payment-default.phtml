@@ -1,0 +1,34 @@
+<?php
+/**
+ * @var \Magento\Payment\Block\Info $block
+ */
+$specificInfo = $block->getSpecificInformation();
+$method = $block->getInfo()->getMethod();
+?>
+<?= $block->escapeHtml($block->getMethod()->getTitle()) ?>
+<?php if ($specificInfo) : ?>
+    <?php foreach ($specificInfo as $label => $value) : ?>
+        <br/><?= $block->escapeHtml($label) ?><br/>
+        <?php foreach ($block->getValueAsArray($value) as $output) : ?>
+            <?php if (!empty($output)) : ?>
+                <?= $block->escapeHtml($output) ?><br/>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    <?php endforeach; ?>
+<?php endif; ?>
+<?php if ($method == 'purchaseorder') : ?>
+    <br/><?= $block->escapeHtml(__('Purchase Order Number: %1', $block->getInfo()->getPoNumber())) ?>
+<?php endif; ?>
+<?php if ($method == 'checkmo') : ?>
+    <?php if ($block->getInfo()->getAdditionalInformation()) : ?>
+        <br/>
+        <?php if ($block->getPayableTo()) : ?>
+            <?= $block->escapeHtml(__('Make Check payable to: %1', $block->getPayableTo())) ?><br/>
+        <?php endif; ?>
+        <?php if ($block->getMailingAddress()) : ?>
+            <?= $block->escapeHtml(__('Send Check to:')) ?>
+            <?= /* @noEscape */ nl2br($block->escapeHtml($block->getMailingAddress())) ?><br/>
+        <?php endif; ?>
+    <?php endif; ?>
+<?php endif; ?>
+<?= $block->getChildHtml() ?>
