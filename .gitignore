@@ -17,6 +17,7 @@
 !app/code/**/*
 !app/design/frontend/Smartwave/porto/**/*
 !app/etc/config.php
+!app/i18n/**/*
 /update/
 dev
 vendor/codeception
