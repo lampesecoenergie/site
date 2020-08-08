@@ -34,6 +34,9 @@
 # 2020-08-08 Dmitry Fedyuk https://www.upwork.com/fl/mage2pro
 # "Add the modified standard files to the source control": https://github.com/lampesecoenergie/site/issues/2
 !vendor/magento/module-catalog/view/adminhtml/templates/catalog/product/edit/action/inventory.phtml
+# 2020-08-08 Dmitry Fedyuk https://www.upwork.com/fl/mage2pro
+# "Add the modified standard files to the source control": https://github.com/lampesecoenergie/site/issues/2
+!vendor/magento/module-directory/Model/Currency.php
 /update/
 dev
 vendor/codeception
