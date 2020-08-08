@@ -19,6 +19,9 @@
 !app/etc/config.php
 !app/i18n/**/*
 !lib/web/fonts/Nostress_Koongo/**/*
+# 2020-08-08 Dmitry Fedyuk https://www.upwork.com/fl/mage2pro
+# "Add the modified standard files to the source control": https://github.com/lampesecoenergie/site/issues/2
+!vendor/magento/framework/Acl/etc/acl_merged.xsd
 /update/
 dev
 vendor/codeception
