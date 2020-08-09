@@ -200,8 +200,6 @@ class Zend_Db_Adapter_Pdo_Mysql extends Zend_Db_Adapter_Pdo_Abstract
                 $row[$type] = 'float';
                 $precision = $matches[1];
                 $scale = $matches[2];
-			# 2020-08-09 Dmitry Fedyuk https://www.upwork.com/fl/mage2pro
-			# This line was modified by someone before me.
             } else if (preg_match('/^((?:big|medium|small|tiny)?int)(?:\((\d+)\))?/', $row[$type], $matches)) {
                 $row[$type] = $matches[1];
                 // The optional argument of a MySQL int type is not precision
