@@ -25,6 +25,10 @@
 # 2020-08-08 Dmitry Fedyuk https://www.upwork.com/fl/mage2pro
 # "Add the modified standard files to the source control": https://github.com/lampesecoenergie/site/issues/2
 !vendor/magento/framework/Config/Reader/Filesystem.php
+# 2020-08-09 Dmitry Fedyuk https://www.upwork.com/fl/mage2pro
+# «Invalid template file: 'vendor/magento/module-theme/view/frontend/templates/page/js/require_js.phtml'»:
+# https://github.com/dxmoto/site/issues/13
+!vendor/magento/framework/View/Element/Template/File/Validator.php
 # 2020-08-08 Dmitry Fedyuk https://www.upwork.com/fl/mage2pro
 # "Add the modified standard files to the source control": https://github.com/lampesecoenergie/site/issues/2
 !vendor/magento/module-asynchronous-operations/Model/BulkManagement.php
