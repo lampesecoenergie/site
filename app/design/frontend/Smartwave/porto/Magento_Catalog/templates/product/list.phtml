@@ -21,9 +21,17 @@ $_objectManager = \Magento\Framework\App\ObjectManager::getInstance(); //instanc
 $storeManager = $_objectManager->get('Magento\Store\Model\StoreManagerInterface'); 
 $currentStore = $storeManager->getStore();
 
-$category = $_objectManager->get('Magento\Framework\Registry')->registry('current_category');//get current category
-$subcats = $category->getChildrenCategories();
-$subcatcount = $category->getChildrenCategories()->count(); 
+# 2020-08-10 Dmitry Fedyuk https://www.upwork.com/fl/mage2pro
+# "«Call to a member function getChildrenCategories() on null
+# in app/design/frontend/Smartwave/porto/Magento_Catalog/templates/product/list.phtml:25»
+# on using the frontend search box": https://github.com/lampesecoenergie/site/issues/6
+if (!($category = $_objectManager->get('Magento\Framework\Registry')->registry('current_category'))) {
+	$subcatcount = 0;
+}
+else {
+	$subcats = $category->getChildrenCategories();
+	$subcatcount = $category->getChildrenCategories()->count();
+}
 if($subcatcount>0):
 //correct count
 // echo $subcatcount;
