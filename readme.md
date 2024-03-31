@@ -1,4 +1,4 @@
-[lampesecoenergie.com(https://lampesecoenergie.com) (Magento 2).
+[lampesecoenergie.com](https://lampesecoenergie.com) (Magento 2).
 
 ## How to deploy the static content
 ```posh
