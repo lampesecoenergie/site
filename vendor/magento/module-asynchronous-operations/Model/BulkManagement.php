@@ -198,7 +198,7 @@ class BulkManagement implements \Magento\Framework\Bulk\BulkManagementInterface
     {
         $operationsByTopics = [];
         foreach ($operations as $operation) {
-			# 2020-08-08 Dmitry Fedyuk https://www.upwork.com/fl/mage2pro
+			# 2020-08-08 Dmitry Fedyuk https://github.com/dmitrii-fediuk
 			# This line was added by someone before me.
             $this->entityManager->save($operation);
             $operationsByTopics[$operation->getTopicName()][] = $operation;

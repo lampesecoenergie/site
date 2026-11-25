@@ -136,7 +136,7 @@ class Validator
             $directories = (array)$directories;
         }
         $realPath = $this->fileDriver->getRealPath($path);
-		# 2020-08-09 Dmitry Fedyuk https://www.upwork.com/fl/mage2pro
+		# 2020-08-09 Dmitry Fedyuk https://github.com/dmitrii-fediuk
 		# «Invalid template file: 'vendor/magento/module-theme/view/frontend/templates/page/js/require_js.phtml'»:
 		# https://github.com/lampesecoenergie/site/issues/3
 		$isWin = 'WIN' === strtoupper(substr(PHP_OS, 0, 3)); /** @var bool $isWin */

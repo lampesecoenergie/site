@@ -84,12 +84,12 @@ class ProductCollection extends \Magento\Catalog\Model\ResourceModel\Product\Col
         $entity = $this->getEntity();
         $fKey = 'e.' . $this->getEntityPkName($entity);
         $pKey = $tableName . '.' . $this->getEntityPkName($entity);
-		# 2020-08-08 Dmitry Fedyuk https://www.upwork.com/fl/mage2pro
+		# 2020-08-08 Dmitry Fedyuk https://github.com/dmitrii-fediuk
 		# This line was added by someone before me.
         $attributeId = $attributeModel->getAttributeId();
         $condition = "({$pKey} = {$fKey}) AND ("
             . $this->_getConditionSql("{$tableName}.value", $condition)
-			# 2020-08-08 Dmitry Fedyuk https://www.upwork.com/fl/mage2pro
+			# 2020-08-08 Dmitry Fedyuk https://github.com/dmitrii-fediuk
 			# These 2 lines were added by someone before me.
             . ') AND ('
             . $this->_getConditionSql("{$tableName}.attribute_id", $attributeId)

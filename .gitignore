@@ -1,4 +1,4 @@
-# 2020-08-08 Dmitry Fedyuk https://www.upwork.com/fl/mage2pro
+# 2020-08-08 Dmitry Fedyuk https://github.com/dmitrii-fediuk
 # http://stackoverflow.com/questions/987142
 # http://stackoverflow.com/questions/9162919
 # http://stackoverflow.com/questions/8024924#comment15884195_8025106
@@ -6,10 +6,10 @@
 !*/
 !/.editorconfig
 !/.gitignore
-# 2020-08-08 Dmitry Fedyuk https://www.upwork.com/fl/mage2pro
+# 2020-08-08 Dmitry Fedyuk https://github.com/dmitrii-fediuk
 # "Add the modified standard files to the source control": https://github.com/lampesecoenergie/site/issues/2
 !/.htaccess
-# 2020-08-08 Dmitry Fedyuk https://www.upwork.com/fl/mage2pro
+# 2020-08-08 Dmitry Fedyuk https://github.com/dmitrii-fediuk
 # "Add the modified standard files to the source control": https://github.com/lampesecoenergie/site/issues/2
 !/.user.ini
 !/composer.json
@@ -19,35 +19,35 @@
 !app/etc/config.php
 !app/i18n/**/*
 !lib/web/fonts/Nostress_Koongo/**/*
-# 2020-08-08 Dmitry Fedyuk https://www.upwork.com/fl/mage2pro
+# 2020-08-08 Dmitry Fedyuk https://github.com/dmitrii-fediuk
 # "Add the modified standard files to the source control": https://github.com/lampesecoenergie/site/issues/2
 !vendor/magento/framework/Acl/etc/acl_merged.xsd
-# 2020-08-08 Dmitry Fedyuk https://www.upwork.com/fl/mage2pro
+# 2020-08-08 Dmitry Fedyuk https://github.com/dmitrii-fediuk
 # "Add the modified standard files to the source control": https://github.com/lampesecoenergie/site/issues/2
 !vendor/magento/framework/Config/Reader/Filesystem.php
-# 2020-08-09 Dmitry Fedyuk https://www.upwork.com/fl/mage2pro
+# 2020-08-09 Dmitry Fedyuk https://github.com/dmitrii-fediuk
 # «Invalid template file: 'vendor/magento/module-theme/view/frontend/templates/page/js/require_js.phtml'»:
 # https://github.com/dxmoto/site/issues/13
 !vendor/magento/framework/View/Element/Template/File/Validator.php
-# 2020-08-08 Dmitry Fedyuk https://www.upwork.com/fl/mage2pro
+# 2020-08-08 Dmitry Fedyuk https://github.com/dmitrii-fediuk
 # "Add the modified standard files to the source control": https://github.com/lampesecoenergie/site/issues/2
 !vendor/magento/module-asynchronous-operations/Model/BulkManagement.php
-# 2020-08-08 Dmitry Fedyuk https://www.upwork.com/fl/mage2pro
+# 2020-08-08 Dmitry Fedyuk https://github.com/dmitrii-fediuk
 # "Add the modified standard files to the source control": https://github.com/lampesecoenergie/site/issues/2
 !vendor/magento/module-catalog/Ui/DataProvider/Product/ProductCollection.php
-# 2020-08-08 Dmitry Fedyuk https://www.upwork.com/fl/mage2pro
+# 2020-08-08 Dmitry Fedyuk https://github.com/dmitrii-fediuk
 # "Add the modified standard files to the source control": https://github.com/lampesecoenergie/site/issues/2
 !vendor/magento/module-catalog/view/adminhtml/templates/catalog/product/edit/action/inventory.phtml
-# 2020-08-08 Dmitry Fedyuk https://www.upwork.com/fl/mage2pro
+# 2020-08-08 Dmitry Fedyuk https://github.com/dmitrii-fediuk
 # "Add the modified standard files to the source control": https://github.com/lampesecoenergie/site/issues/2
 !vendor/magento/module-directory/Model/Currency.php
-# 2020-08-08 Dmitry Fedyuk https://www.upwork.com/fl/mage2pro
+# 2020-08-08 Dmitry Fedyuk https://github.com/dmitrii-fediuk
 # "Add the modified standard files to the source control": https://github.com/lampesecoenergie/site/issues/2
 !vendor/magento/module-sales/Model/Order.php
-# 2020-08-08 Dmitry Fedyuk https://www.upwork.com/fl/mage2pro
+# 2020-08-08 Dmitry Fedyuk https://github.com/dmitrii-fediuk
 # "Add the modified standard files to the source control": https://github.com/lampesecoenergie/site/issues/2
 !vendor/magento/module-shipping/Model/Shipping/LabelGenerator.php
-# 2020-08-08 Dmitry Fedyuk https://www.upwork.com/fl/mage2pro
+# 2020-08-08 Dmitry Fedyuk https://github.com/dmitrii-fediuk
 # "Add the modified standard files to the source control": https://github.com/lampesecoenergie/site/issues/2
 !vendor/magento/module-theme/view/frontend/templates/html/header.phtml
 /update/

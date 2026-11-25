@@ -70,7 +70,7 @@ class LabelGenerator
     {
         $order = $shipment->getOrder();       
         $carrier = $this->carrierFactory->create($order->getShippingMethod(true)->getCarrierCode());
-		# 2020-08-08 Dmitry Fedyuk https://www.upwork.com/fl/mage2pro
+		# 2020-08-08 Dmitry Fedyuk https://github.com/dmitrii-fediuk
 		# This code was commented out by someone before me.
         /*if (!$carrier->isShippingLabelsAvailable()) {
             throw new \Magento\Framework\Exception\LocalizedException(__('Shipping labels is not available.'));

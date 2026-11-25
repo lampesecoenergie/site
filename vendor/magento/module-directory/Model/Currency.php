@@ -228,7 +228,7 @@ class Currency extends \Magento\Framework\Model\AbstractModel
             return (float)$price * (float)$rate;
         }
 
-		# 2020-08-08 Dmitry Fedyuk https://www.upwork.com/fl/mage2pro
+		# 2020-08-08 Dmitry Fedyuk https://github.com/dmitrii-fediuk
 		# These lines were commented out by someone before me.
 //        throw new \Exception(__(
 //            'Undefined rate from "%1-%2".',

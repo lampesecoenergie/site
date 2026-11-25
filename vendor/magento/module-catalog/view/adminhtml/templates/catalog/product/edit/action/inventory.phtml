@@ -34,7 +34,7 @@
 $defaultMinSaleQty = $block->getDefaultConfigValue('min_sale_qty');
 if (!is_numeric($defaultMinSaleQty)) {
     $defaultMinSaleQty = json_decode($defaultMinSaleQty, true);
-	# 2020-08-08 Dmitry Fedyuk https://www.upwork.com/fl/mage2pro
+	# 2020-08-08 Dmitry Fedyuk https://github.com/dmitrii-fediuk
 	# This line was modified by someone before me.
     $defaultMinSaleQty = (float) ($defaultMinSaleQty[\Magento\Customer\Api\Data\GroupInterface::CUST_GROUP_ALL] ?? 1);
 }

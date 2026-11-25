@@ -1321,7 +1321,7 @@ class Order extends AbstractModel implements EntityInterface, OrderInterface
         if (!$asObject || !$shippingMethod) {
             return $shippingMethod;
         } else {
-			# 2020-08-08 Dmitry Fedyuk https://www.upwork.com/fl/mage2pro
+			# 2020-08-08 Dmitry Fedyuk https://github.com/dmitrii-fediuk
 			# This line was modified by someone before me.
 			list($carrierCode,$method) = (strstr($shippingMethod, '_') ? explode('_', $shippingMethod) : array($shippingMethod, ''));
             return new \Magento\Framework\DataObject(['carrier_code' => $carrierCode, 'method' => $method]);
